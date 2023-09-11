@@ -13,6 +13,7 @@ struct PlayMusicView: View {
     @State var repeatActive = false
     @State var likeTrack = false
     @State var animatingHeart = false
+    @State var viewQueue = false
     
     var body: some View {
         ZStack{
@@ -27,7 +28,6 @@ struct PlayMusicView: View {
                         Image(systemName: "chevron.down")
                             .resizable()
                             .modifier(Icon())
-                        
                             .frame(height: 16)
                     }
                     
@@ -37,15 +37,16 @@ struct PlayMusicView: View {
                         .modifier(BlackColor())
                     Spacer()
                     
+                    //MARK: - VIEW QUEUE BUTTON
                     Button {
                         
                     } label: {
-                        Image(systemName: "ellipsis")
+                        Image("queue")
                             .resizable()
+                            .renderingMode(.template)
                             .modifier(Icon())
-                            .frame(height: 6)
+                            .frame(height: 40)
                             .bold()
-                            .rotationEffect(.degrees(90))
                     }
                 }
                 
@@ -64,12 +65,12 @@ struct PlayMusicView: View {
                     VStack{
                         //MARK: - TRACK'S NAME
                         Text("Song Name")
-                            .font(.custom("Gotham-Bold", size: 25))
+                            .font(.custom("Gotham-Bold", size: 28))
                             .modifier(BlackColor())
                             .frame(maxWidth: .infinity, alignment: .leading)
                         //MARK: - ARTISTS
                         Text("Artists")
-                            .font(.custom("Gotham-Book", size: 18))
+                            .font(.custom("Gotham-Book", size: 20))
                             .modifier(BlackColor())
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -86,9 +87,8 @@ struct PlayMusicView: View {
                         HeartButtonView(active: $likeTrack, startAnimation: animatingHeart)
                     }
 
-                }
-                    
-                Spacer()
+                }.frame(width: .infinity)
+
                 
                 //MARK: - PROGRESS BAR
                 ZStack(alignment: .leading) {
@@ -133,7 +133,7 @@ struct PlayMusicView: View {
                         Image(systemName: "backward.end.fill")
                             .resizable()
                             .modifier(Icon())
-                            .frame(width: 35)
+                            .frame(width: 37)
                     }
                     //MARK: - PLAY/PAUSE BUTTON
                     Button {
@@ -144,7 +144,7 @@ struct PlayMusicView: View {
                         Image(systemName: pauseActive ? "play.circle" : "pause.circle")
                             .resizable()
                             .modifier(Icon())
-                            .frame(width: 70)
+                            .frame(width: 75)
                             .rotationEffect(.degrees(pauseActive ? 0 : -180))
                     }
                     //MARK: - FORWARD BUTTON
@@ -154,7 +154,7 @@ struct PlayMusicView: View {
                         Image(systemName: "forward.end.fill")
                             .resizable()
                             .modifier(Icon())
-                            .frame(width: 35)
+                            .frame(width: 37)
                     }
                     //MARK: - REPEAT BUTTON
                     Button {
