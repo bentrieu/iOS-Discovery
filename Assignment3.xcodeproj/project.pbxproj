@@ -21,6 +21,10 @@
 		04E149CA2AAF4D5000BF6229 /* Gotham-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149C02AAF4D5000BF6229 /* Gotham-LightItalic.otf */; };
 		04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149CB2AAF52A700BF6229 /* HeartButtonView.swift */; };
 		9958D84D2AAF69EF00F5F42E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84C2AAF69EF00F5F42E /* LandingPageView.swift */; };
+		9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */; };
+		9958D8522AAF822B00F5F42E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8512AAF822B00F5F42E /* LoginView.swift */; };
+		9958D8542AAF831200F5F42E /* CustomeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8532AAF831200F5F42E /* CustomeTextField.swift */; };
+		9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8562AAF841900F5F42E /* SplashScreenView.swift */; };
 		9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2D2AADA67300A07591 /* RootView.swift */; };
 		9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */; };
 		9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */; };
@@ -52,6 +56,10 @@
 		04E149C02AAF4D5000BF6229 /* Gotham-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-LightItalic.otf"; sourceTree = "<group>"; };
 		04E149CB2AAF52A700BF6229 /* HeartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButtonView.swift; sourceTree = "<group>"; };
 		9958D84C2AAF69EF00F5F42E /* LandingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageView.swift; sourceTree = "<group>"; };
+		9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewModiferHelper.swift; sourceTree = "<group>"; };
+		9958D8512AAF822B00F5F42E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9958D8532AAF831200F5F42E /* CustomeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeTextField.swift; sourceTree = "<group>"; };
+		9958D8562AAF841900F5F42E /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		9CB48F2D2AADA67300A07591 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSettingsView.swift; sourceTree = "<group>"; };
 		9CD5585B2AAC4F2B0058A5C3 /* Assignment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +90,7 @@
 		04E149992AAF499200BF6229 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9958D8552AAF83F000F5F42E /* SplashView */,
 				9958D84B2AAF69B200F5F42E /* AuthenticationView */,
 				04E149CD2AAF5DA500BF6229 /* MusicView */,
 			);
@@ -126,8 +135,26 @@
 			isa = PBXGroup;
 			children = (
 				9958D84C2AAF69EF00F5F42E /* LandingPageView.swift */,
+				9958D8512AAF822B00F5F42E /* LoginView.swift */,
+				9958D8532AAF831200F5F42E /* CustomeTextField.swift */,
 			);
 			path = AuthenticationView;
+			sourceTree = "<group>";
+		};
+		9958D84E2AAF7E4900F5F42E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9958D8552AAF83F000F5F42E /* SplashView */ = {
+			isa = PBXGroup;
+			children = (
+				9958D8562AAF841900F5F42E /* SplashScreenView.swift */,
+			);
+			path = SplashView;
 			sourceTree = "<group>";
 		};
 		9CD558522AAC4F2A0058A5C3 = {
@@ -150,6 +177,7 @@
 		9CD5585D2AAC4F2B0058A5C3 /* Assignment3 */ = {
 			isa = PBXGroup;
 			children = (
+				9958D84E2AAF7E4900F5F42E /* Utils */,
 				04E149B22AAF4A8400BF6229 /* Info.plist */,
 				04E1499F2AAF4A4A00BF6229 /* Fonts */,
 				04E1499A2AAF499900BF6229 /* Helpers */,
@@ -282,15 +310,19 @@
 			files = (
 				04E1499E2AAF4A2500BF6229 /* Modifier.swift in Sources */,
 				9CD558612AAC4F2B0058A5C3 /* ContentView.swift in Sources */,
+				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
 				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
 				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
+				9958D8542AAF831200F5F42E /* CustomeTextField.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
 				04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */,
 				9958D84D2AAF69EF00F5F42E /* LandingPageView.swift in Sources */,
 				9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
+				9958D8522AAF822B00F5F42E /* LoginView.swift in Sources */,
 				04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */,
+				9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
