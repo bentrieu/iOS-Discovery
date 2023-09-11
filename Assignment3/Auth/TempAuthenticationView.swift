@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct TempAuthenticationView: View {
+    
+    @Binding var showSignInView: Bool
+    
     var body: some View {
         VStack {
             NavigationLink {
-                TemporarySignInView()
+                TemporarySignUpView(showSignInView: $showSignInView)
             } label: {
-                Text("Sign in with Email")
+                Text("Sign up with Email")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(height: 55)
@@ -24,14 +27,14 @@ struct TempAuthenticationView: View {
             Spacer()
         }
         .padding()
-        .navigationTitle("Sign In")
+        .navigationTitle("Sign up")
     }
 }
 
 struct TempAuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            TempAuthenticationView()
+            TempAuthenticationView(showSignInView: .constant(false))
         }
     }
 }

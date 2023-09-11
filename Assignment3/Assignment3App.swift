@@ -15,9 +15,7 @@ struct Assignment3App: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack{
-                TempAuthenticationView()
-            }
+            RootView()
         }
     }
 }

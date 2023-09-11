@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2D2AADA67300A07591 /* RootView.swift */; };
+		9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */; };
 		9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */; };
 		9CD558612AAC4F2B0058A5C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD558602AAC4F2B0058A5C3 /* ContentView.swift */; };
 		9CD558632AAC4F2C0058A5C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CD558622AAC4F2C0058A5C3 /* Assets.xcassets */; };
@@ -14,20 +16,22 @@
 		9CD5586D2AAC4FCD0058A5C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CD5586C2AAC4FCD0058A5C3 /* GoogleService-Info.plist */; };
 		9CD558702AAC50470058A5C3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9CD5586F2AAC50470058A5C3 /* FirebaseAnalytics */; };
 		9CD558722AAC50470058A5C3 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CD558712AAC50470058A5C3 /* FirebaseAnalyticsSwift */; };
-		9CFE5E792AAC5DBB0000A801 /* TemporarySignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E782AAC5DBB0000A801 /* TemporarySignInView.swift */; };
+		9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */; };
 		9CFE5E7D2AAC5F940000A801 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFE5E7C2AAC5F940000A801 /* FirebaseAuth */; };
 		9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */; };
 		9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9CB48F2D2AADA67300A07591 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSettingsView.swift; sourceTree = "<group>"; };
 		9CD5585B2AAC4F2B0058A5C3 /* Assignment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment3App.swift; sourceTree = "<group>"; };
 		9CD558602AAC4F2B0058A5C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9CD558622AAC4F2C0058A5C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CD558652AAC4F2C0058A5C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9CD5586C2AAC4FCD0058A5C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9CFE5E782AAC5DBB0000A801 /* TemporarySignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporarySignInView.swift; sourceTree = "<group>"; };
+		9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporarySignUpView.swift; sourceTree = "<group>"; };
 		9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempAuthenticationView.swift; sourceTree = "<group>"; };
 		9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +72,7 @@
 			children = (
 				9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */,
 				9CD558602AAC4F2B0058A5C3 /* ContentView.swift */,
+				9CB48F2D2AADA67300A07591 /* RootView.swift */,
 				9CFE5E7A2AAC5DCA0000A801 /* Auth */,
 				9CD5586C2AAC4FCD0058A5C3 /* GoogleService-Info.plist */,
 				9CD558622AAC4F2C0058A5C3 /* Assets.xcassets */,
@@ -87,9 +92,10 @@
 		9CFE5E7A2AAC5DCA0000A801 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				9CFE5E782AAC5DBB0000A801 /* TemporarySignInView.swift */,
+				9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */,
 				9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */,
 				9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */,
+				9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -181,7 +187,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CD558612AAC4F2B0058A5C3 /* ContentView.swift in Sources */,
-				9CFE5E792AAC5DBB0000A801 /* TemporarySignInView.swift in Sources */,
+				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
+				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
+				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
 				9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
