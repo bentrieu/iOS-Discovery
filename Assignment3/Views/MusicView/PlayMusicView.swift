@@ -11,6 +11,8 @@ struct PlayMusicView: View {
     @State var pauseActive = false
     @State var shuffleActive = false
     @State var repeatActive = false
+    @State var likeTrack = false
+    @State var animatingHeart = false
     
     var body: some View {
         ZStack{
@@ -45,8 +47,6 @@ struct PlayMusicView: View {
                             .bold()
                             .rotationEffect(.degrees(90))
                     }
-
-
                 }
                 
                 Spacer()
@@ -60,18 +60,34 @@ struct PlayMusicView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                 
                 Spacer()
-                
-                //MARK: - TRACK'S NAME
-                Text("Song Name")
-                    .font(.custom("Gotham-Bold", size: 25))
-                    .modifier(BlackColor())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                //MARK: - ARTISTS
-                Text("Artists")
-                    .font(.custom("Gotham-Book", size: 18))
-                    .modifier(BlackColor())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
+                HStack{
+                    VStack{
+                        //MARK: - TRACK'S NAME
+                        Text("Song Name")
+                            .font(.custom("Gotham-Bold", size: 25))
+                            .modifier(BlackColor())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        //MARK: - ARTISTS
+                        Text("Artists")
+                            .font(.custom("Gotham-Book", size: 18))
+                            .modifier(BlackColor())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    //MARK: - HEART BUTTON
+                    Button {
+                        withAnimation {
+                            animatingHeart = true
+                        }
+                        likeTrack.toggle()
+                        withAnimation {
+                            animatingHeart = false
+                        }
+                    } label: {
+                        HeartButtonView(active: $likeTrack, startAnimation: animatingHeart)
+                    }
+
+                }
+                    
                 Spacer()
                 
                 //MARK: - PROGRESS BAR
