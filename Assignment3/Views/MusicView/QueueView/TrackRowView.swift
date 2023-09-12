@@ -13,9 +13,8 @@ struct TrackRowView: View {
             Image("testImg")
                 .resizable()
                 .frame(width: 60, height: 60)
-                .scaledToFill()
                 .clipShape(RoundedRectangle(cornerRadius: 7))
-                .shadow(radius: 1)
+                .modifier(Img())
             VStack{
                 Text("Song Name")
                     .font(.custom("Gotham-Medium", size: 21))

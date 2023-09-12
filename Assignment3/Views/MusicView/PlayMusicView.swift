@@ -14,7 +14,7 @@ struct PlayMusicView: View {
     @State var likeTrack = false
     @State var animatingHeart = false
     @State var viewQueue = false
-    
+    @State var showAddPlayListSheet = false
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
@@ -64,9 +64,9 @@ struct PlayMusicView: View {
                         .resizable()
                         .frame(maxWidth: .infinity)
                         .frame(height: UIScreen.main.bounds.height/2.2)
-                        .scaledToFill()
                         .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .shadow(radius: 1)
+                        .modifier(Img())
+                        
                     
                     Spacer()
                     HStack{
@@ -93,6 +93,18 @@ struct PlayMusicView: View {
                             }
                         } label: {
                             HeartButtonView(active: $likeTrack, startAnimation: animatingHeart)
+                        }
+                        //MARK: - ADD TO PLAYLIST BUTTON
+                        Button {
+                            showAddPlayListSheet = true
+                        } label: {
+                            Image(systemName: "plus.square.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(Color("black"))
+                                .frame(height: 30)
+                        }.sheet(isPresented: $showAddPlayListSheet) {
+                            
                         }
                         
                     }.frame(width: .infinity)

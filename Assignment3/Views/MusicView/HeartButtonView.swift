@@ -22,8 +22,6 @@ struct HeartButtonView: View {
             .frame(height: 30)
             .scaleEffect(startAnimation ? animationScale : 1)
             .animation(.easeInOut(duration: 0.2), value: startAnimation)
-        
-        
     }
 }
 

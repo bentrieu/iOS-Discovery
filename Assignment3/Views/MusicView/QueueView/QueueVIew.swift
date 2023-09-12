@@ -18,7 +18,7 @@ struct QueueVIew: View {
                 
             } label: {
                 TrackRowView()
-                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.08)))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.4)).shadow(radius: 1))
             }
             Text("Up Next")
                 .font(.custom("Gotham-Bold", size: 25))
@@ -32,14 +32,26 @@ struct QueueVIew: View {
                 }label: {
                     TrackRowView()
                 }
-                .listRowInsets(.init(top: 0, leading: 0, bottom: 5, trailing: 0))
+                .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+                
+                Button{
+                    
+                }label: {
+                    TrackRowView()
+                }
+                .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
                 
             }
             .listStyle(PlainListStyle())
             .frame(height: UIScreen.main.bounds.height/2.2)
-        }.frame(width: .infinity)
+            Spacer()
+        }
+        .frame(width: .infinity)
+        .padding(.top, 15)
     }
 }
 

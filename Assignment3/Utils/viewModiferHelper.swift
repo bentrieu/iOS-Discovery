@@ -17,3 +17,41 @@ struct CustomButtonAthentication: ViewModifier {
             .frame(width: 340, height: 50)
     }
 }
+
+struct BlackColor: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Color("black"))
+    }
+}
+
+struct Icon: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .scaledToFit()
+            .modifier(BlackColor())
+    }
+}
+
+struct Shadow: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: Color("black") ,radius: 3)
+    }
+}
+
+struct Img: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .scaledToFill()
+            .modifier(Shadow())
+    }
+}
+
+struct OneLineText: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .modifier(BlackColor())
+            .lineLimit(1)
+    }
+}
