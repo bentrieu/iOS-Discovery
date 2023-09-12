@@ -27,16 +27,18 @@ struct QueueVIew: View {
             
             //MARK: - TRACK LIST
             List{
-                TrackRowView()
-                    .listRowInsets(.init(top: 0, leading: 0, bottom: 10, trailing: 0))
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                TrackRowView()
-                    .listRowInsets(.init(top: -5, leading: 0, bottom: 10, trailing: 0))
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-            }.listStyle(PlainListStyle())
-                .frame(height: UIScreen.main.bounds.height/2.2)
+                Button{
+                    
+                }label: {
+                    TrackRowView()
+                }
+                .listRowInsets(.init(top: 0, leading: 0, bottom: 5, trailing: 0))
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+                
+            }
+            .listStyle(PlainListStyle())
+            .frame(height: UIScreen.main.bounds.height/2.2)
         }.frame(width: .infinity)
     }
 }
