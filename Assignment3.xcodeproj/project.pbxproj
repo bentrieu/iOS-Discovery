@@ -19,10 +19,11 @@
 		04E149C92AAF4D5000BF6229 /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149BF2AAF4D5000BF6229 /* Gotham-Light.otf */; };
 		04E149CA2AAF4D5000BF6229 /* Gotham-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149C02AAF4D5000BF6229 /* Gotham-LightItalic.otf */; };
 		04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149CB2AAF52A700BF6229 /* HeartButtonView.swift */; };
-		04E149D32AB03CEE00BF6229 /* TrackRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D22AB03CEE00BF6229 /* TrackRowView.swift */; };
+		04E149D32AB03CEE00BF6229 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D22AB03CEE00BF6229 /* ListRowView.swift */; };
 		04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D42AB0447000BF6229 /* QueueVIew.swift */; };
 		04E149D72AB04DC300BF6229 /* AddToPlayListSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D62AB04DC300BF6229 /* AddToPlayListSheet.swift */; };
 		04E149DB2AB05FDD00BF6229 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DA2AB05FDD00BF6229 /* SearchBarView.swift */; };
+		04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */; };
 		9958D84D2AAF69EF00F5F42E /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84C2AAF69EF00F5F42E /* LandingPageView.swift */; };
 		9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */; };
 		9958D8522AAF822B00F5F42E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8512AAF822B00F5F42E /* LoginView.swift */; };
@@ -57,10 +58,11 @@
 		04E149BF2AAF4D5000BF6229 /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
 		04E149C02AAF4D5000BF6229 /* Gotham-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-LightItalic.otf"; sourceTree = "<group>"; };
 		04E149CB2AAF52A700BF6229 /* HeartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButtonView.swift; sourceTree = "<group>"; };
-		04E149D22AB03CEE00BF6229 /* TrackRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRowView.swift; sourceTree = "<group>"; };
+		04E149D22AB03CEE00BF6229 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		04E149D42AB0447000BF6229 /* QueueVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueVIew.swift; sourceTree = "<group>"; };
 		04E149D62AB04DC300BF6229 /* AddToPlayListSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToPlayListSheet.swift; sourceTree = "<group>"; };
 		04E149DA2AB05FDD00BF6229 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaylistView.swift; sourceTree = "<group>"; };
 		9958D84C2AAF69EF00F5F42E /* LandingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageView.swift; sourceTree = "<group>"; };
 		9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewModiferHelper.swift; sourceTree = "<group>"; };
 		9958D8512AAF822B00F5F42E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -135,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				04E149D42AB0447000BF6229 /* QueueVIew.swift */,
-				04E149D22AB03CEE00BF6229 /* TrackRowView.swift */,
+				04E149D22AB03CEE00BF6229 /* ListRowView.swift */,
 			);
 			path = QueueView;
 			sourceTree = "<group>";
@@ -145,6 +147,7 @@
 			children = (
 				04E149D62AB04DC300BF6229 /* AddToPlayListSheet.swift */,
 				04E149DA2AB05FDD00BF6229 /* SearchBarView.swift */,
+				04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */,
 			);
 			path = AddToPlaylistView;
 			sourceTree = "<group>";
@@ -329,8 +332,9 @@
 				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
 				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
 				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
-				04E149D32AB03CEE00BF6229 /* TrackRowView.swift in Sources */,
+				04E149D32AB03CEE00BF6229 /* ListRowView.swift in Sources */,
 				9958D8542AAF831200F5F42E /* CustomeTextField.swift in Sources */,
+				04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				04E149D72AB04DC300BF6229 /* AddToPlayListSheet.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,

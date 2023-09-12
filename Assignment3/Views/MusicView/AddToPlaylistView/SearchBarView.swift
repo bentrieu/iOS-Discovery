@@ -22,8 +22,8 @@ struct SearchBarView: View {
             TextField("", text: $searchInput, prompt: Text("Find playlist")
                 .font(.custom("Gotham-Medium", size: 20))
                 .foregroundColor(Color("black")))
-                .foregroundColor(Color("black"))
-                .font(.custom("Gotham-Medium", size: 20))
+            .foregroundColor(Color("black"))
+            .font(.custom("Gotham-Medium", size: 20))
             //MARK: - X MARK TO DELETE WHOLE INPUT FIELD
             Image(systemName: "xmark")
                 .resizable()
@@ -35,10 +35,10 @@ struct SearchBarView: View {
                     searchInput = ""
                 }
         }.padding(.horizontal)
-            .frame(height: 50)
+            .frame(height: 45)
             .background(
                 RoundedRectangle(cornerRadius: 5)
-                    .fill(Color.gray.opacity(0.4))
+                    .fill(Color.gray.opacity(0.9))
             )
     }
 }

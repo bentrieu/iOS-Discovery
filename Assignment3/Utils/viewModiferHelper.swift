@@ -36,7 +36,7 @@ struct Icon: ViewModifier{
 struct Shadow: ViewModifier{
     func body(content: Content) -> some View {
         content
-            .shadow(color: Color("black") ,radius: 3)
+            .shadow(color: Color("black") ,radius: 1)
     }
 }
 

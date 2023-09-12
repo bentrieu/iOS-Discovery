@@ -9,20 +9,24 @@ import SwiftUI
 
 struct AddToPlayListSheet: View {
     @Environment (\.dismiss) var dismiss
+    
+    @State var addNewPlaylist = false
+    
     @State var searchActive = false
     @State var searchResult = ""
+    
     var body: some View {
         ZStack{
-            Color("white")
+            LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
-            VStack(spacing: 30){
+            VStack(spacing: searchActive ? 5 : addNewPlaylist ? 0 : 20){
                 //MARK: - HEADER
                 HStack{
                     Button {
                         if searchActive{
-                            withAnimation {
-                                searchActive = false
-                            }
+                            searchActive = false
+                        }else if addNewPlaylist{
+                            addNewPlaylist = false
                         }else{
                             dismiss()
                         }
@@ -31,7 +35,8 @@ struct AddToPlayListSheet: View {
                             .resizable()
                             .modifier(Icon())
                             .frame(height: 16)
-                            .rotationEffect(.degrees(searchActive ? 90 : 0), anchor: UnitPoint(x: 0.4, y: 0.15))
+                            .rotationEffect(.degrees(searchActive || addNewPlaylist ? 90 : 0), anchor: UnitPoint(x: 0.4, y: 0.15))
+                            .animation(.easeInOut, value: searchActive)
                     }
                     
                     
@@ -41,16 +46,19 @@ struct AddToPlayListSheet: View {
                         //MARK: - SEARCH BAR
                         SearchBarView(searchInput: $searchResult)
                     }else{
-                        Text("Add To Playlist")
+                        //MARK: - VIEW TITLE
+                        Text(addNewPlaylist ? "New playlist" : "Add To Playlist")
                             .font(.custom("Gotham-Bold", size: 22))
                             .modifier(BlackColor())
-                            .offset(x: -7)
+                            .offset(x: addNewPlaylist ? -12 : -7)
+                            .animation(.easeOut, value: addNewPlaylist)
                         Spacer()
                     }
                 }
                 
                 //MARK: - NEW PLAYLIST BUTTON
                 Button{
+                    addNewPlaylist = true
                     
                 }label: {
                     Text("New playlist")
@@ -60,11 +68,19 @@ struct AddToPlayListSheet: View {
                         .padding(.horizontal,30)
                         .background(
                             Capsule().stroke(Color("black"))
+                                .opacity(addNewPlaylist ? 0 : 1)
+                                .animation(nil, value: addNewPlaylist)
                         )
-                }.opacity(searchActive ? 0 : 1)
+                    
+                }
+                .opacity(searchActive || addNewPlaylist ? 0 : 1)
+                .frame(height: searchActive || addNewPlaylist ? 0 : nil)
+                .disabled(searchActive || addNewPlaylist)
+                .offset(y: addNewPlaylist ? -20 : 0)
+                .animation(.easeOut, value: addNewPlaylist)
+                
                 
                 Spacer()
-                
                 
                 HStack{
                     //MARK: - SEARCH PLAYLIST BUTTON
@@ -105,16 +121,37 @@ struct AddToPlayListSheet: View {
                             )
                     }
                 }
-                .offset(y: searchActive ? -200 : 0)
-                .opacity(searchActive ? 0 : 1)
+                .offset(y: searchActive ? -UIScreen.main.bounds.height/11 : 0)
+                .opacity(searchActive || addNewPlaylist ? 0 : 1)
+                .frame(height: searchActive || addNewPlaylist ? 0 : nil)
+                .disabled(searchActive || addNewPlaylist)
                 .animation(.easeOut(duration: 0.4), value: searchActive)
                 
                 
                 
                 //MARK: - PLAYLIST
                 List{
-                    
+                    Button{
+                        
+                    }label: {
+                        ListRowView(imgDimens: 65, title: "Playlist Name", titleSize: 24, subTitle: "Num of tracks", subTitleSize: 20)
+                    }
+                    .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
+                .listStyle(PlainListStyle())
+                .animation(.easeInOut, value: searchActive)
+                .opacity(addNewPlaylist ? 0 : 1)
+                .frame(height: addNewPlaylist ? 0 : nil)
+                .disabled(addNewPlaylist)
+                
+                //MARK: NEW PLAYLIST VIEW
+                NewPlaylistView(addNewPlaylist: $addNewPlaylist)
+                    .opacity(addNewPlaylist ? 1 : 0)
+                    .frame(height: addNewPlaylist ? nil : 0)
+                    .disabled(!addNewPlaylist)
+                    .animation(.easeOut, value: addNewPlaylist)
                 
                 Spacer()
             }

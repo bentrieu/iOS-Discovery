@@ -7,21 +7,27 @@
 
 import SwiftUI
 
-struct TrackRowView: View {
+struct ListRowView: View {
+    let imgDimens: CGFloat
+    let title: String
+    let titleSize: CGFloat
+    let subTitle: String
+    let subTitleSize: CGFloat
+    
     var body: some View {
         HStack(spacing: UIScreen.main.bounds.width/25){
             Image("testImg")
                 .resizable()
-                .frame(width: 60, height: 60)
+                .frame(width: imgDimens, height: imgDimens)
                 .clipShape(RoundedRectangle(cornerRadius: 7))
                 .modifier(Img())
             VStack{
-                Text("Song Name")
-                    .font(.custom("Gotham-Medium", size: 21))
+                Text(title)
+                    .font(.custom("Gotham-Medium", size: titleSize))
                     .modifier(OneLineText())
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Artists")
-                    .font(.custom("Gotham-Book", size: 17))
+                Text(subTitle)
+                    .font(.custom("Gotham-Book", size: subTitleSize))
                     .modifier(OneLineText())
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -32,8 +38,8 @@ struct TrackRowView: View {
     }
 }
 
-struct TrackRowView_Previews: PreviewProvider {
+struct ListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackRowView()
+        ListRowView(imgDimens: 60, title: "Song Name", titleSize: 21, subTitle: "Artists", subTitleSize: 17)
     }
 }
