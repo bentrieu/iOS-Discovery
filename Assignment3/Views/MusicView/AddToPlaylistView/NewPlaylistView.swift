@@ -73,11 +73,12 @@ struct NewPlaylistView: View {
             }
         }
         .onChange(of: addNewPlaylist, perform: { newValue in
-            if focusedField == .inputSearch{
+            if newValue{
+                focusedField = .inputSearch
+
+            }else{
                 focusedField = nil
                 input = ""
-            }else{
-                focusedField = .inputSearch
             }
         })
     }
