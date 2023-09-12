@@ -103,8 +103,9 @@ struct PlayMusicView: View {
                                 .scaledToFit()
                                 .foregroundColor(Color("black"))
                                 .frame(height: 30)
-                        }.sheet(isPresented: $showAddPlayListSheet) {
-                            AddToPlayListSheet()
+                        }.fullScreenCover(isPresented: $showAddPlayListSheet) {
+                            AddToPlaylistView()
+                                
                         }
                         
                     }.frame(width: .infinity)

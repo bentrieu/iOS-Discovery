@@ -11,6 +11,11 @@ struct NewPlaylistView: View {
     @Binding var addNewPlaylist: Bool
     @State var input = ""
     
+    enum FocusedField {
+        case inputSearch
+    }
+    @FocusState private var focusedField: FocusedField?
+    
     var body: some View {
         VStack(alignment: .center, spacing: 40){
             Text("Give your playlist a name")
@@ -20,6 +25,9 @@ struct NewPlaylistView: View {
                 .font(.custom("Gotham-Bold", size: 40))
                 .modifier(BlackColor())
                 .multilineTextAlignment(.center)
+                .disableAutocorrection(true)
+                .textInputAutocapitalization(.never)
+                .focused($focusedField, equals: .inputSearch)
                 .background(
                     Color.clear
                         .overlay(
@@ -64,6 +72,14 @@ struct NewPlaylistView: View {
                 Spacer()
             }
         }
+        .onChange(of: addNewPlaylist, perform: { newValue in
+            if focusedField == .inputSearch{
+                focusedField = nil
+                input = ""
+            }else{
+                focusedField = .inputSearch
+            }
+        })
     }
 }
 

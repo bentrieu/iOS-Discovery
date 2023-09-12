@@ -9,6 +9,11 @@ import SwiftUI
 
 struct SearchBarView: View {
     @Binding var searchInput:String
+    
+    enum FocusedField {
+        case inputSearch
+    }
+    @FocusState private var focusedField: FocusedField?
     var body: some View {
         HStack{
             //MARK: - SEARCH ICON
@@ -24,6 +29,9 @@ struct SearchBarView: View {
                 .foregroundColor(Color("black")))
             .foregroundColor(Color("black"))
             .font(.custom("Gotham-Medium", size: 20))
+            .disableAutocorrection(true)
+            .textInputAutocapitalization(.never)
+            .focused($focusedField, equals: .inputSearch)
             //MARK: - X MARK TO DELETE WHOLE INPUT FIELD
             Image(systemName: "xmark")
                 .resizable()
@@ -34,12 +42,16 @@ struct SearchBarView: View {
                 .onTapGesture {
                     searchInput = ""
                 }
-        }.padding(.horizontal)
-            .frame(height: 45)
-            .background(
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(Color.gray.opacity(0.9))
-            )
+        }
+        .padding(.horizontal)
+        .frame(height: 45)
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color.gray.opacity(0.9))
+        )
+        .onAppear{
+            focusedField = .inputSearch
+        }
     }
 }
 

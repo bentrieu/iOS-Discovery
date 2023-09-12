@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddToPlayListSheet: View {
+struct AddToPlaylistView: View {
     @Environment (\.dismiss) var dismiss
     
     @State var addNewPlaylist = false
@@ -24,6 +24,7 @@ struct AddToPlayListSheet: View {
                 HStack{
                     Button {
                         if searchActive{
+                            searchResult = ""
                             searchActive = false
                         }else if addNewPlaylist{
                             addNewPlaylist = false
@@ -36,7 +37,7 @@ struct AddToPlayListSheet: View {
                             .modifier(Icon())
                             .frame(height: 16)
                             .rotationEffect(.degrees(searchActive || addNewPlaylist ? 90 : 0), anchor: UnitPoint(x: 0.4, y: 0.15))
-                            .animation(.easeInOut, value: searchActive)
+                            .animation(.easeInOut, value: searchActive || addNewPlaylist)
                     }
                     
                     
@@ -51,7 +52,7 @@ struct AddToPlayListSheet: View {
                             .font(.custom("Gotham-Bold", size: 22))
                             .modifier(BlackColor())
                             .offset(x: addNewPlaylist ? -12 : -7)
-                            .animation(.easeOut, value: addNewPlaylist)
+                            .animation(.easeIn, value: addNewPlaylist)
                         Spacer()
                     }
                 }
@@ -59,7 +60,6 @@ struct AddToPlayListSheet: View {
                 //MARK: - NEW PLAYLIST BUTTON
                 Button{
                     addNewPlaylist = true
-                    
                 }label: {
                     Text("New playlist")
                         .font(.custom("Gotham-Bold", size: 20))
@@ -121,11 +121,11 @@ struct AddToPlayListSheet: View {
                             )
                     }
                 }
-                .offset(y: searchActive ? -UIScreen.main.bounds.height/11 : 0)
+                .offset(y: searchActive ? -UIScreen.main.bounds.height/30 : 0)
                 .opacity(searchActive || addNewPlaylist ? 0 : 1)
                 .frame(height: searchActive || addNewPlaylist ? 0 : nil)
                 .disabled(searchActive || addNewPlaylist)
-                .animation(.easeOut(duration: 0.4), value: searchActive)
+                .animation(.easeOut, value: searchActive)
                 
                 
                 
@@ -163,6 +163,6 @@ struct AddToPlayListSheet: View {
 
 struct AddToPlayListSheet_Previews: PreviewProvider {
     static var previews: some View {
-        AddToPlayListSheet()
+        AddToPlaylistView()
     }
 }
