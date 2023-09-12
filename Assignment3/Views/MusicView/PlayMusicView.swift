@@ -32,63 +32,73 @@ struct PlayMusicView: View {
                     }
                     
                     Spacer()
-                    Text("On Play")
-                        .font(.custom("Gotham-Book", size: 20))
+                    Text(viewQueue ? "Queue" : "On Play")
+                        .font(.custom(viewQueue ? "Gotham-Bold" : "Gotham-Book", size: viewQueue ? 25 : 20))
                         .modifier(BlackColor())
+                        .offset(x: viewQueue ? -5 : 0)
                     Spacer()
                     
                     //MARK: - VIEW QUEUE BUTTON
                     Button {
-                        
+                        withAnimation {
+                            viewQueue.toggle()
+                        }
                     } label: {
-                        Image("queue")
+                        Image(systemName: viewQueue ? "xmark" : "text.line.first.and.arrowtriangle.forward")
                             .resizable()
                             .renderingMode(.template)
                             .modifier(Icon())
-                            .frame(height: 40)
-                            .bold()
+                            .frame(height: 27)
                     }
                 }
                 
                 Spacer()
                 
-                //MARK: - THUMBNAIL IMAGE
-                Image("testImg")
-                    .resizable()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: UIScreen.main.bounds.height/2.2)
-                    .scaledToFill()
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                if viewQueue{
+                    //MARK: - QUEUE VIEW
+                   QueueVIew()
+               
+                }else{
+                    //MARK: - THUMBNAIL IMAGE
+                    Image("testImg")
+                        .resizable()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: UIScreen.main.bounds.height/2.2)
+                        .scaledToFill()
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .shadow(radius: 1)
+                    
+                    Spacer()
+                    HStack{
+                        VStack{
+                            //MARK: - TRACK'S NAME
+                            Text("Song Name")
+                                .font(.custom("Gotham-Bold", size: 28))
+                                .modifier(OneLineText())
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            //MARK: - ARTISTS
+                            Text("Artists")
+                                .font(.custom("Gotham-Book", size: 20))
+                                .modifier(OneLineText())
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        //MARK: - HEART BUTTON
+                        Button {
+                            withAnimation {
+                                animatingHeart = true
+                            }
+                            likeTrack.toggle()
+                            withAnimation {
+                                animatingHeart = false
+                            }
+                        } label: {
+                            HeartButtonView(active: $likeTrack, startAnimation: animatingHeart)
+                        }
+                        
+                    }.frame(width: .infinity)
+                }
                 
-                Spacer()
-                HStack{
-                    VStack{
-                        //MARK: - TRACK'S NAME
-                        Text("Song Name")
-                            .font(.custom("Gotham-Bold", size: 28))
-                            .modifier(BlackColor())
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        //MARK: - ARTISTS
-                        Text("Artists")
-                            .font(.custom("Gotham-Book", size: 20))
-                            .modifier(BlackColor())
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    //MARK: - HEART BUTTON
-                    Button {
-                        withAnimation {
-                            animatingHeart = true
-                        }
-                        likeTrack.toggle()
-                        withAnimation {
-                            animatingHeart = false
-                        }
-                    } label: {
-                        HeartButtonView(active: $likeTrack, startAnimation: animatingHeart)
-                    }
-
-                }.frame(width: .infinity)
-
+                
                 
                 //MARK: - PROGRESS BAR
                 ZStack(alignment: .leading) {
@@ -101,18 +111,21 @@ struct PlayMusicView: View {
                         .frame(width: 200,height: 8)
                 }.frame(width: .infinity)
                 
-                //MARK: - START & END TIME
-                HStack{
-                    Text("0:00")
-                        .font(.custom("Gotham-Light", size: 16))
-                        .modifier(BlackColor())
-                    Spacer()
-                    Text("0:00")
-                        .font(.custom("Gotham-Light", size: 15))
-                        .modifier(BlackColor())
+                if !viewQueue{
+                    //MARK: - START & END TIME
+                    HStack{
+                        Text("0:00")
+                            .font(.custom("Gotham-Light", size: 16))
+                            .modifier(BlackColor())
+                        Spacer()
+                        Text("0:00")
+                            .font(.custom("Gotham-Light", size: 15))
+                            .modifier(BlackColor())
+                    }
+                    .frame(width: .infinity)
+                    .padding(.horizontal, 5)
                 }
-                .frame(width: .infinity)
-                .padding(.horizontal, 5)
+                
                 
                 //MARK: - CONTROL BUTTONS
                 HStack(spacing: UIScreen.main.bounds.width/13){

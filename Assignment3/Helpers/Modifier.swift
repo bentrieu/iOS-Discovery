@@ -23,3 +23,11 @@ struct Icon: ViewModifier{
     }
 }
 
+struct OneLineText: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .modifier(BlackColor())
+            .lineLimit(1)
+    }
+}
+
