@@ -31,6 +31,17 @@ struct LoginView: View {
                     
                     CustomSecureTextFieldView(isEditing: $onEditPass)
                 }
+                
+                
+                //MARK: LOGIN BUTTON
+                VStack(){
+                    Button {
+                        
+                    } label: {
+                        LoginTextView()
+                    }
+                }
+                .padding(.top,45)
                Spacer()
             }
             .padding(.horizontal)
@@ -46,3 +57,16 @@ struct LoginView_Previews: PreviewProvider {
 
 
 
+
+struct LoginTextView: View {
+    var body: some View {
+        Text("Log in")
+            .foregroundColor(.black)
+            .font(Font.custom("Gotham-Bold", size: 20))
+            .tracking(-1)
+            .frame(width: 100, height: 25)
+            .padding()
+            .background(Color("gray").opacity(0.6))
+            .clipShape(Capsule())
+    }
+}

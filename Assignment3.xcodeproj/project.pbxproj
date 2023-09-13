@@ -44,6 +44,12 @@
 		9CFE5E7D2AAC5F940000A801 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFE5E7C2AAC5F940000A801 /* FirebaseAuth */; };
 		9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */; };
 		9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */; };
+		F514FA892AB1A99E00A48228 /* SmallCirlceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA882AB1A99E00A48228 /* SmallCirlceView.swift */; };
+		F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8A2AB1ACA900A48228 /* SquareView.swift */; };
+		F514FA8E2AB1B2D500A48228 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8D2AB1B2D500A48228 /* RowView.swift */; };
+		F514FA902AB1B7DF00A48228 /* RowForSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8F2AB1B7DF00A48228 /* RowForSquareView.swift */; };
+		F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA912AB1B9E300A48228 /* HomeView.swift */; };
+		F514FA942AB1BB4600A48228 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA932AB1BB4600A48228 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +89,12 @@
 		9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporarySignUpView.swift; sourceTree = "<group>"; };
 		9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempAuthenticationView.swift; sourceTree = "<group>"; };
 		9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		F514FA882AB1A99E00A48228 /* SmallCirlceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCirlceView.swift; sourceTree = "<group>"; };
+		F514FA8A2AB1ACA900A48228 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
+		F514FA8D2AB1B2D500A48228 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
+		F514FA8F2AB1B7DF00A48228 /* RowForSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowForSquareView.swift; sourceTree = "<group>"; };
+		F514FA912AB1B9E300A48228 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F514FA932AB1BB4600A48228 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +116,7 @@
 			children = (
 				9958D8552AAF83F000F5F42E /* SplashView */,
 				9958D84B2AAF69B200F5F42E /* AuthenticationView */,
+				F514FA862AB1A58000A48228 /* HomeView */,
 				04E149CD2AAF5DA500BF6229 /* MusicView */,
 			);
 			path = Views;
@@ -172,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */,
+				F514FA932AB1BB4600A48228 /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -243,6 +257,34 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F514FA862AB1A58000A48228 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				F514FA8C2AB1B2A700A48228 /* RowView */,
+				F514FA872AB1A97300A48228 /* ItemView */,
+				F514FA912AB1B9E300A48228 /* HomeView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		F514FA872AB1A97300A48228 /* ItemView */ = {
+			isa = PBXGroup;
+			children = (
+				F514FA882AB1A99E00A48228 /* SmallCirlceView.swift */,
+				F514FA8A2AB1ACA900A48228 /* SquareView.swift */,
+			);
+			path = ItemView;
+			sourceTree = "<group>";
+		};
+		F514FA8C2AB1B2A700A48228 /* RowView */ = {
+			isa = PBXGroup;
+			children = (
+				F514FA8D2AB1B2D500A48228 /* RowView.swift */,
+				F514FA8F2AB1B7DF00A48228 /* RowForSquareView.swift */,
+			);
+			path = RowView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +378,9 @@
 			files = (
 				9CD558612AAC4F2B0058A5C3 /* ContentView.swift in Sources */,
 				9958D8712AB071E500F5F42E /* LoginView.swift in Sources */,
+				F514FA942AB1BB4600A48228 /* Utils.swift in Sources */,
+				F514FA902AB1B7DF00A48228 /* RowForSquareView.swift in Sources */,
+				F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */,
 				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
 				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
 				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
@@ -347,13 +392,16 @@
 				04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
 				04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */,
+				F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */,
 				04E149DB2AB05FDD00BF6229 /* SearchBarView.swift in Sources */,
 				9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */,
 				04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */,
 				9958D8732AB0723900F5F42E /* CustomTextFieldView.swift in Sources */,
 				9958D86F2AB071BF00F5F42E /* SignUpView.swift in Sources */,
+				F514FA8E2AB1B2D500A48228 /* RowView.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
 				04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */,
+				F514FA892AB1A99E00A48228 /* SmallCirlceView.swift in Sources */,
 				9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -40,7 +40,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
             .padding(.horizontal)
             .background{
                 RoundedRectangle(cornerRadius: 5)
-                    .fill(focus ? Color("light-gray" ) : Color("gray"))
+                    .fill(focus ? Color("light-gray" ).opacity(0.6) : Color("gray").opacity(0.6))
             }
             .tint(Color("green"))
             
