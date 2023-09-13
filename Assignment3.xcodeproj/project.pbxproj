@@ -248,9 +248,9 @@
 		9CFE5E7A2AAC5DCA0000A801 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */,
 				9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */,
 				9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */,
-				9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */,
 				9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */,
 			);
 			path = Auth;
