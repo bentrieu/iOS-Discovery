@@ -6,26 +6,18 @@
 //
 
 import SwiftUI
+//remove googlesignin later when build a custom button
 import GoogleSignIn
 import GoogleSignInSwift
-import FirebaseAuth
+
 
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
     
     func signInGoogle() async throws {
-        guard let topVC = UIApplication.topViewController() else {
-            throw URLError(.cannotFindHost)
-        }
-        
-        let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: topVC)
-        
-        guard let idToken: String = gidSignInResult.user.idToken?.tokenString else {
-            throw URLError(.badServerResponse)
-        }
-        let accessToken: String = gidSignInResult.user.accessToken.tokenString
-
-        try await AuthenticationManager.instance.signInWithGoogle(idToken: idToken, accessToken: accessToken)
+        let helper = SignInGoogleHelper()
+        let tokens = try await helper.signIn()
+        try await AuthenticationManager.instance.signInWithGoogle(tokens: tokens)
     }
 }
 
