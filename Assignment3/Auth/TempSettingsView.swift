@@ -10,6 +10,14 @@ import SwiftUI
 @MainActor
 final class SettingsViewModel: ObservableObject {
     
+    @Published var authProviders: [AuthProviderOption] = []
+    
+    func loadAuthProviders() {
+        if let providers = try? AuthenticationManager.instance.getProvider() {
+            authProviders = providers
+        }
+    }
+    
     func signOut() throws {
         try AuthenticationManager.instance.signOut()
     }
@@ -53,42 +61,47 @@ struct TempSettingsView: View {
                 }
             }
             
-            Section {
-                Button("Reset password") {
-                    Task {
-                        do {
-                            try await viewModel.resetPassword()
-                            print("password reset")
-                        } catch {
-                            print("error: \(error)")
+            if viewModel.authProviders.contains(.email) {
+                Section {
+                    Button("Reset password") {
+                        Task {
+                            do {
+                                try await viewModel.resetPassword()
+                                print("password reset")
+                            } catch {
+                                print("error: \(error)")
+                            }
                         }
                     }
-                }
-                
-                Button("Update password") {
-                    Task {
-                        do {
-                            try await viewModel.updatePassword()
-                            print("password updated")
-                        } catch {
-                            print("error: \(error)")
+                    
+                    Button("Update password") {
+                        Task {
+                            do {
+                                try await viewModel.updatePassword()
+                                print("password updated")
+                            } catch {
+                                print("error: \(error)")
+                            }
                         }
                     }
-                }
-                
-                Button("Update email") {
-                    Task {
-                        do {
-                            try await viewModel.updateEmail()
-                            print("email updated")
-                        } catch {
-                            print("error: \(error)")
+                    
+                    Button("Update email") {
+                        Task {
+                            do {
+                                try await viewModel.updateEmail()
+                                print("email updated")
+                            } catch {
+                                print("error: \(error)")
+                            }
                         }
                     }
+                } header: {
+                    Text("Email function")
                 }
-            } header: {
-                Text("Email function")
             }
+        }
+        .onAppear {
+            viewModel.loadAuthProviders()
         }
         .navigationBarTitle("Settings")
     }

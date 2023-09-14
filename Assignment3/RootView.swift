@@ -13,8 +13,10 @@ struct RootView: View {
     
     var body: some View {
         ZStack {
-            NavigationStack {
-                TempSettingsView(showSignInView: $showSignInView)
+            if !showSignInView {
+                NavigationStack {
+                    TempSettingsView(showSignInView: $showSignInView)
+                }
             }
         }
         .onAppear {
