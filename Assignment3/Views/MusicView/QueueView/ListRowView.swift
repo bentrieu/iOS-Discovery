@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ListRowView: View {
+    let imgName: String
     let imgDimens: CGFloat
     let title: String
     let titleSize: CGFloat
@@ -16,7 +17,7 @@ struct ListRowView: View {
     
     var body: some View {
         HStack(spacing: UIScreen.main.bounds.width/25){
-            Image("testImg")
+            Image(imgName)
                 .resizable()
                 .frame(width: imgDimens, height: imgDimens)
                 .clipShape(RoundedRectangle(cornerRadius: 7))
@@ -40,6 +41,6 @@ struct ListRowView: View {
 
 struct ListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ListRowView(imgDimens: 60, title: "Song Name", titleSize: 21, subTitle: "Artists", subTitleSize: 17)
+        ListRowView(imgName: "testImg", imgDimens: 60, title: "Song Name", titleSize: 21, subTitle: "Artists", subTitleSize: 17)
     }
 }

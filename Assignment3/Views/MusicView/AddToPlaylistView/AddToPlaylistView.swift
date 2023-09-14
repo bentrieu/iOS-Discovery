@@ -134,7 +134,7 @@ struct AddToPlaylistView: View {
                     Button{
                         
                     }label: {
-                        ListRowView(imgDimens: 65, title: "Playlist Name", titleSize: 24, subTitle: "Num of tracks", subTitleSize: 20)
+                        ListRowView(imgName: "testImg",imgDimens: 65, title: "Playlist Name", titleSize: 24, subTitle: "Num of tracks", subTitleSize: 20)
                     }
                     .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
                     .listRowBackground(Color.clear)
