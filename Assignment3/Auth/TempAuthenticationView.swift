@@ -9,7 +9,8 @@ import SwiftUI
 //remove googlesignin later when build a custom button
 import GoogleSignIn
 import GoogleSignInSwift
-
+import FacebookLogin
+import FacebookCore
 
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
@@ -18,6 +19,16 @@ final class AuthenticationViewModel: ObservableObject {
         let helper = SignInGoogleHelper()
         let tokens = try await helper.signIn()
         try await AuthenticationManager.instance.signInWithGoogle(tokens: tokens)
+    }
+}
+
+struct FacebookLoginButton: UIViewRepresentable {
+    func updateUIView(_ uiView: FBSDKLoginKit.FBLoginButton, context: Context) {
+        
+    }
+    
+    func makeUIView(context: Context) -> FBLoginButton {
+        return FBLoginButton()
     }
 }
 
@@ -50,7 +61,15 @@ struct TempAuthenticationView: View {
                     }
                 }
             }
+            FacebookLoginButton()
+                .frame(height: 40)
             Spacer()
+        }
+        .onAppear {
+            if let token = AccessToken.current, !token.isExpired {
+                print(token)
+                showSignInView = false
+            }
         }
         .padding()
         .navigationTitle("Sign up")
