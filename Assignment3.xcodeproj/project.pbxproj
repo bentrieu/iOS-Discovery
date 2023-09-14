@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0440583A2AB309EB002C994B /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044058392AB309EB002C994B /* LibraryView.swift */; };
 		04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */; };
 		04E149C12AAF4D5000BF6229 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */; };
 		04E149C22AAF4D5000BF6229 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B82AAF4D4F00BF6229 /* Gotham-Bold.otf */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044058392AB309EB002C994B /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		04E149B22AAF4A8400BF6229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusicView.swift; sourceTree = "<group>"; };
 		04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044058382AB3096B002C994B /* LibraryView */ = {
+			isa = PBXGroup;
+			children = (
+				044058392AB309EB002C994B /* LibraryView.swift */,
+			);
+			path = LibraryView;
+			sourceTree = "<group>";
+		};
 		04E149992AAF499200BF6229 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 				9958D84B2AAF69B200F5F42E /* AuthenticationView */,
 				F514FA862AB1A58000A48228 /* HomeView */,
 				04E149CD2AAF5DA500BF6229 /* MusicView */,
+				044058382AB3096B002C994B /* LibraryView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -401,6 +412,7 @@
 				9958D86D2AB071B300F5F42E /* CustomSecureTextField.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */,
+				0440583A2AB309EB002C994B /* LibraryView.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
 				04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */,
 				F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */,
