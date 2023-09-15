@@ -55,3 +55,11 @@ struct OneLineText: ViewModifier{
             .lineLimit(1)
     }
 }
+
+struct PagePadding: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .padding(.horizontal, UIScreen.main.bounds.width/15)
+            .padding(.vertical)
+    }
+}

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0440583A2AB309EB002C994B /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044058392AB309EB002C994B /* LibraryView.swift */; };
+		0440583C2AB40DCD002C994B /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0440583B2AB40DCD002C994B /* PlaylistView.swift */; };
+		044058402AB421ED002C994B /* PlaylistUpdateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0440583F2AB421ED002C994B /* PlaylistUpdateSheet.swift */; };
+		044058422AB43CDF002C994B /* AddTracksToPlayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044058412AB43CDF002C994B /* AddTracksToPlayListView.swift */; };
+		044058442AB4463C002C994B /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044058432AB4463C002C994B /* SearchBarView.swift */; };
 		04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */; };
 		04E149C12AAF4D5000BF6229 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */; };
 		04E149C22AAF4D5000BF6229 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B82AAF4D4F00BF6229 /* Gotham-Bold.otf */; };
@@ -23,7 +27,7 @@
 		04E149D32AB03CEE00BF6229 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D22AB03CEE00BF6229 /* ListRowView.swift */; };
 		04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D42AB0447000BF6229 /* QueueVIew.swift */; };
 		04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D62AB04DC300BF6229 /* AddToPlaylistView.swift */; };
-		04E149DB2AB05FDD00BF6229 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DA2AB05FDD00BF6229 /* SearchBarView.swift */; };
+		04E149DB2AB05FDD00BF6229 /* FocusedSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DA2AB05FDD00BF6229 /* FocusedSearchBarView.swift */; };
 		04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */; };
 		9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */; };
 		9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8562AAF841900F5F42E /* SplashScreenView.swift */; };
@@ -60,6 +64,10 @@
 
 /* Begin PBXFileReference section */
 		044058392AB309EB002C994B /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		0440583B2AB40DCD002C994B /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
+		0440583F2AB421ED002C994B /* PlaylistUpdateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistUpdateSheet.swift; sourceTree = "<group>"; };
+		044058412AB43CDF002C994B /* AddTracksToPlayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTracksToPlayListView.swift; sourceTree = "<group>"; };
+		044058432AB4463C002C994B /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		04E149B22AAF4A8400BF6229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusicView.swift; sourceTree = "<group>"; };
 		04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
@@ -76,7 +84,7 @@
 		04E149D22AB03CEE00BF6229 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		04E149D42AB0447000BF6229 /* QueueVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueVIew.swift; sourceTree = "<group>"; };
 		04E149D62AB04DC300BF6229 /* AddToPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToPlaylistView.swift; sourceTree = "<group>"; };
-		04E149DA2AB05FDD00BF6229 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		04E149DA2AB05FDD00BF6229 /* FocusedSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedSearchBarView.swift; sourceTree = "<group>"; };
 		04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaylistView.swift; sourceTree = "<group>"; };
 		9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewModiferHelper.swift; sourceTree = "<group>"; };
 		9958D8562AAF841900F5F42E /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
@@ -128,8 +136,19 @@
 			isa = PBXGroup;
 			children = (
 				044058392AB309EB002C994B /* LibraryView.swift */,
+				0440583E2AB421AA002C994B /* PlayListView */,
 			);
 			path = LibraryView;
+			sourceTree = "<group>";
+		};
+		0440583E2AB421AA002C994B /* PlayListView */ = {
+			isa = PBXGroup;
+			children = (
+				0440583B2AB40DCD002C994B /* PlaylistView.swift */,
+				0440583F2AB421ED002C994B /* PlaylistUpdateSheet.swift */,
+				044058412AB43CDF002C994B /* AddTracksToPlayListView.swift */,
+			);
+			path = PlayListView;
 			sourceTree = "<group>";
 		};
 		04E149992AAF499200BF6229 /* Views */ = {
@@ -140,6 +159,7 @@
 				F514FA862AB1A58000A48228 /* HomeView */,
 				04E149CD2AAF5DA500BF6229 /* MusicView */,
 				044058382AB3096B002C994B /* LibraryView */,
+				044058432AB4463C002C994B /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				04E149D62AB04DC300BF6229 /* AddToPlaylistView.swift */,
-				04E149DA2AB05FDD00BF6229 /* SearchBarView.swift */,
+				04E149DA2AB05FDD00BF6229 /* FocusedSearchBarView.swift */,
 				04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */,
 			);
 			path = AddToPlaylistView;
@@ -413,6 +433,7 @@
 				F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */,
 				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
 				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
+				044058442AB4463C002C994B /* SearchBarView.swift in Sources */,
 				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
 				9C9EA7782AB21B4A0042ACD5 /* GoogleSignInHelper.swift in Sources */,
 				04E149D32AB03CEE00BF6229 /* ListRowView.swift in Sources */,
@@ -424,11 +445,14 @@
 				0440583A2AB309EB002C994B /* LibraryView.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
 				04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */,
+				0440583C2AB40DCD002C994B /* PlaylistView.swift in Sources */,
+				044058402AB421ED002C994B /* PlaylistUpdateSheet.swift in Sources */,
 				F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */,
-				04E149DB2AB05FDD00BF6229 /* SearchBarView.swift in Sources */,
+				04E149DB2AB05FDD00BF6229 /* FocusedSearchBarView.swift in Sources */,
 				9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */,
 				04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */,
 				9958D8732AB0723900F5F42E /* CustomTextFieldView.swift in Sources */,
+				044058422AB43CDF002C994B /* AddTracksToPlayListView.swift in Sources */,
 				9958D86F2AB071BF00F5F42E /* SignUpView.swift in Sources */,
 				F514FA8E2AB1B2D500A48228 /* RowView.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
