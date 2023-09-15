@@ -37,10 +37,9 @@ struct LandingPageView: View {
                         SignUpView()
                             .navigationTitle("Create account")
                             .foregroundColor(Color("black"))
-                            .navigationBarBackButtonHidden()
-                            .navigationBarItems(leading: BackButton())
+                            .modifier(CustomNavigationButton())
                     } label: {
-                        SignUpButtonView()
+                        ButtonWithBackGroundGreenView(title: "Sign up free")
                     }
 
                     
@@ -72,8 +71,7 @@ struct LandingPageView: View {
                         LoginView()
                             .navigationTitle("Login")
                             .foregroundColor(Color("black"))
-                            .navigationBarBackButtonHidden()
-                            .navigationBarItems(leading: BackButton())
+                            .modifier(CustomNavigationButton())
                            
                            
                     } label: {
@@ -101,9 +99,10 @@ struct LandingPageView_Previews: PreviewProvider {
 }
 
 
-struct SignUpButtonView: View {
+struct ButtonWithBackGroundGreenView: View {
+    var title : String
     var body: some View {
-        Text("Sign up free")
+        Text(title)
             .modifier(CustomButtonAthentication())
             .background(Color("green"))
             .clipShape(Capsule())

@@ -7,34 +7,22 @@
 
 import SwiftUI
 
-struct RowForSquareView <Content:View>: View {
-    var title: String
-    var itemList : [SquareStruct]
-    var size : CGFloat
+struct AlbumView : View {
+    var albums : [Album]
    
-    let content : Content
-    
-    init(title: String, itemList: [SquareStruct], size : CGFloat, @ViewBuilder content: () -> Content) {
-        self.title = title
-        self.itemList = itemList
-        self.size = size
-        self.content = content()
-    }
-    
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
+            Text("Popular Album")
                 .foregroundColor(Color("black"))
                 .font(Font.custom("Gotham-Bold", size: 24))
                 .padding(.leading)
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
-                    ForEach(itemList, id: \.id) { item in
+                    ForEach(albums, id: \.id) { item in
                         VStack(alignment: .leading){
-                            SquareView(imageUrl: item.imageUrl, size: size)
-                            self.content
+                            SquareView(imageUrl: item.imageUrl, size: 175)
+                            TextForAlbumView(title: item.title, type: "Album", name: item.name, size: 175)
                         }
-                      
                     }
                 }
                 .padding(.leading,15)
@@ -47,14 +35,44 @@ struct RowForSquareView <Content:View>: View {
 
 struct RowForSquareView_Previews: PreviewProvider {
     static var previews: some View {
-        RowForSquareView(title: "Popular Album", itemList: bigSquareDataArray, size: 175){
-            
+        AlbumView(albums: albums)
+    }
+}
+
+
+struct TextForAlbumView: View {
+    var title : String
+    var type : String
+    var name : String
+    var size : CGFloat
+    var body: some View {
+        VStack(alignment: .leading, spacing: -5){
+            Text(title)
+                .foregroundColor(Color("black"))
+                .font(Font.custom("Gotham-Medium", size: 16))
+            HStack(spacing: 5){
+                Text(type)
+                
+                Text(".")
+                    .font(.system(size: 45))
+                    .offset(y:-15)
+                Text(name)
+                Spacer()
+            }
+            .offset(y:-10)
+            .font(Font.custom("Gotham-Medium", size: 16))
+            .foregroundColor(Color("black").opacity(0.6))
+            .frame(width: size)
         }
     }
 }
 
 
-struct SquareStruct: Identifiable {
+
+
+
+
+struct Album: Identifiable {
     let id = UUID()
     let imageUrl: String
     let title: String
@@ -62,56 +80,56 @@ struct SquareStruct: Identifiable {
     let name: String
 }
 
-let bigSquareDataArray: [SquareStruct] = [
-    SquareStruct(
+let albums: [Album] = [
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",
         name: "Min"
     ),
-    SquareStruct(
+    Album(
         imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
         title: "MIN",
         type: "Single",

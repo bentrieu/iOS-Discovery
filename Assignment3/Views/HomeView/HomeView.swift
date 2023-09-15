@@ -9,69 +9,36 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        ZStack{
-            Color("white")
-                .edgesIgnoringSafeArea(.all)
-            ScrollView {
-                VStack (alignment: .leading,spacing: 10){
-                    HeadingView()
-                    
-                    
-                    HStack{
+        NavigationStack {
+            ZStack{
+                Color("white")
+                    .edgesIgnoringSafeArea(.all)
+                ScrollView {
+                    VStack (alignment: .leading,spacing: 10){
+                        HeadingView()
                         
-                        Button {
+                        
+                        HStack{
                             
-                        } label: {
-                            CustomButton(name: "Music")
-                        }
+                            Button {
+                                
+                            } label: {
+                                CustomButton(name: "Music")
+                            }
 
+                        }
+                        .padding()
                         
-                        Button {
-                            
-                        } label: {
-                            CustomButton(name: "Podcast & Shows")
-                        }
-                      
-                      
-                    }
-                    .padding()
-                    RowForSquareView(title: "Recently Played", itemList: bigSquareDataArray, size: 110) {
-                        HStack{
-                            Text("Top 50 - Viet Nam")
-                                .font(Font.custom("Gotham-Medium", size: 16))
-                                .frame(width: 100,alignment: .leading)
-                                .foregroundColor(Color("black"))
-                            
-                        }
+                        //MARK: RECENTLY PLAYED MUSIC
+                       MusicView(musics: musics)
+
+                        //MARK: ALBUM MUSIC ROW VIEW
+                        AlbumView(albums: albums)
                         
                     }
-                    
-                    
-                    
-                    RowForSquareView(title: "Uniquely yours", itemList: bigSquareDataArray, size: 175) {
-                        HStack{
-                            Text("Song you love right now")
-                                .font(Font.custom("Gotham-Medium", size: 16))
-                                .frame(width: 175,alignment: .leading)
-                                .foregroundColor(Color("black").opacity(0.4))
-                            
-                        }
-                        
-                    }
-                    
-                    RowForSquareView(title: "Trending now near you", itemList: bigSquareDataArray, size: 175) {
-                        HStack{
-//                            TextForAlbumView(title: <#T##String#>, type: <#T##String#>, name: <#T##String#>, size: <#T##CGFloat#>)
-                            
-                        }
-                        
-                    }
-                    
-                    RowForSquareView(title: "Popular Radio", itemList: bigSquareDataArray, size: 175) {}
-                    
                 }
+               
             }
-           
         }
     }
 }
@@ -84,7 +51,7 @@ struct HomeView_Previews: PreviewProvider {
 
 struct HeadingView: View {
     var body: some View {
-        HStack{
+        HStack(spacing: 15){
             Text("Good Afternoon")
                 .tracking(-1)
                 .font(Font.custom("Gotham-Bold", size: 26))
@@ -98,7 +65,20 @@ struct HeadingView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(Color("black"))
-                    .frame(width: 25,height: 25)
+                    .frame(width: 24,height: 24 )
+                    .bold()
+                    
+            }
+            
+            
+            Button {
+                
+            } label: {
+                Image(systemName: "gearshape")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(Color("black"))
+                    .frame(width: 24,height: 24 )
                     .bold()
                     
             }

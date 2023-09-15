@@ -18,6 +18,14 @@ struct CustomButtonAthentication: ViewModifier {
     }
 }
 
+struct CustomNavigationButton: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .navigationBarBackButtonHidden()
+            .navigationBarItems(leading: BackButton())
+    }
+}
+
 struct BlackColor: ViewModifier{
     func body(content: Content) -> some View {
         content
