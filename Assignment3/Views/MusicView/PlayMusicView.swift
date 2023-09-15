@@ -194,8 +194,7 @@ struct PlayMusicView: View {
                     }
                 }.frame(width: .infinity)
             }
-            .padding(.horizontal, UIScreen.main.bounds.width/15)
-            .padding(.vertical)
+            .modifier(PagePadding())
         }
     }
 }

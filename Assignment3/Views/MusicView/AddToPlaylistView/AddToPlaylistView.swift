@@ -45,7 +45,7 @@ struct AddToPlaylistView: View {
                     
                     if searchActive{
                         //MARK: - SEARCH BAR
-                        SearchBarView(searchInput: $searchResult)
+                        FocusedSearchBarView(searchInput: $searchResult, prompt: "Find playlist")
                     }else{
                         //MARK: - VIEW TITLE
                         Text(addNewPlaylist ? "New playlist" : "Add To Playlist")
@@ -155,8 +155,7 @@ struct AddToPlaylistView: View {
                 
                 Spacer()
             }
-            .padding(.horizontal, UIScreen.main.bounds.width/15)
-            .padding(.vertical)
+            .modifier(PagePadding())
         }
     }
 }
