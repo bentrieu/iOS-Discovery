@@ -105,6 +105,12 @@ extension AuthenticationManager {
         return try await signIn(credential: credential)
     }
     
+    @discardableResult
+    func signInWithFacebook(token: String) async throws -> AuthDataResultModel {
+        let credential = FacebookAuthProvider.credential(withAccessToken: token)
+        return try await signIn(credential: credential)
+    }
+    
     func signIn(credential: AuthCredential) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().signIn(with: credential)
         return AuthDataResultModel(user: authDataResult.user)

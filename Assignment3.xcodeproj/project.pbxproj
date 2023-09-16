@@ -23,7 +23,7 @@
 		04E149D32AB03CEE00BF6229 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D22AB03CEE00BF6229 /* ListRowView.swift */; };
 		04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D42AB0447000BF6229 /* QueueVIew.swift */; };
 		04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149D62AB04DC300BF6229 /* AddToPlaylistView.swift */; };
-		04E149DB2AB05FDD00BF6229 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DA2AB05FDD00BF6229 /* SearchBarView.swift */; };
+		04E149DB2AB05FDD00BF6229 /* FocusedSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DA2AB05FDD00BF6229 /* FocusedSearchBarView.swift */; };
 		04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */; };
 		9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */; };
 		9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8562AAF841900F5F42E /* SplashScreenView.swift */; };
@@ -32,6 +32,7 @@
 		9958D8712AB071E500F5F42E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8702AB071E500F5F42E /* LoginView.swift */; };
 		9958D8732AB0723900F5F42E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8722AB0723800F5F42E /* CustomTextFieldView.swift */; };
 		9958D8752AB072F400F5F42E /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8742AB072F300F5F42E /* LandingPage.swift */; };
+		9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */; };
 		9C9EA7712AB1F4300042ACD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C9EA7702AB1F4300042ACD5 /* GoogleService-Info.plist */; };
 		9C9EA7742AB1F4720042ACD5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 9C9EA7732AB1F4720042ACD5 /* GoogleSignIn */; };
 		9C9EA7762AB1F4720042ACD5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C9EA7752AB1F4720042ACD5 /* GoogleSignInSwift */; };
@@ -95,6 +96,7 @@
 		9958D8702AB071E500F5F42E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9958D8722AB0723800F5F42E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		9958D8742AB072F300F5F42E /* LandingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
+		9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInHelper.swift; sourceTree = "<group>"; };
 		9C9EA7702AB1F4300042ACD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9C9EA7772AB21B4A0042ACD5 /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
 		9CB48F2D2AADA67300A07591 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */,
 				9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */,
 				9C9EA7772AB21B4A0042ACD5 /* GoogleSignInHelper.swift */,
+				9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -483,7 +486,6 @@
 				F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */,
 				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
 				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
-				044058442AB4463C002C994B /* SearchBarView.swift in Sources */,
 				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
 				9C9EA7782AB21B4A0042ACD5 /* GoogleSignInHelper.swift in Sources */,
 				04E149D32AB03CEE00BF6229 /* ListRowView.swift in Sources */,
@@ -492,21 +494,19 @@
 				04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */,
 				9958D8752AB072F400F5F42E /* LandingPage.swift in Sources */,
 				9958D86D2AB071B300F5F42E /* CustomSecureTextField.swift in Sources */,
+				9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */,
 				0440583A2AB309EB002C994B /* LibraryView.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
 				04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */,
-				0440583C2AB40DCD002C994B /* PlaylistView.swift in Sources */,
-				044058402AB421ED002C994B /* PlaylistUpdateSheet.swift in Sources */,
 				F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */,
-				04E149DB2AB05FDD00BF6229 /* SearchBarView.swift in Sources */,
+				04E149DB2AB05FDD00BF6229 /* FocusedSearchBarView.swift in Sources */,
 				F5BD95092AB42E800015B48C /* ViewProfileView.swift in Sources */,
 				9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */,
 				04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */,
 				F5BD94FA2AB415EE0015B48C /* MusicView.swift in Sources */,
 				9958D8732AB0723900F5F42E /* CustomTextFieldView.swift in Sources */,
-				044058422AB43CDF002C994B /* AddTracksToPlayListView.swift in Sources */,
 				9958D86F2AB071BF00F5F42E /* SignUpView.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
 				04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */,
