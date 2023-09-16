@@ -7,16 +7,19 @@
 
 import Foundation
 import FirebaseAuth
+import FacebookLogin
 
 struct AuthDataResultModel {
     let uid: String
     let email: String?
     let photoUrl: String?
+    let description: String?
     
     init(user: User) {
         self.uid = user.uid
         self.email = user.email
         self.photoUrl = user.photoURL?.absoluteString
+        self.description = user.description
     }
 }
 
@@ -58,6 +61,8 @@ final class AuthenticationManager {
     
     func signOut() throws {
         try Auth.auth().signOut()
+        let manager = LoginManager()
+        manager.logOut()
     }
     
     func deleteUser() async throws {

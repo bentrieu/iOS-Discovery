@@ -12,17 +12,6 @@ import GoogleSignInSwift
 import FacebookLogin
 import FacebookCore
 
-
-@MainActor
-final class AuthenticationViewModel: ObservableObject {
-    
-    func signInGoogle() async throws {
-        let helper = SignInGoogleHelper()
-        let tokens = try await helper.signIn()
-        try await AuthenticationManager.instance.signInWithGoogle(tokens: tokens)
-    }
-}
-
 struct TempAuthenticationView: View {
     
     @StateObject private var viewModel = AuthenticationViewModel()
@@ -48,12 +37,30 @@ struct TempAuthenticationView: View {
                         try await viewModel.signInGoogle()
                         showSignInView = false
                     } catch {
-                        print(error)
+                        print(error.localizedDescription)
                     }
                 }
             }
-            FacebookLoginButton()
-                .frame(height: 40)
+
+            Button {
+                Task {
+                    do {
+                        try await viewModel.signInFacebook()
+                        showSignInView = false
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            } label: {
+                Text("Sign up with Facebook")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(height: 55)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            
             Spacer()
         }
         .onAppear {
