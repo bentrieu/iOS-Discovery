@@ -17,7 +17,7 @@ struct FacebookLoginButton: UIViewRepresentable {
         
         // Set the delegate to handle login results
         loginButton.delegate = context.coordinator
-        
+    
         return loginButton
     }
     
