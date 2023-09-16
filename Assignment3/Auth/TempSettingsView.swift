@@ -42,6 +42,10 @@ final class SettingsViewModel: ObservableObject {
         let pass = "12345678"
         try await AuthenticationManager.instance.updatePassword(password: pass)
     }
+    
+    func deleteUser() async throws {
+        try await AuthenticationManager.instance.deleteUser()
+    }
 }
 
 struct TempSettingsView: View {
@@ -59,6 +63,19 @@ struct TempSettingsView: View {
                         print("error: \(error)")
                     }
                 }
+            }
+            
+            Button(role:. destructive) {
+                Task {
+                    do {
+                        try await viewModel.deleteUser()
+                        showSignInView = true
+                    } catch {
+                        print("error: \(error)")
+                    }
+                }
+            } label: {
+                Text("Delete account")
             }
             
             if viewModel.authProviders.contains(.email) {

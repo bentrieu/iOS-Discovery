@@ -23,6 +23,7 @@ struct AuthDataResultModel {
 enum AuthProviderOption: String {
     case email = "password"
     case google = "google.com"
+    case facebook = "facebook.com"
 }
 
 final class AuthenticationManager {
@@ -57,6 +58,14 @@ final class AuthenticationManager {
     
     func signOut() throws {
         try Auth.auth().signOut()
+    }
+    
+    func deleteUser() async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badURL)
+        }
+        
+        try await user.delete()
     }
 }
 
