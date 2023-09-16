@@ -53,7 +53,6 @@ struct TempAuthenticationView: View {
                 }
             }
             FacebookLoginButton()
-                .buttonStyle(.rounded)
                 .frame(height: 40)
             Spacer()
         }
