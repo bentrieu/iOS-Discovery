@@ -12,10 +12,11 @@ import FacebookCore
 @MainActor
 final class ProfileViewModel: ObservableObject {
     
-    @Published private(set) var user: AuthDataResultModel? = nil
+    @Published private(set) var user: DBUser? = nil
     
-    func loadCurrentUser() throws {
-        self.user = try AuthenticationManager.instance.getAuthenticatedUser()
+    func loadCurrentUser() async throws {
+        let authDataResult = try AuthenticationManager.instance.getAuthenticatedUser()
+        self.user = try await UserManager.instance.getUser(userId: authDataResult.uid)
     }
 }
 
@@ -27,11 +28,17 @@ struct TempProfileView: View {
     var body: some View {
         List {
             if let user = viewModel.user {
-                Text("Userid: \(user.uid)")
+                Text("Userid: \(user.userId)")
+                if let email = user.email {
+                    Text("Email: \(email)")
+                }
+                if let photoUrl = user.photoUrl {
+                    Text("photoUrl: \(photoUrl)")
+                }
             }
         }
-        .onAppear {
-            try? viewModel.loadCurrentUser()
+        .task {
+            try? await viewModel.loadCurrentUser()
         }
         .navigationTitle("Profile")
         .toolbar {
