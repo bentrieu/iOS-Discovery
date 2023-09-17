@@ -19,25 +19,25 @@ struct LibraryView: View {
             NavigationView {
                 VStack(){
                     //MARK: - SEARCH BAR + BACK BUTTON
-                    HStack(spacing:20){
-                        Button {
-                            searchInput = ""
-                            withAnimation {
-                                searchActive = false
+                    if (searchActive){
+                        HStack(spacing:20){
+                            Button {
+                                searchInput = ""
+                                withAnimation {
+                                    searchActive = false
+                                }
+                            } label: {
+                                Image(systemName: "arrow.backward")
+                                    .resizable()
+                                    .modifier(Icon())
+                                    .frame(width: 25)
                             }
-                        } label: {
-                            Image(systemName: "arrow.backward")
-                                .resizable()
-                                .modifier(Icon())
-                                .frame(width: 25)
+                            
+                            FocusedSearchBarView(searchInput: $searchInput, prompt: "Find playlist")
+                            
                         }
-                        
-                        FocusedSearchBarView(searchInput: $searchInput, prompt: "Find playlist")
-                        
+
                     }
-                    .opacity(searchActive ? 1 : 0)
-                    .frame(height: searchActive ? nil : 0)
-                    .disabled(!searchActive)
                     
                     //MARK: - HEADER
                     HStack{
@@ -89,8 +89,9 @@ struct LibraryView: View {
                     .padding(.bottom, searchActive ? 0 : 40)
                     .opacity(searchActive ? 0 : 1)
                     .frame(height: searchActive ? 0 : nil)
+                    .offset(y: searchActive ? -80 : 0)
                     .disabled(searchActive)
-                    .scaleEffect(searchActive ? 0 : 1)
+                    
                     
                     Divider()
                         .overlay(Color("black"))
