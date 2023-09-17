@@ -40,7 +40,9 @@ struct PlaylistUpdateSheet: View {
                     }
                     //MARK: - ADD TO PLAYLIST BUTTON
                     Button {
-                        showAddTracksToPlaylistView = true
+                        withAnimation {
+                            showAddTracksToPlaylistView = true
+                        }
                         dismiss()
                     } label: {
                         ButtonRowView(iconName: "plus.square",iconSize: 23, text: "Add to this playlist")
