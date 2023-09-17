@@ -19,6 +19,7 @@ struct FacebookLoginButton: UIViewRepresentable {
         let loginButton = FBLoginButton()
 
         // Set the delegate to handle login results
+        loginButton.permissions = ["public_profile","email"]
         loginButton.delegate = context.coordinator
 
         return loginButton
@@ -49,7 +50,9 @@ struct FacebookLoginButton: UIViewRepresentable {
                 // Handle successful login
                 Task {
                     do {
-                        try await AuthenticationManager.instance.signInWithFacebook(token: AccessToken.current!.tokenString)
+                        let authDataResult = try await AuthenticationManager.instance.signInWithFacebook(token: AccessToken.current!.tokenString)
+                        let user = DBUser(auth: authDataResult)
+                        try await UserManager.instance.createNewUser(user: user)
                         print("Logged in with Facebook")
                         parent.showSignInView = false
                     } catch {
