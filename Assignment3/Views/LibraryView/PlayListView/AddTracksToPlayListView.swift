@@ -64,7 +64,7 @@ struct AddTracksToPlayListView: View {
             .padding(.horizontal,10)
             .listStyle(PlainListStyle())
             .background(
-                Color(.gray).opacity(0.6)
+                Color(.gray).opacity(0.3)
             )
             .cornerRadius(15)
             
