@@ -129,7 +129,7 @@ struct AddToPlaylistView: View {
                 
                 
                 
-                //MARK: - PLAYLIST
+                //MARK: - LIST OF PLAYLISTS
                 List{
                     Button{
                         
@@ -147,7 +147,7 @@ struct AddToPlaylistView: View {
                 .disabled(addNewPlaylist)
                 
                 //MARK: NEW PLAYLIST VIEW
-                NewPlaylistView(addNewPlaylist: $addNewPlaylist)
+                NewPlaylistView(showView: $addNewPlaylist)
                     .opacity(addNewPlaylist ? 1 : 0)
                     .frame(height: addNewPlaylist ? nil : 0)
                     .disabled(!addNewPlaylist)

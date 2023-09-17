@@ -14,12 +14,13 @@ struct PlaylistView: View {
     @Binding var playlistName:String
     @Binding var numOfTracks: Int
     
+    @State var playMusicAvtive = false
     @State var searchActive = false
     @State var searchInput = ""
     
     @State var showPlaylistUpdateSheet = false
-    
     @State var showAddTracksToPlaylistView = false
+    @State var showEditPlaylistView = false
     
     //MARK: - BACK BUTTON
     var btnBack : some View { Button(action: {
@@ -71,15 +72,21 @@ struct PlaylistView: View {
                         }
                         Spacer()
                         //MARK: - PLAY BUTTON
-                        Image(systemName: "play.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, alignment: .center)
-                            .foregroundColor(.accentColor)
-                            .background(
-                                Circle()
-                                    .fill(Color(.white))
-                            )
+                        Button {
+                            playMusicAvtive.toggle()
+                        } label: {
+                            Image(systemName: playMusicAvtive ? "pause.circle.fill" : "play.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, alignment: .center)
+                                .foregroundColor(.accentColor)
+                                .background(
+                                    Circle()
+                                        .fill(Color(.white))
+                                )
+                        }
+
+
                     }
                     .offset(y: searchActive ? -50 : 0)
                     .frame(height: searchActive ? 0 : nil)
@@ -139,13 +146,19 @@ struct PlaylistView: View {
                         .disabled(searchActive)
                         .animation(nil)
                         .sheet(isPresented: $showPlaylistUpdateSheet) {
-                            PlaylistUpdateSheet(showAddTracksToPlaylistView: $showAddTracksToPlaylistView ,imgName: imgName, playlistName: playlistName, numOfTracks: numOfTracks)
+                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, imgName: imgName, playlistName: playlistName, numOfTracks: numOfTracks)
+                                .presentationDetents([.medium])
+                              
                         }
                         
                     }
                 }
             }
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
+        .fullScreenCover(isPresented: $showEditPlaylistView) {
+            EditPlaylistView()
+        }
     }
 }
 

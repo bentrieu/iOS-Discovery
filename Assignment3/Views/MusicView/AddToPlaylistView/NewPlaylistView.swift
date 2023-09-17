@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NewPlaylistView: View {
-    @Binding var addNewPlaylist: Bool
+    @Environment(\.dismiss) var dismiss
+    @Binding var showView: Bool
     @State var input = ""
     
     enum FocusedField {
@@ -33,7 +34,7 @@ struct NewPlaylistView: View {
                         .overlay(
                             VStack{
                                 Divider()
-                                    .overlay(Color.gray)
+                                    .overlay(Color("black"))
                                     .offset(x: 0, y: 15)
                             }
                         )
@@ -42,7 +43,9 @@ struct NewPlaylistView: View {
                 Spacer()
                 //MARK: - CANCEL BUTTON
                 Button{
-                    addNewPlaylist = false
+                    
+                    showView = false
+                    dismiss()
                 }label: {
                     Text("Cancel")
                         .font(.custom("Gotham-Medium", size: 20))
@@ -58,7 +61,9 @@ struct NewPlaylistView: View {
                 
                 //MARK: - CREATE BUTTON
                 Button{
-                    addNewPlaylist = false
+                    
+                    showView = false
+                    dismiss()
                 }label: {
                     Text("Create")
                         .font(.custom("Gotham-Bold", size: 20))
@@ -72,7 +77,7 @@ struct NewPlaylistView: View {
                 Spacer()
             }
         }
-        .onChange(of: addNewPlaylist, perform: { newValue in
+        .onChange(of: showView, perform: { newValue in
             if newValue{
                 focusedField = .inputSearch
 
@@ -86,6 +91,6 @@ struct NewPlaylistView: View {
 
 struct NewPlaylistView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPlaylistView(addNewPlaylist: .constant(true))
+        NewPlaylistView(showView: .constant(true))
     }
 }

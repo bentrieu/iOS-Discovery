@@ -9,8 +9,10 @@ import SwiftUI
 
 struct PlaylistUpdateSheet: View {
     @Environment (\.dismiss) var dismiss
+    let parentPresentationMode: Binding<PresentationMode>
     
     @Binding var showAddTracksToPlaylistView: Bool
+    @Binding var showEditPlaylistView : Bool
     
     let imgName:String
     let playlistName:String
@@ -22,6 +24,7 @@ struct PlaylistUpdateSheet: View {
                 .ignoresSafeArea(.all)
             VStack(alignment: .leading, spacing: 35){
                 ListRowView(imgName: imgName, imgDimens: 65, title: playlistName, titleSize: 22, subTitle: "\(numOfTracks) track(s)", subTitleSize: 17)
+                    .padding(.top, 30)
                     .padding(.bottom, -10)
                 
                 Divider()
@@ -44,13 +47,16 @@ struct PlaylistUpdateSheet: View {
                     }
                     //MARK: - EDIT PLAYLIST BUTTON
                     Button {
-                        
+                        showEditPlaylistView = true
+                        dismiss()
                     } label: {
                         ButtonRowView(iconName: "pencil",iconSize: 23, text: "Edit playlist")
                     }
                     //MARK: - DELETE PLAYLIST BUTTON
                     Button {
                         dismiss()
+                        self.parentPresentationMode.wrappedValue.dismiss()
+
                     } label: {
                         ButtonRowView(iconName: "xmark",iconSize: 23, text: "Delete playlist")
                     }
@@ -80,8 +86,8 @@ struct ButtonRowView: View{
     }
 }
 
-struct PlaylistUpdateSheet_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaylistUpdateSheet(showAddTracksToPlaylistView: .constant(false) ,imgName: "testImg", playlistName: "Playlist Name", numOfTracks: 4)
-    }
-}
+//struct PlaylistUpdateSheet_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlaylistUpdateSheet(parentPresentationMode: .constant(PresentationMode.self), showAddTracksToPlaylistView: .constant(false) ,imgName: "testImg", playlistName: "Playlist Name", numOfTracks: 4)
+//    }
+//}

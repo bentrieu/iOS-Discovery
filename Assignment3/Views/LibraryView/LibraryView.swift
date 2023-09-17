@@ -8,19 +8,46 @@
 import SwiftUI
 
 struct LibraryView: View {
+    @State var showAddNewPlaylistView = false
+    @State var searchActive = false
+    @State var searchInput = ""
+    
     var body: some View {
         ZStack{
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             NavigationView {
-                VStack(spacing:45){
+                VStack(){
+                    //MARK: - SEARCH BAR + BACK BUTTON
+                    HStack(spacing:20){
+                        Button {
+                            searchInput = ""
+                            withAnimation {
+                                searchActive = false
+                            }
+                        } label: {
+                            Image(systemName: "arrow.backward")
+                                .resizable()
+                                .modifier(Icon())
+                                .frame(width: 25)
+                        }
+                        
+                        FocusedSearchBarView(searchInput: $searchInput, prompt: "Find playlist")
+                        
+                    }
+                    .opacity(searchActive ? 1 : 0)
+                    .frame(height: searchActive ? nil : 0)
+                    .disabled(!searchActive)
+                    
                     //MARK: - HEADER
-                    HStack(){
+                    HStack{
                         Image("testImg")
                             .resizable()
                             .frame(width: 50, height: 50)
                             .modifier(Img())
                             .clipShape(Circle())
+                        
+                        
                         Text("Your Library")
                             .font(.custom("Gotham-Bold", size: 28))
                             .modifier(BlackColor())
@@ -28,30 +55,50 @@ struct LibraryView: View {
                         
                         //MARK: - SEARCH BUTTON
                         Button {
-                            
+                            withAnimation {
+                                searchActive = true
+                            }
                         } label: {
                             Image(systemName: "magnifyingglass")
                                 .resizable()
                                 .modifier(Icon())
-                                .frame(width: 25)
+                                .frame(width: 28)
                                 .foregroundColor(Color("black"))
                         }
                         
                         //MARK: - ADD NEW PLAYLIST BUTTON
                         Button {
-                            
+                            showAddNewPlaylistView = true
                         } label: {
                             Image(systemName: "plus")
                                 .resizable()
                                 .modifier(Icon())
-                                .frame(width: 25)
+                                .frame(width: 28)
                                 .foregroundColor(Color("black"))
+                        }.fullScreenCover(isPresented: $showAddNewPlaylistView) {
+                            //MARK: ADD NEW PLAYLIST VIEW
+                            ZStack{
+                                LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
+                                    .ignoresSafeArea(.all)
+                                NewPlaylistView(showView: $showAddNewPlaylistView)
+                                    .modifier(PagePadding())
+                            }
+                            
                         }
-                        
-                        
                     }
+                    .padding(.bottom, searchActive ? 0 : 40)
+                    .opacity(searchActive ? 0 : 1)
+                    .frame(height: searchActive ? 0 : nil)
+                    .disabled(searchActive)
+                    .scaleEffect(searchActive ? 0 : 1)
+                    
                     Divider()
                         .overlay(Color("black"))
+                        .padding(.bottom, searchActive ? 0 : 40)
+                        .opacity(searchActive ? 0 : 1)
+                        .frame(height: searchActive ? 0 : nil)
+                        .disabled(searchActive)
+                    
                     
                     //MARK: - LIST OF PLAYLIST
                     
