@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FacebookLogin
+import FacebookCore
 
 @MainActor
 final class ProfileViewModel: ObservableObject {

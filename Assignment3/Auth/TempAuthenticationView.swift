@@ -41,25 +41,12 @@ struct TempAuthenticationView: View {
                     }
                 }
             }
-
-            Button {
-                Task {
-                    do {
-                        try await viewModel.signInFacebook()
-                        showSignInView = false
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
-            } label: {
-                Text("Sign up with Facebook")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(height: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
+            
+            FacebookLoginButton(showSignInView: $showSignInView)
+                .foregroundColor(Color.blue)
+                .background(Color.white)
+                .frame(height:40)
+                .cornerRadius(20)
             
             Spacer()
         }

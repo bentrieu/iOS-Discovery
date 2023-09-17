@@ -12,21 +12,23 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.166361983066-gb357rncfffo48pkshje0nmsn0sqmrel</string>
-                <string>fb1466143374233894</string>
+                <string>fb1381444506063796</string>
 			</array>
 		</dict>
 	</array>
     
     <key>FacebookAppID</key>
-    <string>1466143374233894</string>
+    <string>1381444506063796</string>
     <key>FacebookClientToken</key>
-    <string>04bec8e13a996844a49d93f6095fbb72</string>
+    <string>40b097ea2719b913cf3366113cf3b9c5</string>
     <key>FacebookDisplayName</key>
     <string>RMIT Music</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>fbapi</string>
       <string>fb-messenger-share-api</string>
+      <string>fbauth2</string>
+      <string>fbshareextension</string>
     </array>
     
 	<key>GIDClientID</key>

@@ -15,10 +15,4 @@ final class AuthenticationViewModel: ObservableObject {
         let tokens = try await helper.signIn()
         try await AuthenticationManager.instance.signInWithGoogle(tokens: tokens)
     }
-    
-    func signInFacebook() async throws {
-        let helper = SignInFacebookHelper()
-        let token = helper.signIn()
-        try await AuthenticationManager.instance.signInWithFacebook(token: token)
-    }
 }
