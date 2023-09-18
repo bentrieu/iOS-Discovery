@@ -49,4 +49,34 @@ class MusicViewModel : ObservableObject {
             }
         }
     }
+    func findMusicById(_ musicId: String, completion: @escaping (Result<Music?, Error>) -> Void) {
+        let query = db.collection("music").whereField("music_id", isEqualTo: musicId)
+
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let documents = querySnapshot?.documents, let document = documents.first else {
+                completion(.success(nil)) // Document doesn't exist
+                return
+            }
+
+            do {
+                let musicData = document.data()
+                let music = Music(
+                    musicId: musicData["music_id"] as? String ?? "",
+                    musicName: musicData["music_name"] as? String ?? "",
+                    imageUrl: musicData["image_url"] as? String ?? "",
+                    artistName: musicData["artist_name"] as? String ?? "",
+                    genre: musicData["genre"] as? String ?? ""
+                )
+                completion(.success(music))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
 }
