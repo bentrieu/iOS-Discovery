@@ -150,6 +150,28 @@ final class AlbumManager : ObservableObject {
             }
         }
     }
+    
+    func deleteMusicFromAlbum(albumId: String, musicId: String) {
+        getAlbumById(albumID: albumId) { result in
+            switch result {
+            case .success(var fetchedAlbum):
+                if var album = fetchedAlbum {
+                    if let index = album.musicList.firstIndex(of: musicId) {
+                        album.musicList.remove(at: index)
+                        self.updateAlbum(album)
+                    } else {
+                        print("Music not found in the album")
+                    }
+                } else {
+                    print("Album not found")
+                }
+            case .failure(let error):
+                print("Error fetching album: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    
 
 
 }

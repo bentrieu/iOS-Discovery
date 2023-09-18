@@ -31,6 +31,10 @@ struct testMusicView: View {
                 print("album id: 1, music id: 1")
                 albumModel.addMusicToAlbum(albumId: "1", musicId: "1")
             }
+            Button("remove music from album"){
+                print("album id: 1, music id: 1")
+                albumModel.deleteMusicFromAlbum(albumId: "1", musicId: "1")
+            }
             
         }
         }
