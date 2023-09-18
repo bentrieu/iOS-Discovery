@@ -71,6 +71,7 @@
 		E38A26432AB8288E00C7A3FA /* testMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38A26422AB8288E00C7A3FA /* testMusicView.swift */; };
 		E3AFB4442AB852C3001E83E4 /* AlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */; };
 		E3AFB4462AB85FA3001E83E4 /* CounterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AFB4452AB85FA3001E83E4 /* CounterManager.swift */; };
+		E3AFB4482AB86519001E83E4 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AFB4472AB86519001E83E4 /* PlaylistManager.swift */; };
 		F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8A2AB1ACA900A48228 /* SquareView.swift */; };
 		F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */; };
 		F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA912AB1B9E300A48228 /* HomeView.swift */; };
@@ -144,6 +145,7 @@
 		E38A26422AB8288E00C7A3FA /* testMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusicView.swift; sourceTree = "<group>"; };
 		E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumManager.swift; sourceTree = "<group>"; };
 		E3AFB4452AB85FA3001E83E4 /* CounterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterManager.swift; sourceTree = "<group>"; };
+		E3AFB4472AB86519001E83E4 /* PlaylistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistManager.swift; sourceTree = "<group>"; };
 		F514FA8A2AB1ACA900A48228 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		F514FA912AB1B9E300A48228 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				9C38803D2AB83ED100E60162 /* MusicManager.swift */,
 				E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */,
 				E3AFB4452AB85FA3001E83E4 /* CounterManager.swift */,
+				E3AFB4472AB86519001E83E4 /* PlaylistManager.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				F5BD94FA2AB415EE0015B48C /* MusicView.swift in Sources */,
 				9958D8732AB0723900F5F42E /* CustomTextFieldView.swift in Sources */,
 				9958D86F2AB071BF00F5F42E /* SignUpView.swift in Sources */,
+				E3AFB4482AB86519001E83E4 /* PlaylistManager.swift in Sources */,
 				0440584E2AB70250002C994B /* AddTracksToPlayListView.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
 				04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */,
