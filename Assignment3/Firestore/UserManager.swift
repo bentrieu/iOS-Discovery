@@ -10,16 +10,20 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct DBUser: Codable {
-    let  userId: String
-    let  dateCreated: Date?
-    let  email: String?
-    let  photoUrl: String?
+    let userId: String
+    let dateCreated: Date?
+    let email: String?
+    let photoUrl: String?
+    let displayName: String?
+    let biography: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
         self.dateCreated = Date()
         self.email = auth.email
         self.photoUrl = auth.photoUrl
+        self.displayName = auth.displayName
+        self.biography = ""
     }
 }
 
@@ -52,5 +56,15 @@ final class UserManager {
     
     func getUser(userId: String) async throws -> DBUser {
         return try await userDocument(userId: userId).getDocument(as: DBUser.self, decoder: decoder)
+    }
+    
+    func updateUserProfile(userId:String, displayName: String, biography: String, photoUrl: String) async throws {
+        let data: [String:Any] = [
+            "display_name": displayName,
+            "biography": biography,
+            "photo_url": photoUrl
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
     }
 }
