@@ -13,17 +13,27 @@ struct SettingView: View {
     var body: some View {
         VStack{
             NavigationLink {
-                
+                ViewProfileView()
+                    .modifier(CustomNavigationButton())
             } label: {
                 AccountProfile(account: account)
                     .modifier(CustomNavigationButton())
                     .padding(.bottom)
             }
             
-            SettingItemView(name: "Account")
+            NavigationLink {
+                ThemeEditingView()
+                    .navigationTitle("Theme Setting")
+                    .modifier(CustomNavigationButton())
+            } label: {
+                SettingItemView(name: "Theme")
+                    .modifier(CustomNavigationButton())
+                    
+            }
+        
             
-            SettingItemView(name: "Theme")
-            
+           
+    
             Spacer()
         }
         .padding(.horizontal)
@@ -46,7 +56,7 @@ struct Account{
     var imageURL: String
     
 }
-let account = Account(name: "Hữu Phước", username: "phuoc05", email: "phuocdinh21102@gmail.com", password: "huuphuochahahjhj", imageURL: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/345072827_1301949700393436_9075755003333917361_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=svy-3ya0lowAX_agXLH&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfCmRbUTm4Z3GH52hylZhdya5TgL4YdLgCkVQWuWrUVH0Q&oe=6507E976")
+let account = Account(name: "Hữu Phước", username: "phuoc05", email: "phuocdinh21102@gmail.com", password: "huuphuochahahjhj", imageURL: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/345072827_1301949700393436_9075755003333917361_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=TVqUyJ5J1OAAX_1TePk&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDu5bi68KQZDgeXxZqAgCI-Lzx7cXZIcwaqqR7Eo_T11w&oe=650DD836")
 
 struct AccountProfile: View {
     var account: Account

@@ -18,17 +18,21 @@ struct MusicView: View {
                 .padding(.leading)
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
-                    ForEach(musics, id: \.id) { item in
+                    ForEach(musics, id: \.musicId) { item in
                         NavigationLink {
                             PlayMusicView()
                         }label: {
                             VStack(alignment: .leading){
-                                SquareView(imageUrl: item.imageURL, size: 125)
-                                Text(item.musicName)
-                                    .foregroundColor(Color("black"))
-                                    .font(Font.custom("Gotham-Meidum", size: 16))
-                                    .frame(width:125, alignment: .leading)
-                                    .multilineTextAlignment(.leading)
+                                if let tempURL = item.imageUrl {
+                                    SquareView(imageUrl: tempURL, size: 125)
+                                    if let tempMusicName = item.musicName {
+                                        Text(tempMusicName)
+                                            .foregroundColor(Color("black"))
+                                            .font(Font.custom("Gotham-Meidum", size: 16))
+                                            .frame(width:125, alignment: .leading)
+                                            .multilineTextAlignment(.leading)
+                                    }
+                                }
                             }
                         }
                     }
@@ -43,19 +47,10 @@ struct MusicView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        MusicView(musics: musics)
+       Text("")
     }
 }
 
 
 
-let musics = [
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    
-]
+

@@ -42,6 +42,8 @@
 		99B598E22AB812AC0082C1B5 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B598E12AB812AC0082C1B5 /* Music.swift */; };
 		99B598E42AB812B90082C1B5 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B598E32AB812B90082C1B5 /* Album.swift */; };
 		9C2AB8D82AB6EADC0056D5C3 /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2AB8D72AB6EADC0056D5C3 /* SignUpEmailViewModel.swift */; };
+		9C38803C2AB83E7900E60162 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C38803B2AB83E7900E60162 /* FirebaseStorage */; };
+		9C38803E2AB83ED100E60162 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C38803D2AB83ED100E60162 /* MusicManager.swift */; };
 		9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */; };
 		9C575AFF2AB589D000BE4553 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9C575AFE2AB589D000BE4553 /* FirebaseFirestore */; };
 		9C575B012AB589D000BE4553 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C575B002AB589D000BE4553 /* FirebaseFirestoreSwift */; };
@@ -66,10 +68,13 @@
 		9CFE5E7D2AAC5F940000A801 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFE5E7C2AAC5F940000A801 /* FirebaseAuth */; };
 		9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */; };
 		9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */; };
+		E38A26432AB8288E00C7A3FA /* testMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38A26422AB8288E00C7A3FA /* testMusicView.swift */; };
 		F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8A2AB1ACA900A48228 /* SquareView.swift */; };
 		F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */; };
 		F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA912AB1B9E300A48228 /* HomeView.swift */; };
 		F514FA942AB1BB4600A48228 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA932AB1BB4600A48228 /* Utils.swift */; };
+		F5704DFC2AB82AF800495552 /* ThemeEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5704DFB2AB82AF800495552 /* ThemeEditingView.swift */; };
+		F5704DFE2AB82C3500495552 /* ChangePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5704DFD2AB82C3500495552 /* ChangePhotoView.swift */; };
 		F5BD94FA2AB415EE0015B48C /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD94F92AB415EE0015B48C /* MusicView.swift */; };
 		F5BD94FD2AB41DAD0015B48C /* RootViewTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD94FC2AB41DAD0015B48C /* RootViewTemp.swift */; };
 		F5BD95002AB41E760015B48C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD94FF2AB41E760015B48C /* SearchView.swift */; };
@@ -77,7 +82,6 @@
 		F5BD95092AB42E800015B48C /* ViewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD95082AB42E800015B48C /* ViewProfileView.swift */; };
 		F5BD950B2AB436210015B48C /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD950A2AB436210015B48C /* EditProfileView.swift */; };
 		F5BD950F2AB443DC0015B48C /* EditModalLeaveConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD950E2AB443DC0015B48C /* EditModalLeaveConfirmView.swift */; };
-		F5BD95112AB451B80015B48C /* ImageModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD95102AB451B80015B48C /* ImageModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +121,7 @@
 		99B598E12AB812AC0082C1B5 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		99B598E32AB812B90082C1B5 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		9C2AB8D72AB6EADC0056D5C3 /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
+		9C38803D2AB83ED100E60162 /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInHelper.swift; sourceTree = "<group>"; };
 		9C575B032AB58E2700BE4553 /* TempProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempProfileView.swift; sourceTree = "<group>"; };
 		9C575B072AB5E97600BE4553 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -134,10 +139,13 @@
 		9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporarySignUpView.swift; sourceTree = "<group>"; };
 		9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempAuthenticationView.swift; sourceTree = "<group>"; };
 		9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		E38A26422AB8288E00C7A3FA /* testMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusicView.swift; sourceTree = "<group>"; };
 		F514FA8A2AB1ACA900A48228 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		F514FA912AB1B9E300A48228 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F514FA932AB1BB4600A48228 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F5704DFB2AB82AF800495552 /* ThemeEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditingView.swift; sourceTree = "<group>"; };
+		F5704DFD2AB82C3500495552 /* ChangePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhotoView.swift; sourceTree = "<group>"; };
 		F5BD94F92AB415EE0015B48C /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		F5BD94FC2AB41DAD0015B48C /* RootViewTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewTemp.swift; sourceTree = "<group>"; };
 		F5BD94FF2AB41E760015B48C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -145,7 +153,6 @@
 		F5BD95082AB42E800015B48C /* ViewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileView.swift; sourceTree = "<group>"; };
 		F5BD950A2AB436210015B48C /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F5BD950E2AB443DC0015B48C /* EditModalLeaveConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModalLeaveConfirmView.swift; sourceTree = "<group>"; };
-		F5BD95102AB451B80015B48C /* ImageModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +163,7 @@
 				9C9EA7762AB1F4720042ACD5 /* GoogleSignInSwift in Frameworks */,
 				9CF2DCD82AB348D4000AEDDB /* FacebookCore in Frameworks */,
 				9CD558722AAC50470058A5C3 /* FirebaseAnalyticsSwift in Frameworks */,
+				9C38803C2AB83E7900E60162 /* FirebaseStorage in Frameworks */,
 				9C9EA7742AB1F4720042ACD5 /* GoogleSignIn in Frameworks */,
 				9CFE5E7D2AAC5F940000A801 /* FirebaseAuth in Frameworks */,
 				9C575AFF2AB589D000BE4553 /* FirebaseFirestore in Frameworks */,
@@ -295,21 +303,16 @@
 			children = (
 				99B598E12AB812AC0082C1B5 /* Music.swift */,
 				99B598E32AB812B90082C1B5 /* Album.swift */,
+				E38A26422AB8288E00C7A3FA /* testMusicView.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		99E22AD72AB7FD900027E04A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9C575B062AB5E96600BE4553 /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
 				9C575B072AB5E97600BE4553 /* UserManager.swift */,
+				9C38803D2AB83ED100E60162 /* MusicManager.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -335,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				99B598E02AB8129C0082C1B5 /* Model */,
-				99E22AD72AB7FD900027E04A /* ViewModel */,
 				9CF2DCDB2AB34C6D000AEDDB /* Assignment3.entitlements */,
 				9958D84E2AAF7E4900F5F42E /* Utils */,
 				04E149B22AAF4A8400BF6229 /* Info.plist */,
@@ -434,7 +436,8 @@
 				F5BD95082AB42E800015B48C /* ViewProfileView.swift */,
 				F5BD950A2AB436210015B48C /* EditProfileView.swift */,
 				F5BD950E2AB443DC0015B48C /* EditModalLeaveConfirmView.swift */,
-				F5BD95102AB451B80015B48C /* ImageModal.swift */,
+				F5704DFB2AB82AF800495552 /* ThemeEditingView.swift */,
+				F5704DFD2AB82C3500495552 /* ChangePhotoView.swift */,
 			);
 			path = SettingView;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				9CF2DCD92AB348D4000AEDDB /* FacebookLogin */,
 				9C575AFE2AB589D000BE4553 /* FirebaseFirestore */,
 				9C575B002AB589D000BE4553 /* FirebaseFirestoreSwift */,
+				9C38803B2AB83E7900E60162 /* FirebaseStorage */,
 			);
 			productName = Assignment3;
 			productReference = 9CD5585B2AAC4F2B0058A5C3 /* Assignment3.app */;
@@ -549,7 +553,6 @@
 				F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */,
 				F5BD950F2AB443DC0015B48C /* EditModalLeaveConfirmView.swift in Sources */,
 				F5BD95072AB4278F0015B48C /* SettingView.swift in Sources */,
-				F5BD95112AB451B80015B48C /* ImageModal.swift in Sources */,
 				F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */,
 				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
 				0440584C2AB70200002C994B /* PlaylistView.swift in Sources */,
@@ -558,14 +561,17 @@
 				99B598E42AB812B90082C1B5 /* Album.swift in Sources */,
 				9C2AB8D82AB6EADC0056D5C3 /* SignUpEmailViewModel.swift in Sources */,
 				044058482AB70199002C994B /* SearchBarView.swift in Sources */,
+				9C38803E2AB83ED100E60162 /* MusicManager.swift in Sources */,
 				9C9EA7782AB21B4A0042ACD5 /* GoogleSignInHelper.swift in Sources */,
 				04E149D32AB03CEE00BF6229 /* ListRowView.swift in Sources */,
 				F5BD95002AB41E760015B48C /* SearchView.swift in Sources */,
 				F5BD94FD2AB41DAD0015B48C /* RootViewTemp.swift in Sources */,
 				04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */,
 				9958D8752AB072F400F5F42E /* LandingPage.swift in Sources */,
+				E38A26432AB8288E00C7A3FA /* testMusicView.swift in Sources */,
 				9958D86D2AB071B300F5F42E /* CustomSecureTextField.swift in Sources */,
 				9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */,
+				F5704DFE2AB82C3500495552 /* ChangePhotoView.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */,
 				0440583A2AB309EB002C994B /* LibraryView.swift in Sources */,
@@ -577,6 +583,7 @@
 				9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */,
 				04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */,
 				0440584A2AB701C3002C994B /* PlaylistUpdateSheet.swift in Sources */,
+				F5704DFC2AB82AF800495552 /* ThemeEditingView.swift in Sources */,
 				049B57162AB75BD6005809B5 /* EditPlaylistView.swift in Sources */,
 				F5BD94FA2AB415EE0015B48C /* MusicView.swift in Sources */,
 				9958D8732AB0723900F5F42E /* CustomTextFieldView.swift in Sources */,
@@ -818,6 +825,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9C38803B2AB83E7900E60162 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CD5586E2AAC50470058A5C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		9C575AFE2AB589D000BE4553 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9CD5586E2AAC50470058A5C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -46,6 +46,8 @@ struct ViewProfileView: View {
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(Color("black"))
                             }
+                    }.sheet(isPresented: $isPresentingEdit) {
+                        EditProfileView(account: $accountProfile, isCancelButtonPressed: $isCancelButtonPressed, isContentNotEdited: $isContentNotEdited, isPresentingEdit: $isPresentingEdit)
                     }
                 
                    
@@ -63,9 +65,9 @@ struct ViewProfileView: View {
                 Spacer()
             }
             
-            EditProfileView(account: $accountProfile, isCancelButtonPressed: $isCancelButtonPressed,  isContentNotEdited: $isContentNotEdited,isPresentingEdit: $isPresentingEdit)
-                .position(x: UIScreen.main.bounds.width / 2 , y: isPresentingEdit ?  UIScreen.main.bounds.height / 2  : UIScreen.main.bounds.height * 2)
-            
+//            EditProfileView(account: $accountProfile, isCancelButtonPressed: $isCancelButtonPressed,  isContentNotEdited: $isContentNotEdited,isPresentingEdit: $isPresentingEdit)
+//                .position(x: UIScreen.main.bounds.width / 2 , y: isPresentingEdit ?  UIScreen.main.bounds.height / 2  : UIScreen.main.bounds.height * 2)
+//                .zIndex(20)
             
             
         }

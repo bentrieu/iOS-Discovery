@@ -30,7 +30,7 @@ struct HomeView: View {
                         .padding()
                         
                         //MARK: RECENTLY PLAYED MUSIC
-                       MusicView(musics: musics)
+                  
 
                         //MARK: ALBUM MUSIC ROW VIEW
                         AlbumView(albums: albums)
@@ -57,7 +57,7 @@ struct HeadingView: View {
                 .font(Font.custom("Gotham-Bold", size: 26))
             Spacer()
             
-            Button {
+            NavigationLink {
                 
             } label: {
                 Image("clock")
@@ -71,8 +71,9 @@ struct HeadingView: View {
             }
             
             
-            Button {
-                
+            NavigationLink {
+                SettingView(account: account)
+                    .navigationTitle("Settings")
             } label: {
                 Image(systemName: "gearshape")
                     .resizable()
