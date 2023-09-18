@@ -272,6 +272,20 @@
 			path = SplashView;
 			sourceTree = "<group>";
 		};
+		99E22AD62AB7FD850027E04A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		99E22AD72AB7FD900027E04A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		9C575B062AB5E96600BE4553 /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +314,8 @@
 		9CD5585D2AAC4F2B0058A5C3 /* Assignment3 */ = {
 			isa = PBXGroup;
 			children = (
+				99E22AD72AB7FD900027E04A /* ViewModel */,
+				99E22AD62AB7FD850027E04A /* Models */,
 				9CF2DCDB2AB34C6D000AEDDB /* Assignment3.entitlements */,
 				9958D84E2AAF7E4900F5F42E /* Utils */,
 				04E149B22AAF4A8400BF6229 /* Info.plist */,
