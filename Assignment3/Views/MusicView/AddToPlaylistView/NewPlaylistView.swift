@@ -34,6 +34,7 @@ struct NewPlaylistView: View {
                         .overlay(
                             VStack{
                                 Divider()
+                                    .frame(height: 1)
                                     .overlay(Color("black"))
                                     .offset(x: 0, y: 15)
                             }

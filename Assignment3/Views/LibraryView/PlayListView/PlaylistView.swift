@@ -118,6 +118,7 @@ struct PlaylistView: View {
                     Spacer()
                 }
                 .modifier(PagePadding())
+                
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(leading: btnBack)
                 .toolbar{
@@ -153,6 +154,7 @@ struct PlaylistView: View {
                         
                     }
                 }
+                
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -162,7 +164,7 @@ struct PlaylistView: View {
     }
 }
 
-struct PlaylistVIew_Previews: PreviewProvider {
+struct PlaylistView_Previews: PreviewProvider {
     static var previews: some View {
         PlaylistView(imgName: .constant("testImg"), playlistName: .constant("Playlist Name"), numOfTracks: .constant(3))
     }

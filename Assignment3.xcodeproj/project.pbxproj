@@ -13,6 +13,8 @@
 		0440584C2AB70200002C994B /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0440584B2AB70200002C994B /* PlaylistView.swift */; };
 		0440584E2AB70250002C994B /* AddTracksToPlayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0440584D2AB70250002C994B /* AddTracksToPlayListView.swift */; };
 		049B57162AB75BD6005809B5 /* EditPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B57152AB75BD6005809B5 /* EditPlaylistView.swift */; };
+		049B57182AB823E7005809B5 /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B57172AB823E7005809B5 /* DiscoveryView.swift */; };
+		049B571C2AB83072005809B5 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B571B2AB83072005809B5 /* GenreView.swift */; };
 		04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */; };
 		04E149C12AAF4D5000BF6229 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */; };
 		04E149C22AAF4D5000BF6229 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B82AAF4D4F00BF6229 /* Gotham-Bold.otf */; };
@@ -89,6 +91,8 @@
 		0440584B2AB70200002C994B /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		0440584D2AB70250002C994B /* AddTracksToPlayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTracksToPlayListView.swift; sourceTree = "<group>"; };
 		049B57152AB75BD6005809B5 /* EditPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaylistView.swift; sourceTree = "<group>"; };
+		049B57172AB823E7005809B5 /* DiscoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
+		049B571B2AB83072005809B5 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		04E149B22AAF4A8400BF6229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusicView.swift; sourceTree = "<group>"; };
 		04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
@@ -192,6 +196,15 @@
 			path = PlayListView;
 			sourceTree = "<group>";
 		};
+		049B571A2AB8240B005809B5 /* DiscoveryView */ = {
+			isa = PBXGroup;
+			children = (
+				049B57172AB823E7005809B5 /* DiscoveryView.swift */,
+				049B571B2AB83072005809B5 /* GenreView.swift */,
+			);
+			path = DiscoveryView;
+			sourceTree = "<group>";
+		};
 		04E149992AAF499200BF6229 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +217,7 @@
 				04E149CD2AAF5DA500BF6229 /* MusicView */,
 				044058382AB3096B002C994B /* LibraryView */,
 				044058472AB70199002C994B /* SearchBarView.swift */,
+				049B571A2AB8240B005809B5 /* DiscoveryView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -527,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C575B0A2AB5EC3600BE4553 /* AuthenticationViewModel.swift in Sources */,
+				049B57182AB823E7005809B5 /* DiscoveryView.swift in Sources */,
 				9CD558612AAC4F2B0058A5C3 /* ContentView.swift in Sources */,
 				9958D8712AB071E500F5F42E /* LoginView.swift in Sources */,
 				9C575B082AB5E97600BE4553 /* UserManager.swift in Sources */,
@@ -534,6 +549,7 @@
 				F5BD950B2AB436210015B48C /* EditProfileView.swift in Sources */,
 				9C575B042AB58E2700BE4553 /* TempProfileView.swift in Sources */,
 				99B598E22AB812AC0082C1B5 /* Music.swift in Sources */,
+				049B571C2AB83072005809B5 /* GenreView.swift in Sources */,
 				F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */,
 				F5BD950F2AB443DC0015B48C /* EditModalLeaveConfirmView.swift in Sources */,
 				F5BD95072AB4278F0015B48C /* SettingView.swift in Sources */,

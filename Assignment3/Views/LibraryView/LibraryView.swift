@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LibraryView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var showAddNewPlaylistView = false
     @State var searchActive = false
     @State var searchInput = ""
@@ -41,15 +42,22 @@ struct LibraryView: View {
                     
                     //MARK: - HEADER
                     HStack{
-                        Image("testImg")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .modifier(Img())
-                            .clipShape(Circle())
+                        //MARK: - USER PROFILE BUTTON
+                        Button {
+                            self.presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Image("testImg")
+                                .resizable()
+                                .frame(width: 45, height: 45)
+                                .modifier(Img())
+                                .clipShape(Circle())
+                        }
+
+
                         
                         
                         Text("Your Library")
-                            .font(.custom("Gotham-Bold", size: 28))
+                            .font(.custom("Gotham-Black", size: 30))
                             .modifier(BlackColor())
                         Spacer()
                         
@@ -105,7 +113,7 @@ struct LibraryView: View {
                     
                     List{
                         NavigationLink (destination: PlaylistView(imgName: .constant("testImg"), playlistName: .constant("Playlist Name"), numOfTracks: .constant(4))){
-                            ListRowView(imgName: "testImg", imgDimens: 65, title: "Playlist Name", titleSize: 25, subTitle: "Num of Tracks", subTitleSize: 18)
+                            ListRowView(imgName: "testImg", imgDimens: 60, title: "Playlist Name", titleSize: 23, subTitle: "Num of Tracks", subTitleSize: 17)
                         }                    .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)

@@ -15,7 +15,7 @@ struct EditPlaylistView: View {
     var body: some View {
         ZStack{
             Color("white")
-            VStack(spacing: 30){
+            VStack(spacing: 40){
                 HStack{
                     //MARK: - CLOSE BUTTON
                     Button {
@@ -25,14 +25,15 @@ struct EditPlaylistView: View {
                             .resizable()
                             .modifier(Icon())
                             .frame(width: 23)
+                        
                     }
                     Spacer()
                     
                     //MARK: - HEADER
                     Text("Edit Playlist")
-                        .font(.custom("Gotham-Medium", size: 21))
+                        .font(.custom("Gotham-Bold", size: 21))
                         .modifier(BlackColor())
-                        .offset(x: 15)
+                        .offset(x: 13)
                     
                     Spacer()
                     //MARK: - SAVE BUTTON
@@ -40,7 +41,7 @@ struct EditPlaylistView: View {
                         dismiss()
                     } label: {
                         Text("Save")
-                            .font(.custom("Gotham-Medium", size: 24))
+                            .font(.custom("Gotham-Medium", size: 23))
                             .modifier(BlackColor())
                     }
                 }
@@ -53,7 +54,7 @@ struct EditPlaylistView: View {
                 
                 //MARK: - PLAYLIST NAME
                 TextField("", text: $playlistName)
-                    .font(.custom("Gotham-Bold", size: 35))
+                    .font(.custom("Gotham-Black", size: 35))
                     .modifier(BlackColor())
                     .multilineTextAlignment(.center)
                     .disableAutocorrection(true)
@@ -63,17 +64,22 @@ struct EditPlaylistView: View {
                             .overlay(
                                 VStack{
                                     Divider()
+                                        .frame(height: 1)
                                         .overlay(Color("black"))
                                         .offset(x: 0, y: 15)
                                 }
                             )
                     )
+                    .padding(.bottom,10)
                 
                 //MARK: - LIST OF TRACKS
                 List{
-                    HStack (spacing: 25){
+                    HStack (spacing: 40){
                         //MARK: DELETE TRACK BUTTON
                         Button{
+                            //remove focus on search bar when tap on other views
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                            
                             
                         }label: {
                             Image(systemName: "minus.circle")
@@ -82,6 +88,7 @@ struct EditPlaylistView: View {
                                 .frame(width: 33)
                             
                         }
+                        
                         VStack(alignment: .leading){
                             Text("Track Name")
                                 .font(.custom("Gotham-Medium", size: 25))
@@ -90,7 +97,7 @@ struct EditPlaylistView: View {
                                 .font(.custom("Gotham-Book", size: 20))
                                 .modifier(OneLineText())
                         }
-                       
+                    
                     }.padding(.horizontal, UIScreen.main.bounds.width/25)
                     .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
                     .listRowBackground(Color.clear)
