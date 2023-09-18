@@ -22,7 +22,7 @@ struct SearchBarView: View {
                 .foregroundColor(Color("black"))
             //MARK: - INPUT FIELD
             TextField("", text: $searchInput, prompt: Text(prompt)
-                .font(.custom("Gotham-Medium", size: 20))
+                .font(.custom("Gotham-Medium", size: 18))
                 .foregroundColor(Color("black")))
             .foregroundColor(Color("black"))
             .font(.custom("Gotham-Medium", size: 20))
