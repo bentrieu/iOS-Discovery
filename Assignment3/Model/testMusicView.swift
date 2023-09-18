@@ -25,15 +25,15 @@ struct testMusicView: View {
             }
             Button("Delete album"){
                 print("delete")
-                albumModel.deleteByAlbumId("1")
+                albumModel.deleteByAlbumId("73iWHnrdh4DfWdDjwPdW")
             }
             Button("Add music to album"){
                 print("album id: 1, music id: 1")
-                albumModel.addMusicToAlbum(albumId: "1", musicId: "1")
+                albumModel.addMusicToAlbum(albumId: "ecmL9AZEFHgQ9Ritrc69", musicId: "1")
             }
             Button("remove music from album"){
-                print("album id: 1, music id: 1")
-                albumModel.deleteMusicFromAlbum(albumId: "1", musicId: "1")
+                print("album id: ecmL9AZEFHgQ9Ritrc69, music id: 1")
+                albumModel.deleteMusicFromAlbum(albumId: "ecmL9AZEFHgQ9Ritrc69", musicId: "1")
             }
             
         }

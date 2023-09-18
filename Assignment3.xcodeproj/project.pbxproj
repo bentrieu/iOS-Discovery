@@ -70,7 +70,6 @@
 		9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */; };
 		E38A26432AB8288E00C7A3FA /* testMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38A26422AB8288E00C7A3FA /* testMusicView.swift */; };
 		E3AFB4442AB852C3001E83E4 /* AlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */; };
-		E3AFB4462AB85FA3001E83E4 /* CounterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AFB4452AB85FA3001E83E4 /* CounterManager.swift */; };
 		E3AFB4482AB86519001E83E4 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AFB4472AB86519001E83E4 /* PlaylistManager.swift */; };
 		F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8A2AB1ACA900A48228 /* SquareView.swift */; };
 		F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */; };
@@ -144,7 +143,6 @@
 		9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		E38A26422AB8288E00C7A3FA /* testMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusicView.swift; sourceTree = "<group>"; };
 		E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumManager.swift; sourceTree = "<group>"; };
-		E3AFB4452AB85FA3001E83E4 /* CounterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterManager.swift; sourceTree = "<group>"; };
 		E3AFB4472AB86519001E83E4 /* PlaylistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistManager.swift; sourceTree = "<group>"; };
 		F514FA8A2AB1ACA900A48228 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
@@ -320,7 +318,6 @@
 				9C575B072AB5E97600BE4553 /* UserManager.swift */,
 				9C38803D2AB83ED100E60162 /* MusicManager.swift */,
 				E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */,
-				E3AFB4452AB85FA3001E83E4 /* CounterManager.swift */,
 				E3AFB4472AB86519001E83E4 /* PlaylistManager.swift */,
 			);
 			path = Firestore;
@@ -559,7 +556,6 @@
 				9C575B042AB58E2700BE4553 /* TempProfileView.swift in Sources */,
 				99B598E22AB812AC0082C1B5 /* Music.swift in Sources */,
 				049B571C2AB83072005809B5 /* GenreView.swift in Sources */,
-				E3AFB4462AB85FA3001E83E4 /* CounterManager.swift in Sources */,
 				F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */,
 				F5BD950F2AB443DC0015B48C /* EditModalLeaveConfirmView.swift in Sources */,
 				F5BD95072AB4278F0015B48C /* SettingView.swift in Sources */,

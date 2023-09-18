@@ -15,7 +15,7 @@ final class AlbumManager : ObservableObject {
     private var albumsCollectionRef: CollectionReference {
         return db.collection("album")
     }
-    private var counterManager = CounterManager.instance
+
     init() {
         fetchAlbums()
     }
@@ -45,23 +45,22 @@ final class AlbumManager : ObservableObject {
     }
 
     func addAlbum(_ album: Album) {
-        let counterName = "album"
-        counterManager.getAndIncrementCounter(counterName: counterName) { result in
-            switch result {
-            case .success(let counterValue):
-                do {
-                    let documentName = String(counterValue)
-                    let albumRef = self.albumsCollectionRef.document(documentName)
-                    var tempAlbum = album
-                    tempAlbum.albumId = documentName // Set the album_id using the counter value
-                    
-                    try albumRef.setData(from: tempAlbum)
-                } catch {
-                    print("Error adding album: \(error.localizedDescription)")
-                }
-            case .failure(let error):
-                print("Error incrementing counter: \(error.localizedDescription)")
-            }
+        do {
+            let albumRef = self.albumsCollectionRef.addDocument(data: [
+                "image_url": album.imageUrl,
+                "title": album.title,
+                "type": album.type,
+                "artist_name": album.artistName,
+                "music_list": album.musicList
+            ])
+            
+            let documentName = albumRef.documentID // Get the Firestore document ID
+            var tempAlbum = album
+            tempAlbum.albumId = documentName // Set the album_id using the document ID
+            
+            try albumRef.setData(from: tempAlbum, merge: true)
+        } catch {
+            print("Error adding album: \(error.localizedDescription)")
         }
     }
 
@@ -84,41 +83,28 @@ final class AlbumManager : ObservableObject {
 
     func deleteByAlbumId(_ albumId: String) {
         // Use a query to find the album document with the specified albumId
-        let query = albumsCollectionRef.whereField("album_id", isEqualTo: albumId)
-
-        query.getDocuments { (querySnapshot, error) in
+        let albumRef = albumsCollectionRef.document(albumId)
+        
+        // Delete the album document
+        albumRef.delete { error in
             if let error = error {
-                print("Error deleting album by albumId: \(error.localizedDescription)")
-                return
-            }
-
-            if let documents = querySnapshot?.documents, let document = documents.first {
-                document.reference.delete { error in
-                    if let error = error {
-                        print("Error deleting album: \(error.localizedDescription)")
-                    } else {
-                        print("Album with albumId \(albumId) deleted successfully.")
-                    }
-                }
+                print("Error deleting album: \(error.localizedDescription)")
             } else {
-                print("Album with albumId \(albumId) not found.")
+                print("Album deleted successfully")
             }
         }
     }
-    
+
     func getAlbumById(albumID: String, completion: @escaping (Result<Album?, Error>) -> Void) {
-        let albumsCollectionRef = db.collection("album") // Adjust the collection name as needed
+        let albumRef = albumsCollectionRef.document(albumID) // Use the document method to get the specific album document
 
-        // Create a query to find the album with the matching albumId field
-        let query = albumsCollectionRef.whereField("album_id", isEqualTo: albumID)
-
-        query.getDocuments { (querySnapshot, error) in
+        albumRef.getDocument { (document, error) in
             if let error = error {
                 completion(.failure(error))
                 return
             }
 
-            if let document = querySnapshot?.documents.first {
+            if let document = document, document.exists {
                 do {
                     let album = try document.data(as: Album.self)
                     completion(.success(album))
@@ -130,6 +116,7 @@ final class AlbumManager : ObservableObject {
             }
         }
     }
+
 
     func addMusicToAlbum(albumId: String, musicId: String) {
         getAlbumById(albumID: albumId) { result in
