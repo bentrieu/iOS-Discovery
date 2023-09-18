@@ -12,6 +12,8 @@ struct ViewProfileView: View {
     @State private var accountProfile = account
     @State private var isPresentingEdit = false
     @State var isCancelButtonPressed = false
+    @State var isContentNotEdited = true
+    
     var body: some View {
         
         ZStack {
@@ -28,6 +30,7 @@ struct ViewProfileView: View {
                     
                     Button {
                         isCancelButtonPressed = false
+                        isContentNotEdited = true
                         withAnimation {
                             
                             isPresentingEdit = true
@@ -60,7 +63,7 @@ struct ViewProfileView: View {
                 Spacer()
             }
             
-            EditProfileView(account: $accountProfile, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit)
+            EditProfileView(account: $accountProfile, isCancelButtonPressed: $isCancelButtonPressed,  isContentNotEdited: $isContentNotEdited,isPresentingEdit: $isPresentingEdit)
                 .position(x: UIScreen.main.bounds.width / 2 , y: isPresentingEdit ?  UIScreen.main.bounds.height / 2  : UIScreen.main.bounds.height * 2)
             
             

@@ -10,7 +10,6 @@ import SwiftUI
 struct MusicView: View {
     var musics : [Music]
     
-    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Recently Played")
@@ -48,14 +47,6 @@ struct SwiftUIView_Previews: PreviewProvider {
     }
 }
 
-
-struct Music {
-    var id = UUID()
-    var musicName : String
-    var imageURL: String
-    var artistName: String
-    var genere: String
-}
 
 
 let musics = [

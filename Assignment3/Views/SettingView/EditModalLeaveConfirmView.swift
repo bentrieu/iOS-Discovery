@@ -10,6 +10,8 @@ import SwiftUI
 struct EditModalLeaveConfirmView: View {
     @Binding  var isPresentingEdit : Bool
     @Binding var isCancelButtonPressed: Bool
+    var focusField: FocusState<Bool>.Binding
+    
     var body: some View {
         
         ZStack {
@@ -45,6 +47,7 @@ struct EditModalLeaveConfirmView: View {
                 Button {
                     withAnimation {
                         isPresentingEdit = false
+                        focusField.wrappedValue = false
                        
                     }
                 } label: {
@@ -68,8 +71,8 @@ struct EditModalLeaveConfirmView: View {
     }
 }
 
-struct EditModalLeaveConfirmView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditModalLeaveConfirmView(isPresentingEdit: .constant(true), isCancelButtonPressed: .constant(true))
-    }
-}
+//struct EditModalLeaveConfirmView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditModalLeaveConfirmView(isPresentingEdit: .constant(true), isCancelButtonPressed: .constant(true))
+//    }
+//}

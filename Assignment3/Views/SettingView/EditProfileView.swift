@@ -15,7 +15,7 @@ struct EditProfileView: View {
     @State var tempName: String  = ""
     @State var tempImage: String  = ""
     @Binding var isCancelButtonPressed: Bool
-    @State var isContentNotEdited: Bool = true
+    @Binding var isContentNotEdited: Bool
     @Binding  var isPresentingEdit : Bool
     @FocusState private var focusedField: Bool
 
@@ -25,7 +25,7 @@ struct EditProfileView: View {
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 15){
-                HeadingControllerButtonView(isContentModified: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit, isContentNotEdited: $isContentNotEdited)
+                HeadingControllerButtonView(isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit, focusField: $focusedField)
                 
                 
                 AsyncImage(url: URL(string: account.imageURL)) { image in
@@ -58,7 +58,7 @@ struct EditProfileView: View {
                      ))
                     .textFieldStyle(CustomTextFieldForEditView())
                     .padding(.horizontal,30)
-//                    .focused($focusedField, equals: .field)
+                    .focused($focusedField)
                 
                 
                 Text("This could be your first name or nickname. It's how you'll appear on Spotify.")
@@ -74,12 +74,12 @@ struct EditProfileView: View {
             
             if isCancelButtonPressed{
                 if !isContentNotEdited{
-                    EditModalLeaveConfirmView(isPresentingEdit: $isPresentingEdit, isCancelButtonPressed: $isCancelButtonPressed)
+                    EditModalLeaveConfirmView(isPresentingEdit: $isPresentingEdit, isCancelButtonPressed: $isCancelButtonPressed, focusField: $focusedField)
                 }
             }
         }
         .onAppear{
-            self.tempName = "\(Int.random(in: 1...3))"
+            self.tempName = account.name
             self.tempImage = account.imageURL
             self.isContentNotEdited = true
             
@@ -91,7 +91,7 @@ struct EditProfileView: View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(account: .constant(account), isCancelButtonPressed: .constant(false), isPresentingEdit: .constant(true))
+        EditProfileView(account: .constant(account), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
     }
 }
 
@@ -110,10 +110,11 @@ struct CustomTextFieldForEditView: TextFieldStyle {
 }
 
 struct HeadingControllerButtonView: View {
-    @Binding var isContentModified: Bool
+    @Binding var isContentNotEdited: Bool
     @Binding var isCancelButtonPressed: Bool
     @Binding  var isPresentingEdit : Bool
-    @Binding  var isContentNotEdited : Bool
+    var focusField: FocusState<Bool>.Binding
+    
     var body: some View {
         HStack{
             Button {
@@ -122,9 +123,10 @@ struct HeadingControllerButtonView: View {
                    
                 }
                
-                if isContentModified{
+                if isContentNotEdited{
                     withAnimation {
                         isPresentingEdit = false
+                        focusField.wrappedValue = false
                     }
                 }
                 
@@ -146,10 +148,10 @@ struct HeadingControllerButtonView: View {
                 
             } label: {
                 Text("Save")
-                    .foregroundColor(isContentModified ? Color("black").opacity(0.6) : Color("black"))
+                    .foregroundColor(isContentNotEdited ? Color("black").opacity(0.6) : Color("black"))
                     .font(Font.custom("Gotham-Medium", size: 12))
             }
-            .disabled(isContentModified)
+            .disabled(isContentNotEdited)
             
             
             

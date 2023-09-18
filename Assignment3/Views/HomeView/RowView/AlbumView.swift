@@ -72,13 +72,6 @@ struct TextForAlbumView: View {
 
 
 
-struct Album: Identifiable {
-    let id = UUID()
-    let imageUrl: String
-    let title: String
-    let type: String
-    let name: String
-}
 
 let albums: [Album] = [
     Album(
