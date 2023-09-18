@@ -9,7 +9,7 @@ import SwiftUI
 
 struct testMusicView: View {
     @StateObject var viewModel = MusicViewModel()
-    @StateObject var albumModel = AlbumViewModel()
+    @StateObject var albumModel = AlbumManager()
     var body: some View {
         VStack {
             Button("Click me") {
@@ -21,12 +21,17 @@ struct testMusicView: View {
             }
             Button("Add album") {
                 print("add")
-                albumModel.addAlbum(Album(albumId: "0", imageUrl: "none" ,title: "Young, Dumb and Broke",  type: "Album", artistName: "Khalid" ))
+                albumModel.addAlbum(Album(albumId: "0", imageUrl: "none" ,title: "V",  type: "Album", artistName: "Maroon 5", musicList: [""]))
             }
             Button("Delete album"){
                 print("delete")
                 albumModel.deleteByAlbumId("1")
             }
+            Button("Add music to album"){
+                print("album id: 1, music id: 1")
+                albumModel.addMusicToAlbum(albumId: "1", musicId: "1")
+            }
+            
         }
         }
     
