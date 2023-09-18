@@ -14,6 +14,7 @@ struct EditProfileView: View {
     //once the user save edit we will overwrite to account variable
     @State var tempName: String  = ""
     @State var tempImage: String  = ""
+    @State var isPresentingEditPicture = false
     @Binding var isCancelButtonPressed: Bool
     @Binding var isContentNotEdited: Bool
     @Binding  var isPresentingEdit : Bool
@@ -41,6 +42,7 @@ struct EditProfileView: View {
                 
                 
                 Button {
+                    isPresentingEditPicture = true
                     isContentNotEdited = false
                 } label: {
                     Text("Change photo")
@@ -71,6 +73,11 @@ struct EditProfileView: View {
                 
               
             }
+            if (isPresentingEditPicture){
+                ChangePhotoView(isPresentingEditPicture: $isPresentingEditPicture)
+            }
+            
+            
             
             if isCancelButtonPressed{
                 if !isContentNotEdited{
