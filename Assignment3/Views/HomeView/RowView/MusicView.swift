@@ -18,7 +18,7 @@ struct MusicView: View {
                 .padding(.leading)
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
-                    ForEach(musics, id: \.id) { item in
+                    ForEach(musics, id: \.musicId) { item in
                         NavigationLink {
                             PlayMusicView()
                         }label: {
@@ -43,19 +43,10 @@ struct MusicView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        MusicView(musics: musics)
+       Text("")
     }
 }
 
 
 
-let musics = [
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    Music(musicName: "Em Cua Ngay Hom Qua", imageURL: "https://wallpapercave.com/wp/wp10044095.jpg", artistName: "Son Tung MTP", genere: "Pop"),
-    
-]
+
