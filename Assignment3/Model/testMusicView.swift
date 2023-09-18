@@ -9,15 +9,25 @@ import SwiftUI
 
 struct testMusicView: View {
     @StateObject var viewModel = MusicViewModel()
+    @StateObject var albumModel = AlbumViewModel()
     var body: some View {
-      
+        VStack {
             Button("Click me") {
                 print("Click")
-                for music in viewModel.musics {
+                for album in albumModel.albums {
                     print("in func")
-                    print(music)
+                    print(album)
                 }
             }
+            Button("Add album") {
+                print("add")
+                albumModel.addAlbum(Album(albumId: "0", imageUrl: "none" ,title: "Young, Dumb and Broke",  type: "Album", artistName: "Khalid" ))
+            }
+            Button("Delete album"){
+                print("delete")
+                albumModel.deleteByAlbumId("1")
+            }
+        }
         }
     
 }

@@ -18,10 +18,10 @@ struct AlbumView : View {
                 .padding(.leading)
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
-                    ForEach(albums, id: \.id) { item in
+                    ForEach(albums, id: \.albumId) { item in
                         VStack(alignment: .leading){
-                            SquareView(imageUrl: item.imageUrl, size: 175)
-                            TextForAlbumView(title: item.title, type: "Album", name: item.name, size: 175)
+//                            SquareView(imageUrl: item.imageUrl, size: 175)
+//                            TextForAlbumView(title: item.title, type: "Album", name: item.name, size: 175)
                         }
                     }
                 }
@@ -35,7 +35,7 @@ struct AlbumView : View {
 
 struct RowForSquareView_Previews: PreviewProvider {
     static var previews: some View {
-        AlbumView(albums: albums)
+      Text("")
     }
 }
 
@@ -73,59 +73,4 @@ struct TextForAlbumView: View {
 
 
 
-let albums: [Album] = [
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    ),
-    Album(
-        imageUrl: "https://yt3.googleusercontent.com/xfFkNTU0Kg_u1Im9W11kI1AkWnpoz91gnYjk1pZZHN5gN_ul3OnBHS7ZrWS35SitlezR5QI9gQ=s176-c-k-c0x00ffffff-no-rj",
-        title: "MIN",
-        type: "Single",
-        name: "Min"
-    )
-]
+
