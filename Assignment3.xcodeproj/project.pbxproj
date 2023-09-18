@@ -64,7 +64,7 @@
 		9CFE5E7D2AAC5F940000A801 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFE5E7C2AAC5F940000A801 /* FirebaseAuth */; };
 		9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */; };
 		9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */; };
-		E38A263F2AB8255500C7A3FA /* testMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38A263E2AB8255500C7A3FA /* testMusic.swift */; };
+		E38A26432AB8288E00C7A3FA /* testMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38A26422AB8288E00C7A3FA /* testMusicView.swift */; };
 		F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8A2AB1ACA900A48228 /* SquareView.swift */; };
 		F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */; };
 		F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA912AB1B9E300A48228 /* HomeView.swift */; };
@@ -131,7 +131,7 @@
 		9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporarySignUpView.swift; sourceTree = "<group>"; };
 		9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempAuthenticationView.swift; sourceTree = "<group>"; };
 		9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		E38A263E2AB8255500C7A3FA /* testMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusic.swift; sourceTree = "<group>"; };
+		E38A26422AB8288E00C7A3FA /* testMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusicView.swift; sourceTree = "<group>"; };
 		F514FA8A2AB1ACA900A48228 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		F514FA912AB1B9E300A48228 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 			children = (
 				99B598E12AB812AC0082C1B5 /* Music.swift */,
 				99B598E32AB812B90082C1B5 /* Album.swift */,
-				E38A263E2AB8255500C7A3FA /* testMusic.swift */,
+				E38A26422AB8288E00C7A3FA /* testMusicView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -536,7 +536,6 @@
 				F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */,
 				F5BD950F2AB443DC0015B48C /* EditModalLeaveConfirmView.swift in Sources */,
 				F5BD95072AB4278F0015B48C /* SettingView.swift in Sources */,
-				E38A263F2AB8255500C7A3FA /* testMusic.swift in Sources */,
 				F5BD95112AB451B80015B48C /* ImageModal.swift in Sources */,
 				F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */,
 				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
@@ -552,6 +551,7 @@
 				F5BD94FD2AB41DAD0015B48C /* RootViewTemp.swift in Sources */,
 				04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */,
 				9958D8752AB072F400F5F42E /* LandingPage.swift in Sources */,
+				E38A26432AB8288E00C7A3FA /* testMusicView.swift in Sources */,
 				9958D86D2AB071B300F5F42E /* CustomSecureTextField.swift in Sources */,
 				9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,

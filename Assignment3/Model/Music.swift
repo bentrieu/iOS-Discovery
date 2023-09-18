@@ -10,55 +10,43 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 struct Music : Codable {
     let musicId : String
-    var musicName : String
-    var imageURL: String
-    var artistName: String
-    var genere: String
+    var musicName : String?
+    var imageUrl: String?
+    var artistName: String?
+    var genre: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case musicId = "music_id"
+        case musicName = "music_name"
+        case imageUrl = "image_url"
+        case artistName = "artist_name"
+        case genre
+    }
+
 }
 
-final class MusicManager {
-    static let instance = MusicManager()
-    private init(){}
-    private let musicCollection = Firestore.firestore().collection("music")
-    private func musicDocument(musicId: String) -> DocumentReference {
-        musicCollection.document(musicId)
+class MusicViewModel : ObservableObject {
+    @Published var musics = [Music]()
+    private var db  = Firestore.firestore()
+    init() {
+        getAllMusicData()
+        print("get music in model")
     }
-    private let encoder: Firestore.Encoder = {
-        let encoder = Firestore.Encoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        return encoder
-    }()
-    private let decoder: Firestore.Decoder = {
-        let decoder = Firestore.Decoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
-    func getMusic(musicId: String) async throws -> Music {
-        return try await musicDocument(musicId: musicId).getDocument(as: Music.self, decoder: decoder)
-    }
-    func getAllMusic(completion: @escaping (Result<[Music], Error>) -> Void) {
-        musicCollection.getDocuments { querySnapshot, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-
+    func getAllMusicData() {
+        db.collection("music").addSnapshotListener{(querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-                completion(.success([])) // No documents found
+                print("No document")
                 return
             }
-
-            let musicItems: [Music] = documents.compactMap { document in
-                do {
-                    let music = try document.data(as: Music.self, decoder: self.decoder)
-                    return music
-                } catch {
-                    print("Error decoding document: \(error)")
-                    return nil
-                }
+            self.musics = documents.map {(queryDocumentSnapshot) -> Music in
+                let data  = queryDocumentSnapshot.data()
+                let music_name = data["music_name"] as? String ?? ""
+                let music_id = data["music_id"] as? String ?? ""
+                let image_url = data["image_url"] as? String ?? ""
+                let artist_name = data["artist_name"] as? String ?? ""
+                let genre = data["genre"] as? String ?? ""
+                return Music(musicId: music_id, musicName: music_name, imageUrl: image_url, artistName: artist_name, genre: genre)
             }
-
-            completion(.success(musicItems))
         }
     }
 }

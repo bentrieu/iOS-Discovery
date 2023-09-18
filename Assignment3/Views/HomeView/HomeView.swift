@@ -30,7 +30,7 @@ struct HomeView: View {
                         .padding()
                         
                         //MARK: RECENTLY PLAYED MUSIC
-                       MusicView(musics: musics)
+                  
 
                         //MARK: ALBUM MUSIC ROW VIEW
                         AlbumView(albums: albums)
