@@ -17,6 +17,17 @@ struct CustomButtonAthentication: ViewModifier {
             .frame(width: 340, height: 50)
     }
 }
+struct CustomeButtonEditPictureView: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(Font.custom("Gotham-Medium", size: 14))
+            .frame(width: 50, height: 40)
+            .padding(.horizontal)
+            .padding(.horizontal)
+    }
+}
+
+   
 
 struct CustomNavigationButton: ViewModifier {
     func body(content: Content) -> some View {
