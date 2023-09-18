@@ -43,7 +43,7 @@ struct TempProfileView: View {
                 Text("Userid: \(user.userId)")
                 TextField("Username", text: $usernameText)
                 TextField("Biography", text: $biographyText)
-                TextField("Biography", text: $photoUrl)
+                TextField("Photo url", text: $photoUrl)
                 Button {
                     viewModel.updateUserProfile(usernameText: usernameText, biographyText: biographyText, photoUrl: photoUrl)
                 } label: {
@@ -61,8 +61,14 @@ struct TempProfileView: View {
                 }
             }
         }
-        .task {
-            try? await viewModel.loadCurrentUser()
+        .onAppear {
+            Task {
+                do {
+                    try? await viewModel.loadCurrentUser()
+                } catch {
+                    print(error)
+                }
+            }
         }
         .navigationTitle("Profile")
         .toolbar {
