@@ -83,6 +83,12 @@ final class MusicManager : ObservableObject {
     func startTimer(){
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.secondsElapsed += 1
+            
+            if(self.secondsElapsed == self.currPlaying.musicLength){
+                self.currPlaying = self.playNextMusic()!
+                self.play()
+            }
+            
         }
     }
     func stopTimer() {
@@ -111,9 +117,9 @@ final class MusicManager : ObservableObject {
     }
     
     func play(){
-        MusicManager.instance.playMusicById(id: self.currPlaying.musicId)
-        MusicManager.instance.reset(music: self.currPlaying)
-        MusicManager.instance.startTimer()
+        self.playMusicById(id: self.currPlaying.musicId)
+        self.reset(music: self.currPlaying)
+        self.startTimer()
     }
 
 }
