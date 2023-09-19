@@ -9,16 +9,15 @@ import SwiftUI
 import AVFAudio
 
 struct testMusic: View {
-    
+    @StateObject var musicManager = MusicManager.instance
     var body: some View {
         VStack{
+            Text("\(musicManager.formatTime( musicManager.secondsElapsed)    )")
             Button("Click Me ") {
-                AlbumManager.shared.fetchPopularAlbumList { result, error in
-                    print(result)
-                }
+                musicManager.startTimer()
             }
             Button("Stop") {
-                MusicManager.instance.pauseMusic()
+                musicManager.stopTimer()
             }
         }
     }

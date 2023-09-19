@@ -15,6 +15,10 @@ struct PlayMusicView: View {
     @State var animatingHeart = false
     @State var viewQueue = false
     @State var showAddPlayListSheet = false
+    
+    @StateObject var musicManager  = MusicManager.instance
+
+    
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
@@ -56,28 +60,33 @@ struct PlayMusicView: View {
                 
                 if viewQueue{
                     //MARK: - QUEUE VIEW
-                   QueueVIew()
+//                   QueueVIew()
                
                 }else{
                     //MARK: - THUMBNAIL IMAGE
-                    Image("testImg")
-                        .resizable()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: UIScreen.main.bounds.height/2.2)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .modifier(Img())
+                    AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
+                        image
+                            .resizable()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: UIScreen.main.bounds.height/2.2)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .modifier(Img())
+                    }placeholder: {
+                        
+                    }
+                        
                         
                     
                     Spacer()
                     HStack{
                         VStack{
                             //MARK: - TRACK'S NAME
-                            Text("Song Name")
+                            Text(musicManager.currPlaying.musicName!)
                                 .font(.custom("Gotham-Bold", size: 28))
                                 .modifier(OneLineText())
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             //MARK: - ARTISTS
-                            Text("Artists")
+                            Text(musicManager.currPlaying.artistName!)
                                 .font(.custom("Gotham-Book", size: 20))
                                 .modifier(OneLineText())
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -104,7 +113,7 @@ struct PlayMusicView: View {
                                 .foregroundColor(Color("black"))
                                 .frame(height: 30)
                         }.fullScreenCover(isPresented: $showAddPlayListSheet) {
-                            AddToPlaylistView()
+//                            AddToPlaylistView()
                                 
                         }
                         
@@ -114,24 +123,24 @@ struct PlayMusicView: View {
                 
                 
                 //MARK: - PROGRESS BAR
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(.black.opacity(0.08))
-                        .frame(height: 8)
-                    
-                    Capsule()
-                        .modifier(BlackColor())
-                        .frame(width: 200,height: 8)
-                }.frame(width: .infinity)
-                
+//                ZStack(alignment: .leading) {
+//                    Capsule()
+//                        .fill(.black.opacity(0.08))
+//                        .frame(height: 8)
+//
+//                    Capsule()
+//                        .modifier(BlackColor())
+//                        .frame(width: 200,height: 8)
+//                }.frame(width: .infinity)
+                ProgressView(value: Double(musicManager.secondsElapsed) / Double(musicManager.currPlaying.musicLength!))
                 if !viewQueue{
                     //MARK: - START & END TIME
                     HStack{
-                        Text("0:00")
+                        Text("\(musicManager.formatTime(musicManager.secondsElapsed))")
                             .font(.custom("Gotham-Light", size: 16))
                             .modifier(BlackColor())
                         Spacer()
-                        Text("0:00")
+                        Text("- \(musicManager.formatTime(musicManager.secondsRemaining))")
                             .font(.custom("Gotham-Light", size: 15))
                             .modifier(BlackColor())
                     }
@@ -154,7 +163,8 @@ struct PlayMusicView: View {
                     }
                     //MARK: - BACKWARD BUTTON
                     Button {
-                        
+                        musicManager.currPlaying = musicManager.playPreviousMusic()!
+                        musicManager.play()
                     } label: {
                         Image(systemName: "backward.end.fill")
                             .resizable()
@@ -164,10 +174,11 @@ struct PlayMusicView: View {
                     //MARK: - PLAY/PAUSE BUTTON
                     Button {
                         withAnimation {
-                            pauseActive.toggle()
+                            MusicManager.instance.pauseMusic()
+                            print(MusicManager.instance.isPlaying)
                         }
                     } label: {
-                        Image(systemName: pauseActive ? "play.circle" : "pause.circle")
+                        Image(systemName:  !musicManager.isPlaying ? "play.circle" : "pause.circle")
                             .resizable()
                             .modifier(Icon())
                             .frame(width: 75)
@@ -175,7 +186,8 @@ struct PlayMusicView: View {
                     }
                     //MARK: - FORWARD BUTTON
                     Button {
-                        
+                        musicManager.currPlaying = musicManager.playNextMusic()!
+                        musicManager.play()
                     } label: {
                         Image(systemName: "forward.end.fill")
                             .resizable()
@@ -196,12 +208,25 @@ struct PlayMusicView: View {
             }
             .modifier(PagePadding())
         }
+       
     }
+   
+    
 }
 
 struct PlayMusicView_Previews: PreviewProvider {
     static var previews: some View {
         PlayMusicView()
+            .onAppear{
+                MusicManager.instance.currPlaying = sampleMusic
+                MusicManager.instance.play()
+            }
     }
 }
+let sampleMusic = Music(musicId: "8eRvtX2V8goiU3Sy7JIr",
+        musicName: "Try Tim Bao Vat",
+        imageUrl: "https://i.scdn.co/image/ab67616d0000b273e368556118fdcd985aa28019",
+        artistName: "24K Right",
+        file: "gs://assignment3-fcc04.appspot.com/music/X2Download.app - Truy Lùng Bảo Vật - 24k.Right ft. Sofia - Team B Ray _ Rap Việt 2023 [MV Lyrics] (128 kbps).mp3",
+musicLength: 341)
 

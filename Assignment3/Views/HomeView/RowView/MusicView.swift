@@ -20,7 +20,7 @@ struct MusicView: View {
                 HStack(spacing: 17){
                     ForEach(musics, id: \.musicId) { item in
                         NavigationLink {
-                            PlayMusicView()
+                            
                         }label: {
                             VStack(alignment: .leading){
 //                                if let tempURL = item {

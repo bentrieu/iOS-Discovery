@@ -17,7 +17,6 @@ struct HomeView: View {
                     VStack (alignment: .leading,spacing: 10){
                         HeadingView()
                         
-                        
                         HStack{
                             
                             Button {
@@ -25,7 +24,6 @@ struct HomeView: View {
                             } label: {
                                 CustomButton(name: "Music")
                             }
-
                         }
                         .padding()
                         

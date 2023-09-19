@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AlbumView : View {
-    @State var albums : [Album] = []
-   
+    @State var albums: [Album] = []
+    @State var musics : [Music] = []
     var body: some View {
         VStack(alignment: .leading) {
             Text("Popular Album")
@@ -19,9 +19,14 @@ struct AlbumView : View {
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
                     ForEach(albums, id: \.albumId) { item in
-                        VStack(alignment: .leading){
-                            SquareView(imageUrl: item.imageUrl!, size: 160)
-                            TextForAlbumView(title: item.title!, type: item.type!, name: item.artistName!, size: 160)
+                        NavigationLink {
+                            AlbumPageView(album: item)
+                               
+                        } label: {
+                            VStack(alignment: .leading){
+                                SquareView(imageUrl: item.imageUrl!, size: 160)
+                                TextForAlbumView(title: item.title!, type: item.type!, name: item.artistName!, size: 160)
+                            }
                         }
                     }
                 }
@@ -31,18 +36,25 @@ struct AlbumView : View {
         }
         .padding(.vertical)
         .onAppear{
-            Task{
-                 AlbumManager.shared.fetchPopularAlbumList { result, error in
-                    self.albums = result!
+            Task {
+                do {
+                    self.albums = try await AlbumManager.shared.fetchPopularAlbumList()
+                    // Handle the albums
+                } catch {
+                    // Handle any errors that occur during the asynchronous operation
+                    print("Error: \(error)")
                 }
             }
+            
         }
     }
 }
 
 struct RowForSquareView_Previews: PreviewProvider {
     static var previews: some View {
-      Text("")
+        NavigationStack {
+            AlbumView()
+        }
     }
 }
 

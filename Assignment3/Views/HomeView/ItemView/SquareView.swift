@@ -30,7 +30,7 @@ struct SquareView: View {
 
 struct SquareView_Provider: PreviewProvider {
     static var previews: some View {
-        SquareView(imageUrl: "https://wallpapercave.com/wp/wp10044095.jpg", size: 175)
+        SquareView(imageUrl: "https://i.scdn.co/image/ab67616d0000b273b315e8bb7ef5e57e9a25bb0f", size: 175)
     }
 }
 
