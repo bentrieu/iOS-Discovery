@@ -33,7 +33,7 @@ struct HomeView: View {
                   
 
                         //MARK: ALBUM MUSIC ROW VIEW
-                    
+                        AlbumView()
                         
                     }
                 }

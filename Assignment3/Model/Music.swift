@@ -11,14 +11,13 @@ import FirebaseFirestoreSwift
 struct Music : Codable {
     let musicId : String
     var musicName : String?
-    var imageUrl: String?
     var artistName: String?
+    var file: String?
     var genre: String?
     
     enum CodingKeys: String, CodingKey {
         case musicId = "music_id"
         case musicName = "music_name"
-        case imageUrl = "image_url"
         case artistName = "artist_name"
         case genre
     }
@@ -28,6 +27,9 @@ struct Music : Codable {
 class MusicViewModel : ObservableObject {
     @Published var musics = [Music]()
     private var db  = Firestore.firestore()
+    
+    static var shared = MusicViewModel()
+    
     init() {
         getAllMusicData()
         print("get music in model")
@@ -42,10 +44,9 @@ class MusicViewModel : ObservableObject {
                 let data  = queryDocumentSnapshot.data()
                 let music_name = data["music_name"] as? String ?? ""
                 let music_id = data["music_id"] as? String ?? ""
-                let image_url = data["image_url"] as? String ?? ""
                 let artist_name = data["artist_name"] as? String ?? ""
                 let genre = data["genre"] as? String ?? ""
-                return Music(musicId: music_id, musicName: music_name, imageUrl: image_url, artistName: artist_name, genre: genre)
+                return Music(musicId: music_id, musicName: music_name, artistName: artist_name, genre: genre)
             }
         }
     }
@@ -68,8 +69,8 @@ class MusicViewModel : ObservableObject {
                 let music = Music(
                     musicId: musicData["music_id"] as? String ?? "",
                     musicName: musicData["music_name"] as? String ?? "",
-                    imageUrl: musicData["image_url"] as? String ?? "",
                     artistName: musicData["artist_name"] as? String ?? "",
+                    file: musicData["file"] as? String ?? "",
                     genre: musicData["genre"] as? String ?? ""
                 )
                 completion(.success(music))

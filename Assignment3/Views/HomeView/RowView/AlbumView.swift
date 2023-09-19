@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AlbumView : View {
-    var albums : [Album]
+    @State var albums : [Album] = []
    
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,8 +20,8 @@ struct AlbumView : View {
                 HStack(spacing: 17){
                     ForEach(albums, id: \.albumId) { item in
                         VStack(alignment: .leading){
-//                            SquareView(imageUrl: item.imageUrl, size: 175)
-//                            TextForAlbumView(title: item.title, type: "Album", name: item.name, size: 175)
+                            SquareView(imageUrl: item.imageUrl!, size: 160)
+                            TextForAlbumView(title: item.title!, type: item.type!, name: item.artistName!, size: 160)
                         }
                     }
                 }
@@ -30,6 +30,13 @@ struct AlbumView : View {
             
         }
         .padding(.vertical)
+        .onAppear{
+            Task{
+                 AlbumManager.shared.fetchPopularAlbumList { result, error in
+                    self.albums = result!
+                }
+            }
+        }
     }
 }
 
@@ -48,6 +55,7 @@ struct TextForAlbumView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: -5){
             Text(title)
+                .tracking(-1)
                 .foregroundColor(Color("black"))
                 .font(Font.custom("Gotham-Medium", size: 16))
             HStack(spacing: 5){
@@ -57,6 +65,7 @@ struct TextForAlbumView: View {
                     .font(.system(size: 45))
                     .offset(y:-15)
                 Text(name)
+                    .tracking(-1)
                 Spacer()
             }
             .offset(y:-10)

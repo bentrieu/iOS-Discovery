@@ -23,16 +23,16 @@ struct MusicView: View {
                             PlayMusicView()
                         }label: {
                             VStack(alignment: .leading){
-                                if let tempURL = item.imageUrl {
-                                    SquareView(imageUrl: tempURL, size: 125)
-                                    if let tempMusicName = item.musicName {
-                                        Text(tempMusicName)
-                                            .foregroundColor(Color("black"))
-                                            .font(Font.custom("Gotham-Meidum", size: 16))
-                                            .frame(width:125, alignment: .leading)
-                                            .multilineTextAlignment(.leading)
-                                    }
-                                }
+//                                if let tempURL = item {
+//                                    SquareView(imageUrl: tempURL, size: 125)
+//                                    if let tempMusicName = item.musicName {
+//                                        Text(tempMusicName)
+//                                            .foregroundColor(Color("black"))
+//                                            .font(Font.custom("Gotham-Meidum", size: 16))
+//                                            .frame(width:125, alignment: .leading)
+//                                            .multilineTextAlignment(.leading)
+//                                    }
+//                                }
                             }
                         }
                     }

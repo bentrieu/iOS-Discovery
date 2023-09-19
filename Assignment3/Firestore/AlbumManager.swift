@@ -11,26 +11,28 @@ import FirebaseFirestoreSwift
 
 final class AlbumManager : ObservableObject {
     @Published var albums = [Album]()
+    
+    static var shared = AlbumManager()
     private var db = Firestore.firestore()
     private var albumsCollectionRef: CollectionReference {
         return db.collection("album")
     }
 
-    init() {
-        fetchAlbums()
-    }
+    init() {}
  
-    func fetchAlbums() {
+    func fetchAlbums(completion: @escaping ([Album]?, Error?) -> Void) {
         albumsCollectionRef.addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print("Error fetching albums: \(error.localizedDescription)")
+                completion(nil, error)
                 return
             }
             guard let documents = querySnapshot?.documents else {
                 print("No document")
+                completion([], nil)
                 return
             }
-            self.albums = documents.map {(queryDocumentSnapshot) -> Album in
+            let albums = documents.map { (queryDocumentSnapshot) -> Album in
                 let data = queryDocumentSnapshot.data()
                 let album_name = data["artist_name"] as? String ?? ""
                 let image_url = data["image_url"] as? String ?? ""
@@ -40,10 +42,83 @@ final class AlbumManager : ObservableObject {
                 let music_list = data["music_list"] as? [String] ?? [""]
                 return Album(albumId: album_id, imageUrl: image_url, title: title, type: type, artistName: album_name, musicList: music_list)
             }
-
+            completion(albums, nil)
         }
     }
+    
+    func findAlbumById(_ albumId: String, completion: @escaping (Result<Album?, Error>) -> Void) {
+        let query = db.collection("album").whereField("album_id", isEqualTo: albumId)
 
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let documents = querySnapshot?.documents, let document = documents.first else {
+                completion(.success(nil)) // Document doesn't exist
+                return
+            }
+
+            do {
+                let albumData = document.data()
+                let album = Album(albumId: albumData["album_id"] as? String ?? "",
+                                  imageUrl:albumData["image_url"] as? String ?? "",
+                                  title:albumData["title"] as? String ?? "",
+                                  type:albumData["type"] as? String ?? "",
+                                  artistName: albumData["artist_name"] as? String ?? "",
+                                  musicList: albumData["music_list"] as? [String] ?? [""])
+                completion(.success(album))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchPopularAlbumList(completion: @escaping ([Album]?, Error?) -> Void) {
+        let query = db.collection("albums").whereField("albums_name", isEqualTo: "Popular Albums")
+        
+        query.getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
+                
+                var albums: [Album] = []
+
+                for document in querySnapshot!.documents {
+                    let albumListData = document.data()
+                    
+                    if let albumIds = albumListData["album_list"] as? [String] {
+                        let dispatchGroup = DispatchGroup()
+                        for albumId in albumIds {
+                            print(albumId)
+                            dispatchGroup.enter()
+                            self.findAlbumById(albumId){ result in
+                                switch result {
+                                case .success(let album):
+                                    if let album = album {
+                                        albums.append(album)
+                                    }
+                                case .failure(let error):
+                                    // Handle the error
+                                    print("Error fetching album with ID \(albumId): \(error.localizedDescription)")
+                                }
+                                
+                                dispatchGroup.leave()
+                            }
+                        }
+                        
+                        dispatchGroup.notify(queue: .main) {
+                            completion(albums, nil)
+                        }
+                    } else {
+                        // Handle the case where the "album_list" field is not an array or is empty.
+                        completion([], nil)
+                    }
+                }
+            }
+    }
     func addAlbum(_ album: Album) {
         do {
             let albumRef = self.albumsCollectionRef.addDocument(data: [
