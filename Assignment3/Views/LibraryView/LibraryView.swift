@@ -18,12 +18,12 @@ struct LibraryView: View {
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             NavigationView {
-                VStack(){
+                VStack{
                     //MARK: - SEARCH BAR + BACK BUTTON
-                    if (searchActive){
+                    
                         HStack(spacing:20){
                             Button {
-                                searchInput = ""
+                                
                                 withAnimation {
                                     searchActive = false
                                 }
@@ -34,11 +34,14 @@ struct LibraryView: View {
                                     .frame(width: 25)
                             }
                             
-                            FocusedSearchBarView(searchInput: $searchInput, prompt: "Find playlist")
+                            FocusedSearchBarView(searchInput: $searchInput,searchActive: $searchActive, prompt: "Find playlist")
                             
                         }
-
-                    }
+                        .opacity(searchActive ? 1 : 0)
+                        .frame(height: searchActive ? nil : 0)
+                        .offset(y: searchActive ? 0 : 80)
+                        .disabled(!searchActive)
+                    
                     
                     //MARK: - HEADER
                     HStack{

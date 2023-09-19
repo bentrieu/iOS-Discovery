@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FocusedSearchBarView: View {
     @Binding var searchInput:String
+    @Binding var searchActive: Bool
     let prompt: String
     
     enum FocusedField {
@@ -51,14 +52,20 @@ struct FocusedSearchBarView: View {
             RoundedRectangle(cornerRadius: 5)
                 .fill(Color.gray.opacity(0.3))
         )
-        .onAppear{
-            focusedField = .inputSearch
-        }
+        .onChange(of: searchActive, perform: { newValue in
+            if newValue{
+                focusedField = .inputSearch
+
+            }else{
+                focusedField = nil
+                searchInput = ""
+            }
+        })
     }
 }
 
 struct FocusedSearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-        FocusedSearchBarView(searchInput: .constant(""), prompt: "Find playlist")
+        FocusedSearchBarView(searchInput: .constant(""), searchActive: .constant(true),prompt: "Find playlist")
     }
 }

@@ -19,7 +19,7 @@ struct AddToPlaylistView: View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
-            VStack(spacing: searchActive ? 5 : addNewPlaylist ? 0 : 20){
+            VStack(spacing: searchActive ? 5 : addNewPlaylist ? 0 : 30){
                 //MARK: - HEADER
                 HStack{
                     Button {
@@ -43,16 +43,23 @@ struct AddToPlaylistView: View {
                     
                     Spacer()
                     
-                    if searchActive{
-                        //MARK: - SEARCH BAR
-                        FocusedSearchBarView(searchInput: $searchResult, prompt: "Find playlist")
-                    }else{
-                        //MARK: - VIEW TITLE
-                        Text(addNewPlaylist ? "New playlist" : "Add To Playlist")
-                            .font(.custom("Gotham-Bold", size: 22))
-                            .modifier(BlackColor())
-                            .offset(x: addNewPlaylist ? -12 : -7)
-                            .animation(.easeIn, value: addNewPlaylist)
+                    
+                    //MARK: - SEARCH BAR
+                    FocusedSearchBarView(searchInput: $searchResult, searchActive: $searchActive,prompt: "Find playlist")
+                        .opacity(searchActive ? 1 : 0)
+                        .frame(width: searchActive ? nil : 0, height: searchActive ? nil : 0)
+                        .disabled(!searchActive)
+                    
+                    //MARK: - VIEW TITLE
+                    Text(addNewPlaylist ? "New playlist" : "Add To Playlist")
+                        .font(.custom("Gotham-Bold", size: 22))
+                        .modifier(BlackColor())
+                        .offset(x: addNewPlaylist ? -12 : -7)
+                        .animation(.easeIn, value: addNewPlaylist)
+                        .opacity(searchActive ? 0 : 1)
+                        .frame(width: searchActive ? 0 : nil, height: searchActive ? 0 : nil)
+                    
+                    if !searchActive{
                         Spacer()
                     }
                 }
@@ -80,7 +87,7 @@ struct AddToPlaylistView: View {
                 .animation(.easeOut, value: addNewPlaylist)
                 
                 
-                Spacer()
+               
                 
                 HStack{
                     //MARK: - SEARCH PLAYLIST BUTTON

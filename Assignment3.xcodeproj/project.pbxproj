@@ -220,7 +220,6 @@
 				F514FA862AB1A58000A48228 /* HomeView */,
 				04E149CD2AAF5DA500BF6229 /* MusicView */,
 				044058382AB3096B002C994B /* LibraryView */,
-				044058472AB70199002C994B /* SearchBarView.swift */,
 				049B571A2AB8240B005809B5 /* DiscoveryView */,
 			);
 			path = Views;
@@ -349,6 +348,7 @@
 				04E149B22AAF4A8400BF6229 /* Info.plist */,
 				04E1499F2AAF4A4A00BF6229 /* Fonts */,
 				04E149992AAF499200BF6229 /* Views */,
+				044058472AB70199002C994B /* SearchBarView.swift */,
 				9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */,
 				9CD558602AAC4F2B0058A5C3 /* ContentView.swift */,
 				9CB48F2D2AADA67300A07591 /* RootView.swift */,
