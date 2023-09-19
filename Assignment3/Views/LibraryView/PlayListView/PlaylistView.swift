@@ -94,10 +94,24 @@ struct PlaylistView: View {
                     
                     //MARK: - LIST OF TRACKS
                     List{
+                        
+                        //MARK: ADD TO PLAYLIST BUTTON
+                        Button{
+                            withAnimation {
+                                showAddTracksToPlaylistView = true
+                            }
+                            
+                        }label: {
+                            AddToPlaylistButtonView()
+                        }
+                        .listRowInsets(.init(top: 0, leading: 0, bottom: 5, trailing: 0))
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        
                         Button{
                             
                         }label: {
-                            ListRowView(imgName: "testImg",imgDimens: 60, title: "Song Name", titleSize: 21, subTitle: "Artists", subTitleSize: 17)
+                            ListRowView(imgName: "testImg",imgDimens: 60, title: "Song Name", titleSize: 23, subTitle: "Artists", subTitleSize: 17)
                         }
                         .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
                         .listRowBackground(Color.clear)
@@ -106,7 +120,7 @@ struct PlaylistView: View {
                         Button{
                             
                         }label: {
-                            ListRowView(imgName: "testImg",imgDimens: 60, title: "Song Name", titleSize: 21, subTitle: "Artists", subTitleSize: 17)
+                            ListRowView(imgName: "testImg",imgDimens: 60, title: "Song Name", titleSize: 23, subTitle: "Artists", subTitleSize: 17)
                         }
                         .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
                         .listRowBackground(Color.clear)
@@ -161,6 +175,27 @@ struct PlaylistView: View {
         .fullScreenCover(isPresented: $showEditPlaylistView) {
             EditPlaylistView()
         }
+    }
+}
+
+struct AddToPlaylistButtonView: View {
+    var body: some View {
+        HStack(spacing: UIScreen.main.bounds.width/25) {
+            Image(systemName: "plus.square.fill")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .modifier(Icon())
+                .foregroundColor(Color("black"))
+                .shadow(radius: 1)
+
+            Text("Add to this playlist")
+                .font(.custom("Gotham-Medium", size: 21))
+                .modifier(OneLineText())
+        }
+        .frame(width: .infinity)
+        .padding(.vertical, 10)
+        .padding(.horizontal)
+
     }
 }
 
