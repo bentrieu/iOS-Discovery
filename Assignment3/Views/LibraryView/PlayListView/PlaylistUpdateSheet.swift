@@ -49,8 +49,8 @@ struct PlaylistUpdateSheet: View {
                     }
                     //MARK: - EDIT PLAYLIST BUTTON
                     Button {
-                        showEditPlaylistView = true
                         dismiss()
+                        showEditPlaylistView = true
                     } label: {
                         ButtonRowView(iconName: "pencil",iconSize: 23, text: "Edit playlist")
                     }

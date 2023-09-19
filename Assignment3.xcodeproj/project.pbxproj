@@ -15,6 +15,7 @@
 		049B57162AB75BD6005809B5 /* EditPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B57152AB75BD6005809B5 /* EditPlaylistView.swift */; };
 		049B57182AB823E7005809B5 /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B57172AB823E7005809B5 /* DiscoveryView.swift */; };
 		049B571C2AB83072005809B5 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B571B2AB83072005809B5 /* GenreView.swift */; };
+		049B571E2AB98F38005809B5 /* AlbumPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B571D2AB98F38005809B5 /* AlbumPageView.swift */; };
 		04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */; };
 		04E149C12AAF4D5000BF6229 /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */; };
 		04E149C22AAF4D5000BF6229 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04E149B82AAF4D4F00BF6229 /* Gotham-Bold.otf */; };
@@ -95,6 +96,7 @@
 		049B57152AB75BD6005809B5 /* EditPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaylistView.swift; sourceTree = "<group>"; };
 		049B57172AB823E7005809B5 /* DiscoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
 		049B571B2AB83072005809B5 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
+		049B571D2AB98F38005809B5 /* AlbumPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPageView.swift; sourceTree = "<group>"; };
 		04E149B22AAF4A8400BF6229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMusicView.swift; sourceTree = "<group>"; };
 		04E149B72AAF4D4F00BF6229 /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				F514FA8C2AB1B2A700A48228 /* RowView */,
 				F514FA872AB1A97300A48228 /* ItemView */,
 				F514FA912AB1B9E300A48228 /* HomeView.swift */,
+				049B571D2AB98F38005809B5 /* AlbumPageView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */,
 				F5704DFE2AB82C3500495552 /* ChangePhotoView.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
+				049B571E2AB98F38005809B5 /* AlbumPageView.swift in Sources */,
 				04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */,
 				0440583A2AB309EB002C994B /* LibraryView.swift in Sources */,
 				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
