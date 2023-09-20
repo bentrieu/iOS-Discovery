@@ -155,6 +155,7 @@ struct DiscoveryView: View {
                                     }
                                 }
                             }
+                            .frame(height: albumSearchResult.isEmpty ? 0 : nil)
                         }else{
                             //MARK: - TRACKS TAB
                             List{
@@ -177,7 +178,7 @@ struct DiscoveryView: View {
                                 
                             }
                             .listStyle(PlainListStyle())
-                            
+                            .frame(height: trackSearchResult.isEmpty ? 0 : nil)
                         }
                     }
                     .frame(height: searchInput.isEmpty ? 0 : nil)
@@ -189,19 +190,19 @@ struct DiscoveryView: View {
                         Spacer()
                     }
                     
-                    //MARK: - SEARCH EMPTY NOTIFICATION
+                    //MARK: - SEARCH NOTIFICATION
                     Group{
-                        Text("Play what you love")
-                            .font(.custom("Gotham-Bold", size: 22))
+                        Text(searchInput.isEmpty ? "Play what you love" : "Couldn't find '\(searchInput)'")
+                            .font(.custom("Gotham-Black", size: 20))
                             .modifier(BlackColor())
                             .multilineTextAlignment(.center)
-                        Text("Search tracks, albums by name or artists")
-                            .font(.custom("Gotham-Medium", size: 16))
+                        Text(searchInput.isEmpty ? "Search tracks, albums by name or artists" : "Trying searching again using a different spelling or keyword")
+                            .font(.custom("Gotham-Medium", size: 14))
                             .modifier(BlackColor())
                             .multilineTextAlignment(.center)
                     }
-                    .frame(height: searchActive && searchInput.isEmpty ? nil : 0)
-                    .opacity(searchActive && searchInput.isEmpty ? 1 : 0)
+                    .frame(height: searchActive && (searchInput.isEmpty || (albumSearch ? albumSearchResult.isEmpty : trackSearchResult.isEmpty)) ? nil : 0)
+                    .opacity(searchActive && (searchInput.isEmpty || (albumSearch ? albumSearchResult.isEmpty : trackSearchResult.isEmpty)) ? 1 : 0)
 
 
                     Spacer()
