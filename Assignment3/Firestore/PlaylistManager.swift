@@ -46,15 +46,15 @@ final class PlaylistManager{
         return decoder
     }()
     
-    func getCurrentUser() throws -> String {
+    func getCurrentUser() async throws -> String {
         return try AuthenticationManager.instance.getAuthenticatedUser().uid
     }
     
-    func getPlaylistsRef() throws -> CollectionReference {
-        return try userCollection.document(getCurrentUser()).collection("playlists")
+    func getPlaylistsRef() async throws -> CollectionReference {
+        return try await userCollection.document(getCurrentUser()).collection("playlists")
     }
     
-    func addPlaylist() throws {
+    func addPlaylist() async throws {
         var playlistData: [String: Any] = [
             "playlist_id": "",
             "name": "Playlist",
@@ -63,40 +63,40 @@ final class PlaylistManager{
             "musics": []
         ]
         
-        let playlistRef = try getPlaylistsRef().addDocument(data: playlistData)
+        let playlistRef = try await getPlaylistsRef().addDocument(data: playlistData)
         let playlistId = playlistRef.documentID
         
         playlistData["playlist_id"] = playlistId
         
-        try getPlaylistsRef().document(playlistId).setData(playlistData)
+        try await getPlaylistsRef().document(playlistId).setData(playlistData)
     }
     
     func getPlaylist(playlistId: String) async throws -> DBPlaylist {
         return try await getPlaylistsRef().document(playlistId).getDocument(as: DBPlaylist.self, decoder: decoder)
     }
     
-    func addMusicToPlaylist(musicId: String, playlistId: String) throws {
+    func addMusicToPlaylist(musicId: String, playlistId: String) async throws {
         let data: [String: Any] = [
             "musics": FieldValue.arrayUnion([musicId])
         ]
         
-        try getPlaylistsRef().document(playlistId).updateData(data)
+        try await getPlaylistsRef().document(playlistId).updateData(data)
     }
     
-    func removeMusicFromPlaylist(musicId: String, playlistId: String) throws {
+    func removeMusicFromPlaylist(musicId: String, playlistId: String) async throws {
         let data: [String: Any] = [
             "musics": FieldValue.arrayRemove([musicId])
         ]
         
-        try getPlaylistsRef().document(playlistId).updateData(data)
+        try await getPlaylistsRef().document(playlistId).updateData(data)
     }
     
-    func updatePlaylistInfo(playlistId: String, name: String, photoUrl: String) throws {
+    func updatePlaylistInfo(playlistId: String, name: String, photoUrl: String) async throws {
         let playlistData: [String: Any] = [
             "name": name,
             "photo_url": photoUrl,
         ]
         
-        try getPlaylistsRef().document(playlistId).updateData(playlistData)
+        try await getPlaylistsRef().document(playlistId).updateData(playlistData)
     }
 }

@@ -27,16 +27,16 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     
-    func addPlaylist() throws {
-        try PlaylistManager.instance.addPlaylist()
+    func addPlaylist() async throws {
+        try await PlaylistManager.instance.addPlaylist()
     }
     
-    func addMusicToPlaylist(musicId: String, playlistId: String) throws {
-        try PlaylistManager.instance.addMusicToPlaylist(musicId: musicId, playlistId: playlistId)
+    func addMusicToPlaylist(musicId: String, playlistId: String) async throws {
+        try await PlaylistManager.instance.addMusicToPlaylist(musicId: musicId, playlistId: playlistId)
     }
     
-    func removeMusicFromPlaylist(musicId: String, playlistId: String) throws {
-        try PlaylistManager.instance.removeMusicFromPlaylist(musicId: musicId, playlistId: playlistId)
+    func removeMusicFromPlaylist(musicId: String, playlistId: String) async throws {
+        try await PlaylistManager.instance.removeMusicFromPlaylist(musicId: musicId, playlistId: playlistId)
     }
 }
 
@@ -73,54 +73,65 @@ struct TempProfileView: View {
                 }
                 
                 Button {
-                    do {
-                        try viewModel.addPlaylist()
-                    } catch {
-                        print(error)
+                    Task {
+                        do {
+                            try await viewModel.addPlaylist()
+                        } catch {
+                            print(error)
+                        }
                     }
-                    
                 } label: {
                     Text("Add playlist")
                 }
                 
                 Group {
                     Button {
-                        do {
-                            try viewModel.addMusicToPlaylist(musicId: "1", playlistId: "v8AtiDouY7nv1napA7Uv")
-                        } catch {
-                            print(error)
+                        Task {
+                            do {
+                                try await viewModel.addMusicToPlaylist(musicId: "1", playlistId: "v8AtiDouY7nv1napA7Uv")
+                            } catch {
+                                print(error)
+                            }
                         }
-
                     } label: {
                         Text("Add music")
                     }
                     Button {
-                        do {
-                            try viewModel.addMusicToPlaylist(musicId: "2", playlistId: "v8AtiDouY7nv1napA7Uv")
-                        } catch {
-                            print(error)
+                        Task {
+                            do {
+                                try await viewModel.addMusicToPlaylist(musicId: "2", playlistId: "v8AtiDouY7nv1napA7Uv")
+                            } catch {
+                                print(error)
+                            }
                         }
+
                     } label: {
                         Text("Add music 2")
                     }
                     
                     Button {
-                        do {
-                            try viewModel.removeMusicFromPlaylist(musicId: "1", playlistId: "v8AtiDouY7nv1napA7Uv")
-                        } catch {
-                            print(error)
+                        Task {
+                            do {
+                                try await viewModel.removeMusicFromPlaylist(musicId: "1", playlistId: "v8AtiDouY7nv1napA7Uv")
+                            } catch {
+                                print(error)
+                            }
                         }
+
 
                     } label: {
                         Text("remove music")
                     }
                     
                     Button {
-                        do {
-                            try viewModel.removeMusicFromPlaylist(musicId: "2", playlistId: "v8AtiDouY7nv1napA7Uv")
-                        } catch {
-                            print(error)
+                        Task {
+                            do {
+                                try await viewModel.removeMusicFromPlaylist(musicId: "2", playlistId: "v8AtiDouY7nv1napA7Uv")
+                            } catch {
+                                print(error)
+                            }
                         }
+
                     } label: {
                         Text("remove music 2")
                     }

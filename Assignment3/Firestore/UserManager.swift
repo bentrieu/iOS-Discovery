@@ -16,6 +16,7 @@ struct DBUser: Codable {
     let photoUrl: String?
     let displayName: String?
     let biography: String?
+    let favorites: [String]?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -24,6 +25,7 @@ struct DBUser: Codable {
         self.photoUrl = auth.photoUrl
         self.displayName = auth.displayName
         self.biography = ""
+        self.favorites = []
     }
 }
 
@@ -63,6 +65,22 @@ final class UserManager {
             "display_name": displayName,
             "biography": biography,
             "photo_url": photoUrl
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func favoriteMusic(musicId: String, userId: String) async throws {
+        let data: [String: Any] = [
+            "favorites": FieldValue.arrayUnion([musicId])
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func unfavoriteMusic(musicId: String, userId: String) async throws {
+        let data: [String: Any] = [
+            "favorites": FieldValue.arrayRemove([musicId])
         ]
         
         try await userDocument(userId: userId).updateData(data)
