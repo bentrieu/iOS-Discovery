@@ -36,22 +36,19 @@ struct AlbumPageView: View {
             LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
             
-            
-            VStack{
-                //MARK: - THUMBNAIL IMG
-//                AsyncImage(url: URL(string: album.imageUrl!)) { image in
-//                    image
-//                        .resizable()
-//                        .frame(height: UIScreen.main.bounds.width/1.5)
-//                        .scaledToFill()
-//                        .ignoresSafeArea(.all)
-//                        .padding(.bottom, -50)
-//                } placeholder: {
-//                    
-//                }
-
-                
                 VStack(spacing: 30){
+                    //MARK: - THUMBNAIL IMG
+    //                AsyncImage(url: URL(string: album.imageUrl!)) { image in
+    //                    image
+    //                        .resizable()
+    //                        .frame(height: UIScreen.main.bounds.width/1.5)
+    //                        .scaledToFill()
+    //                        .ignoresSafeArea(.all)
+    //                        .padding(.bottom, -50)
+    //                } placeholder: {
+    //
+    //                }
+
                     HStack{
                         VStack(alignment: .leading){
                             //MARK: - PLAYLIST NAME
@@ -59,7 +56,7 @@ struct AlbumPageView: View {
                                 .font(.custom("Gotham-Black", size: 35))
                                 .modifier(OneLineText())
                             Text("\(numOfTracks) track(s)")
-                                .font(.custom("Gotham-Me", size: 18))
+                                .font(.custom("Gotham-Medium", size: 18))
                                 .modifier(OneLineText())
                         }
                         Spacer()
@@ -95,7 +92,7 @@ struct AlbumPageView: View {
                                     }
                                    
                             } label: {
-                                ListRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
+                                MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
                             }
                         }
                     }
@@ -103,7 +100,7 @@ struct AlbumPageView: View {
                 }
                 .modifier(PagePadding())
 
-            }
+            
             
         }
         .task{

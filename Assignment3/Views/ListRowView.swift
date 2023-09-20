@@ -1,8 +1,8 @@
 //
-//  TrackRowView.swift
+//  ListRowView.swift
 //  Assignment3
 //
-//  Created by DuyNguyen on 12/09/2023.
+//  Created by DuyNguyen on 20/09/2023.
 //
 
 import SwiftUI
@@ -43,6 +43,6 @@ struct ListRowView: View {
 
 //struct ListRowView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ListRowView(imgName: "testImg", imgDimens: 60, title: "Song Name", titleSize: 21, subTitle: "Artists", subTitleSize: 17)
+//        ListRowView(imgDimens: <#CGFloat#>, titleSize: <#CGFloat#>, subTitleSize: <#CGFloat#>, music: <#Music#>)
 //    }
 //}

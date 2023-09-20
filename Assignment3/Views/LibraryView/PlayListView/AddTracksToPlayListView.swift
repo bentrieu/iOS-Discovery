@@ -46,7 +46,7 @@
 //                    
 //                }label: {
 //                    HStack{
-//                        ListRowView(imgName: "testImg",imgDimens: 55, title: "Song Name", titleSize: 20, subTitle: "Artists", subTitleSize: 15)
+//                        MusicRowView(imgName: "testImg",imgDimens: 55, title: "Song Name", titleSize: 20, subTitle: "Artists", subTitleSize: 15)
 //                        Image(systemName: "plus.circle")
 //                            .resizable()
 //                            .modifier(Icon())

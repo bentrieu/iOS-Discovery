@@ -217,7 +217,11 @@ final class AlbumManager : ObservableObject {
         }
     }
 
-    
+    func searchAlbumByNameAndArtist(input : String) -> [Album]{
+        var result = albums.filter { $0.title!.lowercased().contains(input.lowercased())}
+        result += albums.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+        return result
+    }
 
 
 }
