@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PlayMusicView: View {
+    @Environment (\.dismiss) var dismiss
+    
     @State var pauseActive = false
     @State var shuffleActive = false
     @State var repeatActive = false
@@ -27,7 +29,7 @@ struct PlayMusicView: View {
                 //MARK: - HEADER
                 HStack{
                     Button {
-                        
+                        dismiss()
                     } label: {
                         Image(systemName: "chevron.down")
                             .resizable()

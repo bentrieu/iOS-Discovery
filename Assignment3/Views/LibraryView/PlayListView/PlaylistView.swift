@@ -111,7 +111,7 @@
 //                        Button{
 //                            
 //                        }label: {
-//                            ListRowView(imgName: "testImg",imgDimens: 60, title: "Song Name", titleSize: 23, subTitle: "Artists", subTitleSize: 17)
+//                            MusicRowView(imgName: "testImg",imgDimens: 60, title: "Song Name", titleSize: 23, subTitle: "Artists", subTitleSize: 17)
 //                        }
 //                        .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
 //                        .listRowBackground(Color.clear)

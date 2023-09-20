@@ -19,7 +19,7 @@ struct QueueVIew: View {
                 
             } label: {
                 Text("")
-                ListRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
+                MusicRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
                 
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.4)).shadow(radius: 1))
             }
@@ -33,7 +33,7 @@ struct QueueVIew: View {
                 Button{
                     
                 }label: {
-                    ListRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
+                    MusicRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
                     Text("")
                 }
                 .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
@@ -44,7 +44,7 @@ struct QueueVIew: View {
                     
                 }label: {
                     Text("")
-                    ListRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
+                    MusicRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
                 }
                 .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
                 .listRowBackground(Color.clear)

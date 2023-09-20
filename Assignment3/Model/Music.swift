@@ -114,5 +114,10 @@ class MusicViewModel : ObservableObject {
         return musics
     }
     
-
+    
+    func searchMusicByNameAndArtist(input : String) -> [Music]{
+        var result = musics.filter { $0.musicName!.lowercased().contains(input.lowercased()) }
+        result += musics.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+        return result
+    }
 }
