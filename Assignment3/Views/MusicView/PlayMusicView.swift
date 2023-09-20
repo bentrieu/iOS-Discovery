@@ -15,7 +15,7 @@ struct PlayMusicView: View {
     @State var animatingHeart = false
     @State var viewQueue = false
     @State var showAddPlayListSheet = false
-    
+    @State var firstPlayMusic = true
     @StateObject var musicManager  = MusicManager.instance
 
     
@@ -173,10 +173,16 @@ struct PlayMusicView: View {
                     }
                     //MARK: - PLAY/PAUSE BUTTON
                     Button {
-                        withAnimation {
-                            MusicManager.instance.pauseMusic()
-                            print(MusicManager.instance.isPlaying)
+                        if (firstPlayMusic){
+                            musicManager.play()
+                            firstPlayMusic = false
+                        }else{
+                            withAnimation {
+                                MusicManager.instance.pauseMusic()
+                               
+                            }
                         }
+                        
                     } label: {
                         Image(systemName:  !musicManager.isPlaying ? "play.circle" : "pause.circle")
                             .resizable()
@@ -219,7 +225,6 @@ struct PlayMusicView_Previews: PreviewProvider {
         PlayMusicView()
             .onAppear{
                 MusicManager.instance.currPlaying = sampleMusic
-                MusicManager.instance.play()
             }
     }
 }

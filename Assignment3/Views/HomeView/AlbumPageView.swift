@@ -91,7 +91,7 @@ struct AlbumPageView: View {
                                 PlayMusicView()
                                     .onAppear{
                                         musicManager.currPlaying = item
-                                        musicManager.play()
+                                    
                                     }
                                    
                             } label: {
