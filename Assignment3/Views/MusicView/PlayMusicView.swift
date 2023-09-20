@@ -60,7 +60,7 @@ struct PlayMusicView: View {
                 
                 if viewQueue{
                     //MARK: - QUEUE VIEW
-//                   QueueVIew()
+                   QueueVIew()
                
                 }else{
                     //MARK: - THUMBNAIL IMAGE
@@ -173,13 +173,16 @@ struct PlayMusicView: View {
                     }
                     //MARK: - PLAY/PAUSE BUTTON
                     Button {
+
                         if (firstPlayMusic){
-                            musicManager.play()
+                            withAnimation {
+                                musicManager.play()
+
+                            }
                             firstPlayMusic = false
                         }else{
                             withAnimation {
                                 MusicManager.instance.pauseMusic()
-                               
                             }
                         }
                         
@@ -188,7 +191,7 @@ struct PlayMusicView: View {
                             .resizable()
                             .modifier(Icon())
                             .frame(width: 75)
-                            .rotationEffect(.degrees(pauseActive ? 0 : -180))
+                            .rotationEffect(.degrees(!musicManager.isPlaying ? 0 : -180))
                     }
                     //MARK: - FORWARD BUTTON
                     Button {
