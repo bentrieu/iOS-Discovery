@@ -26,6 +26,18 @@ final class ProfileViewModel: ObservableObject {
             self.user = try await UserManager.instance.getUser(userId: user.userId)
         }
     }
+    
+    func addPlaylist() throws {
+        try PlaylistManager.instance.addPlaylist()
+    }
+    
+    func addMusicToPlaylist(musicId: String, playlistId: String) throws {
+        try PlaylistManager.instance.addMusicToPlaylist(musicId: musicId, playlistId: playlistId)
+    }
+    
+    func removeMusicFromPlaylist(musicId: String, playlistId: String) throws {
+        try PlaylistManager.instance.removeMusicFromPlaylist(musicId: musicId, playlistId: playlistId)
+    }
 }
 
 struct TempProfileView: View {
@@ -59,6 +71,62 @@ struct TempProfileView: View {
                 if let date = user.dateCreated {
                     Text("photoUrl: \(date.description)")
                 }
+                
+                Button {
+                    do {
+                        try viewModel.addPlaylist()
+                    } catch {
+                        print(error)
+                    }
+                    
+                } label: {
+                    Text("Add playlist")
+                }
+                
+                Group {
+                    Button {
+                        do {
+                            try viewModel.addMusicToPlaylist(musicId: "1", playlistId: "v8AtiDouY7nv1napA7Uv")
+                        } catch {
+                            print(error)
+                        }
+
+                    } label: {
+                        Text("Add music")
+                    }
+                    Button {
+                        do {
+                            try viewModel.addMusicToPlaylist(musicId: "2", playlistId: "v8AtiDouY7nv1napA7Uv")
+                        } catch {
+                            print(error)
+                        }
+                    } label: {
+                        Text("Add music 2")
+                    }
+                    
+                    Button {
+                        do {
+                            try viewModel.removeMusicFromPlaylist(musicId: "1", playlistId: "v8AtiDouY7nv1napA7Uv")
+                        } catch {
+                            print(error)
+                        }
+
+                    } label: {
+                        Text("remove music")
+                    }
+                    
+                    Button {
+                        do {
+                            try viewModel.removeMusicFromPlaylist(musicId: "2", playlistId: "v8AtiDouY7nv1napA7Uv")
+                        } catch {
+                            print(error)
+                        }
+                    } label: {
+                        Text("remove music 2")
+                    }
+                }
+                
+
             }
         }
         .onAppear {
