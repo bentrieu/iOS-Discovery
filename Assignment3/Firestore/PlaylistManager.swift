@@ -51,8 +51,12 @@ final class PlaylistManager : ObservableObject{
         return try AuthenticationManager.instance.getAuthenticatedUser().uid
     }
     
+//    func getPlaylistsRef() async throws -> CollectionReference {
+//        return try await userCollection.document(getCurrentUser()).collection("playlists")
+//    }
+    
     func getPlaylistsRef() async throws -> CollectionReference {
-        return try await userCollection.document(getCurrentUser()).collection("playlists")
+        return try await userCollection.document("mW8JeXNn48bI1annfiBM4x6pSdz2").collection("playlists")
     }
     
     func addPlaylist() async throws {

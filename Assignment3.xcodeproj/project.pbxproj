@@ -47,6 +47,7 @@
 		99B598E42AB812B90082C1B5 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B598E32AB812B90082C1B5 /* Album.swift */; };
 		99B598E92AB9799F0082C1B5 /* testMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B598E82AB9799F0082C1B5 /* testMusic.swift */; };
 		9C2AB8D82AB6EADC0056D5C3 /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2AB8D72AB6EADC0056D5C3 /* SignUpEmailViewModel.swift */; };
+		9C33DC8A2ABC857D00BFA2EE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33DC892ABC857D00BFA2EE /* StorageManager.swift */; };
 		9C38803C2AB83E7900E60162 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C38803B2AB83E7900E60162 /* FirebaseStorage */; };
 		9C38803E2AB83ED100E60162 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C38803D2AB83ED100E60162 /* MusicManager.swift */; };
 		9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */; };
@@ -135,6 +136,7 @@
 		99B598E32AB812B90082C1B5 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		99B598E82AB9799F0082C1B5 /* testMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusic.swift; sourceTree = "<group>"; };
 		9C2AB8D72AB6EADC0056D5C3 /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
+		9C33DC892ABC857D00BFA2EE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		9C38803D2AB83ED100E60162 /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInHelper.swift; sourceTree = "<group>"; };
 		9C575B032AB58E2700BE4553 /* TempProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempProfileView.swift; sourceTree = "<group>"; };
@@ -328,6 +330,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9C33DC882ABC856F00BFA2EE /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				9C33DC892ABC857D00BFA2EE /* StorageManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		9C575B062AB5E96600BE4553 /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +379,7 @@
 				9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */,
 				9CD558602AAC4F2B0058A5C3 /* ContentView.swift */,
 				9CB48F2D2AADA67300A07591 /* RootView.swift */,
+				9C33DC882ABC856F00BFA2EE /* Storage */,
 				9C575B062AB5E96600BE4553 /* Firestore */,
 				9CFE5E7A2AAC5DCA0000A801 /* Auth */,
 				9CD558622AAC4F2C0058A5C3 /* Assets.xcassets */,
@@ -590,6 +601,7 @@
 				0440584C2AB70200002C994B /* PlaylistView.swift in Sources */,
 				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
 				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
+				9C33DC8A2ABC857D00BFA2EE /* StorageManager.swift in Sources */,
 				99B598E42AB812B90082C1B5 /* Album.swift in Sources */,
 				9C2AB8D82AB6EADC0056D5C3 /* SignUpEmailViewModel.swift in Sources */,
 				044058482AB70199002C994B /* SearchBarView.swift in Sources */,
