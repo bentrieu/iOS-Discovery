@@ -23,7 +23,7 @@
 //            Color("white")
 //                .ignoresSafeArea(.all)
 //            VStack(alignment: .leading, spacing: 35){
-//                ListRowView(imgName: imgName, imgDimens: 65, title: playlistName, titleSize: 22, subTitle: "\(numOfTracks) track(s)", subTitleSize: 17)
+//                PlaylistRowView(imgName: imgName, imgDimens: 65, title: playlistName, titleSize: 22, subTitle: "\(numOfTracks) track(s)", subTitleSize: 17)
 //                    .padding(.top, 30)
 //                    .padding(.bottom, -10)
 //                
