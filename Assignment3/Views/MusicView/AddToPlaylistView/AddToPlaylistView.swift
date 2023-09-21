@@ -11,9 +11,9 @@ struct AddToPlaylistView: View {
     @Environment (\.dismiss) var dismiss
     
     @StateObject var playListManager = PlaylistManager.instance
-    var playlistSearchResult : [DBPlaylist]{
-        return playListManager.searchPlaylistByName(input: searchInput)
-    }
+//    var playlistSearchResult : [DBPlaylist]{
+//        return playListManager.searchPlaylistByName(input: searchInput)
+//    }
     
     @State var addNewPlaylist = false
     
@@ -143,7 +143,8 @@ struct AddToPlaylistView: View {
                 
                 //MARK: - LIST OF PLAYLISTS
                 List{
-                    ForEach(playlistSearchResult.isEmpty ? playListManager.playlists : playlistSearchResult, id: \.playlistId) {playlist in
+//                    ForEach(playlistSearchResult.isEmpty ? playListManager.playlists : playlistSearchResult, id: \.playlistId) {playlist in
+                    ForEach( playListManager.playlists, id: \.playlistId) {playlist in
                         Button{
                             
                         }label: {
