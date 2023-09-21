@@ -18,7 +18,7 @@ struct PlaylistRowView: View {
 
             SquareView(imageUrl: playlist.photoUrl!, size: imgDimens)
             VStack{
-                Text(playlist.displayName!)
+                Text(playlist.name!)
                     .font(.custom("Gotham-Medium", size: titleSize))
                     .modifier(OneLineText())
                     .frame(maxWidth: .infinity, alignment: .leading)

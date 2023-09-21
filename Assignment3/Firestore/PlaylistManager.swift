@@ -13,7 +13,7 @@ struct DBPlaylist: Codable {
     let playlistId: String
     let dateCreated: Date?
     let photoUrl: String?
-    let displayName: String?
+    let name: String?
     let musics: [String]?
     
 //    init(playlistId: String,
