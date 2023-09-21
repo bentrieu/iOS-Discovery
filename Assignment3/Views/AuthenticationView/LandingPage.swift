@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LandingPageView: View {
     @Environment(\.colorScheme) var colorScheme
+    
+    @StateObject private var viewModel = AuthenticationViewModel()
    
     var body: some View {
         NavigationStack {
@@ -46,7 +48,13 @@ struct LandingPageView: View {
                     //MARK: SIGN UP WITH GOOGLE
                     
                     Button {
-                        
+                        Task {
+                            do {
+                                try await viewModel.signInGoogle()
+                            } catch {
+                                print(error)
+                            }
+                        }
                     } label: {
                         CustomSignUpButton(image: Image("google-icon"), title: "Continue with Google")
                     }

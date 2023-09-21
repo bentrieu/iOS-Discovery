@@ -16,6 +16,7 @@ struct TempAuthenticationView: View {
     
     @StateObject private var viewModel = AuthenticationViewModel()
     @Binding var showSignInView: Bool
+    @StateObject private var loginManager = FacebookSignInHelper()
     
     var body: some View {
         VStack {
@@ -42,11 +43,29 @@ struct TempAuthenticationView: View {
                 }
             }
             
-            FacebookLoginButton(showSignInView: $showSignInView)
-                .foregroundColor(Color.blue)
-                .background(Color.white)
-                .frame(height:40)
-                .cornerRadius(20)
+//            FacebookLoginButton(showSignInView: $showSignInView)
+//                .foregroundColor(Color.blue)
+//                .background(Color.white)
+//                .frame(height:40)
+//                .cornerRadius(20)
+            Button {
+                Task {
+                    do {
+                        try await loginManager.loginFacebook()
+                        showSignInView = false
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            } label: {
+                Text("Sign up with Facebook")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(height: 55)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
             
             Spacer()
         }
