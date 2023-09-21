@@ -25,7 +25,7 @@ final class ProfileViewModel: ObservableObject {
         self.playlists = try await PlaylistManager.instance.getAllPlaylist()
     }
     
-    func updateUserProfile(usernameText: String, biographyText: String, photoUrl: String) {
+    func updateUserProfile(usernameText: String) {
         guard let user else { return }
         Task {
             try await UserManager.instance.updateUserProfile(userId: user.userId, displayName:usernameText)
@@ -71,6 +71,7 @@ final class ProfileViewModel: ObservableObject {
             print("success")
             print(path)
             print(name)
+            try await UserManager.instance.updateProfileImageURL(userId: user.userId, path: name)
         }
     }
 }
@@ -78,13 +79,12 @@ final class ProfileViewModel: ObservableObject {
 struct TempProfileView: View {
     
     @State var usernameText: String
-    @State var biographyText: String
-    @State var photoUrl: String
     
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
     
     @State private var item: PhotosPickerItem? = nil
+    @State private var imageData: Data? = nil
     
     var body: some View {
         List {
@@ -92,11 +92,9 @@ struct TempProfileView: View {
                 Group {
                     Text("Userid: \(user.userId)")
                     TextField("Username", text: $usernameText)
-                    TextField("Biography", text: $biographyText)
-                    TextField("Photo url", text: $photoUrl)
                 }
                 Button {
-                    viewModel.updateUserProfile(usernameText: usernameText, biographyText: biographyText, photoUrl: photoUrl)
+                    viewModel.updateUserProfile(usernameText: usernameText)
                 } label: {
                     Text("Save")
                 }
@@ -105,7 +103,7 @@ struct TempProfileView: View {
                     Text("Email: \(email)")
                 }
                 if let date = user.dateCreated {
-                    Text("Date created: \(date.description)")
+                    Text("Date created  : \(date.description)")
                 }
                 
                 Button {
@@ -182,6 +180,14 @@ struct TempProfileView: View {
                         }
                     }
                 }
+                
+                if let imageData, let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 150, height: 150)
+                        .cornerRadius(10)
+                }
             }
         }
         .onChange(of: item, perform: { newValue in
@@ -194,6 +200,11 @@ struct TempProfileView: View {
                 do {
                     try? await viewModel.loadCurrentUser()
                     try? await viewModel.loadUserPlaylist()
+                    
+                    if let user = viewModel.user {
+                        let data = try? await StorageManager.instance.getProfileData(userId: user.userId)
+                        self.imageData = data
+                    }
                 } catch {
                     print(error)
                 }
@@ -215,6 +226,6 @@ struct TempProfileView: View {
 
 struct TempProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        TempProfileView(usernameText: "", biographyText: "", photoUrl: "", showSignInView: .constant(false))
+        TempProfileView(usernameText: "", showSignInView: .constant(false))
     }
 }

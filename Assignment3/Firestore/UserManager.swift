@@ -15,6 +15,7 @@ struct DBUser: Codable {
     let email: String?
     let displayName: String?
     let favorites: [String]?
+    let profileImageURL: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -22,6 +23,7 @@ struct DBUser: Codable {
         self.email = auth.email
         self.displayName = auth.displayName
         self.favorites = []
+        self.profileImageURL = nil
     }
 }
 
@@ -59,6 +61,14 @@ final class UserManager {
     func updateUserProfile(userId:String, displayName: String) async throws {
         let data: [String:Any] = [
             "display_name": displayName
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func updateProfileImageURL(userId:String, path: String) async throws {
+        let data: [String:Any] = [
+            "profile_image_url": path
         ]
         
         try await userDocument(userId: userId).updateData(data)
