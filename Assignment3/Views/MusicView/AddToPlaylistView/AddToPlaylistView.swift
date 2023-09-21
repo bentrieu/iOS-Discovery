@@ -10,10 +10,11 @@ import SwiftUI
 struct AddToPlaylistView: View {
     @Environment (\.dismiss) var dismiss
     
-    @StateObject var playListViewModel = PlaylistViewModel.instance
-//    var playlistSearchResult : [DBPlaylist]{
-//        return playListManager.searchPlaylistByName(input: searchInput)
-//    }
+    @StateObject private var playlistManager = PlaylistManager.instance
+    var playlistSearchResult : [DBPlaylist]{
+    
+        return searchInput.isEmpty ? playlistManager.playlists : playlistManager.searchPlaylistByName(input: searchInput)
+    }
     
     @State var addNewPlaylist = false
     
@@ -140,28 +141,33 @@ struct AddToPlaylistView: View {
                 .animation(.easeOut, value: searchActive)
                 
                 
-                
-                //MARK: - LIST OF PLAYLISTS
-                List{
-//                    ForEach(playlistSearchResult.isEmpty ? playListManager.playlists : playlistSearchResult, id: \.playlistId) {playlist in
-                    ForEach( playListViewModel.playlists, id: \.playlistId) {playlist in
-                        Button{
-                            
-                        }label: {
-                            PlaylistRowView(imgDimens: 40, titleSize: 23, subTitleSize: 17, playlist: playlist)
+                if (!playlistManager.playlists.isEmpty && searchInput.isEmpty) || (!playlistSearchResult.isEmpty && !searchInput.isEmpty){
+                    //MARK: - LIST OF PLAYLISTS
+                    List{
+                        ForEach(playlistSearchResult, id: \.playlistId) {playlist in
+                            Button{
+                                Task {
+                                    do {
+                                        try await playlistManager.addMusicToPlaylist(musicId: MusicManager.instance.currPlaying.musicId, playlistId: playlist.playlistId)
+                                    } catch {
+                                        print(error)
+                                    }
+                                }
+                                dismiss()
+                            }label: {
+                                PlaylistRowView(imgDimens: 60, titleSize: 23, subTitleSize: 18, playlist: playlist)
+                            }
+                            .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
                     }
-
+                    .listStyle(PlainListStyle())
+                    .animation(.easeInOut, value: searchActive)
+                    .opacity(addNewPlaylist ? 0 : 1)
+                    .frame(height: addNewPlaylist ? 0 : nil)
+                    .disabled(addNewPlaylist)
                 }
-                .listStyle(PlainListStyle())
-                .animation(.easeInOut, value: searchActive)
-                .opacity(addNewPlaylist ? 0 : 1)
-                .frame(height: addNewPlaylist ? 0 : nil)
-                .disabled(addNewPlaylist)
-                
                 if(addNewPlaylist){
                     Spacer()
                 }
@@ -179,7 +185,7 @@ struct AddToPlaylistView: View {
         }
         .task {
             do{
-                playListViewModel.playlists = try await PlaylistManager.instance.getAllPlaylist()
+                playlistManager.playlists = try await playlistManager.getAllPlaylist()
             } catch {
                 // Handle the error
                 print("Error: \(error)")
