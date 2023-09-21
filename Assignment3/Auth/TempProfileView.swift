@@ -28,7 +28,7 @@ final class ProfileViewModel: ObservableObject {
     func updateUserProfile(usernameText: String, biographyText: String, photoUrl: String) {
         guard let user else { return }
         Task {
-            try await UserManager.instance.updateUserProfile(userId: user.userId, displayName:usernameText, biography:biographyText,photoUrl:photoUrl)
+            try await UserManager.instance.updateUserProfile(userId: user.userId, displayName:usernameText)
             self.user = try await UserManager.instance.getUser(userId: user.userId)
         }
     }
@@ -104,11 +104,8 @@ struct TempProfileView: View {
                 if let email = user.email {
                     Text("Email: \(email)")
                 }
-                if let photoUrl = user.photoUrl {
-                    Text("photoUrl: \(photoUrl)")
-                }
                 if let date = user.dateCreated {
-                    Text("photoUrl: \(date.description)")
+                    Text("Date created: \(date.description)")
                 }
                 
                 Button {

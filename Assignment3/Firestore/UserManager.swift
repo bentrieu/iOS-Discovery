@@ -13,7 +13,6 @@ struct DBUser: Codable {
     let userId: String
     let dateCreated: Date?
     let email: String?
-    let photoUrl: String?
     let displayName: String?
     let favorites: [String]?
     
@@ -21,7 +20,6 @@ struct DBUser: Codable {
         self.userId = auth.uid
         self.dateCreated = Date()
         self.email = auth.email
-        self.photoUrl = auth.photoUrl
         self.displayName = auth.displayName
         self.favorites = []
     }
@@ -58,10 +56,9 @@ final class UserManager {
         return try await userDocument(userId: userId).getDocument(as: DBUser.self, decoder: decoder)
     }
     
-    func updateUserProfile(userId:String, displayName: String, biography: String, photoUrl: String) async throws {
+    func updateUserProfile(userId:String, displayName: String) async throws {
         let data: [String:Any] = [
-            "display_name": displayName,
-            "photo_url": photoUrl
+            "display_name": displayName
         ]
         
         try await userDocument(userId: userId).updateData(data)
