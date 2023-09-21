@@ -119,7 +119,6 @@ final class PlaylistManager : ObservableObject{
     }
     
     func searchPlaylistByName(input : String) -> [DBPlaylist]{
-        return  playlists.filter { $0.displayName!.lowercased().contains(input.lowercased()) }
-
+        return playlists.filter { $0.displayName!.lowercased().contains(input.lowercased()) }
     }
 }

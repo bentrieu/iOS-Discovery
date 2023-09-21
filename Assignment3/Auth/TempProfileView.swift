@@ -14,10 +14,15 @@ import PhotosUI
 final class ProfileViewModel: ObservableObject {
     
     @Published private(set) var user: DBUser? = nil
+    @Published private(set) var playlists: [DBPlaylist]? = nil
     
     func loadCurrentUser() async throws {
         let authDataResult = try AuthenticationManager.instance.getAuthenticatedUser()
         self.user = try await UserManager.instance.getUser(userId: authDataResult.uid)
+    }
+    
+    func loadUserPlaylist() async throws {
+        self.playlists = try await PlaylistManager.instance.getAllPlaylist()
     }
     
     func updateUserProfile(usernameText: String, biographyText: String, photoUrl: String) {
@@ -29,15 +34,30 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func addPlaylist() async throws {
-        try await PlaylistManager.instance.addPlaylist()
+        guard let user else { return }
+        
+        Task {
+            try await PlaylistManager.instance.addPlaylist()
+            self.user = try await UserManager.instance.getUser(userId: user.userId)
+        }
     }
     
     func addMusicToPlaylist(musicId: String, playlistId: String) async throws {
-        try await PlaylistManager.instance.addMusicToPlaylist(musicId: musicId, playlistId: playlistId)
+        guard let user else { return }
+        
+        Task {
+            try await PlaylistManager.instance.addMusicToPlaylist(musicId: musicId, playlistId: playlistId)
+            self.user = try await UserManager.instance.getUser(userId: user.userId)
+        }
     }
     
     func removeMusicFromPlaylist(musicId: String, playlistId: String) async throws {
-        try await PlaylistManager.instance.removeMusicFromPlaylist(musicId: musicId, playlistId: playlistId)
+        guard let user else { return }
+        
+        Task {
+            try await PlaylistManager.instance.removeMusicFromPlaylist(musicId: musicId, playlistId: playlistId)
+            self.user = try await UserManager.instance.getUser(userId: user.userId)
+        }
     }
     
     func saveProfileImage(item: PhotosPickerItem) {
@@ -157,6 +177,13 @@ struct TempProfileView: View {
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("select an image")
                 }
+                if let playlists = viewModel.playlists {
+                    List {
+                        ForEach(playlists, id:\.playlistId) { item in
+                            Text("\(item.playlistId)")
+                        }
+                    }
+                }
             }
         }
         .onChange(of: item, perform: { newValue in
@@ -168,6 +195,7 @@ struct TempProfileView: View {
             Task {
                 do {
                     try? await viewModel.loadCurrentUser()
+                    try? await viewModel.loadUserPlaylist()
                 } catch {
                     print(error)
                 }
