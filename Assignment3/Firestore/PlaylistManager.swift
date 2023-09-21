@@ -75,6 +75,19 @@ final class PlaylistManager{
         return try await getPlaylistsRef().document(playlistId).getDocument(as: DBPlaylist.self, decoder: decoder)
     }
     
+    func getAllPlaylist() async throws -> [DBPlaylist] {
+        let snapshot = try await getPlaylistsRef().getDocuments()
+        
+        var playlists: [DBPlaylist] = []
+        
+        for document in snapshot.documents {
+            let playlist = try document.data(as: DBPlaylist.self)
+            playlists.append(playlist)
+        }
+        
+        return playlists
+    }
+    
     func addMusicToPlaylist(musicId: String, playlistId: String) async throws {
         let data: [String: Any] = [
             "musics": FieldValue.arrayUnion([musicId])

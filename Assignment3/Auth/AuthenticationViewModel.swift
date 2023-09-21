@@ -17,4 +17,12 @@ final class AuthenticationViewModel: ObservableObject {
         let user = DBUser(auth: authDataResult)
         try await UserManager.instance.createNewUser(user: user)
     }
+    
+    func signInFacebook() async throws {
+        let helper = SignInGoogleHelper()
+        let tokens = try await helper.signIn()
+        let authDataResult = try await AuthenticationManager.instance.signInWithGoogle(tokens: tokens)
+        let user = DBUser(auth: authDataResult)
+        try await UserManager.instance.createNewUser(user: user)
+    }
 }
