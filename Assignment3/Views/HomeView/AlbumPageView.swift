@@ -107,12 +107,7 @@ struct AlbumPageView: View {
                         }
                     }
                     Spacer()
-                    HStack {
-                        Button("Button"){}
-                        Button("Button"){}
-                        Button("Button"){}
-                    }
-                }
+                                    }
                 .modifier(PagePadding())
 
             
@@ -124,11 +119,8 @@ struct AlbumPageView: View {
                     musicManager.currPlaying = currentMusic
                 }
         }, compactView: {
-            VStack {
+            ZStack {
                 MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: currentMusic)
-                if self.miniHandler.isMinimized {
-                    Divider()
-                }
             }
             .cornerRadius(self.miniHandler.isMinimized ? 0 : 20)
             .onTapGesture {
@@ -136,7 +128,7 @@ struct AlbumPageView: View {
                     self.miniHandler.expand()
                 }
         }
-
+     
         }, backgroundView: {
             self.backgroundView()
         }, dragOffset: $dragOffset, dragUpdating: { (value, state, transaction) in
@@ -205,6 +197,23 @@ struct AlbumPageView: View {
             self.miniHandler.draggedOffsetY = 0
        }
 
+    }
+    var minimizedControls: some View {
+        Group {
+            Button(action: {}, label: {
+                
+                Image(systemName: "play.fill")
+                    .font(.title2)
+                    .foregroundColor(.primary)
+            })
+            
+            Button(action: {}, label: {
+                
+                Image(systemName: "forward.fill")
+                    .font(.title2)
+                    .foregroundColor(.primary)
+            })
+        }
     }
   
 }

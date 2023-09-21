@@ -36,23 +36,7 @@ struct PlayMusicView: View {
               
                         
                         Spacer()
-                        if miniHandler.isMinimized{
-                            VStack(alignment: .leading) {
-                                Text("Mui Mui")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                    .matchedGeometryEffect(id: "Singer", in: animationNamespaceId)
-                                
-                                Text("emBARKation")
-                                    .fontWeight(.bold)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                    .matchedGeometryEffect(id: "Song", in: animationNamespaceId)
-                                
-                            }
-                            Spacer(minLength: 0)
-                            self.minimizedControls
-                        } else {
+
                             
                             Spacer(minLength: 0)
                             HStack{
@@ -246,7 +230,7 @@ struct PlayMusicView: View {
                         }.frame(width: .infinity)
                             
                         
-                    }
+                
                 }
                 .frame(height: self.miniHandler.isMinimized ? 0 : nil)
                 .opacity(self.miniHandler.isMinimized ? 0 : 1)
