@@ -86,7 +86,7 @@ final class PlaylistManager : ObservableObject{
         var playlists: [DBPlaylist] = []
         
         for document in snapshot.documents {
-            let playlist = try document.data(as: DBPlaylist.self)
+            let playlist = try document.data(as: DBPlaylist.self, decoder: decoder)
             playlists.append(playlist)
         }
         
