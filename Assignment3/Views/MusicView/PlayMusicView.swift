@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
-
+import MinimizableView
 struct PlayMusicView: View {
     @Environment (\.dismiss) var dismiss
-    
     @State var pauseActive = false
     @State var shuffleActive = false
     @State var repeatActive = false
@@ -19,8 +18,14 @@ struct PlayMusicView: View {
     @State var showAddPlayListSheet = false
     @State var firstPlayMusic = true
     @StateObject var musicManager  = MusicManager.instance
-
-    
+    var safeArea = UIApplication
+        .shared
+        .connectedScenes
+        .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+        .first { $0.isKeyWindow }
+    @EnvironmentObject var miniHandler: MinimizableViewHandler
+    var animationNamespaceId: Namespace.ID
+   
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
@@ -222,21 +227,22 @@ struct PlayMusicView: View {
        
     }
    
-    
 }
 
 struct PlayMusicView_Previews: PreviewProvider {
+    static var namespace = Namespace().wrappedValue
+
     static var previews: some View {
-        PlayMusicView()
-            .onAppear{
+        PlayMusicView(animationNamespaceId: namespace)
+            .onAppear {
                 MusicManager.instance.currPlaying = sampleMusic
             }
     }
 }
+
 let sampleMusic = Music(musicId: "8eRvtX2V8goiU3Sy7JIr",
         musicName: "Try Tim Bao Vat",
         imageUrl: "https://i.scdn.co/image/ab67616d0000b273e368556118fdcd985aa28019",
         artistName: "24K Right",
-        file: "gs://assignment3-fcc04.appspot.com/music/X2Download.app - Truy Lùng Bảo Vật - 24k.Right ft. Sofia - Team B Ray _ Rap Việt 2023 [MV Lyrics] (128 kbps).mp3",
+        file: "gs://assignment3-fcc04.appspot.com/music/X2Download.app - Truy Lùng Bảo Vật - 24k.Right ft. Sofia - Team B Ray _ Rap Việt 2023 [MV Lyrics] (128 kbps).mp3",
 musicLength: 341)
-

@@ -36,6 +36,7 @@
 		04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */; };
 		990FF9F22AB9A9F9007B8252 /* AlbumListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FF9F12AB9A9F9007B8252 /* AlbumListManager.swift */; };
 		990FF9F42AB9AD26007B8252 /* AlbumList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FF9F32AB9AD26007B8252 /* AlbumList.swift */; };
+		993ACD8A2ABCD47D00E78675 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993ACD892ABCD47D00E78675 /* BlurView.swift */; };
 		9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */; };
 		9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8562AAF841900F5F42E /* SplashScreenView.swift */; };
 		9958D86D2AB071B300F5F42E /* CustomSecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D86C2AB071B300F5F42E /* CustomSecureTextField.swift */; };
@@ -125,6 +126,7 @@
 		04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaylistView.swift; sourceTree = "<group>"; };
 		990FF9F12AB9A9F9007B8252 /* AlbumListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListManager.swift; sourceTree = "<group>"; };
 		990FF9F32AB9AD26007B8252 /* AlbumList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumList.swift; sourceTree = "<group>"; };
+		993ACD892ABCD47D00E78675 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewModiferHelper.swift; sourceTree = "<group>"; };
 		9958D8562AAF841900F5F42E /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		9958D86C2AB071B300F5F42E /* CustomSecureTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSecureTextField.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		04E149CD2AAF5DA500BF6229 /* MusicView */ = {
 			isa = PBXGroup;
 			children = (
+				993ACD882ABCD47000E78675 /* Component */,
 				04E149B32AAF4B3500BF6229 /* PlayMusicView.swift */,
 				04E149CB2AAF52A700BF6229 /* HeartButtonView.swift */,
 				04E149D82AB05F8700BF6229 /* QueueView */,
@@ -288,6 +291,14 @@
 				04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */,
 			);
 			path = AddToPlaylistView;
+			sourceTree = "<group>";
+		};
+		993ACD882ABCD47000E78675 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				993ACD892ABCD47D00E78675 /* BlurView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		9958D84B2AAF69B200F5F42E /* AuthenticationView */ = {
@@ -626,6 +637,7 @@
 				F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */,
 				04E149DB2AB05FDD00BF6229 /* FocusedSearchBarView.swift in Sources */,
 				F5BD95092AB42E800015B48C /* ViewProfileView.swift in Sources */,
+				993ACD8A2ABCD47D00E78675 /* BlurView.swift in Sources */,
 				9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */,
 				04E149D52AB0447000BF6229 /* QueueVIew.swift in Sources */,
 				0440584A2AB701C3002C994B /* PlaylistUpdateSheet.swift in Sources */,

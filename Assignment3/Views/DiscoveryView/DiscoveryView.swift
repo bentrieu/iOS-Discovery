@@ -15,7 +15,7 @@ struct DiscoveryView: View {
     @State var searchInput = ""
     
     @State var showPlayMusicView = false
-    
+    @Namespace var namespace
     var trackSearchResult : [Music]{
         return MusicViewModel.shared.searchMusicByNameAndArtist(input: searchInput)
     }
@@ -143,25 +143,26 @@ struct DiscoveryView: View {
                         if albumSearch{
                             
                             //MARK: - ALBUMS TAB
-                            LazyVGrid(columns: gridItemLayout){
-                                ForEach(albumSearchResult, id: \.albumId) {album in
-                                    NavigationLink {
-                                        AlbumPageView(album: album)
-                                    } label: {
-                                        VStack(alignment: .leading){
-                                            SquareView(imageUrl: album.imageUrl!, size: 160)
-                                            TextForAlbumView(title: album.title!, type: album.type!, name: album.artistName!, size: 160)
-                                        }
-                                    }
-                                }
-                            }
-                            .frame(height: albumSearchResult.isEmpty ? 0 : nil)
+//                            LazyVGrid(columns: gridItemLayout){
+//                                ForEach(albumSearchResult, id: \.albumId) {album in
+//                                    NavigationLink {
+//                                        AlbumPageView(album: album)
+//                                        
+//                                    } label: {
+//                                        VStack(alignment: .leading){
+//                                            SquareView(imageUrl: album.imageUrl!, size: 160)
+//                                            TextForAlbumView(title: album.title!, type: album.type!, name: album.artistName!, size: 160)
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                            .frame(height: albumSearchResult.isEmpty ? 0 : nil)
                         }else{
                             //MARK: - TRACKS TAB
                             List{
                                 ForEach(trackSearchResult, id: \.musicId) {music in
                                     NavigationLink{
-                                        PlayMusicView()
+                                        PlayMusicView(animationNamespaceId: self.namespace)
                                             .onAppear{
                                                 musicManager.musicList.removeAll()
                                                 musicManager.musicList.append(music)
