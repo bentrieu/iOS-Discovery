@@ -107,6 +107,11 @@ struct AlbumPageView: View {
                         }
                     }
                     Spacer()
+                    HStack {
+                        Button("Button"){}
+                        Button("Button"){}
+                        Button("Button"){}
+                    }
                 }
                 .modifier(PagePadding())
 
@@ -119,7 +124,19 @@ struct AlbumPageView: View {
                     musicManager.currPlaying = currentMusic
                 }
         }, compactView: {
-            MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: currentMusic)
+            VStack {
+                MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: currentMusic)
+                if self.miniHandler.isMinimized {
+                    Divider()
+                }
+            }
+            .cornerRadius(self.miniHandler.isMinimized ? 0 : 20)
+            .onTapGesture {
+                if self.miniHandler.isMinimized {
+                    self.miniHandler.expand()
+                }
+        }
+
         }, backgroundView: {
             self.backgroundView()
         }, dragOffset: $dragOffset, dragUpdating: { (value, state, transaction) in
@@ -149,19 +166,21 @@ struct AlbumPageView: View {
     }
     //MARK: MINIMIZE VIEW
     func backgroundView() -> some View {
-         VStack(spacing: 0){
-             BlurView(style: .systemChromeMaterial)
-             if self.miniHandler.isMinimized {
-                 Divider()
-             }
-         }.cornerRadius(self.miniHandler.isMinimized ? 0 : 20)
-         .onTapGesture(perform: {
-             if self.miniHandler.isMinimized {
-                 self.miniHandler.expand()
-                 //alternatively, override the default animation. self.miniHandler.expand(animation: Animation)
-             }
-         })
-     }
+        Button(action: {
+            print("Expand")
+            if self.miniHandler.isMinimized {
+                self.miniHandler.expand()
+            }
+        }) {
+            VStack(spacing: 0) {
+                BlurView(style: .systemChromeMaterial)
+                if self.miniHandler.isMinimized {
+                    Divider()
+                }
+            }
+            .cornerRadius(self.miniHandler.isMinimized ? 0 : 20)
+        }
+    }
     func dragUpdated(value: DragGesture.Value) {
         
         if self.miniHandler.isMinimized == false && value.translation.height > 0   { // expanded state
