@@ -67,11 +67,11 @@ final class ProfileViewModel: ObservableObject {
             guard let data = try await item.loadTransferable(type: Data.self) else {
                 return
             }
-            let (path, name) = try await StorageManager.instance.saveImage(data: data, userId: user.userId)
+            let (path, name) = try await StorageManager.instance.saveUserImage(data: data, userId: user.userId)
             print("success")
             print(path)
             print(name)
-            try await UserManager.instance.updateProfileImageURL(userId: user.userId, path: name)
+            try await UserManager.instance.updateProfileImageURL(userId: user.userId, path: path)
         }
     }
 }
@@ -84,7 +84,7 @@ struct TempProfileView: View {
     @Binding var showSignInView: Bool
     
     @State private var item: PhotosPickerItem? = nil
-    @State private var imageData: Data? = nil
+    @State private var image: UIImage? = nil
     
     var body: some View {
         List {
@@ -181,7 +181,7 @@ struct TempProfileView: View {
                     }
                 }
                 
-                if let imageData, let image = UIImage(data: imageData) {
+                if let image {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
@@ -201,9 +201,9 @@ struct TempProfileView: View {
                     try? await viewModel.loadCurrentUser()
                     try? await viewModel.loadUserPlaylist()
                     
-                    if let user = viewModel.user {
-                        let data = try? await StorageManager.instance.getProfileData(userId: user.userId)
-                        self.imageData = data
+                    if let user = viewModel.user, let path = user.profileImagePath {
+                        let image = try? await StorageManager.instance.getImage(path: path)
+                        self.image = image
                     }
                 } catch {
                     print(error)

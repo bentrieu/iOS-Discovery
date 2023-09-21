@@ -20,11 +20,21 @@ final class StorageManager {
         storage.child("users")
     }
     
-    func getProfileData(userId: String) async throws -> Data{
-        return try await userReference().child("\(userId).jpeg").data(maxSize: 3 * 1024 * 1024)
+    func getData(path: String) async throws -> Data{
+        return try await storage.child(path).data(maxSize: 3 * 1024 * 1024)
     }
     
-    func saveImage(data: Data, userId: String) async throws -> (path: String, name: String){
+    func getImage(path: String) async throws -> UIImage {
+        let data = try await getData(path: path)
+        
+        guard let image = UIImage(data: data) else {
+            throw URLError(.badServerResponse)
+        }
+        
+        return image
+    }
+    
+    func saveUserImage(data: Data, userId: String) async throws -> (path: String, name: String){
         let meta = StorageMetadata()
         meta.contentType = "image/jpeg"
     
@@ -38,12 +48,12 @@ final class StorageManager {
         return (returnedPath, returnedName)
     }
     
-    func saveImage(image: UIImage, userId: String) async throws -> (path: String, name: String){
+    func saveUserImage(image: UIImage, userId: String) async throws -> (path: String, name: String){
         guard let data = image.jpegData(compressionQuality: 1) else {
             throw URLError(.backgroundSessionWasDisconnected)
         }
         
-        return try await saveImage(data: data, userId: userId)
+        return try await saveUserImage(data: data, userId: userId)
     }
 
 }
