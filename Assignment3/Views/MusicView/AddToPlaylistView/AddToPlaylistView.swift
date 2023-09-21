@@ -10,7 +10,7 @@ import SwiftUI
 struct AddToPlaylistView: View {
     @Environment (\.dismiss) var dismiss
     
-    @StateObject var playListManager = PlaylistManager.instance
+    @StateObject var playListViewModel = PlaylistViewModel.instance
 //    var playlistSearchResult : [DBPlaylist]{
 //        return playListManager.searchPlaylistByName(input: searchInput)
 //    }
@@ -144,7 +144,7 @@ struct AddToPlaylistView: View {
                 //MARK: - LIST OF PLAYLISTS
                 List{
 //                    ForEach(playlistSearchResult.isEmpty ? playListManager.playlists : playlistSearchResult, id: \.playlistId) {playlist in
-                    ForEach( playListManager.playlists, id: \.playlistId) {playlist in
+                    ForEach( playListViewModel.playlists, id: \.playlistId) {playlist in
                         Button{
                             
                         }label: {
@@ -179,7 +179,7 @@ struct AddToPlaylistView: View {
         }
         .task {
             do{
-                playListManager.playlists = try await playListManager.getAllPlaylist()
+                playListViewModel.playlists = try await PlaylistManager.instance.getAllPlaylist()
             } catch {
                 // Handle the error
                 print("Error: \(error)")

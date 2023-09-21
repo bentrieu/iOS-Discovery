@@ -27,8 +27,18 @@ struct DBPlaylist: Codable {
 //    }
 }
 
-final class PlaylistManager : ObservableObject{
+final class PlaylistViewModel :ObservableObject{
     @Published var playlists =  [DBPlaylist]()
+    static let instance = PlaylistViewModel()
+    
+    
+    //    func searchPlaylistByName(input : String) -> [DBPlaylist]{
+    //        return playlists.filter { $0.displayName!.lowercased().contains(input.lowercased()) }
+    //    }
+}
+
+final class PlaylistManager : ObservableObject{
+    
     
     static let instance = PlaylistManager()
     private init() {}
@@ -118,7 +128,5 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(playlistData)
     }
     
-    func searchPlaylistByName(input : String) -> [DBPlaylist]{
-        return playlists.filter { $0.displayName!.lowercased().contains(input.lowercased()) }
-    }
+
 }
