@@ -143,20 +143,20 @@ struct DiscoveryView: View {
                         if albumSearch{
                             
                             //MARK: - ALBUMS TAB
-//                            LazyVGrid(columns: gridItemLayout){
-//                                ForEach(albumSearchResult, id: \.albumId) {album in
-//                                    NavigationLink {
-//                                        AlbumPageView(album: album)
-//                                        
-//                                    } label: {
-//                                        VStack(alignment: .leading){
-//                                            SquareView(imageUrl: album.imageUrl!, size: 160)
-//                                            TextForAlbumView(title: album.title!, type: album.type!, name: album.artistName!, size: 160)
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                            .frame(height: albumSearchResult.isEmpty ? 0 : nil)
+                            LazyVGrid(columns: gridItemLayout){
+                                ForEach(albumSearchResult, id: \.albumId) {album in
+                                    NavigationLink {
+                                        AlbumPageView(album: album)
+                                        
+                                    } label: {
+                                        VStack(alignment: .leading){
+                                            SquareView(imageUrl: album.imageUrl!, size: 160)
+                                            TextForAlbumView(title: album.title!, type: album.type!, name: album.artistName!, size: 160)
+                                        }
+                                    }
+                                }
+                            }
+                            .frame(height: albumSearchResult.isEmpty ? 0 : nil)
                         }else{
                             //MARK: - TRACKS TAB
                             List{
