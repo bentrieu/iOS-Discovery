@@ -118,6 +118,15 @@
       }
     },
     {
+      "identity" : "minimizableview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DominikButz/MinimizableView.git",
+      "state" : {
+        "revision" : "1a3f279dd1f5c90f891a358aa80cedfaf88d3aad",
+        "version" : "2.4.1"
+      }
+    },
+    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",

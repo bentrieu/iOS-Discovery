@@ -80,6 +80,8 @@
 		F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */; };
 		F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA912AB1B9E300A48228 /* HomeView.swift */; };
 		F514FA942AB1BB4600A48228 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F514FA932AB1BB4600A48228 /* Utils.swift */; };
+		F56DC32C2ABC618100BD8457 /* CurrPlayingMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56DC32B2ABC618100BD8457 /* CurrPlayingMusicView.swift */; };
+		F56DC32F2ABC69C200BD8457 /* MinimizableView in Frameworks */ = {isa = PBXBuildFile; productRef = F56DC32E2ABC69C200BD8457 /* MinimizableView */; };
 		F5704DFC2AB82AF800495552 /* ThemeEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5704DFB2AB82AF800495552 /* ThemeEditingView.swift */; };
 		F5704DFE2AB82C3500495552 /* ChangePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5704DFD2AB82C3500495552 /* ChangePhotoView.swift */; };
 		F5BD94FA2AB415EE0015B48C /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD94F92AB415EE0015B48C /* MusicView.swift */; };
@@ -158,6 +160,7 @@
 		F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		F514FA912AB1B9E300A48228 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F514FA932AB1BB4600A48228 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F56DC32B2ABC618100BD8457 /* CurrPlayingMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrPlayingMusicView.swift; sourceTree = "<group>"; };
 		F5704DFB2AB82AF800495552 /* ThemeEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditingView.swift; sourceTree = "<group>"; };
 		F5704DFD2AB82C3500495552 /* ChangePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhotoView.swift; sourceTree = "<group>"; };
 		F5BD94F92AB415EE0015B48C /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F56DC32F2ABC69C200BD8457 /* MinimizableView in Frameworks */,
 				9C9EA7762AB1F4720042ACD5 /* GoogleSignInSwift in Frameworks */,
 				9CF2DCD82AB348D4000AEDDB /* FacebookCore in Frameworks */,
 				9CD558722AAC50470058A5C3 /* FirebaseAnalyticsSwift in Frameworks */,
@@ -413,6 +417,7 @@
 				F514FA912AB1B9E300A48228 /* HomeView.swift */,
 				049B571D2AB98F38005809B5 /* AlbumPageView.swift */,
 				99B598E82AB9799F0082C1B5 /* testMusic.swift */,
+				F56DC32B2ABC618100BD8457 /* CurrPlayingMusicView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -490,6 +495,7 @@
 				9C575AFE2AB589D000BE4553 /* FirebaseFirestore */,
 				9C575B002AB589D000BE4553 /* FirebaseFirestoreSwift */,
 				9C38803B2AB83E7900E60162 /* FirebaseStorage */,
+				F56DC32E2ABC69C200BD8457 /* MinimizableView */,
 			);
 			productName = Assignment3;
 			productReference = 9CD5585B2AAC4F2B0058A5C3 /* Assignment3.app */;
@@ -523,6 +529,7 @@
 				9CD5586E2AAC50470058A5C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9C9EA7722AB1F4720042ACD5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				9CF2DCD62AB348D4000AEDDB /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				F56DC32D2ABC69C200BD8457 /* XCRemoteSwiftPackageReference "MinimizableView" */,
 			);
 			productRefGroup = 9CD5585C2AAC4F2B0058A5C3 /* Products */;
 			projectDirPath = "";
@@ -575,6 +582,7 @@
 				F514FA902AB1B7DF00A48228 /* AlbumView.swift in Sources */,
 				F5BD950F2AB443DC0015B48C /* EditModalLeaveConfirmView.swift in Sources */,
 				F5BD95072AB4278F0015B48C /* SettingView.swift in Sources */,
+				F56DC32C2ABC618100BD8457 /* CurrPlayingMusicView.swift in Sources */,
 				99B598E92AB9799F0082C1B5 /* testMusic.swift in Sources */,
 				990FF9F42AB9AD26007B8252 /* AlbumList.swift in Sources */,
 				F514FA8B2AB1ACAA00A48228 /* SquareView.swift in Sources */,
@@ -850,6 +858,14 @@
 				minimumVersion = 14.0.0;
 			};
 		};
+		F56DC32D2ABC69C200BD8457 /* XCRemoteSwiftPackageReference "MinimizableView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DominikButz/MinimizableView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -902,6 +918,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9CD5586E2AAC50470058A5C3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		F56DC32E2ABC69C200BD8457 /* MinimizableView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F56DC32D2ABC69C200BD8457 /* XCRemoteSwiftPackageReference "MinimizableView" */;
+			productName = MinimizableView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

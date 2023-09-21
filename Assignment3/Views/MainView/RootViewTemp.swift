@@ -15,7 +15,7 @@ struct MainView: View {
                     Label("Home", systemImage:  "house.fill")
                         .foregroundColor(Color("black"))
                 }
-            SearchView()
+            DiscoveryView()
                 .tabItem {
                     Label("Search", systemImage:  "magnifyingglass")
                         .foregroundColor(Color("black"))
@@ -29,6 +29,7 @@ struct MainView: View {
                     }
                    
                 }
+//            CurrPl÷
         }
         .foregroundColor(Color("black"))
     }
