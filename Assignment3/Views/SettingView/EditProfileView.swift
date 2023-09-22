@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EditProfileView: View {
-    @Binding var account: Account
+//    @Binding var account: Account
+    @ObservedObject var userViewModel: UserViewModel
     
     //declare the temp variables just to be placeholder
     //once the user save edit we will overwrite to account variable
     @State var tempName: String  = ""
-    @State var tempImage: String  = ""
-    @State var isPresentingEditPicture = false
+//    @State var isPresentingEditPicture = false
     @Binding var isCancelButtonPressed: Bool
     @Binding var isContentNotEdited: Bool
     @Binding  var isPresentingEdit : Bool
     @FocusState private var focusedField: Bool
+    
+    @State private var item: PhotosPickerItem? = nil
 
     
     var body: some View {
@@ -26,31 +29,36 @@ struct EditProfileView: View {
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 15){
-                HeadingControllerButtonView(isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit, focusField: $focusedField)
+                HeadingControllerButtonView(userViewModel: userViewModel ,isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit,tempName: $tempName, focusField: $focusedField)
                 
                 
-                AsyncImage(url: URL(string: account.imageURL)) { image in
-                    image.resizable()
-                } placeholder: {
-                    
+                if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
+                    AsyncImage(url: url) { image in
+                        image.resizable()
+                    } placeholder: {
+                        
+                    }
+                    .scaledToFit()
+                    .frame(width:180, height: 180)
+                    .clipShape(Circle())
+                    .frame(height: 200)
                 }
-                .scaledToFit()
-                .frame(width:180, height: 180)
-                .clipShape(Circle())
-                .frame(height: 200)
                 
-                
-                
-                Button {
-                    isPresentingEditPicture = true
-                    isContentNotEdited = false
-                } label: {
+                PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("Change photo")
-                        .foregroundColor(Color("black"))
-                        .font(Font.custom("Gotham-Bold", size: 12))
-                        .focused($focusedField)
                 }
-                
+                if let user = userViewModel.user {
+                    Text(user.userId)
+                }
+//                Button {
+//                    isPresentingEditPicture = true
+//                    isContentNotEdited = false
+//                } label: {
+//                    Text("Change photo")
+//                        .foregroundColor(Color("black"))
+//                        .font(Font.custom("Gotham-Bold", size: 12))
+//                        .focused($focusedField)
+//                }
                 
                 TextField("", text: Binding<String>(
                     get: { self.tempName },
@@ -73,11 +81,11 @@ struct EditProfileView: View {
                 
               
             }
-            if (isPresentingEditPicture){
-                ChangePhotoView(isPresentingEditPicture: $isPresentingEditPicture)
-            }
-            
-            
+//            if (isPresentingEditPicture){
+//                PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
+//                    Text("select an image")
+//                }
+//            }
             
             if isCancelButtonPressed{
                 if !isContentNotEdited{
@@ -85,12 +93,18 @@ struct EditProfileView: View {
                 }
             }
         }
+        .onChange(of: item, perform: { newValue in
+            if let newValue {
+                userViewModel.saveProfileImage(item: newValue)
+            }
+        })
         .onAppear{
-            self.tempName = account.name
-            self.tempImage = account.imageURL
+            if let user = userViewModel.user {
+                if let name = user.displayName {
+                    self.tempName = name
+                }
+            }
             self.isContentNotEdited = true
-            
-    
         }
        
     }
@@ -98,7 +112,7 @@ struct EditProfileView: View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(account: .constant(account), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
+        EditProfileView(userViewModel: UserViewModel(), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
     }
 }
 
@@ -117,9 +131,13 @@ struct CustomTextFieldForEditView: TextFieldStyle {
 }
 
 struct HeadingControllerButtonView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var userViewModel: UserViewModel
+
     @Binding var isContentNotEdited: Bool
     @Binding var isCancelButtonPressed: Bool
     @Binding  var isPresentingEdit : Bool
+    @Binding var tempName: String
     var focusField: FocusState<Bool>.Binding
     
     var body: some View {
@@ -152,7 +170,8 @@ struct HeadingControllerButtonView: View {
             Spacer()
             
             Button {
-                
+                userViewModel.updateUserProfile(usernameText: tempName)
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Save")
                     .foregroundColor(isContentNotEdited ? Color("black").opacity(0.6) : Color("black"))

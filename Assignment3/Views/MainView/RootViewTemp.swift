@@ -48,8 +48,8 @@ struct MainView: View {
         .onAppear {
             Task {
                 do {
-                    try? await viewModel.loadCurrentUser()
-                    try? await viewModel.loadUserPlaylist()
+                    try? await userViewModel.loadCurrentUser()
+//                    try? await viewModel.loadUserPlaylist()
                 } catch {
                     print(error)
                 }
