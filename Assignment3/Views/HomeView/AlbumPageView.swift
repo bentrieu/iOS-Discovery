@@ -36,72 +36,61 @@ struct AlbumPageView: View {
             LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
             
+            ScrollView {
                 VStack(spacing: 30){
-                    //MARK: - THUMBNAIL IMG
-    //                AsyncImage(url: URL(string: album.imageUrl!)) { image in
-    //                    image
-    //                        .resizable()
-    //                        .frame(height: UIScreen.main.bounds.width/1.5)
-    //                        .scaledToFill()
-    //                        .ignoresSafeArea(.all)
-    //                        .padding(.bottom, -50)
-    //                } placeholder: {
-    //
-    //                }
+                        //MARK: - THUMBNAIL IMG
+                        SquareView(imageUrl: album.imageUrl!, size: 225)
 
-                    HStack{
-                        VStack(alignment: .leading){
-                            //MARK: - PLAYLIST NAME
-                            Text(album.title!)
-                                .font(.custom("Gotham-Black", size: 35))
-                                .modifier(OneLineText())
-                            Text("\(numOfTracks) track(s)")
-                                .font(.custom("Gotham-Medium", size: 18))
-                                .modifier(OneLineText())
-                        }
-                        Spacer()
-                        //MARK: - PLAY BUTTON
-                        Button {
-                            playMusicAvtive.toggle()
-                        } label: {
-                            Image(systemName: playMusicAvtive ? "pause.circle.fill" : "play.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 60, alignment: .center)
-                                .foregroundColor(.accentColor)
-                                .background(
-                                    Circle()
-                                        .fill(Color(.white))
-                                )
-                        }
-                    }
-                    
-                    Divider()
-                        .frame(height: 1)
-                        .overlay(Color.gray)
-                    
-                    //MARK: - LIST OF TRACKS
-                  
-                    VStack {
-                        ForEach(musicManager.musicList, id: \.musicId) { item in
-                            NavigationLink {
-                                PlayMusicView()
-                                    .onAppear{
-                                        musicManager.currPlaying = item
-                                    
-                                    }
-                                   
+                        HStack{
+                            VStack(alignment: .leading){
+                                //MARK: - PLAYLIST NAME
+                                Text(album.title!)
+                                    .font(.custom("Gotham-Black", size: 35))
+                                    .modifier(OneLineText())
+                                Text("\(numOfTracks) track(s)")
+                                    .font(.custom("Gotham-Medium", size: 18))
+                                    .modifier(OneLineText())
+                            }
+                            Spacer()
+                            //MARK: - PLAY BUTTON
+                            Button {
+                                playMusicAvtive.toggle()
                             } label: {
-                                MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
+                                Image(systemName: playMusicAvtive ? "pause.circle.fill" : "play.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 50, alignment: .center)
+                                    .foregroundColor(Color("green"))
+                                    .background(
+                                        Circle()
+                                            .fill(Color(.black))
+                                    )
                             }
                         }
+                        
+                        Divider()
+                            .frame(height: 1)
+                            .overlay(Color.gray)
+                        
+                        //MARK: - LIST OF TRACKS
+                        VStack {
+                            ForEach(musicManager.musicList, id: \.musicId) { item in
+                                NavigationLink {
+                                    PlayMusicView()
+                                        .onAppear{
+                                            musicManager.currPlaying = item
+                                        
+                                        }
+                                       
+                                } label: {
+                                    MusicRowView(imgDimens: 45, titleSize: 16, subTitleSize: 12, music: item)
+                                }
+                            }
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                }
                 .modifier(PagePadding())
-
-            
-            
+            }
         }
         .task{
             do {
@@ -114,21 +103,24 @@ struct AlbumPageView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .navigationTitle(album.title!)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: btnBack)
+//        .navigationBarItems(leading: CustomNavigationButton())
+        
     }
   
 }
 
 struct AlbumPageView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+
             AlbumPageView(album: albumSample)
-        }
+        
     }
 }
 
-let albumSample = Album(albumId: "JkoOm0jVQ81LKSF6HeOP",
+let albumSample = Album(albumId: "ecmL9AZEFHgQ9Ritrc69",
+                        imageUrl: "https://upload.wikimedia.org/wikipedia/en/5/53/Maroon_5_-_V_%28Official_Album_Cover%29.png",
                         title: "99%",
                         type: "Rap",
                         musicList: ["OusE6eoQy5b765gHbIQB ","lB3DFP1fKpgNjeRaeQit"])
