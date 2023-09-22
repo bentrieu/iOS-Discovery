@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import SwiftUI
 struct Music : Codable,Identifiable {
     let id = UUID()
     let musicId : String
@@ -26,9 +27,32 @@ struct Music : Codable,Identifiable {
     }
 
 }
+enum Genre: String, CaseIterable{
+    case KPOP = "K-pop"
+    case HIP_HOP = "Hip-Hop"
+    case RAP = "Rap"
+    case POP = "Pop"
+    
+    var color: Color{
+        switch self {
+        case .KPOP:
+            return .cyan
+        case .HIP_HOP:
+            return.green
+        case .RAP:
+            return .blue
+        case .POP:
+            return .indigo
+        default:
+            return .gray
+        }
+    }
+    
+}
 
 class MusicViewModel : ObservableObject {
     @Published var musics = [Music]()
+    @Published var musicByGenre = [Music]()
     private var db  = Firestore.firestore()
     
     static var shared = MusicViewModel()
@@ -36,7 +60,7 @@ class MusicViewModel : ObservableObject {
     
     init() {
         getAllMusicData()
-
+        
         print("get music in model")
     }
     
@@ -59,13 +83,13 @@ class MusicViewModel : ObservableObject {
     }
     func findMusicById(_ musicId: String) async throws -> Music? {
         let query = db.collection("music").whereField("music_id", isEqualTo: musicId)
-
+        
         let querySnapshot = try await query.getDocuments()
-
+        
         guard let document = querySnapshot.documents.first else {
             return nil // Document doesn't exist
         }
-
+        
         let musicData = document.data()
         let music = Music(
             musicId: musicData["music_id"] as? String ?? "",
@@ -76,19 +100,19 @@ class MusicViewModel : ObservableObject {
             genre: musicData["genre"] as? String ?? "",
             musicLength: musicData["music_length"] as? Int ?? 0
         )
-
+        
         return music
     }
     func getMusicListFromAlbum(_ albumId: String) async throws -> [Music] {
         let query = db.collection("album").whereField("album_id", isEqualTo: albumId)
-
+        
         let querySnapshot = try await query.getDocuments()
-
+        
         var musics: [Music] = []
-
+        
         for document in querySnapshot.documents {
             let musicListData = document.data()
-
+            
             if let musicIds = musicListData["music_list"] as? [String] {
                 let dispatchGroup = DispatchGroup()
                 
@@ -106,11 +130,11 @@ class MusicViewModel : ObservableObject {
                     
                     dispatchGroup.leave()
                 }
-
+                
                 await dispatchGroup.wait()
             }
         }
-
+        
         return musics
     }
     
@@ -128,4 +152,6 @@ class MusicViewModel : ObservableObject {
         }
         return result
     }
+    
+   
 }
