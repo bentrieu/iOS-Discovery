@@ -71,7 +71,9 @@ final class ProfileViewModel: ObservableObject {
             print("success")
             print(path)
             print(name)
-            try await UserManager.instance.updateProfileImageURL(userId: user.userId, path: path)
+            let url = try await StorageManager.instance.getUrlForImage(path: path)
+            try await UserManager.instance.updateProfileImageURL(userId: user.userId, path: url.absoluteString)
+            self.user = try await UserManager.instance.getUser(userId: user.userId)
         }
     }
 }
@@ -84,7 +86,7 @@ struct TempProfileView: View {
     @Binding var showSignInView: Bool
     
     @State private var item: PhotosPickerItem? = nil
-    @State private var image: UIImage? = nil
+    @State private var url: URL? = nil
     
     var body: some View {
         List {
@@ -181,12 +183,17 @@ struct TempProfileView: View {
                     }
                 }
                 
-                if let image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 150, height: 150)
-                        .cornerRadius(10)
+                if let urlString = viewModel.user?.profileImagePath, let url = URL(string: urlString) {
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
+                            .cornerRadius(10)
+                    } placeholder: {
+                        ProgressView()
+                            .frame(width: 150, height: 150)
+                    }
                 }
             }
         }
@@ -200,11 +207,6 @@ struct TempProfileView: View {
                 do {
                     try? await viewModel.loadCurrentUser()
                     try? await viewModel.loadUserPlaylist()
-                    
-                    if let user = viewModel.user, let path = user.profileImagePath {
-                        let image = try? await StorageManager.instance.getImage(path: path)
-                        self.image = image
-                    }
                 } catch {
                     print(error)
                 }

@@ -20,6 +20,14 @@ final class StorageManager {
         storage.child("users")
     }
     
+    private func playlistReference() -> StorageReference {
+        storage.child("playlists")
+    }
+    
+    func getUrlForImage(path: String) async throws -> URL {
+        return try await Storage.storage().reference(withPath: path).downloadURL()
+    }
+    
     func getData(path: String) async throws -> Data{
         return try await storage.child(path).data(maxSize: 3 * 1024 * 1024)
     }
@@ -34,6 +42,8 @@ final class StorageManager {
         return image
     }
     
+
+    //MARK: USER IMAGES
     func saveUserImage(data: Data, userId: String) async throws -> (path: String, name: String){
         let meta = StorageMetadata()
         meta.contentType = "image/jpeg"
@@ -55,5 +65,27 @@ final class StorageManager {
         
         return try await saveUserImage(data: data, userId: userId)
     }
-
+    
+    //MARK: PLAYLIST IMAGES
+    func savePlaylistImage(data: Data, playlistId: String) async throws -> (path: String, name: String){
+        let meta = StorageMetadata()
+        meta.contentType = "image/jpeg"
+    
+        let path = "\(playlistId).jpeg"
+        let returnMetaData = try await userReference().child(path).putDataAsync(data, metadata: meta)
+        
+        guard let returnedPath = returnMetaData.path, let returnedName = returnMetaData.name else {
+            throw URLError(.badServerResponse)
+        }
+        
+        return (returnedPath, returnedName)
+    }
+    
+    func savePlaylistImage(image: UIImage, playlistId: String) async throws -> (path: String, name: String){
+        guard let data = image.jpegData(compressionQuality: 1) else {
+            throw URLError(.backgroundSessionWasDisconnected)
+        }
+        
+        return try await savePlaylistImage(data: data, playlistId: playlistId)
+    }
 }
