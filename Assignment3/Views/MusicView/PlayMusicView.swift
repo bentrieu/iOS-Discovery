@@ -125,15 +125,6 @@ struct PlayMusicView: View {
                 
                 
                 //MARK: - PROGRESS BAR
-//                ZStack(alignment: .leading) {
-//                    Capsule()
-//                        .fill(.black.opacity(0.08))
-//                        .frame(height: 8)
-//
-//                    Capsule()
-//                        .modifier(BlackColor())
-//                        .frame(width: 200,height: 8)
-//                }.frame(width: .infinity)
                 ProgressView(value: Double(musicManager.secondsElapsed) / Double(musicManager.currPlaying.musicLength!))
                 if !viewQueue{
                     //MARK: - START & END TIME

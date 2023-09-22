@@ -30,7 +30,10 @@ struct SettingView: View {
                     .modifier(CustomNavigationButton())
                     
             }
-
+        
+            ButtonTextField(title: "Log out")
+           
+    
             Spacer()
         }
         .padding(.horizontal)

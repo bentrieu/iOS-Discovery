@@ -82,20 +82,18 @@ struct DiscoveryView: View {
                     
                     //MARK: - GENRE LIST
                     LazyVGrid(columns: gridItemLayout){
-                        //for each
-                        NavigationLink {
-                            GenreView(genre: "K-pop", color: .blue)
-                        } label: {
-                            GenreCardView(genre: "K-pop", color: .blue)
-                                
+                        ForEach(Genre.allCases, id: \.self){ genre in
+                            NavigationLink {
+                                GenreView(genre: genre.rawValue, color: genre.color)
+                                    .onAppear{
+                                        musicManager.searchMusicByGenre(genre)
+                                    }
+                            } label: {
+                                GenreCardView(genre: genre.rawValue, color: genre.color)
+
+                            }
                         }
-                        
-                        NavigationLink {
-                            GenreView(genre: "Hip-Hop", color: .green)
-                        } label: {
-                            GenreCardView(genre: "Hip-Hop", color: .green)
-                                
-                        }
+                       
                     }
                     .frame(height: searchActive ? 0 : nil)
                     .opacity(searchActive ? 0 : 1)

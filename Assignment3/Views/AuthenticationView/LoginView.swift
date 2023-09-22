@@ -49,7 +49,7 @@ struct LoginView: View {
                             }
                         }
                     } label: {
-                        LoginTextView()
+                        ButtonTextField(title: "Log in")
                     }
                 }
                 .padding(.top,45)
@@ -71,13 +71,14 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
-struct LoginTextView: View {
+struct ButtonTextField: View {
+    var title : String
     var body: some View {
-        Text("Log in")
+        Text(title)
             .foregroundColor(.black)
-            .font(Font.custom("Gotham-Bold", size: 20))
+            .font(Font.custom("Gotham-Bold", size: 16))
             .tracking(-1)
-            .frame(width: 100, height: 25)
+            .frame(width: 85, height: 20)
             .padding()
             .background(Color("gray").opacity(0.6))
             .clipShape(Capsule())

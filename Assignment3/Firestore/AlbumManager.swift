@@ -18,12 +18,9 @@ final class AlbumManager : ObservableObject {
         return db.collection("album")
     }
     
-   
-    
     init() {
         
     }
-
     func fetchAlbums(completion: @escaping ([Album]?, Error?) -> Void) {
         albumsCollectionRef.addSnapshotListener { querySnapshot, error in
             if let error = error {
@@ -100,7 +97,6 @@ final class AlbumManager : ObservableObject {
                 await dispatchGroup.wait()
             }
         }
-
         return albums
     }
     func addAlbum(_ album: Album) {
