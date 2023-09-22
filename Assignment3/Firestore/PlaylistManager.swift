@@ -16,15 +16,15 @@ struct DBPlaylist: Codable {
     let name: String?
     let musics: [String]?
     
-//    init(playlistId: String,
-//    dateCreated: Date? = Date(),
-//    photoUrl: String? = nil,
-//    displayName: String?) {
-//        self.playlistId = playlistId
-//        self.dateCreated = dateCreated
-//        self.photoUrl = photoUrl
-//        self.displayName = displayName
-//    }
+    //    init(playlistId: String,
+    //    dateCreated: Date? = Date(),
+    //    photoUrl: String? = nil,
+    //    displayName: String?) {
+    //        self.playlistId = playlistId
+    //        self.dateCreated = dateCreated
+    //        self.photoUrl = photoUrl
+    //        self.displayName = displayName
+    //    }
 }
 
 
@@ -33,7 +33,7 @@ final class PlaylistManager : ObservableObject{
     
     static let instance = PlaylistManager()
     private init() {}
-        
+    
     private let userCollection = Firestore.firestore().collection("users")
     
     private let encoder: Firestore.Encoder = {
@@ -52,9 +52,9 @@ final class PlaylistManager : ObservableObject{
         return try AuthenticationManager.instance.getAuthenticatedUser().uid
     }
     
-//    func getPlaylistsRef() async throws -> CollectionReference {
-//        return try await userCollection.document(getCurrentUser()).collection("playlists")
-//    }
+    //    func getPlaylistsRef() async throws -> CollectionReference {
+    //        return try await userCollection.document(getCurrentUser()).collection("playlists")
+    //    }
     
     func getPlaylistsRef() async throws -> CollectionReference {
         return try await userCollection.document("mW8JeXNn48bI1annfiBM4x6pSdz2").collection("playlists")
@@ -119,7 +119,34 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(playlistData)
     }
     
-        func searchPlaylistByName(input : String) -> [DBPlaylist]{
-            return playlists.filter { $0.name!.lowercased().contains(input.lowercased()) }
+    func searchPlaylistByName(input : String) -> [DBPlaylist]{
+        return playlists.filter { $0.name!.lowercased().contains(input.lowercased()) }
+    }
+    
+    func getAllMusicsInPlaylist(playlistId : String)-> [Music]{
+        //get all music ids in playlist
+        let playlistTrackIds = PlaylistManager.instance.playlists.first(where: {$0.playlistId == playlistId})?.musics ?? [String]()
+        
+        var playlistTracks = [Music]()
+        //map the id with the real Music instance and put in the array above
+        for id in playlistTrackIds{
+            for music in MusicViewModel.shared.musics{
+                if id == music.musicId{
+                    playlistTracks.append(music)
+                    break
+                }
+            }
         }
+        return playlistTracks
+    }
+    
+    func searchMusicInPlaylistByNameAndArtist(input : String, musics: [Music]) -> [Music]{
+        if input.isEmpty{
+            return musics
+        }else{
+            var result = musics.filter { $0.musicName!.lowercased().contains(input.lowercased()) }
+            result += musics.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+            return result
+        }
+    }
 }
