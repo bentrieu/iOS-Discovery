@@ -31,7 +31,7 @@ struct SettingView: View {
                     
             }
         
-            
+            ButtonTextField(title: "Log out")
            
     
             Spacer()
