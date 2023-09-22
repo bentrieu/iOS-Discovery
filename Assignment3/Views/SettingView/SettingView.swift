@@ -30,10 +30,7 @@ struct SettingView: View {
                     .modifier(CustomNavigationButton())
                     
             }
-        
-            
-           
-    
+
             Spacer()
         }
         .padding(.horizontal)
