@@ -112,10 +112,10 @@ struct LibraryView: View {
                     
                     
                     Divider()
+                        .frame(height: searchActive ? 0 : 1)
                         .overlay(Color("black"))
                         .padding(.bottom, searchActive ? 0 : 40)
                         .opacity(searchActive ? 0 : 1)
-                        .frame(height: searchActive ? 0 : nil)
                         .disabled(searchActive)
                     
                     
@@ -123,7 +123,7 @@ struct LibraryView: View {
                     
                     List{
                         ForEach(playlistSearchResult, id: \.playlistId) {playlist in
-                            NavigationLink (destination: PlaylistView(playlistId: playlist.playlistId, playlistName: playlist.name ?? "")){
+                            NavigationLink (destination: PlaylistView(playlistId: playlist.playlistId)){
                                 PlaylistRowView(imgDimens: 60, titleSize: 23, subTitleSize: 18, playlist: playlist)
                             }
                             .listRowInsets(.init(top: -5, leading: 0, bottom: 10, trailing: 0))

@@ -125,7 +125,7 @@ final class PlaylistManager : ObservableObject{
     
     func getAllMusicsInPlaylist(playlistId : String)-> [Music]{
         //get all music ids in playlist
-        let playlistTrackIds = PlaylistManager.instance.playlists.first(where: {$0.playlistId == playlistId})?.musics ?? [String]()
+        let playlistTrackIds = playlists.first(where: {$0.playlistId == playlistId})?.musics ?? [String]()
         
         var playlistTracks = [Music]()
         //map the id with the real Music instance and put in the array above
@@ -140,12 +140,20 @@ final class PlaylistManager : ObservableObject{
         return playlistTracks
     }
     
-    func searchMusicInPlaylistByNameAndArtist(input : String, musics: [Music]) -> [Music]{
+    func searchMusicInAListByNameAndArtist(input : String, musics: [Music]) -> [Music]{
         if input.isEmpty{
             return musics
         }else{
+            //filter with music name first
             var result = musics.filter { $0.musicName!.lowercased().contains(input.lowercased()) }
-            result += musics.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+            
+            //search by artist later with checking duplicate instances
+            let artistResult = musics.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+            for music in artistResult {
+                if !result.contains(where: {$0.musicId == music.musicId}){
+                    result.append(music)
+                }
+            }
             return result
         }
     }
