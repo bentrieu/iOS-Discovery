@@ -13,7 +13,7 @@ struct LoginView: View {
     @State private var onTabPassword = false
     @State private var onEditPass = false
     @State private var errorMSG : String  = ""
-    @State private var navigateToRootViewTemp: Bool = false
+    @Binding var showSignInView: Bool
     
     var body: some View {
         ZStack {
@@ -43,7 +43,7 @@ struct LoginView: View {
                         Task {
                             do {
                                 try await viewModel.signUp()
-                                navigateToRootViewTemp = true
+                                showSignInView = false
                             } catch {
                                 errorMSG = error.localizedDescription
                             }
@@ -59,8 +59,6 @@ struct LoginView: View {
                     .padding(.vertical,5)
                     .tracking(0)
                Spacer()
-                NavigationLink("", destination: MainView(), isActive: $navigateToRootViewTemp)
-                    .opacity(0) // Hide the link view, it will navigate when navigateToRootViewTemp is true
             }
             .padding(.horizontal)
         }
@@ -69,7 +67,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(showSignInView: .constant(false))
     }
 }
 

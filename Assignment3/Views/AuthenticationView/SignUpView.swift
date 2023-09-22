@@ -10,7 +10,7 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject private var viewModel = AuthenticateEmailViewModel()
     @State private var errorMSG : String  = ""
-    @State private var navigateToRootViewTemp: Bool = false
+    @Binding var showSignInView: Bool
     
     @State private var isEditing = false
     var body: some View {
@@ -42,7 +42,7 @@ struct SignUpView: View {
                         Task {
                             do {
                                 try await viewModel.signUp()
-                                navigateToRootViewTemp = true
+                                showSignInView = false
                             } catch {
                                 errorMSG = error.localizedDescription
                             }
@@ -65,8 +65,6 @@ struct SignUpView: View {
                     .padding(.vertical,5)
                     .tracking(0)
                Spacer()
-                NavigationLink("", destination: MainView(), isActive: $navigateToRootViewTemp)
-                    .opacity(0) // Hide the link view, it will navigate when navigateToRootViewTemp is true
             }
             .padding(.horizontal)
         }
@@ -75,6 +73,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(showSignInView: .constant(false))
     }
 }
