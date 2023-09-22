@@ -92,7 +92,7 @@ final class FacebookSignInHelper: ObservableObject {
                             let user = DBUser(auth: authDataResult)
                             try await UserManager.instance.createNewUser(user: user)
                             print("Logged in with Facebook")
-                            continuation.resume(returning: .success(authDataResult)) // Success
+                            continuation.resume(returning: .success) // Success
                         } catch {
                             print(error)
                             continuation.resume(returning: .error(error)) // Error
@@ -104,10 +104,10 @@ final class FacebookSignInHelper: ObservableObject {
             }
         }
     }
+}
 
-    enum FacebookLoginResult {
-        case success(AuthDataResultModel)
-        case error(Error)
-        case cancelled
-    }
+enum FacebookLoginResult {
+    case success
+    case error(Error)
+    case cancelled
 }

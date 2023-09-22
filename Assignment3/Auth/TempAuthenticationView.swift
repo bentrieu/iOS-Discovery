@@ -20,6 +20,8 @@ struct TempAuthenticationView: View {
     
     var body: some View {
         VStack {
+            
+            //MARK: SIGN UP EMAIL
             NavigationLink {
                 TemporarySignUpView(showSignInView: $showSignInView)
             } label: {
@@ -31,7 +33,9 @@ struct TempAuthenticationView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            //MARK: SIGN UP EMAIL
             
+            //MARK: SIGN IN GOOGLE
             GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
                 Task {
                     do {
@@ -42,17 +46,16 @@ struct TempAuthenticationView: View {
                     }
                 }
             }
+            //MARK: SIGN IN GOOGLE
             
-//            FacebookLoginButton(showSignInView: $showSignInView)
-//                .foregroundColor(Color.blue)
-//                .background(Color.white)
-//                .frame(height:40)
-//                .cornerRadius(20)
+            //MARK: SIGN IN FACEBOOK
             Button {
                 Task {
                     do {
-                        try await viewModel.signInFacebook()
-                        showSignInView = false
+                        let result = try await viewModel.signInFacebook()
+                        if case .success = result {
+                            showSignInView = false
+                        }
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -66,6 +69,7 @@ struct TempAuthenticationView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            //MARK: SIGN IN FACEBOOK
             
             Spacer()
         }

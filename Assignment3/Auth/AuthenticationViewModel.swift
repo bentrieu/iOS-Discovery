@@ -18,8 +18,8 @@ final class AuthenticationViewModel: ObservableObject {
         try await UserManager.instance.createNewUser(user: user)
     }
     
-    func signInFacebook() async throws {
+    func signInFacebook() async throws -> FacebookLoginResult {
         let loginManager = FacebookSignInHelper()
-        let result = try await loginManager.loginFacebook()
+        return try await loginManager.loginFacebook()
     }
 }

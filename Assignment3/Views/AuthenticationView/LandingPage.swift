@@ -11,6 +11,8 @@ struct LandingPageView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @StateObject private var viewModel = AuthenticationViewModel()
+    
+    @State private var navigateToRootViewTemp = false
    
     var body: some View {
         NavigationStack {
@@ -51,6 +53,7 @@ struct LandingPageView: View {
                         Task {
                             do {
                                 try await viewModel.signInGoogle()
+                                navigateToRootViewTemp = true
                             } catch {
                                 print(error)
                             }
@@ -64,6 +67,7 @@ struct LandingPageView: View {
                         Task {
                             do {
                                 try await viewModel.signInFacebook()
+                                navigateToRootViewTemp = true
                             } catch {
                                 print(error)
                             }
@@ -93,6 +97,8 @@ struct LandingPageView: View {
                     }
                     
                     Spacer()
+                    NavigationLink("", destination: MainView(), isActive: $navigateToRootViewTemp)
+                        .opacity(0) // Hide the link view, it will navigate when navigateToRootViewTemp is true
                 }
             }
            
