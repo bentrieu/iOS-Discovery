@@ -9,15 +9,16 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject var viewModel = UserViewModel()
+    @StateObject var userViewModel = UserViewModel()
     
     var body: some View {
         TabView {
-            HomeView()
+            HomeView(userViewModel: userViewModel)
                 .tabItem {
                     Label("Home", systemImage:  "house.fill")
                         .foregroundColor(Color("black"))
                 }
+            
             DiscoveryView()
                 .tabItem {
                     Label("Search", systemImage:  "magnifyingglass")
@@ -30,14 +31,13 @@ struct MainView: View {
                         Label("Library", systemImage:  "books.vertical.fill")
                             .foregroundColor(Color("black"))
                     }
-                   
                 }
         }
         .onAppear {
             Task {
                 do {
-                    try? await viewModel.loadCurrentUser()
-                    try? await viewModel.loadUserPlaylist()
+                    try? await userViewModel.loadCurrentUser()
+//                    try? await viewModel.loadUserPlaylist()
                 } catch {
                     print(error)
                 }

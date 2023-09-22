@@ -7,7 +7,6 @@ struct SplashScreenView: View {
     @State private var opacity = 0.5
     @State private var showSignInView: Bool = false
 
-
     var body: some View {
         if isActive{
             if !showSignInView {
