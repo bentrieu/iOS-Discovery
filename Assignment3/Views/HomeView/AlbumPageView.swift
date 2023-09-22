@@ -13,7 +13,7 @@ struct AlbumPageView: View {
     
     @State var playMusicAvtive = false
     @StateObject var musicManager  = MusicManager.instance
-    
+    @State var firstPlaying = true
     var numOfTracks : Int{
         return album.musicList.count
     }
@@ -54,9 +54,16 @@ struct AlbumPageView: View {
                             Spacer()
                             //MARK: - PLAY BUTTON
                             Button {
-                                playMusicAvtive.toggle()
+                                if firstPlaying{
+                                    musicManager.currPlaying = musicManager.musicList[0]
+                                    musicManager.play()
+                                    firstPlaying = false
+                                }else{
+                                    musicManager.pauseMusic()
+                                }
+                               
                             } label: {
-                                Image(systemName: playMusicAvtive ? "pause.circle.fill" : "play.circle.fill")
+                                Image(systemName: musicManager.isPlaying ? "pause.circle.fill" : "play.circle.fill")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 50, alignment: .center)
@@ -75,12 +82,9 @@ struct AlbumPageView: View {
                         //MARK: - LIST OF TRACKS
                         VStack {
                             ForEach(musicManager.musicList, id: \.musicId) { item in
-                                NavigationLink {
-                                    PlayMusicView()
-                                        .onAppear{
-                                            musicManager.currPlaying = item
-                                        
-                                        }
+                                Button {
+                                    musicManager.currPlaying = item
+                                    musicManager.play()
                                        
                                 } label: {
                                     MusicRowView(imgDimens: 45, titleSize: 16, subTitleSize: 12, music: item)

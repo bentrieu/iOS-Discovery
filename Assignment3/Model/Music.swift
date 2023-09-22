@@ -71,13 +71,21 @@ class MusicViewModel : ObservableObject {
                 return
             }
             self.musics = documents.map {(queryDocumentSnapshot) -> Music in
-                let data  = queryDocumentSnapshot.data()
-                let music_name = data["music_name"] as? String ?? ""
-                let music_id = data["music_id"] as? String ?? ""
-                let artist_name = data["artist_name"] as? String ?? ""
-                let image_url = data["image_url"] as? String ?? ""
-                let genre = data["genre"] as? String ?? ""
-                return Music(musicId: music_id, musicName: music_name,imageUrl: image_url,  artistName: artist_name, genre: genre)
+                let musicData  = queryDocumentSnapshot.data()
+//                let music_name = data["music_name"] as? String ?? ""
+//                let music_id = data["music_id"] as? String ?? ""
+//                let artist_name = data["artist_name"] as? String ?? ""
+//                let image_url = data["image_url"] as? String ?? ""
+//                let genre = data["genre"] as? String ?? ""
+                return Music(
+                    musicId: musicData["music_id"] as? String ?? "",
+                    musicName: musicData["music_name"] as? String ?? "",
+                    imageUrl: musicData["image_url"] as? String ?? "",
+                    artistName: musicData["artist_name"] as? String ?? "",
+                    file: musicData["file"] as? String ?? "",
+                    genre: musicData["genre"] as? String ?? "",
+                    musicLength: musicData["music_length"] as? Int ?? 0
+                )
             }
         }
     }
