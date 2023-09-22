@@ -32,6 +32,28 @@ struct SignUpView: View {
                         
                 }
                 //MARK: PASSWORD
+                VStack(alignment: .leading, spacing:0){
+                    Text("Password")
+                        .font(Font.custom("Gotham-Bold", size: 20))
+                        .tracking(-1)
+                    
+                    CustomSecureTextFieldView(isEditing: $isEditing)
+                }
+                VStack(){
+                    Button {
+                        
+                    } label: {
+                        Text("Sign Up")
+                            .foregroundColor(.black)
+                            .font(Font.custom("Gotham-Bold", size: 20))
+                            .tracking(-1)
+                            .frame(width: 100, height: 25)
+                            .padding()
+                            .background(Color("gray").opacity(0.6))
+                            .clipShape(Capsule())
+                    }
+                }
+                .padding(.top,45)
                Spacer()
             }
             .padding(.horizontal)

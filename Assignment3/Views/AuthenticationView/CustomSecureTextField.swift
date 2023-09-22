@@ -30,8 +30,6 @@ struct CustomSecureTextFieldView: View {
                          ))
                 }
                 .textFieldStyle(CustomTextSecureFieldStyle(focus: $isEditing))
-                
-                
             }
         }
         .overlay {
