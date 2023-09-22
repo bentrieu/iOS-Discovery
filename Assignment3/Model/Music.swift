@@ -116,8 +116,16 @@ class MusicViewModel : ObservableObject {
     
     
     func searchMusicByNameAndArtist(input : String) -> [Music]{
+        //filter with music name first
         var result = musics.filter { $0.musicName!.lowercased().contains(input.lowercased()) }
-        result += musics.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+        
+        //search by artist later with checking duplicate instances
+        let artistResult = musics.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+        for music in artistResult {
+            if !result.contains(where: {$0.musicId == music.musicId}){
+                result.append(music)
+            }
+        }
         return result
     }
 }
