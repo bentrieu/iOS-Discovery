@@ -55,7 +55,9 @@ struct ViewProfileView: View {
                     Text("Playlists")
                         .font(Font.custom("Gotham-bold", size: 16))
                         .foregroundColor(Color("black"))
-                    
+                    if let user = userViewModel.user {
+                        Text(user.userId)
+                    }
                 }
                 .padding(.horizontal)
                 

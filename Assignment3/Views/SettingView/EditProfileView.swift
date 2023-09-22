@@ -47,6 +47,9 @@ struct EditProfileView: View {
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("Change photo")
                 }
+                if let user = userViewModel.user {
+                    Text(user.userId)
+                }
 //                Button {
 //                    isPresentingEditPicture = true
 //                    isContentNotEdited = false
