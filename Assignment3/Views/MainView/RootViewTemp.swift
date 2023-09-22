@@ -31,6 +31,7 @@ struct MainView: View {
                 }
 //            CurrPl÷
         }
+        .navigationBarBackButtonHidden(true)
         .foregroundColor(Color("black"))
     }
 }

@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject private var viewModel = AuthenticateEmailViewModel()
     @State private var placeholder: String = ""
     @State private var onTabPassword = false
     @State private var onEditPass = false
+    @State private var errorMSG : String  = ""
+    @State private var navigateToRootViewTemp: Bool = false
+    
     var body: some View {
         ZStack {
             Color("white")
@@ -18,10 +22,10 @@ struct LoginView: View {
             VStack {
                 //MARK: EMAIL OR USERNAME
                 VStack(alignment: .leading, spacing:0){
-                    Text("Email or username")
+                    Text("Email")
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
-                    CustomeTextFieldView(onEditPass: $onEditPass)
+                    CustomeTextFieldView(name: $viewModel.email,onEditPass: $onEditPass)
                 }
                 //MARK: PASSWORD
                 VStack(alignment: .leading, spacing:0){
@@ -29,20 +33,34 @@ struct LoginView: View {
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
                     
-                    CustomSecureTextFieldView(isEditing: $onEditPass)
+                    CustomSecureTextFieldView(password: $viewModel.password,isEditing: $onEditPass)
                 }
                 
                 
                 //MARK: LOGIN BUTTON
                 VStack(){
                     Button {
-                        
+                        Task {
+                            do {
+                                try await viewModel.signUp()
+                                navigateToRootViewTemp = true
+                            } catch {
+                                errorMSG = error.localizedDescription
+                            }
+                        }
                     } label: {
                         LoginTextView()
                     }
                 }
                 .padding(.top,45)
+                Text(errorMSG)
+                    .foregroundColor(Color("red"))
+                    .font(Font.custom("Gotham-Bold", size: 10))
+                    .padding(.vertical,5)
+                    .tracking(0)
                Spacer()
+                NavigationLink("", destination: MainView(), isActive: $navigateToRootViewTemp)
+                    .opacity(0) // Hide the link view, it will navigate when navigateToRootViewTemp is true
             }
             .padding(.horizontal)
         }
@@ -54,9 +72,6 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
-
-
 
 struct LoginTextView: View {
     var body: some View {

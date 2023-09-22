@@ -16,8 +16,9 @@ struct Assignment3App: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
+//            RootView()
 //                        ViewProfileView()
+            SplashScreenView()
         }
     }
 }
