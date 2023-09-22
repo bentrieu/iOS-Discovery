@@ -123,8 +123,12 @@ struct LibraryView: View {
                     
                     List{
                         ForEach(playlistSearchResult, id: \.playlistId) {playlist in
-                            NavigationLink (destination: PlaylistView(playlistId: playlist.playlistId)){
+                            NavigationLink (destination: PlaylistView(playlistId: playlist.playlistId)
+                                .onAppear {
+                                    searchActive = false
+                                }){
                                 PlaylistRowView(imgDimens: 60, titleSize: 23, subTitleSize: 18, playlist: playlist)
+
                             }
                             .listRowInsets(.init(top: -5, leading: 0, bottom: 10, trailing: 0))
                             .listRowBackground(Color.clear)
