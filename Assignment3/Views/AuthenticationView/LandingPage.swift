@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import FacebookCore
 
 struct LandingPageView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @StateObject private var viewModel = AuthenticationViewModel()
+    
+    @Binding var showSignInView: Bool
    
     var body: some View {
         NavigationStack {
@@ -36,7 +39,7 @@ struct LandingPageView: View {
                     
                     //MARK: Sign UP Free
                     NavigationLink {
-                        SignUpView()
+                        SignUpView(showSignInView: $showSignInView)
                             .navigationTitle("Create account")
                             .foregroundColor(Color("black"))
                             .modifier(CustomNavigationButton())
@@ -51,6 +54,7 @@ struct LandingPageView: View {
                         Task {
                             do {
                                 try await viewModel.signInGoogle()
+                                showSignInView = false
                             } catch {
                                 print(error)
                             }
@@ -64,6 +68,7 @@ struct LandingPageView: View {
                         Task {
                             do {
                                 try await viewModel.signInFacebook()
+                                showSignInView = false
                             } catch {
                                 print(error)
                             }
@@ -82,7 +87,7 @@ struct LandingPageView: View {
 //                    //MARK: SIGN UP WITH APPLE
                     
                     NavigationLink {
-                        LoginView()
+                        LoginView(showSignInView: $showSignInView)
                             .navigationTitle("Login")
                             .foregroundColor(Color("black"))
                             .modifier(CustomNavigationButton())
@@ -97,15 +102,19 @@ struct LandingPageView: View {
             }
            
             .foregroundColor(Color("black"))
-        .preferredColorScheme(colorScheme)
+            .preferredColorScheme(colorScheme)
         }
-        
+        .onAppear {
+            if let token = AccessToken.current, !token.isExpired {
+                showSignInView = false
+            }
+        }
     }
 }
 
 struct LandingPageView_Previews: PreviewProvider {
     static var previews: some View {
-        LandingPageView()
+        LandingPageView(showSignInView: .constant(false))
     }
 }
 

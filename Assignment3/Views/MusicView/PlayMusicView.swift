@@ -219,7 +219,7 @@ struct PlayMusicView: View {
             }
             .modifier(PagePadding())
         }
-       
+        . navigationBarBackButtonHidden(true)
     }
    
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomSecureTextFieldView: View {
-    @State private var password: String =  ""
+    @Binding var password: String
     @Binding var isEditing: Bool
     @State private var isEyeOpen = false
     var body: some View {
@@ -30,8 +30,6 @@ struct CustomSecureTextFieldView: View {
                          ))
                 }
                 .textFieldStyle(CustomTextSecureFieldStyle(focus: $isEditing))
-                
-                
             }
         }
         .overlay {
@@ -59,7 +57,7 @@ struct CustomSecureTextFieldView: View {
 
 struct CustomSecureTextField_Previews: PreviewProvider {
     static var previews: some View {
-        CustomSecureTextFieldView(isEditing: .constant(true))
+        CustomSecureTextFieldView(password: .constant(""), isEditing: .constant(true))
     }
 }
 
