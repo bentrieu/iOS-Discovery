@@ -15,7 +15,7 @@ struct EditProfileView: View {
     //declare the temp variables just to be placeholder
     //once the user save edit we will overwrite to account variable
     @State var tempName: String  = ""
-    @State var isPresentingEditPicture = false
+//    @State var isPresentingEditPicture = false
     @Binding var isCancelButtonPressed: Bool
     @Binding var isContentNotEdited: Bool
     @Binding  var isPresentingEdit : Bool
@@ -44,15 +44,18 @@ struct EditProfileView: View {
                     .frame(height: 200)
                 }
                 
-                Button {
-                    isPresentingEditPicture = true
-                    isContentNotEdited = false
-                } label: {
+                PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("Change photo")
-                        .foregroundColor(Color("black"))
-                        .font(Font.custom("Gotham-Bold", size: 12))
-                        .focused($focusedField)
                 }
+//                Button {
+//                    isPresentingEditPicture = true
+//                    isContentNotEdited = false
+//                } label: {
+//                    Text("Change photo")
+//                        .foregroundColor(Color("black"))
+//                        .font(Font.custom("Gotham-Bold", size: 12))
+//                        .focused($focusedField)
+//                }
                 
                 TextField("", text: Binding<String>(
                     get: { self.tempName },
@@ -75,10 +78,11 @@ struct EditProfileView: View {
                 
               
             }
-            if (isPresentingEditPicture){
-                PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
-                    Text("select an image")
-                }            }
+//            if (isPresentingEditPicture){
+//                PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
+//                    Text("select an image")
+//                }
+//            }
             
             if isCancelButtonPressed{
                 if !isContentNotEdited{
@@ -124,6 +128,7 @@ struct CustomTextFieldForEditView: TextFieldStyle {
 }
 
 struct HeadingControllerButtonView: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var userViewModel: UserViewModel
 
     @Binding var isContentNotEdited: Bool
@@ -163,6 +168,7 @@ struct HeadingControllerButtonView: View {
             
             Button {
                 userViewModel.updateUserProfile(usernameText: tempName)
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Save")
                     .foregroundColor(isContentNotEdited ? Color("black").opacity(0.6) : Color("black"))

@@ -94,6 +94,10 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).setData(playlistData)
     }
     
+    func removePlaylist(playlistId: String) async throws {
+        try await getPlaylistsRef().document(playlistId).delete()
+    }
+    
     func getPlaylist(playlistId: String) async throws -> DBPlaylist {
         return try await getPlaylistsRef().document(playlistId).getDocument(as: DBPlaylist.self, decoder: decoder)
     }
