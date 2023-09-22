@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomeTextFieldView: View {
     
-    @State private var name = ""
+    @Binding var name: String
     @State private var onEditing = false
     @Binding var onEditPass : Bool
     var body: some View {
@@ -25,7 +25,7 @@ struct CustomeTextFieldView: View {
 
 struct CustomeTextField_Previews: PreviewProvider {
     static var previews: some View {
-        CustomeTextFieldView(onEditPass: .constant(true))
+        CustomeTextFieldView(name: .constant(""),onEditPass: .constant(true))
     }
 }
 

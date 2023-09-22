@@ -23,7 +23,7 @@ struct TempAuthenticationView: View {
             
             //MARK: SIGN UP EMAIL
             NavigationLink {
-                TemporarySignUpView(showSignInView: $showSignInView)
+//                TemporarySignUpView(showSignInView: $showSignInView)
             } label: {
                 Text("Sign up with Email")
                     .font(.headline)

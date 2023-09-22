@@ -5,9 +5,16 @@ struct SplashScreenView: View {
     @State private var isActive = false
     @State private var size = 0.8
     @State private var opacity = 0.5
+    @State private var showSignInView: Bool = false
+
+
     var body: some View {
         if isActive{
-            LandingPageView()
+            if !showSignInView {
+                MainView()
+            } else {
+                LandingPageView(showSignInView: $showSignInView)
+            }
         }else{
             ZStack {
                 Color("white")
@@ -27,6 +34,9 @@ struct SplashScreenView: View {
                 }
             }
             .onAppear{
+                let authUser = try? AuthenticationManager.instance.getAuthenticatedUser()
+                self.showSignInView = authUser == nil
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
                     self.isActive = true
                 }

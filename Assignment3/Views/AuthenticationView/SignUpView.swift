@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State private var email : String  = ""
+    @StateObject private var viewModel = AuthenticateEmailViewModel()
+    @State private var errorMSG : String  = ""
+    @Binding var showSignInView: Bool
+    
     @State private var isEditing = false
     var body: some View {
         ZStack {
@@ -20,16 +23,11 @@ struct SignUpView: View {
                     Text("What's your email?")
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
-                    TextField("", text: $email, onEditingChanged: { edit in
+                    TextField("", text: $viewModel.email, onEditingChanged: { edit in
                         isEditing = true
                     })
                     .textFieldStyle(CustomTextFieldStyle(focus: $isEditing))
-                    Text("You'll need to confirm this email later.")
-                        .foregroundColor(Color("black"))
-                        .font(Font.custom("Gotham-Bold", size: 10))
-                        .padding(.vertical,5)
-                        .tracking(0)
-                        
+                    .padding(.vertical,5)
                 }
                 //MARK: PASSWORD
                 VStack(alignment: .leading, spacing:0){
@@ -37,11 +35,18 @@ struct SignUpView: View {
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
                     
-                    CustomSecureTextFieldView(isEditing: $isEditing)
+                    CustomSecureTextFieldView(password: $viewModel.password, isEditing: $isEditing)
                 }
                 VStack(){
                     Button {
-                        
+                        Task {
+                            do {
+                                try await viewModel.signUp()
+                                showSignInView = false
+                            } catch {
+                                errorMSG = error.localizedDescription
+                            }
+                        }
                     } label: {
                         Text("Sign Up")
                             .foregroundColor(.black)
@@ -54,6 +59,11 @@ struct SignUpView: View {
                     }
                 }
                 .padding(.top,45)
+                Text(errorMSG)
+                    .foregroundColor(Color("red"))
+                    .font(Font.custom("Gotham-Bold", size: 10))
+                    .padding(.vertical,5)
+                    .tracking(0)
                Spacer()
             }
             .padding(.horizontal)
@@ -63,6 +73,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(showSignInView: .constant(false))
     }
 }
