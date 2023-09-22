@@ -15,11 +15,6 @@ struct MusicRowView: View {
     
     var body: some View {
         HStack(spacing: UIScreen.main.bounds.width/25){
-//            Image(imgName)
-//                .resizable()
-//                .frame(width: imgDimens, height: imgDimens)
-//                .clipShape(RoundedRectangle(cornerRadius: 7))
-//                .modifier(Img())
             SquareView(imageUrl: music.imageUrl!, size: imgDimens)
             VStack{
                 Text(music.musicName!)
@@ -36,8 +31,6 @@ struct MusicRowView: View {
             print(music.imageUrl!)
         }
         .frame(width: .infinity)
-        .padding(.vertical, 10)
-        .padding(.horizontal)
     }
 }
 

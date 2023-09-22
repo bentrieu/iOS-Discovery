@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct SettingView: View {
-    var account: Account
     
+    @ObservedObject var userViewModel: UserViewModel
+
+//    var account: Account
     var body: some View {
         VStack{
             NavigationLink {
-                ViewProfileView()
+                ViewProfileView(userViewModel: UserViewModel())
                     .modifier(CustomNavigationButton())
             } label: {
-                AccountProfile(account: account)
+                AccountProfile(userViewModel: userViewModel)
                     .modifier(CustomNavigationButton())
                     .padding(.bottom)
             }
@@ -28,10 +30,11 @@ struct SettingView: View {
             } label: {
                 SettingItemView(name: "Theme")
                     .modifier(CustomNavigationButton())
-                    
             }
-        
-            ButtonTextField(title: "Log out")
+            if let user = userViewModel.user {
+                Text(user.userId)
+            }
+//            ButtonTextField(title: "Log out")
            
     
             Spacer()
@@ -43,37 +46,46 @@ struct SettingView: View {
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
        
-            SettingView(account: account)
-        
+            SettingView(userViewModel: UserViewModel())
     }
 }
 
-struct Account{
-    var name: String
-    var username: String
-    var email: String
-    var password: String
-    var imageURL: String
-    
-}
-let account = Account(name: "Hữu Phước", username: "phuoc05", email: "phuocdinh21102@gmail.com", password: "huuphuochahahjhj", imageURL: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/345072827_1301949700393436_9075755003333917361_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=TVqUyJ5J1OAAX_1TePk&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDu5bi68KQZDgeXxZqAgCI-Lzx7cXZIcwaqqR7Eo_T11w&oe=650DD836")
+//struct Account{
+//    var name: String
+//    var username: String
+//    var email: String
+//    var password: String
+//    var imageURL: String
+//
+//}
+//let account = Account(name: "Hữu Phước", username: "phuoc05", email: "phuocdinh21102@gmail.com", password: "huuphuochahahjhj", imageURL: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/345072827_1301949700393436_9075755003333917361_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=TVqUyJ5J1OAAX_1TePk&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDu5bi68KQZDgeXxZqAgCI-Lzx7cXZIcwaqqR7Eo_T11w&oe=650DD836")
 
 struct AccountProfile: View {
-    var account: Account
+    
+//    var account: Account
+    @ObservedObject var userViewModel: UserViewModel
+
     var body: some View {
         HStack{
-            AsyncImage(url: URL(string: account.imageURL)) { image in
-                image.resizable()
-            } placeholder: {
-                
+            if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
+                AsyncImage(url: url) { image in
+                    image.resizable()
+                } placeholder: {
+                    
+                }
+                .scaledToFit()
+                .frame(width:50, height: 50)
+                .clipShape(Circle())
             }
-            .scaledToFit()
-            .frame(width:50, height: 50)
-            .clipShape(Circle())
+
             
             VStack(alignment: .leading){
-                Text(account.name)
-                    .font(Font.custom("Gotham-Meidum", size: 16))
+                if let user = userViewModel.user {
+                    if let name = user.displayName {
+                        Text(name)
+                            .font(Font.custom("Gotham-Meidum", size: 16))
+                    }
+                }
                 Text("View Profile")
                     .font(Font.custom("Gotham-Meidum", size: 12))
                     .foregroundColor(Color("black").opacity(0.6))

@@ -36,7 +36,6 @@ struct LoginView: View {
                     CustomSecureTextFieldView(password: $viewModel.password,isEditing: $onEditPass)
                 }
                 
-                
                 //MARK: LOGIN BUTTON
                 VStack(){
                     Button {

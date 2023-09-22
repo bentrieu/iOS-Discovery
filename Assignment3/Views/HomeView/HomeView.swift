@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @ObservedObject var userViewModel: UserViewModel
+    
     var body: some View {
         NavigationStack {
             ZStack{
@@ -15,7 +18,7 @@ struct HomeView: View {
                     .edgesIgnoringSafeArea(.all)
                 ScrollView {
                     VStack (alignment: .leading,spacing: 10){
-                        HeadingView()
+                        HeadingView(userViewModel: userViewModel)
                         
                         HStack{
                             
@@ -27,11 +30,15 @@ struct HomeView: View {
                         }
                         .padding()
                         
-                        //MARK: RECENTLY PLAYED MUSIC
-                  
-
+                        //MARK: RECOMMENDED MUSIC ROW VIEW
+                        MusicView()
+                        
                         //MARK: ALBUM MUSIC ROW VIEW
                         AlbumView()
+                        
+                        
+                        //MARK: CHART MUSIC ROW VIEW
+                        ChartView()
                         
                     }
                 }
@@ -43,11 +50,14 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(userViewModel: UserViewModel())
     }
 }
 
 struct HeadingView: View {
+    
+    @ObservedObject var userViewModel: UserViewModel
+
     var body: some View {
         HStack(spacing: 15){
             Text("Good Afternoon")
@@ -70,7 +80,7 @@ struct HeadingView: View {
             
             
             NavigationLink {
-                SettingView(account: account)
+                SettingView(userViewModel: userViewModel)
                     .navigationTitle("Settings")
             } label: {
                 Image(systemName: "gearshape")
