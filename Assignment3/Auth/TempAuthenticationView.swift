@@ -51,7 +51,7 @@ struct TempAuthenticationView: View {
             Button {
                 Task {
                     do {
-                        try await loginManager.loginFacebook()
+                        try await viewModel.signInFacebook()
                         showSignInView = false
                     } catch {
                         print(error.localizedDescription)

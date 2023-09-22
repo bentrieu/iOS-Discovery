@@ -80,24 +80,34 @@ import Firebase
 final class FacebookSignInHelper: ObservableObject {
     private let loginManager = LoginManager()
     
-    func loginFacebook() async throws {
-        loginManager.logIn(permissions: ["public_profile","email"], from: nil) { result, error in
-            if let error = error {
-                // Handle login error
-                print("Login error: \(error.localizedDescription)")
-            } else if let result = result, !result.isCancelled {
-                // Handle successful login
-                Task {
-                    do {
-                        let authDataResult = try await AuthenticationManager.instance.signInWithFacebook(token: AccessToken.current!.tokenString)
-                        let user = DBUser(auth: authDataResult)
-                        try await UserManager.instance.createNewUser(user: user)
-                        print("Logged in with Facebook")
-                    } catch {
-                        print(error)
+    func loginFacebook() async throws -> FacebookLoginResult {
+        return await withCheckedContinuation { continuation in
+            loginManager.logIn(permissions: ["public_profile", "email"], from: nil) { result, error in
+                if let error = error {
+                    continuation.resume(returning: .error(error))
+                } else if let result = result, !result.isCancelled {
+                    Task {
+                        do {
+                            let authDataResult = try await AuthenticationManager.instance.signInWithFacebook(token: AccessToken.current!.tokenString)
+                            let user = DBUser(auth: authDataResult)
+                            try await UserManager.instance.createNewUser(user: user)
+                            print("Logged in with Facebook")
+                            continuation.resume(returning: .success(authDataResult)) // Success
+                        } catch {
+                            print(error)
+                            continuation.resume(returning: .error(error)) // Error
+                        }
                     }
+                } else {
+                    continuation.resume(returning: .cancelled) // Cancelled
                 }
             }
         }
+    }
+
+    enum FacebookLoginResult {
+        case success(AuthDataResultModel)
+        case error(Error)
+        case cancelled
     }
 }

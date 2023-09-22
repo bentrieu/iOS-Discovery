@@ -60,6 +60,7 @@
 		9C9EA7742AB1F4720042ACD5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 9C9EA7732AB1F4720042ACD5 /* GoogleSignIn */; };
 		9C9EA7762AB1F4720042ACD5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C9EA7752AB1F4720042ACD5 /* GoogleSignInSwift */; };
 		9C9EA7782AB21B4A0042ACD5 /* GoogleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EA7772AB21B4A0042ACD5 /* GoogleSignInHelper.swift */; };
+		9CAFF8F12ABD8608008C2F01 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF8F02ABD8608008C2F01 /* UserViewModel.swift */; };
 		9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2D2AADA67300A07591 /* RootView.swift */; };
 		9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */; };
 		9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */; };
@@ -144,6 +145,7 @@
 		9C575B092AB5EC3600BE4553 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		9C9EA7702AB1F4300042ACD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9C9EA7772AB21B4A0042ACD5 /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
+		9CAFF8F02ABD8608008C2F01 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		9CB48F2D2AADA67300A07591 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSettingsView.swift; sourceTree = "<group>"; };
 		9CD5585B2AAC4F2B0058A5C3 /* Assignment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -409,6 +411,7 @@
 				9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */,
 				9C575B092AB5EC3600BE4553 /* AuthenticationViewModel.swift */,
 				9C2AB8D72AB6EADC0056D5C3 /* SignUpEmailViewModel.swift */,
+				9CAFF8F02ABD8608008C2F01 /* UserViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				9958D86F2AB071BF00F5F42E /* SignUpView.swift in Sources */,
 				E3AFB4482AB86519001E83E4 /* PlaylistManager.swift in Sources */,
 				0440584E2AB70250002C994B /* AddTracksToPlayListView.swift in Sources */,
+				9CAFF8F12ABD8608008C2F01 /* UserViewModel.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
 				04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */,
 				E3AFB4442AB852C3001E83E4 /* AlbumManager.swift in Sources */,

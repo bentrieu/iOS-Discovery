@@ -61,36 +61,39 @@ struct LandingPageView: View {
                     
                     //MARK: SIGN UP WITH FACEBOOK
                     Button {
-                        
+                        Task {
+                            do {
+                                try await viewModel.signInFacebook()
+                            } catch {
+                                print(error)
+                            }
+                        }
                     } label: {
                         CustomSignUpButton(image: Image("facebook-icon"), title: "Continue with Facebook")
                     }
                     
-                    //MARK: SIGN UP WITH APPLE
-                    Button {
-                        
-                    } label: {
-                        CustomSignUpButton(image: colorScheme == .dark ? Image(systemName: "apple.logo") : Image("apple-icon"), title: "Continue with Apple")
-                    }
-                    
-                    //MARK: SIGN UP WITH APPLE
+//                    //MARK: SIGN UP WITH APPLE
+//                    Button {
+//
+//                    } label: {
+//                        CustomSignUpButton(image: colorScheme == .dark ? Image(systemName: "apple.logo") : Image("apple-icon"), title: "Continue with Apple")
+//                    }
+//
+//                    //MARK: SIGN UP WITH APPLE
                     
                     NavigationLink {
                         LoginView()
                             .navigationTitle("Login")
                             .foregroundColor(Color("black"))
                             .modifier(CustomNavigationButton())
-                           
-                           
                     } label: {
                         Text("Login")
                             .modifier(CustomButtonAthentication())
-                            
+  
                     }
-
-                  
+                    
+                    Spacer()
                 }
-               
             }
            
             .foregroundColor(Color("black"))
