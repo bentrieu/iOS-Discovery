@@ -10,7 +10,11 @@ import SwiftUI
 struct NewPlaylistView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var showView: Bool
+    
+    @StateObject var playlistManager = PlaylistManager.instance
+    
     @State var input = ""
+    @State var showErrorNotification = false
     
     enum FocusedField {
         case inputSearch
@@ -35,11 +39,19 @@ struct NewPlaylistView: View {
                             VStack{
                                 Divider()
                                     .frame(height: 1)
-                                    .overlay(Color("black"))
-                                    .offset(x: 0, y: 15)
+                                    .overlay(showErrorNotification ? Color.red : Color("black"))
+                                Text("Please give your playlist a name")
+                                    .font(.custom("Gotham-Medium", size: 15))
+                                    .foregroundColor(.red)
+                                    
+                                    .opacity(showErrorNotification ? 1 : 0)
                             }
+                                .offset(x: 0, y: 30)
                         )
                 )
+                .onChange(of: input) { newValue in
+                    showErrorNotification = false
+                }
             HStack{
                 Spacer()
                 //MARK: - CANCEL BUTTON
@@ -62,9 +74,27 @@ struct NewPlaylistView: View {
                 
                 //MARK: - CREATE BUTTON
                 Button{
-                    
-                    showView = false
-                    dismiss()
+                    if input.isEmpty{
+                        showErrorNotification = true
+                    }else{
+                        Task{
+                            //create new playlist on firestore
+                            do{
+                                try await playlistManager.addPlaylist(name: input)
+                            }catch{
+                                print(error)
+                            }
+                            //fetch change to local playlists array
+                            do{
+                                playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                            }catch {
+                                print(error)
+                            }
+                        }
+                        //dismiss view
+                        showView = false
+                        dismiss()
+                    }
                 }label: {
                     Text("Create")
                         .font(.custom("Gotham-Bold", size: 20))
@@ -81,7 +111,7 @@ struct NewPlaylistView: View {
         .onChange(of: showView, perform: { newValue in
             if newValue{
                 focusedField = .inputSearch
-
+                
             }else{
                 focusedField = nil
                 input = ""
