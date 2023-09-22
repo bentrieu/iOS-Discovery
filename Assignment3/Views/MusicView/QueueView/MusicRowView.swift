@@ -31,6 +31,8 @@ struct MusicRowView: View {
             print(music.imageUrl!)
         }
         .frame(width: .infinity)
+        .padding(.vertical, 10)
+        .padding(.horizontal)
     }
 }
 

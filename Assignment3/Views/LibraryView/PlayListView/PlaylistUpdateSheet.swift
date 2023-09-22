@@ -58,7 +58,7 @@ struct PlaylistUpdateSheet: View {
                         Task{
                             //delete playlist on firestore
                             do{
-                                //try await playlistManager.deletePla
+                                try await playlistManager.removePlaylist(playlistId: playlist.playlistId)
                             }catch{
                                 print(error)
                             }

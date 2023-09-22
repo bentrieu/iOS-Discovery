@@ -78,10 +78,10 @@ struct PlaylistView: View {
                             
                             //MARK: - PLAYLIST NAME
                             Text(playlistName)
-                                .font(.custom("Gotham-Bold", size: 30))
+                                .font(.custom("Gotham-Black", size: 35))
                                 .modifier(OneLineText())
                             Text("\(playlistTracks.count) track(s)")
-                                .font(.custom("Gotham-Me", size: 20))
+                                .font(.custom("Gotham-Book", size: 20))
                                 .modifier(OneLineText())
                         }
                         
@@ -128,41 +128,72 @@ struct PlaylistView: View {
                         }
                         Spacer()
                     }else{  //playlist has track
-                        //MARK: - LIST OF TRACKS
-                        List{
-                            //MARK: ADD TO PLAYLIST BUTTON
-                            Button{
-                                withAnimation {
-                                    showAddTracksToPlaylistView = true
-                                }
-                                
-                            }label: {
-                                AddToPlaylistButtonView(isMusicListEmpty: false)
-                            }
-                            .listRowInsets(.init(top: 0, leading: 0, bottom: 5, trailing: 0))
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .frame(height: searchActive ? 0 : nil)
-                            .opacity(searchActive ? 0 : 1)
-                            .disabled(searchActive)
-                            
-                            
-                            ForEach(musicSearchResult) { music in
-                                
+                        if musicSearchResult.isEmpty{
+                            //MARK: - SEARCH NOTIFICATION
+                            Text("No results found for '\(searchInput)'")
+                                .font(.custom("Gotham-Black", size: 22))
+                                .modifier(BlackColor())
+                                .multilineTextAlignment(.center)
+                            Text("Check the spelling, or try different keywords.")
+                                .font(.custom("Gotham-Medium", size: 17))
+                                .modifier(BlackColor())
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }else{
+                            //MARK: - LIST OF TRACKS
+                            List{
+                                //MARK: ADD TO PLAYLIST BUTTON
                                 Button{
+                                    withAnimation {
+                                        showAddTracksToPlaylistView = true
+                                    }
                                     
                                 }label: {
-                                    MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: music)
+                                    AddToPlaylistButtonView(isMusicListEmpty: false)
                                 }
-                                .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                                .listRowInsets(.init(top: 0, leading: 0, bottom: 5, trailing: 0))
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
+                                .frame(height: searchActive ? 0 : nil)
+                                .opacity(searchActive ? 0 : 1)
+                                .disabled(searchActive)
                                 
+                                
+                                ForEach(musicSearchResult) { music in
+                                    
+                                    Button{
+                                        
+                                    }label: {
+                                        MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: music)
+                                    }
+                                    .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                                    .listRowBackground(Color.clear)
+                                    .listRowSeparator(.hidden)
+                                    
+                                }
+                                //MARK: - DELETE PLAYLIST ITEM FUNCTION
+                                .onDelete { offsets in
+                                    Task{
+                                        for index in offsets{
+                                            //delete tracks in playlist on firestore
+                                            do{
+                                                try await playlistManager.removeMusicFromPlaylist(musicId: musicSearchResult[index].musicId, playlistId: playlistId)
+                                            }catch{
+                                                print(error)
+                                            }
+                                            //fetch change to local playlists array
+                                            do{
+                                                playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                                            }catch{
+                                                print(error)
+                                            }
+                                        }
+                                    }
+                                }
                             }
-                            
+                            .listStyle(PlainListStyle())
+                            .offset(y: searchActive ? -30 : 0)
                         }
-                        .listStyle(PlainListStyle())
-                        .offset(y: searchActive ? -30 : 0)
                     }
                    
                 }
