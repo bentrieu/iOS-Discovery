@@ -68,8 +68,8 @@ final class AlbumManager : ObservableObject {
 
         return album
     }
-    func fetchPopularAlbumList() async throws -> [Album] {
-        let query = db.collection("albums").whereField("albums_name", isEqualTo: "Popular Albums")
+    func getAlbumCollectionByName(_ name: String) async throws -> [Album] {
+        let query = db.collection("albums").whereField("albums_name", isEqualTo: name)
 
         let querySnapshot = try await query.getDocuments()
 

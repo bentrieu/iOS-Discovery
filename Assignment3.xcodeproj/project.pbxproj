@@ -43,6 +43,7 @@
 		9958D8712AB071E500F5F42E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8702AB071E500F5F42E /* LoginView.swift */; };
 		9958D8732AB0723900F5F42E /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8722AB0723800F5F42E /* CustomTextFieldView.swift */; };
 		9958D8752AB072F400F5F42E /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8742AB072F300F5F42E /* LandingPage.swift */; };
+		999736D52ABDFE8B00394578 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999736D42ABDFE8A00394578 /* ChartView.swift */; };
 		99B598E22AB812AC0082C1B5 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B598E12AB812AC0082C1B5 /* Music.swift */; };
 		99B598E42AB812B90082C1B5 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B598E32AB812B90082C1B5 /* Album.swift */; };
 		99B598E92AB9799F0082C1B5 /* testMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B598E82AB9799F0082C1B5 /* testMusic.swift */; };
@@ -133,6 +134,7 @@
 		9958D8702AB071E500F5F42E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9958D8722AB0723800F5F42E /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		9958D8742AB072F300F5F42E /* LandingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
+		999736D42ABDFE8A00394578 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		99B598E12AB812AC0082C1B5 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		99B598E32AB812B90082C1B5 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		99B598E82AB9799F0082C1B5 /* testMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusic.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 			children = (
 				F514FA8F2AB1B7DF00A48228 /* AlbumView.swift */,
 				F5BD94F92AB415EE0015B48C /* MusicView.swift */,
+				999736D42ABDFE8A00394578 /* ChartView.swift */,
 			);
 			path = RowView;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				0440584E2AB70250002C994B /* AddTracksToPlayListView.swift in Sources */,
 				9CAFF8F12ABD8608008C2F01 /* UserViewModel.swift in Sources */,
 				9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */,
+				999736D52ABDFE8B00394578 /* ChartView.swift in Sources */,
 				04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */,
 				E3AFB4442AB852C3001E83E4 /* AlbumManager.swift in Sources */,
 				9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */,

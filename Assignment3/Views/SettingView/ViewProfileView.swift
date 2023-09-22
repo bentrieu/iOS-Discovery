@@ -36,8 +36,6 @@ struct ViewProfileView: View {
                             
                             isPresentingEdit = true
                         }
-                        
-                        
                     } label: {
                         Text("Edit")
                             .font(Font.custom("Gotham-bold", size: 12))
@@ -50,8 +48,6 @@ struct ViewProfileView: View {
                     }.sheet(isPresented: $isPresentingEdit) {
                         EditProfileView(userViewModel: userViewModel, isCancelButtonPressed: $isCancelButtonPressed, isContentNotEdited: $isContentNotEdited, isPresentingEdit: $isPresentingEdit)
                     }
-                
-                   
                 }
                 .padding(.all)
              
@@ -65,12 +61,6 @@ struct ViewProfileView: View {
                 
                 Spacer()
             }
-            
-//            EditProfileView(account: $accountProfile, isCancelButtonPressed: $isCancelButtonPressed,  isContentNotEdited: $isContentNotEdited,isPresentingEdit: $isPresentingEdit)
-//                .position(x: UIScreen.main.bounds.width / 2 , y: isPresentingEdit ?  UIScreen.main.bounds.height / 2  : UIScreen.main.bounds.height * 2)
-//                .zIndex(20)
-            
-            
         }
     }
 }

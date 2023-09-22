@@ -209,7 +209,7 @@ struct DiscoveryView: View {
         }
         .task {
             do {
-                AlbumManager.shared.albums = try await AlbumManager.shared.fetchPopularAlbumList()
+                AlbumManager.shared.albums = try await AlbumManager.shared.getAlbumCollectionByName("Popular Albums")
                 // Handle the albums
             } catch {
                 // Handle any errors that occur during the asynchronous operation

@@ -77,6 +77,23 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).setData(playlistData)
     }
     
+    func addPlaylist(name : String) async throws {
+        var playlistData: [String: Any] = [
+            "playlist_id": "",
+            "name": name,
+            "date_created": Timestamp(),
+            "photo_url": "",
+            "musics": []
+        ]
+        
+        let playlistRef = try await getPlaylistsRef().addDocument(data: playlistData)
+        let playlistId = playlistRef.documentID
+        
+        playlistData["playlist_id"] = playlistId
+        
+        try await getPlaylistsRef().document(playlistId).setData(playlistData)
+    }
+    
     func getPlaylist(playlistId: String) async throws -> DBPlaylist {
         return try await getPlaylistsRef().document(playlistId).getDocument(as: DBPlaylist.self, decoder: decoder)
     }

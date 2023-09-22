@@ -30,11 +30,15 @@ struct HomeView: View {
                         }
                         .padding()
                         
-                        //MARK: RECENTLY PLAYED MUSIC
-                  
-
+                        //MARK: RECOMMENDED MUSIC ROW VIEW
+                        MusicView()
+                        
                         //MARK: ALBUM MUSIC ROW VIEW
                         AlbumView()
+                        
+                        
+                        //MARK: CHART MUSIC ROW VIEW
+                        ChartView()
                         
                     }
                 }

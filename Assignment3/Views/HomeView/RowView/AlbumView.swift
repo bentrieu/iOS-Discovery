@@ -21,6 +21,7 @@ struct AlbumView : View {
                     ForEach(albums, id: \.albumId) { item in
                         NavigationLink {
                             AlbumPageView(album: item)
+                                .modifier(CustomNavigationButton())
                                
                         } label: {
                             VStack(alignment: .leading){
@@ -34,11 +35,10 @@ struct AlbumView : View {
             }
             
         }
-        .padding(.vertical)
         .onAppear{
             Task {
                 do {
-                    self.albums = try await AlbumManager.shared.fetchPopularAlbumList()
+                    self.albums = try await AlbumManager.shared.getAlbumCollectionByName("Popular Albums")
                     // Handle the albums
                 } catch {
                     // Handle any errors that occur during the asynchronous operation
