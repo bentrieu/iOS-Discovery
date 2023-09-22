@@ -10,21 +10,10 @@ import SwiftUI
 struct GenreView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+    @StateObject var musicManager = MusicManager.instance
     let genre: String
     let color: Color
-    
-//    //MARK: - BACK BUTTON
-//    var btnBack : some View { Button(action: {
-//        self.presentationMode.wrappedValue.dismiss()
-//    }) {
-//        Image(systemName: "arrow.backward")
-//            .resizable()
-//            .modifier(Icon())
-//            .frame(width: 25)
-//    }
-//    }
-    
+   
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [color, Color("white")]), startPoint: .top, endPoint: .bottom)
@@ -32,19 +21,20 @@ struct GenreView: View {
             VStack{
                 
                 //MARK: - LIST OF TRACKS
-                List{
-                    Button{
-                        
-                    }label: {
-//                        MusicRowView(imgName: "testImg",imgDimens: 60, title: "Song Name", titleSize: 23, subTitle: "Artists", subTitleSize: 20)
+                VStack {
+                    ForEach(musicManager.musicList, id: \.musicId) { item in
+                        NavigationLink {
+                            PlayMusicView()
+                                .onAppear{
+                                    musicManager.currPlaying = item
+                                
+                                }
+                               
+                        } label: {
+                            MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
+                        }
                     }
-                    .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    
                 }
-                .listStyle(PlainListStyle())
-                .padding(.top, 20)
             }
             .modifier(PagePadding())
         }

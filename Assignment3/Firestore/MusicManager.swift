@@ -115,6 +115,10 @@ final class MusicManager : ObservableObject {
         return self.musicList[previousIndex]
     }
     
+    func searchMusicByGenre(_ genre: Genre){
+        self.musicList = MusicViewModel.shared.musics.filter { $0.genre!.contains(genre.rawValue) }
+    }
+    
     func play(){
         self.playMusicById(id: self.currPlaying.musicId)
         self.reset(music: self.currPlaying)

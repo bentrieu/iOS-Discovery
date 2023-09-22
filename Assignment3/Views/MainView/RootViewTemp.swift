@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @StateObject var viewModel = UserViewModel()
+    
     var body: some View {
         TabView {
             HomeView()
@@ -29,6 +32,16 @@ struct MainView: View {
                     }
                    
                 }
+        }
+        .onAppear {
+            Task {
+                do {
+                    try? await viewModel.loadCurrentUser()
+                    try? await viewModel.loadUserPlaylist()
+                } catch {
+                    print(error)
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .foregroundColor(Color("black"))
