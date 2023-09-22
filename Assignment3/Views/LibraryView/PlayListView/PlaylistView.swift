@@ -197,8 +197,8 @@ struct PlaylistView: View {
                         .disabled(searchActive)
                         .animation(nil)
                         .sheet(isPresented: $showPlaylistUpdateSheet) {
-//                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, imgName: imgName, playlistName: playlistName, numOfTracks: numOfTracks)
-//                                .presentationDetents([.medium])
+                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, playlist: playlistManager.getPlaylistFromLocal(playlistId: playlistId))
+                                .presentationDetents([.medium])
                               
                         }
                         

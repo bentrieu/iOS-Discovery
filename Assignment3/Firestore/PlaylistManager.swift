@@ -136,6 +136,10 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(playlistData)
     }
     
+    func getPlaylistFromLocal(playlistId : String) -> DBPlaylist{
+        return playlists.first(where: {$0.playlistId == playlistId})!
+    }
+    
     func searchPlaylistByName(input : String) -> [DBPlaylist]{
         return playlists.filter { $0.name!.lowercased().contains(input.lowercased()) }
     }
