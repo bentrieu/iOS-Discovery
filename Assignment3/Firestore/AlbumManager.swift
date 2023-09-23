@@ -216,9 +216,9 @@ final class AlbumManager : ObservableObject {
     func searchAlbumByNameAndArtist(input : String) -> [Album]{
         //filter with music name first
         var result = albums.filter { $0.title!.lowercased().contains(input.lowercased()) }
-        
-        //search by artist later with checking duplicate instances
+        //search by artist later
         let artistResult = albums.filter{$0.artistName!.lowercased().contains(input.lowercased())}
+        //checking duplicates
         for album in artistResult {
             if !result.contains(where: {$0.albumId == album.albumId}){
                 result.append(album)
