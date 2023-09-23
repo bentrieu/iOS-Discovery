@@ -42,6 +42,14 @@ final class StorageManager {
         return image
     }
     
+    func deleteUserImage() async throws {
+        let userId = try AuthenticationManager.instance.getAuthenticatedUser().uid
+        let user = try await UserManager.instance.getUser(userId: userId)
+        
+        if let url = user.profileImagePath {
+            try await userReference().child("\(userId).jpeg").delete()
+        }
+    }
 
     //MARK: USER IMAGES
     func saveUserImage(data: Data, userId: String) async throws -> (path: String, name: String){

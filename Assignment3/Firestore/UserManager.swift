@@ -61,6 +61,10 @@ final class UserManager {
         return try await userDocument(userId: userId).getDocument(as: DBUser.self, decoder: decoder)
     }
     
+    func deteleCurrentUser() async throws {
+        try await userDocument(userId: AuthenticationManager.instance.getAuthenticatedUser().uid).delete()
+    }
+    
     func updateUserProfile(userId:String, displayName: String) async throws {
         let data: [String:Any] = [
             "display_name": displayName

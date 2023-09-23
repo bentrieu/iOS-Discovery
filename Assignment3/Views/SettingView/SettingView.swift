@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct SettingView: View {
     
@@ -55,8 +56,49 @@ struct SettingView: View {
             }
     
             Spacer()
+            
+            Button {
+                authenticate()
+            } label: {
+                Text("Delete account")
+                    .foregroundColor(.black)
+                    .font(Font.custom("Gotham-Bold", size: 16))
+                    .tracking(-1)
+                    .frame(width: 150, height: 20)
+                    .padding()
+                    .background(Color.red.opacity(0.6))
+                    .clipShape(Capsule())
+            }
         }
         .padding(.horizontal)
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "This is to confirm delete account") { success, authenticationError in
+                
+                if success {
+                    Task {
+                        do {
+                            try await StorageManager.instance.deleteUserImage()
+                            try await UserManager.instance.deteleCurrentUser()
+                            try await AuthenticationManager.instance.deleteUser()
+                            showSignInView = true
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                } else {
+                    print("there was a problem")
+                }
+            }
+        } else {
+            print("there is no faceid")
+        }
     }
 }
 
