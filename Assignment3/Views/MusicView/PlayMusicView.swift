@@ -69,10 +69,12 @@ struct PlayMusicView: View {
                     AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
                         image
                             .resizable()
-                            .frame(maxWidth: .infinity)
-                            .frame(height: UIScreen.main.bounds.height/2.2)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
                             .modifier(Img())
+                            .frame(width: UIScreen.main.bounds.width/1.14)
+                            .frame(height: UIScreen.main.bounds.height/2.2)
+                            .clipped()
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            
                     }placeholder: {
                         
                     }

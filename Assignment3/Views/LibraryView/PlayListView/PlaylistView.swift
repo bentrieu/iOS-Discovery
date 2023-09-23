@@ -11,12 +11,10 @@ struct PlaylistView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var playlistManager = PlaylistManager.instance
     
-    let playlistId : String
-    var playlistName: String{
-        return playlistManager.playlists.first(where: {$0.playlistId == playlistId})?.name ?? ""
-    }
+    let playlist : DBPlaylist
+    
     var playlistTracks : [Music]{
-        return playlistManager.getAllMusicsInPlaylist(playlistId: playlistId)
+        return playlistManager.getAllMusicsInPlaylist(playlistId: playlist.playlistId)
     }
     
     var musicSearchResult : [Music]{
@@ -61,23 +59,37 @@ struct PlaylistView: View {
                 .ignoresSafeArea(.all)
             
             if showAddTracksToPlaylistView{
-                AddTracksToPlayListView(showView: $showAddTracksToPlaylistView, playlistId: playlistId)
+                AddTracksToPlayListView(showView: $showAddTracksToPlaylistView, playlistId: playlist.playlistId)
             }else{
                 
                 VStack(spacing: searchActive ? 0 :30){
                     //MARK: - THUMBNAIL IMG
-                    Image("testImg")
-                        .resizable()
-                        .frame(width: searchActive ? 0 : UIScreen.main.bounds.width/1.5,height:searchActive ? 0 : UIScreen.main.bounds.width/1.6)
-                    
-                        .opacity(searchActive ? 0 : 1)
-                        .modifier(Img())
+                    AsyncImage(url: URL(string: playlist.photoUrl!)) { phase in
+                        if let image = phase.image {
+                            // if the image is valid
+                            image
+                                .resizable()
+                        } else {
+                            //appears as placeholder & error image
+                            Image(systemName: "photo")
+                                .resizable()
+                        }
+                    }
+                    .modifier(Img())
+                    .frame(width: searchActive ? 0 : UIScreen.main.bounds.width/1.5,height:searchActive ? 0 : UIScreen.main.bounds.width/1.5)
+                    .clipped()
+                    .overlay(
+                        Rectangle()
+                            .stroke(.gray, lineWidth: 6)
+                    )
+                    .opacity(searchActive ? 0 : 1)
+                  
                     
                     HStack{
                         VStack(alignment: playlistTracks.isEmpty ? .center : .leading){
                             
                             //MARK: - PLAYLIST NAME
-                            Text(playlistName)
+                            Text(playlist.name ?? "")
                                 .font(.custom("Gotham-Black", size: 35))
                                 .modifier(OneLineText())
                             Text("\(playlistTracks.count) track(s)")
@@ -102,7 +114,7 @@ struct PlaylistView: View {
                                     )
                             }
                         }
-
+                        
                     }
                     .offset(y: searchActive ? -50 : 0)
                     .frame(height: searchActive ? 0 : nil)
@@ -113,8 +125,8 @@ struct PlaylistView: View {
                         Divider()
                             .frame(height: 1)
                             .overlay(Color("black"))
-                            
-
+                        
+                        
                         //MARK: - ADD FIRST TRACK BUTTON
                         Text("Let's start building your playlist")
                             .font(.custom("Gotham-Medium", size: 20))
@@ -177,7 +189,7 @@ struct PlaylistView: View {
                                         for index in offsets{
                                             //delete tracks in playlist on firestore
                                             do{
-                                                try await playlistManager.removeMusicFromPlaylist(musicId: musicSearchResult[index].musicId, playlistId: playlistId)
+                                                try await playlistManager.removeMusicFromPlaylist(musicId: musicSearchResult[index].musicId, playlistId: playlist.playlistId)
                                             }catch{
                                                 print(error)
                                             }
@@ -195,7 +207,7 @@ struct PlaylistView: View {
                             .offset(y: searchActive ? -30 : 0)
                         }
                     }
-                   
+                    
                 }
                 .modifier(PagePadding())
                 
@@ -228,9 +240,9 @@ struct PlaylistView: View {
                         .disabled(searchActive)
                         .animation(nil)
                         .sheet(isPresented: $showPlaylistUpdateSheet) {
-                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, playlist: playlistManager.getPlaylistFromLocal(playlistId: playlistId))
+                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, playlist: playlist)
                                 .presentationDetents([.medium])
-                              
+                            
                         }
                         
                     }
@@ -273,13 +285,13 @@ struct AddToPlaylistButtonView: View {
             .padding(.vertical, 10)
             .padding(.horizontal)
         }
-
-
+        
+        
     }
 }
 
-struct PlaylistView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaylistView(playlistId: "v8AtiDouY7nv1napA7Uv")
-    }
-}
+//struct PlaylistView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlaylistView(playlist: PlaylistManager.instance.getPlaylist(playlistId: "v8AtiDouY7nv1napA7Uv"))
+//    }
+//}

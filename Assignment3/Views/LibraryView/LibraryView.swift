@@ -152,7 +152,7 @@ struct LibraryView: View {
                         //MARK: - LIST OF PLAYLIST
                         List{
                             ForEach(playlistSearchResult, id: \.playlistId) {playlist in
-                                NavigationLink (destination: PlaylistView(playlistId: playlist.playlistId)
+                                NavigationLink (destination: PlaylistView(playlist: playlist)
                                     .onAppear {
                                         searchActive = false
                                     }){

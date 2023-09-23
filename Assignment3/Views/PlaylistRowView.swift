@@ -15,8 +15,27 @@ struct PlaylistRowView: View {
     
     var body: some View {
         HStack(spacing: UIScreen.main.bounds.width/25){
+            
+            AsyncImage(url: URL(string: playlist.photoUrl!)) { phase in
+                if let image = phase.image {
+                    // if the image is valid
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    //appears as placeholder & error image
+                    Image(systemName: "photo") 
+                        .resizable()
+                        .scaledToFill()
+                }
+            }
+            .frame(width: imgDimens, height: imgDimens)
+            .clipped()
+            .overlay(
+                Rectangle()
+                    .stroke(.gray, lineWidth: 3)
+            )
 
-            SquareView(imageUrl: playlist.photoUrl!, size: imgDimens)
             VStack(spacing: 5){
                 Text(playlist.name!)
                     .font(.custom("Gotham-Medium", size: titleSize))
