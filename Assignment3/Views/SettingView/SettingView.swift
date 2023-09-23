@@ -66,33 +66,27 @@ struct SettingView_Previews: PreviewProvider {
         SettingView(userViewModel: UserViewModel(), showSignInView: .constant(true))
     }
 }
-
-//struct Account{
-//    var name: String
-//    var username: String
-//    var email: String
-//    var password: String
-//    var imageURL: String
-//
-//}
-//let account = Account(name: "Hữu Phước", username: "phuoc05", email: "phuocdinh21102@gmail.com", password: "huuphuochahahjhj", imageURL: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/345072827_1301949700393436_9075755003333917361_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=TVqUyJ5J1OAAX_1TePk&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDu5bi68KQZDgeXxZqAgCI-Lzx7cXZIcwaqqR7Eo_T11w&oe=650DD836")
-
 struct AccountProfile: View {
-    
-//    var account: Account
     @ObservedObject var userViewModel: UserViewModel
 
     var body: some View {
         HStack{
             if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
-                AsyncImage(url: url) { image in
+                AsyncImage(url: url){ image in
                     image.resizable()
-                } placeholder: {
+                    
+                }placeholder: {
                     
                 }
-                .scaledToFit()
-                .frame(width:50, height: 50)
-                .clipShape(Circle())
+                .modifier(AvatarView(size: 50))
+            }else{
+                AsyncImage(url: URL(string: "https://i.scdn.co/image/ab6761610000e5eb58efbed422ab46484466822b")){ image in
+                    image.resizable()
+                }placeholder: {
+                    
+                }
+                .modifier(AvatarView(size: 50))
+                
             }
 
             

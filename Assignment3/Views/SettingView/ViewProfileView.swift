@@ -76,16 +76,7 @@ struct AccountProfileDetail: View {
 
     var body: some View {
         HStack {
-            if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
-                AsyncImage(url: url) { image in
-                    image.resizable()
-                } placeholder: {
-                    
-                }
-                .scaledToFit()
-                .frame(width:120, height: 120)
-                .clipShape(Circle())
-            }
+            AvatarViewContructor(size: 140, userViewModel: userViewModel)
             
             if let user = userViewModel.user, let name = user.displayName {
                 Text(name)
@@ -97,3 +88,33 @@ struct AccountProfileDetail: View {
         .padding(.horizontal)
     }
 }
+
+
+struct AvatarViewContructor: View {
+    var size : CGFloat
+    @ObservedObject var userViewModel: UserViewModel
+
+    var body: some View {
+        HStack {
+            if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
+                AsyncImage(url: url){ image in
+                    image.resizable()
+                    
+                }placeholder: {
+                    
+                }
+                .modifier(AvatarView(size: size))
+            }else{
+                AsyncImage(url: URL(string: "https://i.scdn.co/image/ab6761610000e5eb58efbed422ab46484466822b")){ image in
+                    image.resizable()
+                }placeholder: {
+                    
+                }
+                .modifier(AvatarView(size: size))
+                
+            }
+            
+        }
+    }
+}
+

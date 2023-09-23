@@ -15,49 +15,36 @@ struct EditProfileView: View {
     //declare the temp variables just to be placeholder
     //once the user save edit we will overwrite to account variable
     @State var tempName: String  = ""
-//    @State var isPresentingEditPicture = false
     @Binding var isCancelButtonPressed: Bool
     @Binding var isContentNotEdited: Bool
     @Binding  var isPresentingEdit : Bool
     @FocusState private var focusedField: Bool
-    
-    @State private var item: PhotosPickerItem? = nil
-
-    
+    @State private var item: PhotosPickerItem?
+    @State private var selectedImage: Image?
     var body: some View {
         ZStack {
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 15){
-                HeadingControllerButtonView(userViewModel: userViewModel ,isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit,tempName: $tempName, focusField: $focusedField)
-                
-                
-                if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
-                    AsyncImage(url: url) { image in
-                        image.resizable()
-                    } placeholder: {
-                        
+                HeadingControllerButtonView(userViewModel: userViewModel ,isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit,tempName: $tempName, focusField: $focusedField){
+                    if let item {
+                        userViewModel.saveProfileImage(item: item)
                     }
-                    .scaledToFit()
-                    .frame(width:180, height: 180)
-                    .clipShape(Circle())
-                    .frame(height: 200)
+                }
+                if let selectedImage{
+                    
+                    selectedImage
+                        .resizable()
+                        .modifier(AvatarView(size: 200))
+                    let _ = print(selectedImage)
+                }else {
+                    AvatarViewContructor(size: 200, userViewModel: userViewModel)
                 }
                 
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("Change photo")
                 }
 
-//                Button {
-//                    isPresentingEditPicture = true
-//                    isContentNotEdited = false
-//                } label: {
-//                    Text("Change photo")
-//                        .foregroundColor(Color("black"))
-//                        .font(Font.custom("Gotham-Bold", size: 12))
-//                        .focused($focusedField)
-//                }
-                
                 TextField("", text: Binding<String>(
                     get: { self.tempName },
                     set: { self.tempName = $0
@@ -79,11 +66,6 @@ struct EditProfileView: View {
                 
               
             }
-//            if (isPresentingEditPicture){
-//                PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
-//                    Text("select an image")
-//                }
-//            }
             
             if isCancelButtonPressed{
                 if !isContentNotEdited{
@@ -92,8 +74,14 @@ struct EditProfileView: View {
             }
         }
         .onChange(of: item, perform: { newValue in
-            if let newValue {
-                userViewModel.saveProfileImage(item: newValue)
+            self.isContentNotEdited  = false
+            Task {
+                if let data = try? await item?.loadTransferable(type: Data.self) {
+                    if let uiImage = UIImage(data: data) {
+                        selectedImage = Image(uiImage: uiImage)
+                        return
+                    }
+                }
             }
         })
         .onAppear{
@@ -138,6 +126,8 @@ struct HeadingControllerButtonView: View {
     @Binding var tempName: String
     var focusField: FocusState<Bool>.Binding
     
+    var callback : () -> Void
+    
     var body: some View {
         HStack{
             Button {
@@ -169,6 +159,7 @@ struct HeadingControllerButtonView: View {
             
             Button {
                 userViewModel.updateUserProfile(usernameText: tempName)
+                callback()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Save")
