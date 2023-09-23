@@ -168,12 +168,12 @@ struct MiniPlayer: View {
                 HStack(spacing: UIScreen.main.bounds.width/13){
                     //MARK: - SHUFFLE BUTTON
                     Button {
-                        shuffleActive.toggle()
+                        musicManager.isShuffle.toggle()
                     } label: {
                         Image(systemName: "shuffle")
                             .resizable()
                             .scaledToFit()
-                            .foregroundColor(shuffleActive ? .accentColor : Color("black"))
+                            .foregroundColor(musicManager.isShuffle ? .accentColor : Color("black"))
                             .frame(width: 30)
                     }
                     //MARK: - BACKWARD BUTTON
@@ -208,12 +208,12 @@ struct MiniPlayer: View {
                     }
                     //MARK: - REPEAT BUTTON
                     Button {
-                        repeatActive.toggle()
+                        musicManager.isRepeat.toggle()
                     } label: {
                         Image(systemName: "repeat")
                             .resizable()
                             .scaledToFit()
-                            .foregroundColor(repeatActive ? .accentColor : Color("black"))
+                            .foregroundColor(musicManager.isRepeat ? .accentColor : Color("black"))
                             .frame(width: 30)
                     }
                 }
