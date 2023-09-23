@@ -27,7 +27,18 @@ struct CustomeButtonEditPictureView: ViewModifier {
     }
 }
 
-   
+struct AvatarView: ViewModifier {
+    var size : CGFloat
+    
+    func body(content: Content) -> some View {
+        content
+            .scaledToFill()
+            .frame(width:size, height: size)
+            .clipShape(Circle())
+    }
+}
+
+  
 
 struct CustomNavigationButton: ViewModifier {
     func body(content: Content) -> some View {

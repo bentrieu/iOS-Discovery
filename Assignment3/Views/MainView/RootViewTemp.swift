@@ -40,7 +40,6 @@ struct MainView: View {
                        
                     }
             }
-            
             //
             if musicManager.isPlayingMusicView{
                 MiniPlayer(animation: animation, expand: $expand)
