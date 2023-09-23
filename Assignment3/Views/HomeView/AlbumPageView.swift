@@ -38,61 +38,61 @@ struct AlbumPageView: View {
             
             ScrollView {
                 VStack(spacing: 30){
-                        //MARK: - THUMBNAIL IMG
-                        SquareView(imageUrl: album.imageUrl!, size: 225)
-
-                        HStack{
-                            VStack(alignment: .leading){
-                                //MARK: - PLAYLIST NAME
-                                Text(album.title!)
-                                    .font(.custom("Gotham-Black", size: 35))
-                                    .modifier(OneLineText())
-                                Text("\(numOfTracks) track(s)")
-                                    .font(.custom("Gotham-Medium", size: 18))
-                                    .modifier(OneLineText())
-                            }
-                            Spacer()
-                            //MARK: - PLAY BUTTON
-                            Button {
-                                if firstPlaying{
-                                    musicManager.currPlaying = musicManager.musicList[0]
-                                    musicManager.play()
-                                    firstPlaying = false
-                                }else{
-                                    musicManager.pauseMusic()
-                                }
-                               
-                            } label: {
-                                Image(systemName: musicManager.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 50, alignment: .center)
-                                    .foregroundColor(Color("green"))
-                                    .background(
-                                        Circle()
-                                            .fill(Color(.black))
-                                    )
-                            }
-                        }
-                        
-                        Divider()
-                            .frame(height: 1)
-                            .overlay(Color.gray)
-                        
-                        //MARK: - LIST OF TRACKS
-                        VStack {
-                            ForEach(musicManager.musicList, id: \.musicId) { item in
-                                Button {
-                                    musicManager.currPlaying = item
-                                    musicManager.play()
-                                       
-                                } label: {
-                                    MusicRowView(imgDimens: 45, titleSize: 16, subTitleSize: 12, music: item)
-                                }
-                            }
+                    //MARK: - THUMBNAIL IMG
+                    SquareView(imageUrl: album.imageUrl!, size: 225)
+                    
+                    HStack{
+                        VStack(alignment: .leading){
+                            //MARK: - PLAYLIST NAME
+                            Text(album.title!)
+                                .font(.custom("Gotham-Black", size: 35))
+                                .modifier(OneLineText())
+                            Text("\(numOfTracks) track(s)")
+                                .font(.custom("Gotham-Medium", size: 18))
+                                .modifier(OneLineText())
                         }
                         Spacer()
+                        //MARK: - PLAY BUTTON
+                        Button {
+                            if firstPlaying{
+                                musicManager.currPlaying = musicManager.musicList[0]
+                                musicManager.play()
+                                firstPlaying = false
+                            }else{
+                                musicManager.pauseMusic()
+                            }
+                            
+                        } label: {
+                            Image(systemName: musicManager.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, alignment: .center)
+                                .foregroundColor(Color("green"))
+                                .background(
+                                    Circle()
+                                        .fill(Color(.black))
+                                )
+                        }
                     }
+                    
+                    Divider()
+                        .frame(height: 1)
+                        .overlay(Color.gray)
+                    
+                    //MARK: - LIST OF TRACKS
+                    VStack {
+                        ForEach(musicManager.musicList, id: \.musicId) { item in
+                            Button {
+                                musicManager.currPlaying = item
+                                musicManager.play()
+                                
+                            } label: {
+                                MusicRowView(imgDimens: 45, titleSize: 16, subTitleSize: 12, music: item)
+                            }
+                        }
+                    }
+                    Spacer()
+                }
                 .modifier(PagePadding())
             }
         }
@@ -109,16 +109,16 @@ struct AlbumPageView: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle(album.title!)
         .navigationBarTitleDisplayMode(.inline)
-//        .navigationBarItems(leading: CustomNavigationButton())
+        //        .navigationBarItems(leading: CustomNavigationButton())
         
     }
-  
+    
 }
 
 struct AlbumPageView_Previews: PreviewProvider {
     static var previews: some View {
-
-            AlbumPageView(album: albumSample)
+        
+        AlbumPageView(album: albumSample)
         
     }
 }
