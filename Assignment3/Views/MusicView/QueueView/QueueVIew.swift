@@ -16,6 +16,12 @@ import SwiftUI
 
 struct QueueVIew: View {
     @StateObject private var musicManager = MusicManager.instance
+    var musicListFromCurPlaying : [Music]{
+        if let i = musicManager.musicList.firstIndex(where: { $0.musicId == musicManager.currPlaying.musicId }) {
+            return Array(musicManager.musicList[i..<musicManager.musicList.count])
+        }
+        return [Music]()
+    }
     var body: some View {
         VStack(alignment: .leading){
             Text("Now Playing")
@@ -23,7 +29,7 @@ struct QueueVIew: View {
                 .modifier(BlackColor())
             //MARK: - CURRENT TRACK
             Button {
-                
+                musicManager.play()
             } label: {
                 Text("")
                 MusicRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
@@ -36,30 +42,22 @@ struct QueueVIew: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             //MARK: - TRACK LIST
-            List{
-                Button{
-                    
-                }label: {
-                    MusicRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
-                    Text("")
+            if !musicListFromCurPlaying.isEmpty{
+                List{
+                    ForEach(musicListFromCurPlaying){ music in
+                        Button{
+                            musicManager.currPlaying = music
+                            musicManager.play()
+                        }label: {
+                            MusicRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: music)
+                        }
+                        .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                    }
                 }
-                .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
-                
-                Button{
-                    
-                }label: {
-                    Text("")
-                    MusicRowView(imgDimens: 60,  titleSize: 21,subTitleSize: 17, music: musicManager.currPlaying)
-                }
-                .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
-                
+                .listStyle(PlainListStyle())
             }
-            .listStyle(PlainListStyle())
-            .frame(height: UIScreen.main.bounds.height/2.2)
             Spacer()
         }
         .frame(width: .infinity)

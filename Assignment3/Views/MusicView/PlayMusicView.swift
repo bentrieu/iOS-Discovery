@@ -235,7 +235,7 @@ struct PlayMusicView_Previews: PreviewProvider {
     }
 }
 let sampleMusic = Music(musicId: "8eRvtX2V8goiU3Sy7JIr",
-        musicName: "Try Tim Bao Vat",
+        musicName: "Truy Tim Bao Vat",
         imageUrl: "https://i.scdn.co/image/ab67616d0000b273e368556118fdcd985aa28019",
         artistName: "24K Right",
         file: "gs://assignment3-fcc04.appspot.com/music/X2Download.app - Truy Lùng Bảo Vật - 24k.Right ft. Sofia - Team B Ray _ Rap Việt 2023 [MV Lyrics] (128 kbps).mp3",
