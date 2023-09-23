@@ -10,7 +10,7 @@ import SwiftUI
 struct EditPlaylistView: View {
     @State var playlistName:String = "My Playlist 1"
     
-    
+
     @Environment (\.dismiss) var dismiss
     var body: some View {
         ZStack{
