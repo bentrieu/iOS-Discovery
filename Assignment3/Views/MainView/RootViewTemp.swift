@@ -12,6 +12,7 @@ struct MainView: View {
     @StateObject var userViewModel = UserViewModel()
     @StateObject var musicManager = MusicManager.instance
     @State private var expand = false
+    @Binding var showSignInView: Bool
     
     @Namespace var animation
     
@@ -19,7 +20,7 @@ struct MainView: View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)){
             //MARK: TABVIEW
             TabView {
-                HomeView(userViewModel: userViewModel)
+                HomeView(userViewModel: userViewModel, showSignInView: $showSignInView)
                     .tabItem {
                         Label("Home", systemImage:  "house.fill")
                             .foregroundColor(Color("black"))
@@ -62,6 +63,6 @@ struct MainView: View {
 
 struct RootViewTemp_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(showSignInView: .constant(false))
     }
 }

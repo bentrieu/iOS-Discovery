@@ -77,15 +77,6 @@ struct LandingPageView: View {
                         CustomSignUpButton(image: Image("facebook-icon"), title: "Continue with Facebook")
                     }
                     
-//                    //MARK: SIGN UP WITH APPLE
-//                    Button {
-//
-//                    } label: {
-//                        CustomSignUpButton(image: colorScheme == .dark ? Image(systemName: "apple.logo") : Image("apple-icon"), title: "Continue with Apple")
-//                    }
-//
-//                    //MARK: SIGN UP WITH APPLE
-                    
                     NavigationLink {
                         LoginView(showSignInView: $showSignInView)
                             .navigationTitle("Login")
