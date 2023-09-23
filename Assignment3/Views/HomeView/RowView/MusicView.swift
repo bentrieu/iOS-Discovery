@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MusicView: View {
     @State var musics : [Music] = []
+    @StateObject var musicManager = MusicManager.instance
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Recommended Music")
@@ -18,9 +20,16 @@ struct MusicView: View {
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
                     ForEach(musics, id: \.musicId) { item in
-                        NavigationLink {
-//                            AlbumPageView(album: item)
-//                                .modifier(CustomNavigationButton())
+                        Button {
+                            //set the current music to the selected music
+                            musicManager.currPlaying = item
+
+                            //make sure the music list contain the selected music itself
+                            musicManager.musicList.removeAll()
+                            musicManager.musicList.append(item)
+
+                            //play the music
+                            musicManager.play()
                                
                         } label: {
                             VStack(alignment: .leading){
