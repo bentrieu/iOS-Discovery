@@ -25,7 +25,6 @@ struct DiscoveryView: View {
     
     private var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
-        NavigationStack {
             ZStack{
                 Color("white")
                 NavigationView {
@@ -236,7 +235,7 @@ struct DiscoveryView: View {
                     print("Error: \(error)")
                 }
         }
-        }
+        
     }
 }
 
