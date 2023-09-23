@@ -10,7 +10,7 @@ import PhotosUI
 
 struct EditProfileView: View {
 //    @Binding var account: Account
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
     
     //declare the temp variables just to be placeholder
     //once the user save edit we will overwrite to account variable
@@ -47,6 +47,7 @@ struct EditProfileView: View {
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("Change photo")
                 }
+
 //                Button {
 //                    isPresentingEditPicture = true
 //                    isContentNotEdited = false

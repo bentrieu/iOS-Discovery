@@ -31,7 +31,7 @@ struct LandingPageView: View {
                         .frame(width: 50, height: 50)
                     VStack(spacing: 0){
                         Text("Milions of songs.")
-                        Text("Free on Spotify.")
+                        Text("Free on Muwusic.")
                     }
                     .font(Font.custom("Gotham-Bold", size: 32))
                     .tracking(-3)
@@ -76,15 +76,6 @@ struct LandingPageView: View {
                     } label: {
                         CustomSignUpButton(image: Image("facebook-icon"), title: "Continue with Facebook")
                     }
-                    
-//                    //MARK: SIGN UP WITH APPLE
-//                    Button {
-//
-//                    } label: {
-//                        CustomSignUpButton(image: colorScheme == .dark ? Image(systemName: "apple.logo") : Image("apple-icon"), title: "Continue with Apple")
-//                    }
-//
-//                    //MARK: SIGN UP WITH APPLE
                     
                     NavigationLink {
                         LoginView(showSignInView: $showSignInView)

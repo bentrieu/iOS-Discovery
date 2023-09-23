@@ -9,13 +9,15 @@ import SwiftUI
 
 struct SettingView: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
+    @StateObject var settingViewModel = SettingsViewModel()
+    @Binding var showSignInView: Bool
 
 //    var account: Account
     var body: some View {
         VStack{
             NavigationLink {
-                ViewProfileView(userViewModel: UserViewModel())
+                ViewProfileView(userViewModel: userViewModel)
                     .modifier(CustomNavigationButton())
             } label: {
                 AccountProfile(userViewModel: userViewModel)
@@ -31,11 +33,26 @@ struct SettingView: View {
                 SettingItemView(name: "Theme")
                     .modifier(CustomNavigationButton())
             }
-            if let user = userViewModel.user {
-                Text(user.userId)
-            }
-//            ButtonTextField(title: "Log out")
            
+            Button {
+                Task {
+                    do {
+                        try settingViewModel.signOut()
+                        showSignInView = true
+                    } catch {
+                        print("error: \(error)")
+                    }
+                }
+            } label: {
+                Text("Log out")
+                    .foregroundColor(.black)
+                    .font(Font.custom("Gotham-Bold", size: 16))
+                    .tracking(-1)
+                    .frame(width: 85, height: 20)
+                    .padding()
+                    .background(Color("gray").opacity(0.6))
+                    .clipShape(Capsule())
+            }
     
             Spacer()
         }
@@ -46,7 +63,7 @@ struct SettingView: View {
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
        
-            SettingView(userViewModel: UserViewModel())
+        SettingView(userViewModel: UserViewModel(), showSignInView: .constant(true))
     }
 }
 

@@ -15,6 +15,8 @@ final class MusicManager : ObservableObject {
     
     var player: AVPlayer?
     
+    @Published var isPlayingMusicView = false
+    
     @Published var isPlaying = false
     
     @Published var musicList = [Music]()
@@ -43,6 +45,7 @@ final class MusicManager : ObservableObject {
                         print(url.absoluteString)
                         self.player = AVPlayer(playerItem: AVPlayerItem(url: url))
                         self.player?.play()
+                        self.isPlayingMusicView = true
                     } catch {
                         print("Error downloading music URL: \(error.localizedDescription)")
                     }
@@ -120,10 +123,11 @@ final class MusicManager : ObservableObject {
     }
     
     func play(){
+        self.stopTimer()
         self.playMusicById(id: self.currPlaying.musicId)
         self.reset(music: self.currPlaying)
-        self.startTimer()
         self.isPlaying = true
+        self.startTimer()
     }
 
 }

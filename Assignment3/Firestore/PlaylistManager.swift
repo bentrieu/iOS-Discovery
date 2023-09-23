@@ -15,18 +15,7 @@ struct DBPlaylist: Codable {
     let photoUrl: String?
     let name: String?
     let musics: [String]?
-    
-    //    init(playlistId: String,
-    //    dateCreated: Date? = Date(),
-    //    photoUrl: String? = nil,
-    //    displayName: String?) {
-    //        self.playlistId = playlistId
-    //        self.dateCreated = dateCreated
-    //        self.photoUrl = photoUrl
-    //        self.displayName = displayName
-    //    }
 }
-
 
 final class PlaylistManager : ObservableObject{
     @Published var playlists =  [DBPlaylist]()
@@ -52,10 +41,10 @@ final class PlaylistManager : ObservableObject{
         return try AuthenticationManager.instance.getAuthenticatedUser().uid
     }
     
-    //    func getPlaylistsRef() async throws -> CollectionReference {
-    //        return try await userCollection.document(getCurrentUser()).collection("playlists")
-    //    }
-    
+//        func getPlaylistsRef() async throws -> CollectionReference {
+//            return try await userCollection.document(getCurrentUser()).collection("playlists")
+//        }
+//
     func getPlaylistsRef() async throws -> CollectionReference {
         return try await userCollection.document("mW8JeXNn48bI1annfiBM4x6pSdz2").collection("playlists")
     }
@@ -131,9 +120,16 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(data)
     }
     
-    func updatePlaylistInfo(playlistId: String, name: String, photoUrl: String) async throws {
+    func updatePlaylistName(playlistId: String, name: String) async throws {
         let playlistData: [String: Any] = [
             "name": name,
+        ]
+        
+        try await getPlaylistsRef().document(playlistId).updateData(playlistData)
+    }
+    
+    func updatePlaylistPhoto(playlistId: String, photoUrl: String) async throws {
+        let playlistData: [String: Any] = [
             "photo_url": photoUrl,
         ]
         

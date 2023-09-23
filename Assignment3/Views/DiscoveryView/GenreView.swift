@@ -23,12 +23,9 @@ struct GenreView: View {
                 //MARK: - LIST OF TRACKS
                 VStack {
                     ForEach(musicManager.musicList, id: \.musicId) { item in
-                        NavigationLink {
-                            PlayMusicView()
-                                .onAppear{
-                                    musicManager.currPlaying = item
-                                
-                                }
+                        Button {
+                            musicManager.currPlaying = item
+                            musicManager.play()
                                
                         } label: {
                             MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
@@ -40,7 +37,6 @@ struct GenreView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-      
         .toolbar{
             ToolbarItem (placement: .navigationBarLeading){
                 Button {
