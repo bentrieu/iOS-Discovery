@@ -9,13 +9,13 @@ import SwiftUI
 
 struct SettingView: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
 
 //    var account: Account
     var body: some View {
         VStack{
             NavigationLink {
-                ViewProfileView(userViewModel: UserViewModel())
+                ViewProfileView(userViewModel: userViewModel)
                     .modifier(CustomNavigationButton())
             } label: {
                 AccountProfile(userViewModel: userViewModel)
@@ -31,9 +31,7 @@ struct SettingView: View {
                 SettingItemView(name: "Theme")
                     .modifier(CustomNavigationButton())
             }
-            if let user = userViewModel.user {
-                Text(user.userId)
-            }
+            
 //            ButtonTextField(title: "Log out")
            
     

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ViewProfileView: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
 
     @State private var isPresentingEdit = false
     @State var isCancelButtonPressed = false
@@ -28,7 +28,6 @@ struct ViewProfileView: View {
                     .padding(.bottom,30)
                 
                 HStack{
-                    
                     Button {
                         isCancelButtonPressed = false
                         isContentNotEdited = true
@@ -55,9 +54,7 @@ struct ViewProfileView: View {
                     Text("Playlists")
                         .font(Font.custom("Gotham-bold", size: 16))
                         .foregroundColor(Color("black"))
-                    if let user = userViewModel.user {
-                        Text(user.userId)
-                    }
+
                 }
                 .padding(.horizontal)
                 

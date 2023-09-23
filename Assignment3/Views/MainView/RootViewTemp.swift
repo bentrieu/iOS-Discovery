@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject var viewModel = UserViewModel()
+    @StateObject var userViewModel = UserViewModel()
     @StateObject var musicManager = MusicManager.instance
     @State private var expand = false
     
@@ -19,7 +19,7 @@ struct MainView: View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)){
             //MARK: TABVIEW
             TabView {
-                HomeView()
+                HomeView(userViewModel: userViewModel)
                     .tabItem {
                         Label("Home", systemImage:  "house.fill")
                             .foregroundColor(Color("black"))

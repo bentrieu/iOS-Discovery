@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
     
     var body: some View {
         NavigationStack {
