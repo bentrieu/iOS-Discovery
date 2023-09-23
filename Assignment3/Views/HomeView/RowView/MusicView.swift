@@ -44,7 +44,8 @@ struct MusicView: View {
                                 SquareView(imageUrl: item.imageUrl!, size: 110)
                                 VStack(alignment: .leading, spacing: -5){
                                     Text(item.musicName!)
-                                        .font(Font.custom("Gotham-Bold", size: 13))
+                                        .font(Font.custom("Gotham-Medium", size: 13))
+                                        .lineLimit(1)
                                         .padding(.top,5)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(2)

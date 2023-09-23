@@ -26,16 +26,18 @@ struct GenreView: View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [color, Color("white")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
-            VStack{
-                //MARK: - LIST OF TRACKS
-                VStack {
-                    ForEach(musicManager.musicList, id: \.musicId) { item in
-                        Button {
-                            musicManager.currPlaying = item
-                            musicManager.play()
-                               
-                        } label: {
-                            MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
+            ScrollView {
+                VStack{
+                    //MARK: - LIST OF TRACKS
+                    VStack {
+                        ForEach(musicManager.musicList, id: \.musicId) { item in
+                            Button {
+                                musicManager.currPlaying = item
+                                musicManager.play()
+                                   
+                            } label: {
+                                MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
+                            }
                         }
                     }
                 }
