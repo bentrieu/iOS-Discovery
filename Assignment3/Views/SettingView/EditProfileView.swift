@@ -21,6 +21,8 @@ struct EditProfileView: View {
     @FocusState private var focusedField: Bool
     @State private var item: PhotosPickerItem?
     @State private var selectedImage: Image?
+    @State private var loading = true
+    var callback: ()->Void
     var body: some View {
         ZStack {
             Color("white")
@@ -29,16 +31,18 @@ struct EditProfileView: View {
                 HeadingControllerButtonView(userViewModel: userViewModel ,isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit,tempName: $tempName, focusField: $focusedField){
                     if let item {
                         userViewModel.saveProfileImage(item: item)
+                        callback()
                     }
                 }
                 if let selectedImage{
-                    
                     selectedImage
                         .resizable()
                         .modifier(AvatarView(size: 200))
                     let _ = print(selectedImage)
                 }else {
-                    AvatarViewContructor(size: 200, userViewModel: userViewModel)
+                    AvatarViewContructor(size: 200, userViewModel: userViewModel){
+                        loading = false
+                    }
                 }
                 
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
@@ -72,6 +76,12 @@ struct EditProfileView: View {
                     EditModalLeaveConfirmView(isPresentingEdit: $isPresentingEdit, isCancelButtonPressed: $isCancelButtonPressed, focusField: $focusedField)
                 }
             }
+            if loading{
+                LoadingView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.3))
+                    .ignoresSafeArea()
+            }
         }
         .onChange(of: item, perform: { newValue in
             self.isContentNotEdited  = false
@@ -96,11 +106,11 @@ struct EditProfileView: View {
     }
 }
 
-struct EditProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfileView(userViewModel: UserViewModel(), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
-    }
-}
+//struct EditProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditProfileView(userViewModel: UserViewModel(), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
+//    }
+//}
 
 struct CustomTextFieldForEditView: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {

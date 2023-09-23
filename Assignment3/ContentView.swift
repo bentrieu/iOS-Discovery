@@ -1,22 +1,25 @@
-//
-//  ContentView.swift
-//  Assignment3
-//
-//  Created by Ben Trieu on 09/09/2023.
-//
-
 import SwiftUI
 
+
+
 struct ContentView: View {
+    @State private var isLoading = false
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            // Your content here
+            
+            if isLoading {
+             
+            }
         }
-        .padding()
+        .onAppear {
+            // Simulate loading for a few seconds (remove this in your actual code)
+            isLoading = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                isLoading = false
+            }
+        }
     }
 }
 
@@ -25,5 +28,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-

@@ -18,7 +18,7 @@ struct ChartView: View {
                 .padding(.leading)
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
-                    ForEach(albums, id: \.albumId) { item in
+                    ForEach(AlbumListManager.shared.chart!, id: \.albumId) { item in
                         NavigationLink {
                             AlbumPageView(album: item)
                                 .modifier(CustomNavigationButton())

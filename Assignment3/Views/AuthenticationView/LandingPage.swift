@@ -49,7 +49,6 @@ struct LandingPageView: View {
 
                     
                     //MARK: SIGN UP WITH GOOGLE
-                    
                     Button {
                         Task {
                             do {

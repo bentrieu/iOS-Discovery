@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var userViewModel: UserViewModel
+    @StateObject var albumListManager = AlbumListManager.shared
     @Binding var showSignInView: Bool
     
     var body: some View {
@@ -32,14 +33,19 @@ struct HomeView: View {
                         .padding()
                         
                         //MARK: RECOMMENDED MUSIC ROW VIEW
+                        
                         MusicView()
                         
                         //MARK: ALBUM MUSIC ROW VIEW
-                        AlbumView()
-                        
+                        if let _ = albumListManager.popularAlbums{
+                            AlbumView()
+                        }
                         
                         //MARK: CHART MUSIC ROW VIEW
-                        ChartView()
+                        if let _ =  albumListManager.chart{
+                            ChartView()
+                        }
+                      
                         
                     }
                 }

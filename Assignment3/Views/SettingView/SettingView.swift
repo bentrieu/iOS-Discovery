@@ -14,6 +14,7 @@ struct SettingView: View {
     @StateObject var settingViewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
     @State private var errorPopUp = false
+    @State private var loading = true
 
 //    var account: Account
     var body: some View {
@@ -23,7 +24,9 @@ struct SettingView: View {
                     ViewProfileView(userViewModel: userViewModel)
                         .modifier(CustomNavigationButton())
                 } label: {
-                    AccountProfile(userViewModel: userViewModel)
+                    AccountProfile(userViewModel: userViewModel){
+                        loading = false
+                    }
                         .modifier(CustomNavigationButton())
                         .padding(.bottom)
                 }
@@ -86,6 +89,13 @@ struct SettingView: View {
             }
             .padding(.horizontal)
             
+            if loading{
+                LoadingView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.3))
+                    .ignoresSafeArea()
+            }
+            
             ErrorView(errorMessage: "There is no Face ID") // Error view for pre-filled cell error
                 .position(x: UIScreen.main.bounds.width/2, y: self.errorPopUp ? 100 : -30) // Position error view
                 .edgesIgnoringSafeArea(.top) // Ignore safe area edges
@@ -131,28 +141,12 @@ struct SettingView_Previews: PreviewProvider {
 }
 struct AccountProfile: View {
     @ObservedObject var userViewModel: UserViewModel
-
+    var callback: ()->Void
     var body: some View {
         HStack{
-            if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
-                AsyncImage(url: url){ image in
-                    image.resizable()
-                    
-                }placeholder: {
-                    
-                }
-                .modifier(AvatarView(size: 50))
-            }else{
-                AsyncImage(url: URL(string: "https://i.scdn.co/image/ab6761610000e5eb58efbed422ab46484466822b")){ image in
-                    image.resizable()
-                }placeholder: {
-                    
-                }
-                .modifier(AvatarView(size: 50))
-                
+            AvatarViewContructor(size: 50, userViewModel: userViewModel){
+                callback()
             }
-
-            
             VStack(alignment: .leading){
                 if let user = userViewModel.user {
                     if let name = user.displayName {

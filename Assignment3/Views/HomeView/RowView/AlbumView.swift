@@ -18,7 +18,7 @@ struct AlbumView : View {
                 .padding(.leading)
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: 17){
-                    ForEach(albums, id: \.albumId) { item in
+                    ForEach(AlbumListManager.shared.popularAlbums!, id: \.albumId) { item in
                         NavigationLink {
                             AlbumPageView(album: item)
                                 .modifier(CustomNavigationButton())
@@ -36,16 +36,11 @@ struct AlbumView : View {
             
         }
         .onAppear{
-            Task {
-                do {
-                    self.albums = try await AlbumManager.shared.getAlbumCollectionByName("Popular Albums")
-                    // Handle the albums
-                } catch {
-                    // Handle any errors that occur during the asynchronous operation
-                    print("Error: \(error)")
-                }
-            }
-            
+//            Task {
+//                self.albums = try await AlbumManager.shared.getAlbumCollectionByName("Popular Albums")
+//                print(self.albums)
+//            }
+            print(AlbumListManager.shared.popularAlbums)
         }
     }
 }
