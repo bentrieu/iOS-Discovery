@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var userViewModel: UserViewModel
+    @Binding var showSignInView: Bool
     
     var body: some View {
         NavigationStack {
@@ -18,7 +19,7 @@ struct HomeView: View {
                     .edgesIgnoringSafeArea(.all)
                 ScrollView {
                     VStack (alignment: .leading,spacing: 10){
-                        HeadingView(userViewModel: userViewModel)
+                        HeadingView(userViewModel: userViewModel, showSignInView: $showSignInView)
                         
                         HStack{
                             
@@ -50,13 +51,14 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(userViewModel: UserViewModel())
+        HomeView(userViewModel: UserViewModel(), showSignInView: .constant(false))
     }
 }
 
 struct HeadingView: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
+    @Binding var showSignInView: Bool
 
     var body: some View {
         HStack(spacing: 15){
@@ -80,7 +82,7 @@ struct HeadingView: View {
             
             
             NavigationLink {
-                SettingView(userViewModel: userViewModel)
+                SettingView(userViewModel: userViewModel, showSignInView: $showSignInView)
                     .navigationTitle("Settings")
             } label: {
                 Image(systemName: "gearshape")

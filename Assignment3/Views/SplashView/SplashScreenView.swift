@@ -10,7 +10,7 @@ struct SplashScreenView: View {
     var body: some View {
         if isActive{
             if !showSignInView {
-                MainView()
+                MainView(showSignInView: $showSignInView)
             } else {
                 LandingPageView(showSignInView: $showSignInView)
             }
