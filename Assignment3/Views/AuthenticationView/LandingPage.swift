@@ -31,7 +31,7 @@ struct LandingPageView: View {
                         .frame(width: 50, height: 50)
                     VStack(spacing: 0){
                         Text("Milions of songs.")
-                        Text("Free on Spotify.")
+                        Text("Free on Muwusic.")
                     }
                     .font(Font.custom("Gotham-Bold", size: 32))
                     .tracking(-3)
