@@ -80,7 +80,7 @@ struct PlaylistView: View {
                     .clipped()
                     .overlay(
                         Rectangle()
-                            .stroke(.gray, lineWidth: 6)
+                            .stroke(.gray, lineWidth: 4)
                     )
                     .opacity(searchActive ? 0 : 1)
                   
@@ -252,7 +252,7 @@ struct PlaylistView: View {
         }
         .navigationBarBackButtonHidden(true)
         .fullScreenCover(isPresented: $showEditPlaylistView) {
-            EditPlaylistView()
+            EditPlaylistView(playlist: playlist)
         }
     }
 }
