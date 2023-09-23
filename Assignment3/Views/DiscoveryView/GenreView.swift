@@ -1,9 +1,17 @@
-//
-//  GenreView.swift
-//  Assignment3
-//
-//  Created by DuyNguyen on 18/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+  ID: s3877969, s3878270, s3926888, s3878466, s3836280
+  Created  date: 10/9/2023
+  Last modified: 23/9/2023
+  Acknowledgement:
+https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+*/
+
 
 import SwiftUI
 
@@ -18,22 +26,23 @@ struct GenreView: View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [color, Color("white")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
-            VStack{
-                
-                //MARK: - LIST OF TRACKS
-                VStack {
-                    ForEach(musicManager.musicList, id: \.musicId) { item in
-                        Button {
-                            musicManager.currPlaying = item
-                            musicManager.play()
-                               
-                        } label: {
-                            MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
+            ScrollView {
+                VStack{
+                    //MARK: - LIST OF TRACKS
+                    VStack {
+                        ForEach(musicManager.musicList, id: \.musicId) { item in
+                            Button {
+                                musicManager.currPlaying = item
+                                musicManager.play()
+                                   
+                            } label: {
+                                MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
+                            }
                         }
                     }
                 }
             }
-            .modifier(PagePadding())
+//            .modifier(PagePadding())
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)

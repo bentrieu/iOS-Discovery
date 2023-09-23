@@ -1,81 +1,23 @@
-//
-//  FacebookSignInHelper.swift
-//  Assignment3
-//
-//  Created by Ben Trieu on 16/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+  ID: s3877969, s3878270, s3926888, s3878466, s3836280
+  Created  date: 10/9/2023
+  Last modified: 23/9/2023
+  Acknowledgement:
+https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+*/
+
 
 import Foundation
 import SwiftUI
 import FacebookLogin
 import FacebookCore
 import Firebase
-
-//struct FacebookLoginButton: UIViewRepresentable {
-//    
-//    @Binding var showSignInView: Bool
-//    
-//    func makeUIView(context: Context) -> FBLoginButton {
-//        let loginButton = FBLoginButton()
-//
-//        // Set the delegate to handle login results
-//        loginButton.permissions = ["public_profile","email"]
-//        loginButton.setTitleColor(.blue, for: .normal)
-//        loginButton.delegate = context.coordinator
-//
-//        return loginButton
-//    }
-//
-//    func updateUIView(_ uiView: FBLoginButton, context: Context) {
-//        // You can further configure the FBLoginButton or handle updates here
-//    }
-//
-//    // Coordinator to handle delegate methods
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(self)
-//    }
-//
-//    class Coordinator: NSObject, LoginButtonDelegate {
-//        var parent: FacebookLoginButton
-//
-//        init(_ parent: FacebookLoginButton) {
-//            self.parent = parent
-//        }
-//
-//        // Implement delegate methods to handle login events
-//        func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-//            if let error = error {
-//                // Handle login error
-//                print("Login error: \(error.localizedDescription)")
-//            } else if let result = result, !result.isCancelled {
-//                // Handle successful login
-//                Task {
-//                    do {
-//                        let authDataResult = try await AuthenticationManager.instance.signInWithFacebook(token: AccessToken.current!.tokenString)
-//                        let user = DBUser(auth: authDataResult)
-//                        try await UserManager.instance.createNewUser(user: user)
-//                        print("Logged in with Facebook")
-//                        parent.showSignInView = false
-//                    } catch {
-//                        print(error)
-//                    }
-//                }
-//            }
-//        }
-//
-//        func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-//            // Handle logout event
-//            Task {
-//                do {
-//                    try AuthenticationManager.instance.signOut()
-//                    print("Logged out from Facebook")
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//        }
-//    }
-//}
 
 final class FacebookSignInHelper: ObservableObject {
     private let loginManager = LoginManager()

@@ -1,47 +1,28 @@
-//
-//  AlbumListManager.swift
-//  Assignment3
-//
-//  Created by Hữu Phước  on 19/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+  ID: s3877969, s3878270, s3926888, s3878466, s3836280
+  Created  date: 10/9/2023
+  Last modified: 23/9/2023
+  Acknowledgement:
+https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+*/
+
 
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-final class AlbumListManager{
+final class AlbumListManager: ObservableObject{
+    @Published var popularAlbums :[Album]?
+    @Published var chart :[Album]?
     
     static var shared = AlbumListManager()
     
-    private var db = Firestore.firestore()
-    init(){}
-    
-//    func findAlbumById(_ albumsName: String, completion: @escaping (Result<Album?, Error>) -> Void) {
-//        let query = db.collection("albums").whereField("albums_name", isEqualTo: albumsName)
-//
-//        query.getDocuments { (querySnapshot, error) in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//
-//            guard let documents = querySnapshot?.documents, let document = documents.first else {
-//                completion(.success(nil)) // Document doesn't exist
-//                return
-//            }
-//
-//            do {
-//                let albumData = document.data()
-//                let album = Album(albumId: albumData["album_id"] as? String ?? "",
-//                                  imageUrl:albumData["image_url"] as? String ?? "",
-//                                  title:albumData["title"] as? String ?? "",
-//                                  type:albumData["type"] as? String ?? "",
-//                                  artistName: albumData["artist_name"] as? String ?? "",
-//                                  musicList: albumData["music_list"] as? [String] ?? [""])
-//                completion(.success(album))
-//            } catch {
-//                completion(.failure(error))
-//            }
-//        }
-//    }
+    init(){
+    }
 }

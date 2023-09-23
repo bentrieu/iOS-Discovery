@@ -1,9 +1,17 @@
-//
-//  EditProfileView.swift
-//  Assignment3
-//
-//  Created by Phuoc Dinh Gia Huu on 15/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+  ID: s3877969, s3878270, s3926888, s3878466, s3836280
+  Created  date: 10/9/2023
+  Last modified: 23/9/2023
+  Acknowledgement:
+https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+*/
+
 
 import SwiftUI
 import PhotosUI
@@ -21,6 +29,8 @@ struct EditProfileView: View {
     @FocusState private var focusedField: Bool
     @State private var item: PhotosPickerItem?
     @State private var selectedImage: Image?
+    @State private var loading = true
+    var callback: ()->Void
     var body: some View {
         ZStack {
             Color("white")
@@ -29,16 +39,18 @@ struct EditProfileView: View {
                 HeadingControllerButtonView(userViewModel: userViewModel ,isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit,tempName: $tempName, focusField: $focusedField){
                     if let item {
                         userViewModel.saveProfileImage(item: item)
+                        callback()
                     }
                 }
                 if let selectedImage{
-                    
                     selectedImage
                         .resizable()
                         .modifier(AvatarView(size: 200))
                     let _ = print(selectedImage)
                 }else {
-                    AvatarViewContructor(size: 200, userViewModel: userViewModel)
+                    AvatarViewContructor(size: 200, userViewModel: userViewModel){
+                        loading = false
+                    }
                 }
                 
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
@@ -72,6 +84,12 @@ struct EditProfileView: View {
                     EditModalLeaveConfirmView(isPresentingEdit: $isPresentingEdit, isCancelButtonPressed: $isCancelButtonPressed, focusField: $focusedField)
                 }
             }
+            if loading{
+                LoadingView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.3))
+                    .ignoresSafeArea()
+            }
         }
         .onChange(of: item, perform: { newValue in
             self.isContentNotEdited  = false
@@ -96,11 +114,11 @@ struct EditProfileView: View {
     }
 }
 
-struct EditProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfileView(userViewModel: UserViewModel(), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
-    }
-}
+//struct EditProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditProfileView(userViewModel: UserViewModel(), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
+//    }
+//}
 
 struct CustomTextFieldForEditView: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {

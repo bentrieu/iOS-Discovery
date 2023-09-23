@@ -1,9 +1,16 @@
-//
-//  MusicManager.swift
-//  Assignment3
-//
-//  Created by Ben Trieu on 18/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+  ID: s3877969, s3878270, s3926888, s3878466, s3836280
+  Created  date: 10/9/2023
+  Last modified: 23/9/2023
+  Acknowledgement:
+https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+*/
 
 import Foundation
 import FirebaseStorage
@@ -16,6 +23,10 @@ final class MusicManager : ObservableObject {
     var player: AVPlayer?
     
     @Published var isPlayingMusicView = false
+
+    @Published var isRepeat = false
+    
+    @Published var isShuffle = false
     
     @Published var isPlaying = false
     
@@ -99,6 +110,8 @@ final class MusicManager : ObservableObject {
     }
     
     func playNextMusic() -> Music? {
+        if isRepeat{return currPlaying}
+        if isShuffle{return self.musicList[Int.random(in: 0...musicList.count-1)]}
         guard let currentIndex = self.musicList.firstIndex(where: { $0.musicId == currPlaying.musicId }) else {
             // Current music not found in the list
             return nil

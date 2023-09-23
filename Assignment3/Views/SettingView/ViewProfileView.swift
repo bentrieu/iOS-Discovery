@@ -1,9 +1,16 @@
-//
-//  ViewProfileView.swift
-//  Assignment3
-//
-//  Created by Phuoc Dinh Gia Huu on 15/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+  ID: s3877969, s3878270, s3926888, s3878466, s3836280
+  Created  date: 10/9/2023
+  Last modified: 23/9/2023
+  Acknowledgement:
+https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+*/
 
 import SwiftUI
 
@@ -14,7 +21,8 @@ struct ViewProfileView: View {
     @State private var isPresentingEdit = false
     @State var isCancelButtonPressed = false
     @State var isContentNotEdited = true
-    
+    @State private var loading = true
+    @State var id = UUID()
     var body: some View {
         
         ZStack {
@@ -23,7 +31,13 @@ struct ViewProfileView: View {
                     .edgesIgnoringSafeArea(.all)
                     .frame(height:  150)
                     .overlay(alignment: .bottomLeading) {
-                        AccountProfileDetail(userViewModel: userViewModel)
+                        AccountProfileDetail(userViewModel: userViewModel){
+                            //remove loading modal when successfully
+                            //display image
+                            loading = false
+                            print("close loading for ViewProfileView ")
+                        }
+                        .id(id)
                     }
                     .padding(.bottom,30)
                 
@@ -45,7 +59,10 @@ struct ViewProfileView: View {
                                     .stroke(Color("black"))
                             }
                     }.sheet(isPresented: $isPresentingEdit) {
-                        EditProfileView(userViewModel: userViewModel, isCancelButtonPressed: $isCancelButtonPressed, isContentNotEdited: $isContentNotEdited, isPresentingEdit: $isPresentingEdit)
+                        EditProfileView(userViewModel: userViewModel, isCancelButtonPressed: $isCancelButtonPressed, isContentNotEdited: $isContentNotEdited, isPresentingEdit: $isPresentingEdit){
+                            loading = true
+                            self.id = UUID()
+                        }
                     }
                 }
                 .padding(.all)
@@ -60,6 +77,12 @@ struct ViewProfileView: View {
                 
                 Spacer()
             }
+            if loading{
+                LoadingView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.3))
+                    .ignoresSafeArea()
+            }
         }
     }
 }
@@ -73,10 +96,12 @@ struct ViewProfileView_Previews: PreviewProvider {
 struct AccountProfileDetail: View {
     
     @ObservedObject var userViewModel: UserViewModel
-
+    var callback : ()->Void
     var body: some View {
         HStack {
-            AvatarViewContructor(size: 140, userViewModel: userViewModel)
+            AvatarViewContructor(size: 140, userViewModel: userViewModel){
+                callback()
+            }
             
             if let user = userViewModel.user, let name = user.displayName {
                 Text(name)
@@ -93,25 +118,32 @@ struct AccountProfileDetail: View {
 struct AvatarViewContructor: View {
     var size : CGFloat
     @ObservedObject var userViewModel: UserViewModel
-
+    var callback: () -> Void
     var body: some View {
         HStack {
             if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
-                AsyncImage(url: url){ image in
-                    image.resizable()
-                    
-                }placeholder: {
-                    
+                AsyncImage(url: url){ phase in
+                    if let image = phase.image{
+                        image
+                            .resizable()
+                            .modifier(AvatarView(size: size))
+                            .onAppear{
+                                callback()
+                            }
+                    }
                 }
-                .modifier(AvatarView(size: size))
             }else{
-                AsyncImage(url: URL(string: "https://i.scdn.co/image/ab6761610000e5eb58efbed422ab46484466822b")){ image in
-                    image.resizable()
-                }placeholder: {
-                    
+                AsyncImage(url: URL(string: "https://i.scdn.co/image/ab6761610000e5eb58efbed422ab46484466822b")){ phase in
+                    if let image = phase.image{
+                       
+                        image
+                            .resizable()
+                            .modifier(AvatarView(size: size))
+                            .onAppear{
+                                callback()
+                            }
+                    }
                 }
-                .modifier(AvatarView(size: size))
-                
             }
             
         }

@@ -1,9 +1,16 @@
-//
-//  SettingView.swift
-//  Assignment3
-//
-//  Created by Phuoc Dinh Gia Huu on 15/09/2023.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+  ID: s3877969, s3878270, s3926888, s3878466, s3836280
+  Created  date: 10/9/2023
+  Last modified: 23/9/2023
+  Acknowledgement:
+https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+*/
 
 import SwiftUI
 import LocalAuthentication
@@ -14,6 +21,7 @@ struct SettingView: View {
     @StateObject var settingViewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
     @State private var errorPopUp = false
+    @State private var loading = true
 
 //    var account: Account
     var body: some View {
@@ -23,7 +31,9 @@ struct SettingView: View {
                     ViewProfileView(userViewModel: userViewModel)
                         .modifier(CustomNavigationButton())
                 } label: {
-                    AccountProfile(userViewModel: userViewModel)
+                    AccountProfile(userViewModel: userViewModel){
+                        loading = false
+                    }
                         .modifier(CustomNavigationButton())
                         .padding(.bottom)
                 }
@@ -86,6 +96,13 @@ struct SettingView: View {
             }
             .padding(.horizontal)
             
+            if loading{
+                LoadingView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.3))
+                    .ignoresSafeArea()
+            }
+            
             ErrorView(errorMessage: "There is no Face ID") // Error view for pre-filled cell error
                 .position(x: UIScreen.main.bounds.width/2, y: self.errorPopUp ? 100 : -30) // Position error view
                 .edgesIgnoringSafeArea(.top) // Ignore safe area edges
@@ -131,28 +148,12 @@ struct SettingView_Previews: PreviewProvider {
 }
 struct AccountProfile: View {
     @ObservedObject var userViewModel: UserViewModel
-
+    var callback: ()->Void
     var body: some View {
         HStack{
-            if let urlString = userViewModel.user?.profileImagePath, let url = URL(string: urlString) {
-                AsyncImage(url: url){ image in
-                    image.resizable()
-                    
-                }placeholder: {
-                    
-                }
-                .modifier(AvatarView(size: 50))
-            }else{
-                AsyncImage(url: URL(string: "https://i.scdn.co/image/ab6761610000e5eb58efbed422ab46484466822b")){ image in
-                    image.resizable()
-                }placeholder: {
-                    
-                }
-                .modifier(AvatarView(size: 50))
-                
+            AvatarViewContructor(size: 50, userViewModel: userViewModel){
+                callback()
             }
-
-            
             VStack(alignment: .leading){
                 if let user = userViewModel.user {
                     if let name = user.displayName {

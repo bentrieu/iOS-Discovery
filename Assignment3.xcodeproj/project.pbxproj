@@ -58,7 +58,6 @@
 		9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */; };
 		9C575AFF2AB589D000BE4553 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9C575AFE2AB589D000BE4553 /* FirebaseFirestore */; };
 		9C575B012AB589D000BE4553 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C575B002AB589D000BE4553 /* FirebaseFirestoreSwift */; };
-		9C575B042AB58E2700BE4553 /* TempProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C575B032AB58E2700BE4553 /* TempProfileView.swift */; };
 		9C575B082AB5E97600BE4553 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C575B072AB5E97600BE4553 /* UserManager.swift */; };
 		9C575B0A2AB5EC3600BE4553 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C575B092AB5EC3600BE4553 /* AuthenticationViewModel.swift */; };
 		9C9EA7712AB1F4300042ACD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C9EA7702AB1F4300042ACD5 /* GoogleService-Info.plist */; };
@@ -66,20 +65,15 @@
 		9C9EA7762AB1F4720042ACD5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C9EA7752AB1F4720042ACD5 /* GoogleSignInSwift */; };
 		9C9EA7782AB21B4A0042ACD5 /* GoogleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EA7772AB21B4A0042ACD5 /* GoogleSignInHelper.swift */; };
 		9CAFF8F12ABD8608008C2F01 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF8F02ABD8608008C2F01 /* UserViewModel.swift */; };
-		9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2D2AADA67300A07591 /* RootView.swift */; };
-		9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */; };
 		9CC58AAE2ABEB2E000DC33AC /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC58AAD2ABEB2E000DC33AC /* SettingViewModel.swift */; };
 		9CD5585F2AAC4F2B0058A5C3 /* Assignment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */; };
-		9CD558612AAC4F2B0058A5C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD558602AAC4F2B0058A5C3 /* ContentView.swift */; };
 		9CD558632AAC4F2C0058A5C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CD558622AAC4F2C0058A5C3 /* Assets.xcassets */; };
 		9CD558662AAC4F2C0058A5C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CD558652AAC4F2C0058A5C3 /* Preview Assets.xcassets */; };
 		9CD558702AAC50470058A5C3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9CD5586F2AAC50470058A5C3 /* FirebaseAnalytics */; };
 		9CD558722AAC50470058A5C3 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CD558712AAC50470058A5C3 /* FirebaseAnalyticsSwift */; };
 		9CF2DCD82AB348D4000AEDDB /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9CF2DCD72AB348D4000AEDDB /* FacebookCore */; };
 		9CF2DCDA2AB348D4000AEDDB /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 9CF2DCD92AB348D4000AEDDB /* FacebookLogin */; };
-		9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */; };
 		9CFE5E7D2AAC5F940000A801 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFE5E7C2AAC5F940000A801 /* FirebaseAuth */; };
-		9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */; };
 		9CFE5E822AAC63E60000A801 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */; };
 		E38A26432AB8288E00C7A3FA /* testMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38A26422AB8288E00C7A3FA /* testMusicView.swift */; };
 		E3AFB4442AB852C3001E83E4 /* AlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */; };
@@ -151,23 +145,17 @@
 		9C33DC892ABC857D00BFA2EE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		9C38803D2AB83ED100E60162 /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInHelper.swift; sourceTree = "<group>"; };
-		9C575B032AB58E2700BE4553 /* TempProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempProfileView.swift; sourceTree = "<group>"; };
 		9C575B072AB5E97600BE4553 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		9C575B092AB5EC3600BE4553 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		9C9EA7702AB1F4300042ACD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9C9EA7772AB21B4A0042ACD5 /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
 		9CAFF8F02ABD8608008C2F01 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
-		9CB48F2D2AADA67300A07591 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempSettingsView.swift; sourceTree = "<group>"; };
 		9CC58AAD2ABEB2E000DC33AC /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		9CD5585B2AAC4F2B0058A5C3 /* Assignment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment3App.swift; sourceTree = "<group>"; };
-		9CD558602AAC4F2B0058A5C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9CD558622AAC4F2C0058A5C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CD558652AAC4F2C0058A5C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9CF2DCDB2AB34C6D000AEDDB /* Assignment3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Assignment3.entitlements; sourceTree = "<group>"; };
-		9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporarySignUpView.swift; sourceTree = "<group>"; };
-		9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempAuthenticationView.swift; sourceTree = "<group>"; };
 		9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		E38A26422AB8288E00C7A3FA /* testMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMusicView.swift; sourceTree = "<group>"; };
 		E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumManager.swift; sourceTree = "<group>"; };
@@ -401,8 +389,6 @@
 				04E1499F2AAF4A4A00BF6229 /* Fonts */,
 				04E149992AAF499200BF6229 /* Views */,
 				9CD5585E2AAC4F2B0058A5C3 /* Assignment3App.swift */,
-				9CD558602AAC4F2B0058A5C3 /* ContentView.swift */,
-				9CB48F2D2AADA67300A07591 /* RootView.swift */,
 				9C33DC882ABC856F00BFA2EE /* Storage */,
 				9C575B062AB5E96600BE4553 /* Firestore */,
 				9CFE5E7A2AAC5DCA0000A801 /* Auth */,
@@ -424,10 +410,6 @@
 		9CFE5E7A2AAC5DCA0000A801 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				9CFE5E782AAC5DBB0000A801 /* TemporarySignUpView.swift */,
-				9CFE5E7E2AAC610E0000A801 /* TempAuthenticationView.swift */,
-				9CB48F2F2AADA7D400A07591 /* TempSettingsView.swift */,
-				9C575B032AB58E2700BE4553 /* TempProfileView.swift */,
 				9CFE5E812AAC63E60000A801 /* AuthenticationManager.swift */,
 				9C9EA7772AB21B4A0042ACD5 /* GoogleSignInHelper.swift */,
 				9C575AFC2AB56C7800BE4553 /* FacebookSignInHelper.swift */,
@@ -610,12 +592,10 @@
 			files = (
 				9C575B0A2AB5EC3600BE4553 /* AuthenticationViewModel.swift in Sources */,
 				049B57182AB823E7005809B5 /* DiscoveryView.swift in Sources */,
-				9CD558612AAC4F2B0058A5C3 /* ContentView.swift in Sources */,
 				9958D8712AB071E500F5F42E /* LoginView.swift in Sources */,
 				9C575B082AB5E97600BE4553 /* UserManager.swift in Sources */,
 				F514FA942AB1BB4600A48228 /* Utils.swift in Sources */,
 				F5BD950B2AB436210015B48C /* EditProfileView.swift in Sources */,
-				9C575B042AB58E2700BE4553 /* TempProfileView.swift in Sources */,
 				99B598E22AB812AC0082C1B5 /* Music.swift in Sources */,
 				990FF9F22AB9A9F9007B8252 /* AlbumListManager.swift in Sources */,
 				049B571C2AB83072005809B5 /* GenreView.swift in Sources */,
@@ -629,8 +609,6 @@
 				9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */,
 				9CC58AAE2ABEB2E000DC33AC /* SettingViewModel.swift in Sources */,
 				0440584C2AB70200002C994B /* PlaylistView.swift in Sources */,
-				9CFE5E792AAC5DBB0000A801 /* TemporarySignUpView.swift in Sources */,
-				9CB48F2E2AADA67300A07591 /* RootView.swift in Sources */,
 				9C33DC8A2ABC857D00BFA2EE /* StorageManager.swift in Sources */,
 				99B598E42AB812B90082C1B5 /* Album.swift in Sources */,
 				9C2AB8D82AB6EADC0056D5C3 /* AuthenticateEmailViewModel.swift in Sources */,
@@ -649,11 +627,9 @@
 				9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */,
 				F5704DFE2AB82C3500495552 /* ChangePhotoView.swift in Sources */,
 				995136432ABF05280034C72D /* SettingManager.swift in Sources */,
-				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				049B571E2AB98F38005809B5 /* AlbumPageView.swift in Sources */,
 				04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */,
 				0440583A2AB309EB002C994B /* LibraryView.swift in Sources */,
-				9CFE5E7F2AAC610E0000A801 /* TempAuthenticationView.swift in Sources */,
 				04E149B42AAF4B3500BF6229 /* PlayMusicView.swift in Sources */,
 				F514FA922AB1B9E300A48228 /* HomeView.swift in Sources */,
 				04E149DB2AB05FDD00BF6229 /* FocusedSearchBarView.swift in Sources */,
