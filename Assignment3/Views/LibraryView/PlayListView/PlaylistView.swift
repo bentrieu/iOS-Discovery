@@ -10,6 +10,7 @@ import SwiftUI
 struct PlaylistView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var playlistManager = PlaylistManager.instance
+    @StateObject var musicManager  = MusicManager.instance
     
     let playlist : DBPlaylist
     
@@ -26,6 +27,7 @@ struct PlaylistView: View {
     }
     
     @State var playMusicAvtive = false
+    @State var firstPlaying = true
     @State var searchActive = false
     @State var searchInput = ""
     
@@ -83,7 +85,7 @@ struct PlaylistView: View {
                             .stroke(.gray, lineWidth: 4)
                     )
                     .opacity(searchActive ? 0 : 1)
-                  
+                    
                     
                     HStack{
                         VStack(alignment: playlistTracks.isEmpty ? .center : .leading){
@@ -101,6 +103,16 @@ struct PlaylistView: View {
                             Spacer()
                             //MARK: - PLAY BUTTON
                             Button {
+                                if firstPlaying{
+                                    musicManager.musicList.removeAll()
+                                    musicManager.musicList = playlistTracks
+                                    musicManager.currPlaying = playlistTracks[0]
+                                    musicManager.play()
+                                    firstPlaying = false
+                                }else{
+                                    musicManager.pauseMusic()
+                                }
+                                
                                 playMusicAvtive.toggle()
                             } label: {
                                 Image(systemName: playMusicAvtive ? "pause.circle.fill" : "play.circle.fill")
@@ -174,6 +186,14 @@ struct PlaylistView: View {
                                 ForEach(musicSearchResult) { music in
                                     
                                     Button{
+                                        if firstPlaying{
+                                            musicManager.musicList.removeAll()
+                                            musicManager.musicList = playlistTracks
+                                            firstPlaying = false
+                                        }
+                                        musicManager.currPlaying = music
+                                        musicManager.play()
+                                        playMusicAvtive = true
                                         
                                     }label: {
                                         MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: music)
