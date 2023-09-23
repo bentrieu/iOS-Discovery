@@ -36,6 +36,8 @@
 		04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */; };
 		990FF9F22AB9A9F9007B8252 /* AlbumListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FF9F12AB9A9F9007B8252 /* AlbumListManager.swift */; };
 		990FF9F42AB9AD26007B8252 /* AlbumList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FF9F32AB9AD26007B8252 /* AlbumList.swift */; };
+		995136412ABF04C50034C72D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995136402ABF04C50034C72D /* ErrorView.swift */; };
+		995136432ABF05280034C72D /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995136422ABF05280034C72D /* SettingManager.swift */; };
 		9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */; };
 		9958D8572AAF841900F5F42E /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D8562AAF841900F5F42E /* SplashScreenView.swift */; };
 		9958D86D2AB071B300F5F42E /* CustomSecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9958D86C2AB071B300F5F42E /* CustomSecureTextField.swift */; };
@@ -130,6 +132,8 @@
 		04E149DC2AB0A3BF00BF6229 /* NewPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaylistView.swift; sourceTree = "<group>"; };
 		990FF9F12AB9A9F9007B8252 /* AlbumListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListManager.swift; sourceTree = "<group>"; };
 		990FF9F32AB9AD26007B8252 /* AlbumList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumList.swift; sourceTree = "<group>"; };
+		995136402ABF04C50034C72D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		995136422ABF05280034C72D /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
 		9958D84F2AAF7E6300F5F42E /* viewModiferHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewModiferHelper.swift; sourceTree = "<group>"; };
 		9958D8562AAF841900F5F42E /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		9958D86C2AB071B300F5F42E /* CustomSecureTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSecureTextField.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 		04E149992AAF499200BF6229 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9951363F2ABF04940034C72D /* ErrorView */,
 				F5BD95052AB427830015B48C /* SettingView */,
 				F5BD94FE2AB41E690015B48C /* SearchView */,
 				F5BD94FB2AB41D820015B48C /* MainView */,
@@ -300,6 +305,14 @@
 			path = AddToPlaylistView;
 			sourceTree = "<group>";
 		};
+		9951363F2ABF04940034C72D /* ErrorView */ = {
+			isa = PBXGroup;
+			children = (
+				995136402ABF04C50034C72D /* ErrorView.swift */,
+			);
+			path = ErrorView;
+			sourceTree = "<group>";
+		};
 		9958D84B2AAF69B200F5F42E /* AuthenticationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +369,7 @@
 				E3AFB4432AB852C3001E83E4 /* AlbumManager.swift */,
 				E3AFB4472AB86519001E83E4 /* PlaylistManager.swift */,
 				990FF9F12AB9A9F9007B8252 /* AlbumListManager.swift */,
+				995136422ABF05280034C72D /* SettingManager.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -634,6 +648,7 @@
 				9958D86D2AB071B300F5F42E /* CustomSecureTextField.swift in Sources */,
 				9C575AFD2AB56C7800BE4553 /* FacebookSignInHelper.swift in Sources */,
 				F5704DFE2AB82C3500495552 /* ChangePhotoView.swift in Sources */,
+				995136432ABF05280034C72D /* SettingManager.swift in Sources */,
 				9CB48F302AADA7D400A07591 /* TempSettingsView.swift in Sources */,
 				049B571E2AB98F38005809B5 /* AlbumPageView.swift in Sources */,
 				04E149D72AB04DC300BF6229 /* AddToPlaylistView.swift in Sources */,
@@ -660,6 +675,7 @@
 				04E149CC2AAF52A700BF6229 /* HeartButtonView.swift in Sources */,
 				E3AFB4442AB852C3001E83E4 /* AlbumManager.swift in Sources */,
 				9958D8502AAF7E6300F5F42E /* viewModiferHelper.swift in Sources */,
+				995136412ABF04C50034C72D /* ErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,64 +13,83 @@ struct SettingView: View {
     @StateObject var userViewModel: UserViewModel
     @StateObject var settingViewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
+    @State private var errorPopUp = false
 
 //    var account: Account
     var body: some View {
-        VStack{
-            NavigationLink {
-                ViewProfileView(userViewModel: userViewModel)
-                    .modifier(CustomNavigationButton())
-            } label: {
-                AccountProfile(userViewModel: userViewModel)
-                    .modifier(CustomNavigationButton())
-                    .padding(.bottom)
-            }
-            
-            NavigationLink {
-                ThemeEditingView()
-                    .navigationTitle("Theme Setting")
-                    .modifier(CustomNavigationButton())
-            } label: {
-                SettingItemView(name: "Theme")
-                    .modifier(CustomNavigationButton())
-            }
-           
-            Button {
-                Task {
-                    do {
-                        try settingViewModel.signOut()
-                        showSignInView = true
-                    } catch {
-                        print("error: \(error)")
-                    }
+        ZStack {
+            VStack{
+                NavigationLink {
+                    ViewProfileView(userViewModel: userViewModel)
+                        .modifier(CustomNavigationButton())
+                } label: {
+                    AccountProfile(userViewModel: userViewModel)
+                        .modifier(CustomNavigationButton())
+                        .padding(.bottom)
                 }
-            } label: {
-                Text("Log out")
-                    .foregroundColor(.black)
-                    .font(Font.custom("Gotham-Bold", size: 16))
-                    .tracking(-1)
-                    .frame(width: 85, height: 20)
-                    .padding()
-                    .background(Color("gray").opacity(0.6))
-                    .clipShape(Capsule())
+                
+                NavigationLink {
+                    ThemeEditingView()
+                        .navigationTitle("Theme Setting")
+                        .modifier(CustomNavigationButton())
+                } label: {
+                    SettingItemView(name: "Theme")
+                        .modifier(CustomNavigationButton())
+                }
+               
+                Button {
+                    Task {
+                        do {
+                            try settingViewModel.signOut()
+                            showSignInView = true
+                        } catch {
+                            print("error: \(error)")
+                        }
+                    }
+                } label: {
+                    Text("Log out")
+                        .foregroundColor(.black)
+                        .font(Font.custom("Gotham-Bold", size: 16))
+                        .tracking(-1)
+                        .frame(width: 85, height: 20)
+                        .padding()
+                        .background(Color("gray").opacity(0.6))
+                        .clipShape(Capsule())
+                }
+        
+                Spacer()
+                
+                Button {
+                    authenticate()
+                    if SettingManager.shared.errorPopUp {
+                        withAnimation() {
+                            errorPopUp = true
+                        }
+                        print( SettingManager.shared.errorPopUp)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            withAnimation {
+                                errorPopUp = false
+                                SettingManager.shared.errorPopUp = false
+                            }
+                        }
+                    }
+                } label: {
+                    Text("Delete account")
+                        .foregroundColor(.black)
+                        .font(Font.custom("Gotham-Bold", size: 16))
+                        .tracking(-1)
+                        .frame(width: 150, height: 20)
+                        .padding()
+                        .background(Color.red.opacity(0.6))
+                        .clipShape(Capsule())
+                }
             }
-    
-            Spacer()
+            .padding(.horizontal)
             
-            Button {
-                authenticate()
-            } label: {
-                Text("Delete account")
-                    .foregroundColor(.black)
-                    .font(Font.custom("Gotham-Bold", size: 16))
-                    .tracking(-1)
-                    .frame(width: 150, height: 20)
-                    .padding()
-                    .background(Color.red.opacity(0.6))
-                    .clipShape(Capsule())
-            }
+            ErrorView(errorMessage: "There is no Face ID") // Error view for pre-filled cell error
+                .position(x: UIScreen.main.bounds.width/2, y: self.errorPopUp ? 100 : -30) // Position error view
+                .edgesIgnoringSafeArea(.top) // Ignore safe area edges
         }
-        .padding(.horizontal)
     }
     
     func authenticate() {
@@ -97,6 +116,8 @@ struct SettingView: View {
                 }
             }
         } else {
+            SettingManager.shared.errorPopUp = true
+          
             print("there is no faceid")
         }
     }
