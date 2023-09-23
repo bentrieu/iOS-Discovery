@@ -13,10 +13,19 @@ import FacebookCore
 struct Assignment3App: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+    @Environment(\.scenePhase) var scenePhase
+    @StateObject var musicManager = MusicManager.instance
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
+                .onChange(of: scenePhase) { newValue in
+                    if newValue == .inactive{
+                        musicManager.stopTimer()
+                        musicManager.player?.pause()
+                        musicManager.isPlaying = false
+                    }
+                }
+                
         }
     }
 }
