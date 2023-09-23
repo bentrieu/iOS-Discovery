@@ -23,6 +23,10 @@ final class MusicManager : ObservableObject {
     var player: AVPlayer?
     
     @Published var isPlayingMusicView = false
+
+    @Published var isRepeat = false
+    
+    @Published var isShuffle = false
     
     @Published var isPlaying = false
     
@@ -106,6 +110,8 @@ final class MusicManager : ObservableObject {
     }
     
     func playNextMusic() -> Music? {
+        if isRepeat{return currPlaying}
+        if isShuffle{return self.musicList[Int.random(in: 0...musicList.count-1)]}
         guard let currentIndex = self.musicList.firstIndex(where: { $0.musicId == currPlaying.musicId }) else {
             // Current music not found in the list
             return nil
