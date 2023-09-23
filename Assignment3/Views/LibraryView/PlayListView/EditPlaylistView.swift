@@ -15,9 +15,7 @@ struct EditPlaylistView: View {
     
     @State var nameInput = ""
     @State var photoUrl = ""
-    var musicsIdBeforeEdit : [String]{      
-        return playlist.musics ?? [String]()
-    }
+    @State var musicsIdBeforeEdit = [String]()
     var playlistTracks : [Music]{
         return playlistManager.getAllMusicsInPlaylist(playlistId: playlist.playlistId)
     }
@@ -31,10 +29,10 @@ struct EditPlaylistView: View {
                     //MARK: - CLOSE BUTTON
                     Button {
                         Task{
-                            //reset the musics in playlist on firestore as before editting when tap cancel button
-                            
-                            //fetch change to local array
                             do{
+                                //reset the musics in playlist on firestore as before editting when tap cancel button
+                                try await playlistManager.setMusicsToPlaylist(musicIds: musicsIdBeforeEdit, playlistId: playlist.playlistId)
+                                //fetch change to local array
                                 playlistManager.playlists = try await playlistManager.getAllPlaylist()
                             }catch{
                                 print(error)
@@ -199,6 +197,7 @@ struct EditPlaylistView: View {
         .onAppear {
             nameInput = playlist.name ?? ""
             photoUrl = playlist.photoUrl!
+            musicsIdBeforeEdit = playlist.musics ?? [String]()
         }
     }
 }

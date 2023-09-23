@@ -136,6 +136,14 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(playlistData)
     }
     
+    func setMusicsToPlaylist(musicIds: [String], playlistId: String) async throws {
+        let data: [String: Any] = [
+            "musics": musicIds
+        ]
+        
+        try await getPlaylistsRef().document(playlistId).updateData(data)
+    }
+    
     func getPlaylistFromLocal(playlistId : String) -> DBPlaylist{
         return playlists.first(where: {$0.playlistId == playlistId})!
     }
