@@ -11,12 +11,10 @@ struct PlaylistView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var playlistManager = PlaylistManager.instance
     
-    let playlistId : String
-    var playlistName: String{
-        return playlistManager.playlists.first(where: {$0.playlistId == playlistId})?.name ?? ""
-    }
+    let playlist : DBPlaylist
+    
     var playlistTracks : [Music]{
-        return playlistManager.getAllMusicsInPlaylist(playlistId: playlistId)
+        return playlistManager.getAllMusicsInPlaylist(playlistId: playlist.playlistId)
     }
     
     var musicSearchResult : [Music]{
@@ -61,27 +59,41 @@ struct PlaylistView: View {
                 .ignoresSafeArea(.all)
             
             if showAddTracksToPlaylistView{
-                AddTracksToPlayListView(showView: $showAddTracksToPlaylistView, playlistId: playlistId)
+                AddTracksToPlayListView(showView: $showAddTracksToPlaylistView, playlistId: playlist.playlistId)
             }else{
                 
                 VStack(spacing: searchActive ? 0 :30){
                     //MARK: - THUMBNAIL IMG
-                    Image("testImg")
-                        .resizable()
-                        .frame(width: searchActive ? 0 : UIScreen.main.bounds.width/1.5,height:searchActive ? 0 : UIScreen.main.bounds.width/1.6)
-                    
-                        .opacity(searchActive ? 0 : 1)
-                        .modifier(Img())
+                    AsyncImage(url: URL(string: playlist.photoUrl!)) { phase in
+                        if let image = phase.image {
+                            // if the image is valid
+                            image
+                                .resizable()
+                        } else {
+                            //appears as placeholder & error image
+                            Image(systemName: "photo")
+                                .resizable()
+                        }
+                    }
+                    .modifier(Img())
+                    .frame(width: searchActive ? 0 : UIScreen.main.bounds.width/1.5,height:searchActive ? 0 : UIScreen.main.bounds.width/1.5)
+                    .clipped()
+                    .overlay(
+                        Rectangle()
+                            .stroke(.gray, lineWidth: 6)
+                    )
+                    .opacity(searchActive ? 0 : 1)
+                  
                     
                     HStack{
                         VStack(alignment: playlistTracks.isEmpty ? .center : .leading){
                             
                             //MARK: - PLAYLIST NAME
-                            Text(playlistName)
-                                .font(.custom("Gotham-Bold", size: 30))
+                            Text(playlist.name ?? "")
+                                .font(.custom("Gotham-Black", size: 35))
                                 .modifier(OneLineText())
                             Text("\(playlistTracks.count) track(s)")
-                                .font(.custom("Gotham-Me", size: 20))
+                                .font(.custom("Gotham-Book", size: 20))
                                 .modifier(OneLineText())
                         }
                         
@@ -102,7 +114,7 @@ struct PlaylistView: View {
                                     )
                             }
                         }
-
+                        
                     }
                     .offset(y: searchActive ? -50 : 0)
                     .frame(height: searchActive ? 0 : nil)
@@ -113,8 +125,8 @@ struct PlaylistView: View {
                         Divider()
                             .frame(height: 1)
                             .overlay(Color("black"))
-                            
-
+                        
+                        
                         //MARK: - ADD FIRST TRACK BUTTON
                         Text("Let's start building your playlist")
                             .font(.custom("Gotham-Medium", size: 20))
@@ -128,43 +140,74 @@ struct PlaylistView: View {
                         }
                         Spacer()
                     }else{  //playlist has track
-                        //MARK: - LIST OF TRACKS
-                        List{
-                            //MARK: ADD TO PLAYLIST BUTTON
-                            Button{
-                                withAnimation {
-                                    showAddTracksToPlaylistView = true
-                                }
-                                
-                            }label: {
-                                AddToPlaylistButtonView(isMusicListEmpty: false)
-                            }
-                            .listRowInsets(.init(top: 0, leading: 0, bottom: 5, trailing: 0))
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .frame(height: searchActive ? 0 : nil)
-                            .opacity(searchActive ? 0 : 1)
-                            .disabled(searchActive)
-                            
-                            
-                            ForEach(musicSearchResult) { music in
-                                
+                        if musicSearchResult.isEmpty{
+                            //MARK: - SEARCH NOTIFICATION
+                            Text("No results found for '\(searchInput)'")
+                                .font(.custom("Gotham-Black", size: 22))
+                                .modifier(BlackColor())
+                                .multilineTextAlignment(.center)
+                            Text("Check the spelling, or try different keywords.")
+                                .font(.custom("Gotham-Medium", size: 17))
+                                .modifier(BlackColor())
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }else{
+                            //MARK: - LIST OF TRACKS
+                            List{
+                                //MARK: ADD TO PLAYLIST BUTTON
                                 Button{
+                                    withAnimation {
+                                        showAddTracksToPlaylistView = true
+                                    }
                                     
                                 }label: {
-                                    MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: music)
+                                    AddToPlaylistButtonView(isMusicListEmpty: false)
                                 }
-                                .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                                .listRowInsets(.init(top: 0, leading: 0, bottom: 5, trailing: 0))
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
+                                .frame(height: searchActive ? 0 : nil)
+                                .opacity(searchActive ? 0 : 1)
+                                .disabled(searchActive)
                                 
+                                
+                                ForEach(musicSearchResult) { music in
+                                    
+                                    Button{
+                                        
+                                    }label: {
+                                        MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: music)
+                                    }
+                                    .listRowInsets(.init(top: -5, leading: 0, bottom: 5, trailing: 0))
+                                    .listRowBackground(Color.clear)
+                                    .listRowSeparator(.hidden)
+                                    
+                                }
+                                //MARK: - DELETE PLAYLIST ITEM FUNCTION
+                                .onDelete { offsets in
+                                    Task{
+                                        for index in offsets{
+                                            //delete tracks in playlist on firestore
+                                            do{
+                                                try await playlistManager.removeMusicFromPlaylist(musicId: musicSearchResult[index].musicId, playlistId: playlist.playlistId)
+                                            }catch{
+                                                print(error)
+                                            }
+                                            //fetch change to local playlists array
+                                            do{
+                                                playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                                            }catch{
+                                                print(error)
+                                            }
+                                        }
+                                    }
+                                }
                             }
-                            
+                            .listStyle(PlainListStyle())
+                            .offset(y: searchActive ? -30 : 0)
                         }
-                        .listStyle(PlainListStyle())
-                        .offset(y: searchActive ? -30 : 0)
                     }
-                   
+                    
                 }
                 .modifier(PagePadding())
                 
@@ -197,9 +240,9 @@ struct PlaylistView: View {
                         .disabled(searchActive)
                         .animation(nil)
                         .sheet(isPresented: $showPlaylistUpdateSheet) {
-//                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, imgName: imgName, playlistName: playlistName, numOfTracks: numOfTracks)
-//                                .presentationDetents([.medium])
-                              
+                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, playlist: playlist)
+                                .presentationDetents([.medium])
+                            
                         }
                         
                     }
@@ -242,13 +285,13 @@ struct AddToPlaylistButtonView: View {
             .padding(.vertical, 10)
             .padding(.horizontal)
         }
-
-
+        
+        
     }
 }
 
-struct PlaylistView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaylistView(playlistId: "v8AtiDouY7nv1napA7Uv")
-    }
-}
+//struct PlaylistView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlaylistView(playlist: PlaylistManager.instance.getPlaylist(playlistId: "v8AtiDouY7nv1napA7Uv"))
+//    }
+//}

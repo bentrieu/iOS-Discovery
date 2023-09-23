@@ -74,6 +74,7 @@ struct AddTracksToPlayListView: View {
             //MARK: - SEARCH BAR
             SearchBarView(searchInput: $searchInput, prompt: "Search")
             
+            
             //MARK: - SEARCH NOTIFICATION
             if trackSearchList.isEmpty {
                 Spacer()
@@ -84,15 +85,15 @@ struct AddTracksToPlayListView: View {
                 Spacer()
             }else{
                 if trackSearchResult.isEmpty{
-                    Spacer()
                     Text("Couldn't find '\(searchInput)'")
-                        .font(.custom("Gotham-Black", size: 20))
+                        .font(.custom("Gotham-Black", size: 22))
                         .modifier(BlackColor())
                         .multilineTextAlignment(.center)
                     Text("Trying searching again using a different spelling or keyword")
-                        .font(.custom("Gotham-Medium", size: 14))
+                        .font(.custom("Gotham-Medium", size: 17))
                         .modifier(BlackColor())
                         .multilineTextAlignment(.center)
+                        .offset(y : -20)
                     Spacer()
 
                 }else{

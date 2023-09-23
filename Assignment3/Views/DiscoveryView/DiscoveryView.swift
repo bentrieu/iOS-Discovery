@@ -207,8 +207,25 @@ struct DiscoveryView: View {
 
 
                         Spacer()
-                    }.modifier(PagePadding())
-                }
+                    }
+                    
+                    //MARK: - SEARCH NOTIFICATION
+                    Group{
+                        Text(searchInput.isEmpty ? "Play what you love" : "Couldn't find '\(searchInput)'")
+                            .font(.custom("Gotham-Black", size: 22))
+                            .modifier(BlackColor())
+                            .multilineTextAlignment(.center)
+                        Text(searchInput.isEmpty ? "Search tracks, albums by name or artists" : "Trying searching again using a different spelling or keyword")
+                            .font(.custom("Gotham-Medium", size: 17))
+                            .modifier(BlackColor())
+                            .multilineTextAlignment(.center)
+                    }
+                    .frame(height: searchActive && (searchInput.isEmpty || (albumSearch ? albumSearchResult.isEmpty : trackSearchResult.isEmpty)) ? nil : 0)
+                    .opacity(searchActive && (searchInput.isEmpty || (albumSearch ? albumSearchResult.isEmpty : trackSearchResult.isEmpty)) ? 1 : 0)
+
+
+                    Spacer()
+                }.modifier(PagePadding())
             }
             .task {
                 do {

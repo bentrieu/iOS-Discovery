@@ -40,17 +40,16 @@ struct LibraryView: View {
         return searchInput.isEmpty ? playlistManager.playlists : playlistManager.searchPlaylistByName(input: searchInput)
     }
     
+    
     var body: some View {
         ZStack{
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             NavigationView {
                 VStack{
-                    //MARK: - SEARCH BAR + BACK BUTTON
-                    
                         HStack(spacing:20){
+                            //MARK: - BACK BTN WHEN SEARCHING
                             Button {
-                                
                                 withAnimation {
                                     searchActive = false
                                 }
@@ -60,7 +59,7 @@ struct LibraryView: View {
                                     .modifier(Icon())
                                     .frame(width: 25)
                             }
-                            
+                            //MARK: - SEARCH BAR
                             FocusedSearchBarView(searchInput: $searchInput,searchActive: $searchActive, prompt: "Find playlist")
                             
                         }
@@ -138,23 +137,53 @@ struct LibraryView: View {
                         .opacity(searchActive ? 0 : 1)
                         .disabled(searchActive)
                     
-                    
-                    //MARK: - LIST OF PLAYLIST
-                    
-                    List{
-                        ForEach(playlistSearchResult, id: \.playlistId) {playlist in
-                            NavigationLink (destination: PlaylistView(playlistId: playlist.playlistId)
-                                .onAppear {
-                                    searchActive = false
-                                }){
-                                PlaylistRowView(imgDimens: 60, titleSize: 23, subTitleSize: 18, playlist: playlist)
-
+                    if playlistSearchResult.isEmpty{
+                        //MARK: - SEARCH NOTIFICATION
+                        Text("No results found for '\(searchInput)'")
+                            .font(.custom("Gotham-Black", size: 22))
+                            .modifier(BlackColor())
+                            .multilineTextAlignment(.center)
+                        Text("Check the spelling, or try different keywords.")
+                            .font(.custom("Gotham-Medium", size: 17))
+                            .modifier(BlackColor())
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    }else{
+                        //MARK: - LIST OF PLAYLIST
+                        List{
+                            ForEach(playlistSearchResult, id: \.playlistId) {playlist in
+                                NavigationLink (destination: PlaylistView(playlist: playlist)
+                                    .onAppear {
+                                        searchActive = false
+                                    }){
+                                        PlaylistRowView(imgDimens: 60, titleSize: 23, subTitleSize: 18, playlist: playlist)
+                                        
+                                    }
+                                    .listRowInsets(.init(top: -5, leading: 0, bottom: 10, trailing: 0))
+                                    .listRowBackground(Color.clear)
+                                    .listRowSeparator(.hidden)
                             }
-                            .listRowInsets(.init(top: -5, leading: 0, bottom: 10, trailing: 0))
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                        }
-                    }.listStyle(PlainListStyle())
+                            //MARK: - DELETE PLAYLIST ITEM FUNCTION
+                            .onDelete { offsets in
+                                Task{
+                                    for index in offsets{
+                                        //delete playlist on firestore
+                                        do{
+                                            try await playlistManager.removePlaylist(playlistId: playlistSearchResult[index].playlistId)
+                                        }catch{
+                                            print(error)
+                                        }
+                                        //fetch change to local playlists array
+                                        do{
+                                            playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                                        }catch{
+                                            print(error)
+                                        }
+                                    }
+                                }
+                            }
+                        }.listStyle(PlainListStyle())
+                    }
                 }
                 .modifier(PagePadding())
                 
