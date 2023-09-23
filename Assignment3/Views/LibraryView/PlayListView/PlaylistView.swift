@@ -129,7 +129,7 @@ struct PlaylistView: View {
                                     .foregroundColor(.accentColor)
                                     .background(
                                         Circle()
-                                            .fill(Color(.white))
+                                            .fill(Color("black"))
                                     )
                             }
                         }
