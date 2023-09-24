@@ -66,7 +66,7 @@ struct ViewProfileView: View {
                     }
                 }
                 .padding(.all)
-             
+
                 VStack{
                     Text("Playlists")
                         .font(Font.custom("Gotham-bold", size: 16))
@@ -98,7 +98,7 @@ struct ViewProfileView_Previews: PreviewProvider {
 
 struct AccountProfileDetail: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
     var callback : ()->Void
     var body: some View {
         HStack {
@@ -120,7 +120,7 @@ struct AccountProfileDetail: View {
 
 struct AvatarViewContructor: View {
     var size : CGFloat
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
     var callback: () -> Void
     var body: some View {
         HStack {

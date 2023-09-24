@@ -70,11 +70,11 @@ struct MainView: View {
             Task {
                 albumListManager.popularAlbums = try await AlbumManager.shared.getAlbumCollectionByName("Popular Albums")
                 loading = false
-                
+
             }
             Task {
                 albumListManager.chart = try await AlbumManager.shared.getAlbumCollectionByName("Charts")
-               
+
             }
         }
         .navigationBarBackButtonHidden(true)

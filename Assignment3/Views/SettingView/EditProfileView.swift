@@ -113,10 +113,10 @@ struct EditProfileView: View {
        
     }
 }
-
+//
 //struct EditProfileView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        EditProfileView(userViewModel: UserViewModel(), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true))
+//        EditProfileView(userViewModel: UserViewModel(), isCancelButtonPressed: .constant(false),  isContentNotEdited: .constant(true),isPresentingEdit: .constant(true), callback: {})
 //    }
 //}
 
@@ -136,7 +136,7 @@ struct CustomTextFieldForEditView: TextFieldStyle {
 
 struct HeadingControllerButtonView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
 
     @Binding var isContentNotEdited: Bool
     @Binding var isCancelButtonPressed: Bool

@@ -24,7 +24,7 @@ struct DBUser: Codable {
     let displayName: String?
     let favorites: [String]?
     let profileImagePath: String?
-    let isDark: Bool
+    let isDark: Bool?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
