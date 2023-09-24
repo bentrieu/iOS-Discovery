@@ -19,6 +19,6 @@ class SettingManager: ObservableObject{
     static var shared = SettingManager()
     @Published var isDark =  false
     @Published var errorPopUp = false
-    
+    @Published var msg =  ""
     init(){}
 }
