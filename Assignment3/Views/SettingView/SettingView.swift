@@ -39,7 +39,7 @@ struct SettingView: View {
                 }
                 
                 NavigationLink {
-                    ThemeEditingView()
+                    ThemeEditingView(userViewModel: userViewModel)
                         .navigationTitle("Theme Setting")
                         .modifier(CustomNavigationButton())
                 } label: {

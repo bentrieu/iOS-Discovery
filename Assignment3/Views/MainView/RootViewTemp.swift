@@ -79,6 +79,11 @@ struct MainView: View {
         }
         .navigationBarBackButtonHidden(true)
         .foregroundColor(Color("black"))
+        .preferredColorScheme(
+//            userViewModel.user ?? userViewModel.user?.isDark ?? .light
+            
+            .light
+        )
     }
 }
 
