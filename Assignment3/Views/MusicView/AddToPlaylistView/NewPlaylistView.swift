@@ -64,9 +64,11 @@ struct NewPlaylistView: View {
                 Spacer()
                 //MARK: - CANCEL BUTTON
                 Button{
-                    
-                    showView = false
-                    dismiss()
+                    if showView{
+                        showView = false
+                    }else{
+                        dismiss()
+                    }
                 }label: {
                     Text("Cancel")
                         .font(.custom("Gotham-Medium", size: 20))
@@ -100,8 +102,11 @@ struct NewPlaylistView: View {
                             }
                         }
                         //dismiss view
-                        showView = false
-                        dismiss()
+                        if showView{
+                            showView = false
+                        }else{
+                            dismiss()
+                        }
                     }
                 }label: {
                     Text("Create")

@@ -108,7 +108,7 @@ struct LibraryView: View {
                             ZStack{
                                 LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
                                     .ignoresSafeArea(.all)
-                                NewPlaylistView(showView: $showAddNewPlaylistView)
+                                NewPlaylistView(showView: .constant(false))
                                     .modifier(PagePadding())
                             }
                             
@@ -128,52 +128,61 @@ struct LibraryView: View {
                         .opacity(searchActive ? 0 : 1)
                         .disabled(searchActive)
                     
-                    if playlistSearchResult.isEmpty{
-                        //MARK: - SEARCH NOTIFICATION
-                        Text("No results found for '\(searchInput)'")
-                            .font(.custom("Gotham-Black", size: 22))
-                            .modifier(BlackColor())
-                            .multilineTextAlignment(.center)
-                        Text("Check the spelling, or try different keywords.")
-                            .font(.custom("Gotham-Medium", size: 17))
-                            .modifier(BlackColor())
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }else{
-                        //MARK: - LIST OF PLAYLIST
-                        List{
-                            ForEach(playlistSearchResult, id: \.playlistId) {playlist in
-                                NavigationLink (destination: PlaylistView(playlist: playlist)
-                                    .onAppear {
-                                        searchActive = false
-                                    }){
-                                        PlaylistRowView(imgDimens: 60, titleSize: 23, subTitleSize: 18, playlist: playlist)
-                                        
-                                    }
-                                    .listRowInsets(.init(top: -5, leading: 0, bottom: 10, trailing: 0))
-                                    .listRowBackground(Color.clear)
-                                    .listRowSeparator(.hidden)
-                            }
-                            //MARK: - DELETE PLAYLIST ITEM FUNCTION
-                            .onDelete { offsets in
-                                Task{
-                                    for index in offsets{
-                                        //delete playlist on firestore
-                                        do{
-                                            try await playlistManager.removePlaylist(playlistId: playlistSearchResult[index].playlistId)
-                                        }catch{
-                                            print(error)
+                    if !playlistManager.playlists.isEmpty{
+                        if playlistSearchResult.isEmpty{
+                            //MARK: - SEARCH NOTIFICATION
+                            Text("No results found for '\(searchInput)'")
+                                .font(.custom("Gotham-Black", size: 22))
+                                .modifier(BlackColor())
+                                .multilineTextAlignment(.center)
+                            Text("Check the spelling, or try different keywords.")
+                                .font(.custom("Gotham-Medium", size: 17))
+                                .modifier(BlackColor())
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }else{
+                            //MARK: - LIST OF PLAYLIST
+                            List{
+                                ForEach(playlistSearchResult, id: \.playlistId) {playlist in
+                                    NavigationLink (destination: PlaylistView(playlist: playlist)
+                                        .onAppear {
+                                            searchActive = false
+                                        }){
+                                            PlaylistRowView(imgDimens: 60, titleSize: 23, subTitleSize: 18, playlist: playlist)
+                                            
                                         }
-                                        //fetch change to local playlists array
-                                        do{
-                                            playlistManager.playlists = try await playlistManager.getAllPlaylist()
-                                        }catch{
-                                            print(error)
+                                        .listRowInsets(.init(top: -5, leading: 0, bottom: 10, trailing: 0))
+                                        .listRowBackground(Color.clear)
+                                        .listRowSeparator(.hidden)
+                                }
+                                //MARK: - DELETE PLAYLIST ITEM FUNCTION
+                                .onDelete { offsets in
+                                    Task{
+                                        for index in offsets{
+                                            //delete playlist on firestore
+                                            do{
+                                                try await playlistManager.removePlaylist(playlistId: playlistSearchResult[index].playlistId)
+                                            }catch{
+                                                print(error)
+                                            }
+                                            //fetch change to local playlists array
+                                            do{
+                                                playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                                            }catch{
+                                                print(error)
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        }.listStyle(PlainListStyle())
+                            }.listStyle(PlainListStyle())
+                        }
+                    }else{
+                        //MARK: NOTIFICATION WHEN NO PLAYLIST
+                        Text("There is no playlist, please add one.")
+                            .font(.custom("Gotham-BookItalic", size: 21))
+                            .modifier(BlackColor())
+                            .multilineTextAlignment(.center)
+                        Spacer()
                     }
                 }
                 .modifier(PagePadding())

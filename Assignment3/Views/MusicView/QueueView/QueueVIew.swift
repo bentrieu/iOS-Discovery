@@ -41,7 +41,7 @@ struct QueueVIew: View {
                 .modifier(BlackColor())
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            //MARK: - TRACK LIST
+            //MARK: - UPCOMING TRACK LIST
             if !musicListFromCurPlaying.isEmpty{
                 List{
                     ForEach(musicListFromCurPlaying){ music in
