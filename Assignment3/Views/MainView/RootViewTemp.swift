@@ -63,7 +63,6 @@ struct MainView: View {
             Task {
                 do {
                     try? await userViewModel.loadCurrentUser()
-//                    try? await viewModel.loadUserPlaylist()
                 } catch {
                     print(error)
                 }

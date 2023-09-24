@@ -19,10 +19,11 @@ struct LibraryView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @StateObject private var playlistManager = PlaylistManager.instance
-
+    @StateObject private var userViewModel = UserViewModel()
     @State var showAddNewPlaylistView = false
     @State var searchActive = false
     @State var searchInput = ""
+    @State var loading = true
     var playlistSearchResult : [DBPlaylist]{
     
         return searchInput.isEmpty ? playlistManager.playlists : playlistManager.searchPlaylistByName(input: searchInput)
@@ -60,17 +61,19 @@ struct LibraryView: View {
                     //MARK: - HEADER
                     HStack{
                         //MARK: - USER PROFILE BUTTON
-                        Button {
-                            self.presentationMode.wrappedValue.dismiss()
-                        } label: {
-                            Image("testImg")
-                                .resizable()
-                                .frame(width: 45, height: 45)
-                                .modifier(Img())
-                                .clipShape(Circle())
+//                        Button {
+//                            self.presentationMode.wrappedValue.dismiss()
+//                        } label: {
+//                            Image("testImg")
+//                                .resizable()
+//                                .frame(width: 45, height: 45)
+//                                .modifier(Img())
+//                                .clipShape(Circle())
+//                        }
+
+                        AvatarViewContructor(size: 50, userViewModel: userViewModel) {
+                            loading = false
                         }
-
-
                         
                         
                         Text("Your Library")
@@ -177,6 +180,12 @@ struct LibraryView: View {
                 
             }
             .navigationViewStyle(StackNavigationViewStyle())
+            if loading{
+                LoadingView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.3))
+                    .ignoresSafeArea()
+            }
             
         }
         .task {
