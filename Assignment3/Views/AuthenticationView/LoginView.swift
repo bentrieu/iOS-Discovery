@@ -25,30 +25,36 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
+            // Set the background color to white, ignoring safe area edges.
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 //MARK: EMAIL OR USERNAME
                 VStack(alignment: .leading, spacing:0){
+                    // Display the "Email" label with a custom font and tracking.
                     Text("Email")
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
+                    // Include a custom text field for entering email/username.
                     CustomeTextFieldView(name: $viewModel.email,onEditPass: $onEditPass)
                 }
                 //MARK: PASSWORD
                 VStack(alignment: .leading, spacing:0){
+                    // Display the "Password" label with a custom font and tracking.
                     Text("Password")
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
-                    
+                    // Include a custom secure text field for entering the password.
                     CustomSecureTextFieldView(password: $viewModel.password,isEditing: $onEditPass)
                 }
                 
                 //MARK: LOGIN BUTTON
                 VStack(){
+                    // Define a button that triggers the login action.
                     Button {
                         Task {
                             do {
+                                // Attempt to sign in using the viewModel.
                                 try await viewModel.signIn()
                                 showSignInView = false
                             } catch {
@@ -56,6 +62,7 @@ struct LoginView: View {
                             }
                         }
                     } label: {
+                         // Display a button with the title "Log in."
                         ButtonTextField(title: "Log in")
                     }
                 }

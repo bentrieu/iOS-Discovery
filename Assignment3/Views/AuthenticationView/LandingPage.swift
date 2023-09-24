@@ -32,7 +32,7 @@ struct LandingPageView: View {
                 
                 VStack(spacing: 20){
                     Spacer()
-                    
+                    // Display an image based on the color scheme
                     Image(colorScheme == .dark ? "icon-white" : "icon-black")
                         .resizable()
                         .scaledToFit()
@@ -52,6 +52,7 @@ struct LandingPageView: View {
                             .foregroundColor(Color("black"))
                             .modifier(CustomNavigationButton())
                     } label: {
+                        // Display a button for signing up free
                         ButtonWithBackGroundGreenView(title: "Sign up free")
                     }
                     
@@ -60,6 +61,7 @@ struct LandingPageView: View {
                     Button {
                         Task {
                             do {
+                                // Attempt to sign in with Google
                                 try await viewModel.signInGoogle()
                                 showSignInView = false
                             } catch {
@@ -67,6 +69,7 @@ struct LandingPageView: View {
                             }
                         }
                     } label: {
+                        // Display a button for signing up with Google
                         CustomSignUpButton(image: Image("google-icon"), title: "Continue with Google")
                     }
                     
@@ -74,6 +77,7 @@ struct LandingPageView: View {
                     Button {
                         Task {
                             do {
+                                // Attempt to sign in with Facebook
                                 try await viewModel.signInFacebook()
                                 showSignInView = false
                             } catch {
@@ -81,6 +85,7 @@ struct LandingPageView: View {
                             }
                         }
                     } label: {
+                        // Display a button for signing up with Facebook
                         CustomSignUpButton(image: Image("facebook-icon"), title: "Continue with Facebook")
                     }
                     
@@ -90,6 +95,7 @@ struct LandingPageView: View {
                             .foregroundColor(Color("black"))
                             .modifier(CustomNavigationButton())
                     } label: {
+                        // Display a "Login" button
                         Text("Login")
                             .modifier(CustomButtonAthentication())
                         
@@ -103,6 +109,7 @@ struct LandingPageView: View {
             .preferredColorScheme(colorScheme)
         }
         .onAppear {
+            // Check if there is a valid access token to determine if the user is already signed in
             if let token = AccessToken.current, !token.isExpired {
                 showSignInView = false
             }
@@ -117,7 +124,8 @@ struct LandingPageView_Previews: PreviewProvider {
     }
 }
 
-
+//MARK: - CUSTOM BUTTON
+//custom button for authentication
 struct ButtonWithBackGroundGreenView: View {
     var title : String
     var body: some View {
