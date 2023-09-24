@@ -39,6 +39,14 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    func updateUserTheme(isDark: Bool) {
+        guard let user else { return }
+        Task {
+            try await UserManager.instance.updateUserTheme(userId: user.userId, isDark: isDark)
+            self.user = try await UserManager.instance.getUser(userId: user.userId)
+        }
+    }
+    
     func addPlaylist() async throws {
         guard let user else { return }
         
