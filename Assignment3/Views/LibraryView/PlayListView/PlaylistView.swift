@@ -33,7 +33,7 @@ struct PlaylistView: View {
         }
     }
     
-    @State var playMusicAvtive = false
+    @State var playMusicActive = false
     @State var firstPlaying = true
     @State var searchActive = false
     @State var searchInput = ""
@@ -120,9 +120,9 @@ struct PlaylistView: View {
                                     musicManager.pauseMusic()
                                 }
                                 
-                                playMusicAvtive.toggle()
+                                playMusicActive.toggle()
                             } label: {
-                                Image(systemName: playMusicAvtive ? "pause.circle.fill" : "play.circle.fill")
+                                Image(systemName: playMusicActive ? "pause.circle.fill" : "play.circle.fill")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 60, alignment: .center)
@@ -200,7 +200,7 @@ struct PlaylistView: View {
                                         }
                                         musicManager.currPlaying = music
                                         musicManager.play()
-                                        playMusicAvtive = true
+                                        playMusicActive = true
                                         
                                     }label: {
                                         MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: music)
@@ -267,7 +267,7 @@ struct PlaylistView: View {
                         .disabled(searchActive)
                         .animation(nil)
                         .sheet(isPresented: $showPlaylistUpdateSheet) {
-                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, playlist: playlist)
+                            PlaylistUpdateSheet(parentPresentationMode: presentationMode,showAddTracksToPlaylistView: $showAddTracksToPlaylistView, showEditPlaylistView: $showEditPlaylistView, firstPlaying: $firstPlaying, playMusicActive: $playMusicActive,playlistTracks: playlistTracks, playlist: playlist)
                                 .presentationDetents([.medium])
                             
                         }
@@ -308,7 +308,6 @@ struct AddToPlaylistButtonView: View {
                     .font(.custom("Gotham-Medium", size: 21))
                     .modifier(OneLineText())
             }
-            .frame(width: .infinity)
             .padding(.vertical, 10)
             .padding(.horizontal)
         }
