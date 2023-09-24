@@ -31,7 +31,7 @@ struct HomeView: View {
                         
                         HStack{
                             
-                            Button {
+                            NavigationLink {
                                 
                             } label: {
                                 CustomButton(name: "Music")
@@ -52,13 +52,12 @@ struct HomeView: View {
                         if let _ =  albumListManager.chart{
                             ChartView()
                         }
-                      
-                        
                     }
                 }
                
             }
         }
+
     }
 }
 
@@ -72,28 +71,14 @@ struct HeadingView: View {
     
     @StateObject var userViewModel: UserViewModel
     @Binding var showSignInView: Bool
-
+    @State private var greeting = "Good Morning"
     var body: some View {
         HStack(spacing: 15){
-            Text("Good Afternoon")
+            Text(greeting)
                 .tracking(-1)
                 .font(Font.custom("Gotham-Bold", size: 26))
             Spacer()
-            
-            NavigationLink {
-                
-            } label: {
-                Image("clock")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(Color("black"))
-                    .frame(width: 24,height: 24 )
-                    .bold()
-                    
-            }
-            
-            
+                        
             NavigationLink {
                 SettingView(userViewModel: userViewModel, showSignInView: $showSignInView)
                     .navigationTitle("Settings")
@@ -107,8 +92,26 @@ struct HeadingView: View {
                     
             }
         }
+        .onAppear {
+            updateGreeting()
+            let timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+                updateGreeting()
+            }
+            RunLoop.main.add(timer, forMode: .common)
+        }
         .padding(.horizontal)
     }
+    private func updateGreeting() {
+            let currentTime = Date()
+            let calendar = Calendar.current
+            let hour = calendar.component(.hour, from: currentTime)
+            
+            if hour >= 12 {
+                greeting = "Good Afternoon"
+            } else {
+                greeting = "Good Morning"
+            }
+        }
 }
 
 

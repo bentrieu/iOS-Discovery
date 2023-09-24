@@ -84,6 +84,9 @@ struct ViewProfileView: View {
                     .ignoresSafeArea()
             }
         }
+        .onAppear{
+            print(userViewModel.user)
+        }
     }
 }
 
