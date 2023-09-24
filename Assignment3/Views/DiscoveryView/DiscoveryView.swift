@@ -13,6 +13,9 @@
  */
 
 import SwiftUI
+import UIKit
+
+
 
 struct DiscoveryView: View {
     
@@ -30,7 +33,13 @@ struct DiscoveryView: View {
         return AlbumManager.shared.searchAlbumByNameAndArtist(input: searchInput)
     }
     
-    private var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
+    private var gridItemLayout: [GridItem]{
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return [GridItem(.flexible()), GridItem(.flexible())]
+        } else{
+            return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+        }
+    }
     var body: some View {
         NavigationStack {
             ZStack{
@@ -216,6 +225,7 @@ struct DiscoveryView: View {
                         Spacer()
                     }.modifier(PagePadding())
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
             }
             .task {
                 do {
@@ -237,6 +247,20 @@ struct DiscoveryView: View {
 struct GenreCardView: View{
     let genre: String
     let color: Color
+    private var width: CGFloat{
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return 170
+        } else{
+            return 210
+        }
+    }
+    private var height: CGFloat{
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return 100
+        } else{
+            return 130
+        }
+    }
     
     var body: some View{
         ZStack{
@@ -246,7 +270,7 @@ struct GenreCardView: View{
                 .modifier(BlackColor())
         }
         .cornerRadius(15)
-        .frame(width: 170, height: 100)
+        .frame(width: width, height: height)
     }
 }
 
