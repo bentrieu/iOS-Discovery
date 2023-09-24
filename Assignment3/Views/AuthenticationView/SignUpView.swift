@@ -22,14 +22,17 @@ struct SignUpView: View {
     @State private var isEditing = false
     var body: some View {
         ZStack {
+            // Set the background color to white, ignoring safe area edges.
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 //MARK: EMAIL OR USERNAME
                 VStack(alignment: .leading, spacing:0){
+                    // Display the "What's your email?" label with a custom font and tracking.
                     Text("What's your email?")
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
+                    // Create a text field for entering email/username.
                     TextField("", text: $viewModel.email, onEditingChanged: { edit in
                         isEditing = true
                     })
@@ -38,16 +41,20 @@ struct SignUpView: View {
                 }
                 //MARK: PASSWORD
                 VStack(alignment: .leading, spacing:0){
+                    // Display the "Password" label with a custom font and tracking.
                     Text("Password")
                         .font(Font.custom("Gotham-Bold", size: 20))
                         .tracking(-1)
                     
+                    // Include a custom secure text field for entering the password.
                     CustomSecureTextFieldView(password: $viewModel.password, isEditing: $isEditing)
                 }
                 VStack(){
+                    // Define a button that triggers the sign up action.
                     Button {
                         Task {
                             do {
+                                // Attempt to sign up using the viewModel.
                                 try await viewModel.signUp()
                                 showSignInView = false
                             } catch {
@@ -55,6 +62,7 @@ struct SignUpView: View {
                             }
                         }
                     } label: {
+                        // Display a button with the title "Sign Up."
                         Text("Sign Up")
                             .foregroundColor(.black)
                             .font(Font.custom("Gotham-Bold", size: 20))
@@ -66,6 +74,7 @@ struct SignUpView: View {
                     }
                 }
                 .padding(.top,45)
+                // Display error messages in case of sign-up failure.
                 Text(errorMSG)
                     .foregroundColor(Color("red"))
                     .font(Font.custom("Gotham-Bold", size: 10))

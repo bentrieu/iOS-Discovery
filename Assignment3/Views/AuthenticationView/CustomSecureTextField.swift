@@ -16,26 +16,29 @@ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?
 import SwiftUI
 
 struct CustomSecureTextFieldView: View {
-    @Binding var password: String
-    @Binding var isEditing: Bool
-    @State private var isEyeOpen = false
+    @Binding var password: String          // Binding to the password text
+    @Binding var isEditing: Bool           // Binding to track editing state
+    @State private var isEyeOpen = false   // State to toggle the visibility of the password
+
     var body: some View {
-        VStack{
-            if isEyeOpen{
-                VStack{
+        VStack {
+            if isEyeOpen {
+                VStack {
+                    // If the eye is open, show a regular TextField
                     TextField("", text: $password) { edit in
                         self.isEditing = edit
                     }
                     .textFieldStyle(CustomTextSecureFieldStyle(focus: $isEditing))
                 }
-            }else{
-                VStack{
+            } else {
+                VStack {
+                    // If the eye is closed, show a SecureField
                     SecureField("", text: Binding<String>(
                         get: { self.password },
                         set: { self.password = $0
                             self.isEditing = true
-                           }
-                         ))
+                        }
+                    ))
                 }
                 .textFieldStyle(CustomTextSecureFieldStyle(focus: $isEditing))
             }
@@ -59,8 +62,8 @@ struct CustomSecureTextFieldView: View {
             }
         }
     }
-    
 }
+
 
 
 struct CustomSecureTextField_Previews: PreviewProvider {

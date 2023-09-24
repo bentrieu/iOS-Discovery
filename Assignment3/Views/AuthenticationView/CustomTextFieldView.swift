@@ -17,19 +17,22 @@ import SwiftUI
 
 struct CustomeTextFieldView: View {
     
-    @Binding var name: String
-    @State private var onEditing = false
-    @Binding var onEditPass : Bool
+    @Binding var name: String          // Binding to the text in the text field
+    @State private var onEditing = false // State to track editing state
+    @Binding var onEditPass: Bool      // Binding to coordinate with another view
+    
     var body: some View {
         VStack {
-            TextField("", text: $name,onEditingChanged: { edit in
+            // TextField with a custom focus style
+            TextField("", text: $name, onEditingChanged: { edit in
                 self.onEditing = edit
-                onEditPass = false
+                onEditPass = false // Set onEditPass to false when editing changes
             })
             .textFieldStyle(CustomTextFieldStyle(focus: $onEditing))
         }
     }
 }
+
 
 struct CustomeTextField_Previews: PreviewProvider {
     static var previews: some View {
@@ -38,19 +41,21 @@ struct CustomeTextField_Previews: PreviewProvider {
 }
 
 struct CustomTextFieldStyle: TextFieldStyle {
-    @Binding var focus: Bool
+    @Binding var focus: Bool // Binding to track the focus state of the text field
+    
+    // The body function required for TextFieldStyle
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .frame(height:15)
-            .font(Font.custom("Gotham-Medium", size: 13))
-            .foregroundColor(.white)
-            .padding(.vertical,20)
-            .padding(.horizontal)
-            .background{
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(focus ? Color("light-gray" ).opacity(0.6) : Color("gray").opacity(0.6))
+            .frame(height: 15) // Set the height of the text field
+            .font(Font.custom("Gotham-Medium", size: 13)) // Set the font and size
+            .foregroundColor(.white) // Set the text color to white
+            .padding(.vertical, 20) // Add vertical padding
+            .padding(.horizontal) // Add horizontal padding
+            .background {
+                RoundedRectangle(cornerRadius: 5) // Create a rounded rectangle background
+                    .fill(focus ? Color("light-gray").opacity(0.6) : Color("gray").opacity(0.6)) // Set the fill color based on the focus state
             }
-            .tint(Color("green"))
-            
+            .tint(Color("green")) // Set the tint color (used for the clear button)
     }
 }
+

@@ -87,6 +87,7 @@ struct DiscoveryView: View {
                         }
                         
                         HStack{
+                            //MARK: - BROWSE ALL
                             Text("Browse all")
                                 .font(.custom("Gotham-Medium", size: 20))
                                 .modifier(BlackColor())
