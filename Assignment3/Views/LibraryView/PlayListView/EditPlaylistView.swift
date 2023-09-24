@@ -255,6 +255,8 @@ struct EditPlaylistView: View {
                     try await playlistviewModel.savePlaylistImage(item: item, playlistId: playlist.playlistId)
                     //fetch change to local array
                     playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                    let _ = print(playlist)
+                    playlistManager.id = UUID()
                 }catch{
                     print(error)
                 }
@@ -271,6 +273,7 @@ struct EditPlaylistView: View {
                 print(error)
             }
         }
+       
     }
 }
 

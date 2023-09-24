@@ -30,7 +30,8 @@ struct SplashScreenView: View {
             }
         }else{
             ZStack {
-                Color("white")
+                Color(SettingManager.shared.isDark ? .black : .white)
+                    .edgesIgnoringSafeArea(.all)
                 VStack{
                     Image("icon-green")
                         .resizable()

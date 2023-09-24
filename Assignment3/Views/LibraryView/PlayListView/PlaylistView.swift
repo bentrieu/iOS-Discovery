@@ -41,7 +41,7 @@ struct PlaylistView: View {
     @State var showPlaylistUpdateSheet = false
     @State var showAddTracksToPlaylistView = false
     @State var showEditPlaylistView = false
-    
+  
     //MARK: - BACK BUTTON
     var btnBack : some View { Button(action: {
         if searchActive{
@@ -84,6 +84,7 @@ struct PlaylistView: View {
                                 .resizable()
                         }
                     }
+                    .id(playlistManager.id)
                     .modifier(Img())
                     .frame(width: searchActive ? 0 : UIScreen.main.bounds.width/1.5,height:searchActive ? 0 : UIScreen.main.bounds.width/1.5)
                     .clipped()

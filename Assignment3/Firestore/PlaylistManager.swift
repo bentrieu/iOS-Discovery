@@ -26,7 +26,7 @@ struct DBPlaylist: Codable {
 
 final class PlaylistManager : ObservableObject{
     @Published var playlists =  [DBPlaylist]()
-    
+    @Published var id = UUID()
     static let instance = PlaylistManager()
     private init() {}
     

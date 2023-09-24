@@ -32,7 +32,10 @@ struct HomeView: View {
                         HStack{
                             
                             NavigationLink {
-                                
+                                GenreView(genre: "All Musics", color: Color("white"))
+                                    .onAppear{
+                                        MusicManager.instance.musicList = MusicViewModel.shared.musics
+                                    }
                             } label: {
                                 CustomButton(name: "Music")
                             }

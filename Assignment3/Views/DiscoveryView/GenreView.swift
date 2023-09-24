@@ -51,10 +51,7 @@ struct GenreView: View {
                 Button {
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Image(systemName: "arrow.backward")
-                        .resizable()
-                        .modifier(Icon())
-                        .frame(width: 25)
+                    BackButton()
                 }
             }
             ToolbarItem (placement: .principal){

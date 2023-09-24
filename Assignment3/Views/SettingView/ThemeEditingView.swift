@@ -16,18 +16,18 @@ import SwiftUI
 
 struct ThemeEditingView: View {
     @StateObject var userViewModel : UserViewModel
-    @State private var isDark =  false
+    @StateObject var settingManager = SettingManager.shared
     var body: some View {
         VStack{
-            Toggle(!isDark ? "Light Theme" : "Dark Theme", isOn: $isDark)
+            Toggle(!SettingManager.shared.isDark ? "Light Theme" : "Dark Theme", isOn: $settingManager.isDark)
                 .padding(.all)
             Spacer()
         }
         .onAppear{
-            isDark = userViewModel.user!.isDark
+            SettingManager.shared.isDark = userViewModel.user!.isDark!
         }
-        .onChange(of: isDark) { newValue in
-            userViewModel.updateUserTheme(isDark: isDark)
+        .onChange(of: SettingManager.shared.isDark) { newValue in
+            userViewModel.updateUserTheme(isDark: SettingManager.shared.isDark)
             Task{
                 try await userViewModel.loadCurrentUser()
             }
