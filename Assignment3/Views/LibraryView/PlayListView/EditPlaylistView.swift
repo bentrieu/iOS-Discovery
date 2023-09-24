@@ -12,13 +12,34 @@ https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?m
 https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
 */
 
-
+import PhotosUI
 import SwiftUI
+
+@MainActor
+final class PlaylistViewModel: ObservableObject {
+    
+    func savePlaylistImage(item: PhotosPickerItem, playlistId: String) async throws {
+        let playlist = try await PlaylistManager.instance.getPlaylist(playlistId: playlistId)
+        
+        Task {
+            guard let data = try await item.loadTransferable(type: Data.self) else {
+                return
+            }
+            let (path, name) = try await StorageManager.instance.savePlaylistImage(data: data, playlistId: playlist.playlistId)
+            print("success")
+            print(path)
+            print(name)
+            let url = try await StorageManager.instance.getUrlForImage(path: path)
+            try await PlaylistManager.instance.updatePlaylistPhoto(playlistId: playlist.playlistId, photoUrl: url.absoluteString)
+        }
+    }
+}
 
 struct EditPlaylistView: View {
     @Environment (\.dismiss) var dismiss
     
     @StateObject var playlistManager = PlaylistManager.instance
+    @StateObject var playlistviewModel = PlaylistViewModel()
     let playlist: DBPlaylist
     
     @State var nameInput = ""
@@ -28,6 +49,9 @@ struct EditPlaylistView: View {
         return playlistManager.getAllMusicsInPlaylist(playlistId: playlist.playlistId)
     }
     @State var showErrNotification = false
+    @State private var item: PhotosPickerItem?
+    @State private var selectedImage: Image?
+    @State private var loading = true
     
     var body: some View {
         ZStack{
@@ -69,17 +93,7 @@ struct EditPlaylistView: View {
                             showErrNotification = true
                         }
                         else{
-                            Task{
-                                do{
-                                    //update playlist name and img url on firestore
-                                    try await playlistManager.updatePlaylistName(playlistId: playlist.playlistId, name: nameInput)
-                                    try await playlistManager.updatePlaylistPhoto(playlistId: playlist.playlistId, photoUrl: photoUrl)
-                                    //fetch change to local array
-                                    playlistManager.playlists = try await playlistManager.getAllPlaylist()
-                                }catch{
-                                    print(error)
-                                }
-                            }
+                            saveUserInfo()
                             dismiss()
                         }
 
@@ -91,34 +105,49 @@ struct EditPlaylistView: View {
                 }
                 
                 //MARK: - THUMBNAIL IMG
-                AsyncImage(url: URL(string: photoUrl)) { phase in
-                    if let image = phase.image {
-                        // if the image is valid
-                        image
-                            .resizable()
-                    } else {
-                        //appears as placeholder & error image
-                        Image(systemName: "photo")
-                            .resizable()
+                if let selectedImage{
+                    selectedImage
+                        .resizable()
+                        .modifier(PlayListImageModifer())
+                }else{
+                    AsyncImage(url: URL(string: photoUrl)) { phase in
+                        if let image = phase.image {
+                            // if the image is valid
+                            image
+                                .resizable()
+                                .onAppear{
+                                    loading = false
+                                }
+                        } else {
+                            //appears as placeholder & error image
+                            Image(systemName: "photo")
+                                .resizable()
+                                .onAppear{
+                                    loading = false
+                                }
+                        }
                     }
+                    .modifier(PlayListImageModifer())
                 }
-                .modifier(Img())
-                .frame(width: UIScreen.main.bounds.width/1.7,height:UIScreen.main.bounds.width/1.7)
-                .clipped()
-                .overlay(
-                    Rectangle()
-                        .stroke(.gray, lineWidth: 4)
-                )
+            
+                
+                
                 
                 //MARK: - CHANGE IMAGE BUTTON
-                Button{
-                    
-                }label: {
-                    Text("Change image")
+//                Button{
+//
+//                }label: {
+//                    Text("Change image")
+//                        .font(.custom("Gotham-Medium", size: 18))
+//                        .modifier(BlackColor())
+//                }
+//                .padding(.top, -10)
+                PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
+                    Text("Change photo")
                         .font(.custom("Gotham-Medium", size: 18))
                         .modifier(BlackColor())
                 }
-                .padding(.top, -10)
+                
          
                 //MARK: - PLAYLIST NAME
                 TextField("", text: $nameInput)
@@ -201,11 +230,57 @@ struct EditPlaylistView: View {
                 
             }
             .modifier(PagePadding())
+            
+            if loading{
+                LoadingView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.3))
+                    .ignoresSafeArea()
+            }
+            
+            
+            
         }
         .onAppear {
             nameInput = playlist.name ?? ""
             photoUrl = playlist.photoUrl!
             musicsIdBeforeEdit = playlist.musics ?? [String]()
+        }
+        .onChange(of: item, perform: { newValue in
+//            self.isContentNotEdited  = false
+            Task {
+                if let data = try? await item?.loadTransferable(type: Data.self) {
+                    if let uiImage = UIImage(data: data) {
+                        selectedImage = Image(uiImage: uiImage)
+                        return
+                    }
+                }
+            }
+        })
+    }
+    func saveUserInfo(){
+        if let item{
+            Task{
+                do{
+                    //update playlist name and img url on firestore
+                    try await playlistviewModel.savePlaylistImage(item: item, playlistId: playlist.playlistId)
+                    //fetch change to local array
+                    playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                }catch{
+                    print(error)
+                }
+            }
+        }
+        
+        Task{
+            do{
+                //update playlist name and img url on firestore
+                try await playlistManager.updatePlaylistName(playlistId: playlist.playlistId, name: nameInput)
+                //fetch change to local array
+                playlistManager.playlists = try await playlistManager.getAllPlaylist()
+            }catch{
+                print(error)
+            }
         }
     }
 }
@@ -217,3 +292,6 @@ struct EditPlaylistView: View {
 //        EditPlaylistView(playlist: PlaylistManager.instance.getPlaylist(playlistId: "v8AtiDouY7nv1napA7Uv"))
 //    }
 //}
+
+
+

@@ -46,7 +46,22 @@ struct AvatarView: ViewModifier {
     }
 }
 
-  
+
+struct PlayListImageModifer: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .modifier(Img())
+            .frame(width: UIScreen.main.bounds.width/1.7,height:UIScreen.main.bounds.width/1.7)
+            .clipped()
+            .overlay(
+                Rectangle()
+                    .stroke(.gray, lineWidth: 4)
+            )
+    }
+}
+                                
+                                
+    
 
 struct CustomNavigationButton: ViewModifier {
     func body(content: Content) -> some View {

@@ -38,7 +38,7 @@ struct MainView: View {
                             .foregroundColor(Color("black"))
                     }
                 
-                SearchView()
+                LibraryView()
                     .tabItem {
                         VStack{
                             Label("Library", systemImage:  "books.vertical.fill")
