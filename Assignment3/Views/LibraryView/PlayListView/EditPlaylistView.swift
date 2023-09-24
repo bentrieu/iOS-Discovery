@@ -130,18 +130,7 @@ struct EditPlaylistView: View {
                     .modifier(PlayListImageModifer())
                 }
             
-                
-                
-                
                 //MARK: - CHANGE IMAGE BUTTON
-//                Button{
-//
-//                }label: {
-//                    Text("Change image")
-//                        .font(.custom("Gotham-Medium", size: 18))
-//                        .modifier(BlackColor())
-//                }
-//                .padding(.top, -10)
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("Change photo")
                         .font(.custom("Gotham-Medium", size: 18))
