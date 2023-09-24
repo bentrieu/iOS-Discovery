@@ -27,7 +27,7 @@ struct LandingPageView: View {
         NavigationStack {
             ZStack{
                 //MARK: DEFINE BACK GROUND COLOR
-                Color("white")
+                Color.black
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 20){
@@ -107,6 +107,7 @@ struct LandingPageView: View {
                 showSignInView = false
             }
         }
+        .preferredColorScheme(.dark)
     }
 }
 
