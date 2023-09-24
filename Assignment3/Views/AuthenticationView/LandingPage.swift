@@ -1,16 +1,16 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2023B
-  Assessment: Assignment 3
-  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
-  ID: s3877969, s3878270, s3926888, s3878466, s3836280
-  Created  date: 10/9/2023
-  Last modified: 23/9/2023
-  Acknowledgement:
-https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
-https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
-*/
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2023B
+ Assessment: Assignment 3
+ Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+ ID: s3877969, s3878270, s3926888, s3878466, s3836280
+ Created  date: 10/9/2023
+ Last modified: 23/9/2023
+ Acknowledgement:
+ https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+ */
 
 
 import SwiftUI
@@ -22,7 +22,7 @@ struct LandingPageView: View {
     @StateObject private var viewModel = AuthenticationViewModel()
     
     @Binding var showSignInView: Bool
-   
+    
     var body: some View {
         NavigationStack {
             ZStack{
@@ -54,7 +54,7 @@ struct LandingPageView: View {
                     } label: {
                         ButtonWithBackGroundGreenView(title: "Sign up free")
                     }
-
+                    
                     
                     //MARK: SIGN UP WITH GOOGLE
                     Button {
@@ -92,13 +92,13 @@ struct LandingPageView: View {
                     } label: {
                         Text("Login")
                             .modifier(CustomButtonAthentication())
-  
+                        
                     }
                     
                     Spacer()
                 }
             }
-           
+            
             .foregroundColor(Color("black"))
             .preferredColorScheme(colorScheme)
         }
@@ -153,12 +153,12 @@ struct CustomSignUpButton: View {
 
 struct BackButton: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     var body: some View {
         Button{
             self.presentationMode.wrappedValue.dismiss()
         } label: {
-           Image(systemName: "chevron.left")
+            Image(systemName: "chevron.left")
                 .foregroundColor(Color("black"))
         }
     }

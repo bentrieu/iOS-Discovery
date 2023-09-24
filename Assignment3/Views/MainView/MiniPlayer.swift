@@ -15,12 +15,10 @@
 import SwiftUI
 
 struct MiniPlayer: View {
+    
+    //declare all required variable
     @StateObject var musicManager = MusicManager.instance
-    var animation : Namespace.ID
     @Binding var expand : Bool
-    @State var pauseActive = false
-    @State var shuffleActive = false
-    @State var repeatActive = false
     @State var likeTrack = false
     @State var animatingHeart = false
     @State var viewQueue = false
@@ -28,12 +26,15 @@ struct MiniPlayer: View {
     @State var firstPlayMusic = true
     @State var offset : CGFloat = 0
     
+    //declare local variables
+    var animation : Namespace.ID
     var height = UIScreen.main.bounds.height/3 + 20
     var safeArea = UIApplication.shared.windows.first?.safeAreaInsets
     
     var body: some View {
         VStack () {
             
+            //MARK: Capsule View
             Capsule()
                 .fill(Color.gray)
                 .frame(width: expand ? 60 : 0, height : expand ? 4 : 0)
@@ -119,6 +120,8 @@ struct MiniPlayer: View {
                 }
                 .padding(.horizontal)
                 
+                //if the music view have not expanded
+                //display it at the bottom
                 if !expand{
                     ProgressView(value: Double(musicManager.secondsElapsed) / Double(musicManager.currPlaying.musicLength!))
                         .padding(.horizontal)
@@ -240,7 +243,7 @@ struct MiniPlayer: View {
                             .frame(width: 30)
                     }
                 }
-             
+                
             }
             .padding(.horizontal)
             .frame(width: expand ? nil : 0 , height: expand ? nil : 0)
@@ -267,31 +270,23 @@ struct MiniPlayer: View {
         .edgesIgnoringSafeArea(.all)
     }
     
+    //update the position of music playview ondrag
     func onChanged (value: DragGesture.Value){
-        
         //only allowed when it's expanded
         if value.translation.height > 0 && expand{
             offset = value.translation.height
         }
     }
     
+    //update the position of music playview ondrag
     func onEnded (value: DragGesture.Value){
-        
         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.95,blendDuration: 0.95)){
             
             if value.translation.height > height{
                 viewQueue = false
                 expand = false
             }
-            
             offset = 0
         }
-        
     }
 }
-//
-//struct MiniPlayer_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MiniPlayer(animation: <#Namespace.ID#>, expand: <#Binding<Bool>#>)
-//    }
-//}

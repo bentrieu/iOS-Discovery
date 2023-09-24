@@ -87,7 +87,6 @@
 		F5704DFE2AB82C3500495552 /* ChangePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5704DFD2AB82C3500495552 /* ChangePhotoView.swift */; };
 		F5BD94FA2AB415EE0015B48C /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD94F92AB415EE0015B48C /* MusicView.swift */; };
 		F5BD94FD2AB41DAD0015B48C /* RootViewTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD94FC2AB41DAD0015B48C /* RootViewTemp.swift */; };
-		F5BD95002AB41E760015B48C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD94FF2AB41E760015B48C /* SearchView.swift */; };
 		F5BD95072AB4278F0015B48C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD95062AB4278F0015B48C /* SettingView.swift */; };
 		F5BD95092AB42E800015B48C /* ViewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD95082AB42E800015B48C /* ViewProfileView.swift */; };
 		F5BD950B2AB436210015B48C /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD950A2AB436210015B48C /* EditProfileView.swift */; };
@@ -167,7 +166,6 @@
 		F5704DFD2AB82C3500495552 /* ChangePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhotoView.swift; sourceTree = "<group>"; };
 		F5BD94F92AB415EE0015B48C /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		F5BD94FC2AB41DAD0015B48C /* RootViewTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewTemp.swift; sourceTree = "<group>"; };
-		F5BD94FF2AB41E760015B48C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		F5BD95062AB4278F0015B48C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		F5BD95082AB42E800015B48C /* ViewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileView.swift; sourceTree = "<group>"; };
 		F5BD950A2AB436210015B48C /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			children = (
 				9951363F2ABF04940034C72D /* ErrorView */,
 				F5BD95052AB427830015B48C /* SettingView */,
-				F5BD94FE2AB41E690015B48C /* SearchView */,
 				F5BD94FB2AB41D820015B48C /* MainView */,
 				9958D8552AAF83F000F5F42E /* SplashView */,
 				9958D84B2AAF69B200F5F42E /* AuthenticationView */,
@@ -466,14 +463,6 @@
 			path = MainView;
 			sourceTree = "<group>";
 		};
-		F5BD94FE2AB41E690015B48C /* SearchView */ = {
-			isa = PBXGroup;
-			children = (
-				F5BD94FF2AB41E760015B48C /* SearchView.swift */,
-			);
-			path = SearchView;
-			sourceTree = "<group>";
-		};
 		F5BD95052AB427830015B48C /* SettingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,7 +602,6 @@
 				9C38803E2AB83ED100E60162 /* MusicManager.swift in Sources */,
 				9C9EA7782AB21B4A0042ACD5 /* GoogleSignInHelper.swift in Sources */,
 				04E149D32AB03CEE00BF6229 /* MusicRowView.swift in Sources */,
-				F5BD95002AB41E760015B48C /* SearchView.swift in Sources */,
 				049B57202ABB2E8D005809B5 /* PlaylistRowView.swift in Sources */,
 				F5BD94FD2AB41DAD0015B48C /* RootViewTemp.swift in Sources */,
 				04E149DD2AB0A3BF00BF6229 /* NewPlaylistView.swift in Sources */,
