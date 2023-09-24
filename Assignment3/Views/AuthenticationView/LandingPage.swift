@@ -76,10 +76,12 @@ struct LandingPageView: View {
                     //MARK: SIGN UP WITH FACEBOOK
                     Button {
                         Task {
+                            // Attempt to sign in with Facebook
                             do {
-                                // Attempt to sign in with Facebook
-                                try await viewModel.signInFacebook()
-                                showSignInView = false
+                                let result = try await viewModel.signInFacebook()
+                                if case .success = result {
+                                    showSignInView = false
+                                }
                             } catch {
                                 print(error)
                             }
