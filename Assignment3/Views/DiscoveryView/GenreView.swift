@@ -24,18 +24,22 @@ struct GenreView: View {
    
     var body: some View {
         ZStack{
+            // Apply a linear gradient background with the provided color.
             LinearGradient(gradient: Gradient(colors: [color, Color("white")]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
             ScrollView {
                 VStack{
                     //MARK: - LIST OF TRACKS
                     VStack {
+                        // Display a list of tracks from the musicManager.
                         ForEach(musicManager.musicList, id: \.musicId) { item in
                             Button {
+                                // Play the selected track.
                                 musicManager.currPlaying = item
                                 musicManager.play()
                                    
                             } label: {
+                                // Display a MusicRowView for each track.
                                 MusicRowView(imgDimens: 60, titleSize: 21, subTitleSize: 17, music: item)
                             }
                         }
@@ -49,6 +53,7 @@ struct GenreView: View {
         .toolbar{
             ToolbarItem (placement: .navigationBarLeading){
                 Button {
+                    // Dismiss the view when the back button is pressed.
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {
                     BackButton()
