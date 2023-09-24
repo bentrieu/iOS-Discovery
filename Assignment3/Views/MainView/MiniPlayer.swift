@@ -62,62 +62,68 @@ struct MiniPlayer: View {
                 }
             }
             
-            HStack(spacing: 15){
-                
-                if expand{Spacer(minLength: 0)}
-                
-                if viewQueue{
-                    QueueVIew()
-                        .frame(height: UIScreen.main.bounds.height/1.7)
-                }else{
-                    //MARK: - THUMBNAIL IMAGE
-                    AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
-                        image
-                            .resizable()
-                            .frame(width: expand ? height : 55, height: expand ? height : 55)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                        
-                    }placeholder: {
+            VStack {
+                HStack(spacing: 15){
+                    
+                    if expand{Spacer(minLength: 0)}
+                    
+                    if viewQueue{
+                        QueueVIew()
+                    }else{
+                        //MARK: - THUMBNAIL IMAGE
+                        AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
+                            image
+                                .resizable()
+                                .frame(width: expand ? height : 55, height: expand ? height : 55)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                            
+                        }placeholder: {
+                            
+                        }
                         
                     }
                     
-                }
-                
-                if !expand{
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(musicManager.currPlaying.musicName!)
-                            .font(Font.custom("Gotham-Medium", size: 16))
-                            .foregroundColor(Color("black"))
-                            .tracking(-1)
-                        
-                        Text(musicManager.currPlaying.artistName!)
-                            .font(Font.custom("Gotham-Medium", size: 13))
-                            .foregroundColor(Color("black").opacity(0.6))
-                            .tracking(-1)
+                    if !expand{
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(musicManager.currPlaying.musicName!)
+                                .font(Font.custom("Gotham-Medium", size: 16))
+                                .foregroundColor(Color("black"))
+                                .tracking(-1)
+                            
+                            Text(musicManager.currPlaying.artistName!)
+                                .font(Font.custom("Gotham-Medium", size: 13))
+                                .foregroundColor(Color("black").opacity(0.6))
+                                .tracking(-1)
+                        }
                     }
-                }
-                Spacer(minLength: 0)
-                if !expand{
-                    Button {
-                        MusicManager.instance.pauseMusic()
-                    } label: {
-                        Image(systemName:  !musicManager.isPlaying ? "play.circle" : "pause.circle")
-                            .font(.title)
-                            .foregroundColor(Color("black"))
+                    Spacer(minLength: 0)
+                    if !expand{
+                        Button {
+                            MusicManager.instance.pauseMusic()
+                        } label: {
+                            Image(systemName:  !musicManager.isPlaying ? "play.circle" : "pause.circle")
+                                .font(.title)
+                                .foregroundColor(Color("black"))
+                        }
+                        
+                        Button {
+                            musicManager.currPlaying = musicManager.playNextMusic()!
+                            musicManager.play()
+                        } label: {
+                            Image(systemName: "forward.fill")
+                                .font(.title2)
+                                .foregroundColor(Color("black"))
+                        }
                     }
                     
-                    Button {
-                        musicManager.currPlaying = musicManager.playNextMusic()!
-                        musicManager.play()
-                    } label: {
-                        Image(systemName: "forward.fill")
-                            .font(.title2)
-                            .foregroundColor(Color("black"))
-                    }
                 }
+                .padding(.horizontal)
                 
+                if !expand{
+                    ProgressView(value: Double(musicManager.secondsElapsed) / Double(musicManager.currPlaying.musicLength!))
+                        .padding(.horizontal)
+                }
             }
-            .padding(.horizontal)
             
             VStack {
                 Spacer()
@@ -164,7 +170,7 @@ struct MiniPlayer: View {
                 }
                 
                 //MARK: - PROGRESS BAR
-                ProgressView(value: firstPlayMusic ?  0 : Double(musicManager.secondsElapsed) / Double(musicManager.currPlaying.musicLength!))
+                ProgressView(value: Double(musicManager.secondsElapsed) / Double(musicManager.currPlaying.musicLength!))
                     .padding(.horizontal)
                 
                 //MARK: - START & END TIME
