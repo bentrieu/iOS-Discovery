@@ -18,7 +18,7 @@ struct QueueVIew: View {
     @StateObject private var musicManager = MusicManager.instance
     var musicListFromCurPlaying : [Music]{
         if let i = musicManager.musicList.firstIndex(where: { $0.musicId == musicManager.currPlaying.musicId }) {
-            return Array(musicManager.musicList[i..<musicManager.musicList.count])
+            return Array(musicManager.musicList[i+1..<musicManager.musicList.count])
         }
         return [Music]()
     }
@@ -36,13 +36,13 @@ struct QueueVIew: View {
                 
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.4)).shadow(radius: 1))
             }
-            Text("Up Next")
-                .font(.custom("Gotham-Bold", size: 25))
-                .modifier(BlackColor())
-                .frame(maxWidth: .infinity, alignment: .leading)
             
-            //MARK: - UPCOMING TRACK LIST
             if !musicListFromCurPlaying.isEmpty{
+                Text("Up Next")
+                    .font(.custom("Gotham-Bold", size: 25))
+                    .modifier(BlackColor())
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                //MARK: - UPCOMING TRACK LIST
                 List{
                     ForEach(musicListFromCurPlaying){ music in
                         Button{
@@ -60,8 +60,6 @@ struct QueueVIew: View {
             }
             Spacer()
         }
-        .frame(width: .infinity)
-        .padding(.top, 15)
     }
 }
 
