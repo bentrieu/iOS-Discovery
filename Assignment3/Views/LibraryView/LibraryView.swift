@@ -206,6 +206,10 @@ struct LibraryView: View {
                 
             }
         }
+        .onDisappear {
+            searchInput = ""
+            searchActive = false
+        }
     }
 }
 
