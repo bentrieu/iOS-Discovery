@@ -1,23 +1,23 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2023B
-  Assessment: Assignment 3
-  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
-  ID: s3877969, s3878270, s3926888, s3878466, s3836280
-  Created  date: 10/9/2023
-  Last modified: 23/9/2023
-  Acknowledgement:
-https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
-https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
-*/
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2023B
+ Assessment: Assignment 3
+ Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+ ID: s3877969, s3878270, s3926888, s3878466, s3836280
+ Created  date: 10/9/2023
+ Last modified: 23/9/2023
+ Acknowledgement:
+ https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+ */
 
 
 import SwiftUI
 import PhotosUI
 
 struct EditProfileView: View {
-//    @Binding var account: Account
+    //    @Binding var account: Account
     @StateObject var userViewModel: UserViewModel
     
     //declare the temp variables just to be placeholder
@@ -36,6 +36,7 @@ struct EditProfileView: View {
             Color("white")
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 15){
+                //MARK: - HEADER VIEW
                 HeadingControllerButtonView(userViewModel: userViewModel ,isContentNotEdited: $isContentNotEdited, isCancelButtonPressed: $isCancelButtonPressed, isPresentingEdit: $isPresentingEdit,tempName: $tempName, focusField: $focusedField){
                     if let item {
                         userViewModel.saveProfileImage(item: item)
@@ -53,20 +54,21 @@ struct EditProfileView: View {
                     }
                 }
                 
+                //MARK: - CHANGE PHOTO BUTTON
                 PhotosPicker(selection: $item, matching: .images, photoLibrary: .shared()) {
                     Text("Change photo")
                 }
-
+                
+                //MARK: - USER NAME
                 TextField("", text: Binding<String>(
                     get: { self.tempName },
                     set: { self.tempName = $0
                         self.isContentNotEdited = false
-                       }
-                     ))
-                    .textFieldStyle(CustomTextFieldForEditView())
-                    .padding(.horizontal,30)
-                    .focused($focusedField)
-                
+                    }
+                ))
+                .textFieldStyle(CustomTextFieldForEditView())
+                .padding(.horizontal,30)
+                .focused($focusedField)
                 
                 Text("This could be your first name or nickname. It's how you'll appear on Spotify.")
                     .foregroundColor(Color("black").opacity(0.6))
@@ -76,11 +78,12 @@ struct EditProfileView: View {
                 
                 Spacer()
                 
-              
+                
             }
             
             if isCancelButtonPressed{
                 if !isContentNotEdited{
+                    //MARK: - CONFIRM NOTIFICATION
                     EditModalLeaveConfirmView(isPresentingEdit: $isPresentingEdit, isCancelButtonPressed: $isCancelButtonPressed, focusField: $focusedField)
                 }
             }
@@ -110,7 +113,7 @@ struct EditProfileView: View {
             }
             self.isContentNotEdited = true
         }
-       
+        
     }
 }
 //
@@ -130,14 +133,14 @@ struct CustomTextFieldForEditView: TextFieldStyle {
                 Divider()
                     .background(Color("black").opacity(0.7))
             }
-            
+        
     }
 }
-
+//MARK: - HEADER IMPLEMENTATION
 struct HeadingControllerButtonView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var userViewModel: UserViewModel
-
+    
     @Binding var isContentNotEdited: Bool
     @Binding var isCancelButtonPressed: Bool
     @Binding  var isPresentingEdit : Bool
@@ -148,19 +151,17 @@ struct HeadingControllerButtonView: View {
     
     var body: some View {
         HStack{
+            //MARK: - CANCEL BUTTON
             Button {
                 withAnimation {
                     isCancelButtonPressed = true
-                   
                 }
-               
                 if isContentNotEdited{
                     withAnimation {
                         isPresentingEdit = false
                         focusField.wrappedValue = false
                     }
                 }
-                
             } label: {
                 Text("Cancel")
                     .foregroundColor(Color("black"))
@@ -169,12 +170,14 @@ struct HeadingControllerButtonView: View {
             
             Spacer()
             
+            //MARK: - HEADER
             Text("Edit Profile")
                 .foregroundColor(Color("black"))
                 .font(Font.custom("Gotham-Bold", size: 14))
             
             Spacer()
             
+            //MARK: - SAVE BUTTON
             Button {
                 userViewModel.updateUserProfile(usernameText: tempName)
                 callback()

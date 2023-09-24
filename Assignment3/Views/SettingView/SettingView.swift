@@ -1,16 +1,16 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2023B
-  Assessment: Assignment 3
-  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
-  ID: s3877969, s3878270, s3926888, s3878466, s3836280
-  Created  date: 10/9/2023
-  Last modified: 23/9/2023
-  Acknowledgement:
-https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
-https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
-*/
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2023B
+ Assessment: Assignment 3
+ Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+ ID: s3877969, s3878270, s3926888, s3878466, s3836280
+ Created  date: 10/9/2023
+ Last modified: 23/9/2023
+ Acknowledgement:
+ https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+ */
 
 import SwiftUI
 import LocalAuthentication
@@ -18,15 +18,16 @@ import LocalAuthentication
 struct SettingView: View {
     
     @StateObject var userViewModel: UserViewModel
-//    @StateObject var settingViewModel = SettingsViewModel()
+    //    @StateObject var settingViewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
     @State private var errorPopUp = false
     @State private var loading = true
-
-//    var account: Account
+    
+    //    var account: Account
     var body: some View {
         ZStack {
             VStack{
+                //MARK: - VIEW PROFILE BUTTON
                 NavigationLink {
                     ViewProfileView(userViewModel: userViewModel)
                         .modifier(CustomNavigationButton())
@@ -34,10 +35,10 @@ struct SettingView: View {
                     AccountProfile(userViewModel: userViewModel){
                         loading = false
                     }
-                        .modifier(CustomNavigationButton())
-                        .padding(.bottom)
+                    .modifier(CustomNavigationButton())
+                    .padding(.bottom)
                 }
-                
+                //MARK: - CHANGE THEME BUTTON
                 NavigationLink {
                     ThemeEditingView(userViewModel: userViewModel)
                         .navigationTitle("Theme Setting")
@@ -47,6 +48,7 @@ struct SettingView: View {
                         .modifier(CustomNavigationButton())
                 }
                 
+                //MARK: - LOGOUT BUTTON
                 Button {
                     Task {
                         do {
@@ -66,9 +68,10 @@ struct SettingView: View {
                         .background(Color("gray").opacity(0.6))
                         .clipShape(Capsule())
                 }
-        
+                
                 Spacer()
                 
+                //MARK: - DELETE ACCOUNT BUTTON
                 Button {
                     authenticate()
                     if SettingManager.shared.errorPopUp {
@@ -96,6 +99,7 @@ struct SettingView: View {
             }
             .padding(.horizontal)
             
+            //MARK: - LOADING VIEW
             if loading{
                 LoadingView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -103,12 +107,14 @@ struct SettingView: View {
                     .ignoresSafeArea()
             }
             
+            //MARK: - ERROR VIEW
             ErrorView(errorMessage: SettingManager.shared.msg) // Error view for pre-filled cell error
                 .position(x: UIScreen.main.bounds.width/2, y: self.errorPopUp ? 100 : -30) // Position error view
                 .edgesIgnoringSafeArea(.top) // Ignore safe area edges
         }
     }
     
+    //MARK: - AUTHENTICATE FUNCTION
     func authenticate() {
         let context = LAContext()
         var error: NSError?
@@ -142,10 +148,12 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-       
+        
         SettingView(userViewModel: UserViewModel(), showSignInView: .constant(true))
     }
 }
+
+//MARK: - ACCOUNT PROFILE VIEW
 struct AccountProfile: View {
     @StateObject var userViewModel: UserViewModel
     var callback: ()->Void
@@ -176,6 +184,7 @@ struct AccountProfile: View {
     }
 }
 
+//MARK: - SETTING ITEM VIEW
 struct SettingItemView: View {
     var name: String
     var body: some View {

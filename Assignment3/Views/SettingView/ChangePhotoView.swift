@@ -1,16 +1,16 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2023B
-  Assessment: Assignment 3
-  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
-  ID: s3877969, s3878270, s3926888, s3878466, s3836280
-  Created  date: 10/9/2023
-  Last modified: 23/9/2023
-  Acknowledgement:
-https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
-https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
-*/
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2023B
+ Assessment: Assignment 3
+ Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+ ID: s3877969, s3878270, s3926888, s3878466, s3836280
+ Created  date: 10/9/2023
+ Last modified: 23/9/2023
+ Acknowledgement:
+ https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+ */
 
 
 import SwiftUI
@@ -28,6 +28,7 @@ struct ChangePhotoView: View {
                 Text("Image URL")
                     .foregroundColor(Color("black"))
                     .font(Font.custom("Gotham-Bold", size: 16))
+                //MARK: - URL TEXTFIELD
                 TextField("Enter URL", text: $imageURL,onEditingChanged: { edit in
                     self.onEditing = edit
                     
@@ -37,9 +38,10 @@ struct ChangePhotoView: View {
                 
                 
                 HStack{
+                    //MARK: - CANCEL BUTTON
                     Button {
                         withAnimation {
-                           isPresentingEditPicture = false
+                            isPresentingEditPicture = false
                         }
                     } label: {
                         Text("Cancel")
@@ -50,10 +52,10 @@ struct ChangePhotoView: View {
                             }
                     }
                     
-                    
+                    //MARK: - SAVE BUTTON
                     Button {
                         withAnimation {
-                           isPresentingEditPicture = false
+                            isPresentingEditPicture = false
                         }
                     } label: {
                         Text("Save")
@@ -70,10 +72,10 @@ struct ChangePhotoView: View {
                     .fill(Color("white"))
             }
             
-          
+            
         }
         .foregroundColor(Color("black"))
-       
+        
     }
 }
 
