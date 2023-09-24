@@ -22,15 +22,18 @@ final class UserViewModel: ObservableObject {
     @Published private(set) var user: DBUser? = nil
     @Published private(set) var playlists: [DBPlaylist]? = nil
     
+    //load current authenticated user into the user variable
     func loadCurrentUser() async throws {
         let authDataResult = try AuthenticationManager.instance.getAuthenticatedUser()
         self.user = try await UserManager.instance.getUser(userId: authDataResult.uid)
     }
     
+    //get all playlist of a current user
     func loadUserPlaylist() async throws {
         self.playlists = try await PlaylistManager.instance.getAllPlaylist()
     }
     
+    //update user name and re-fetch
     func updateUserProfile(usernameText: String) {
         guard let user else { return }
         Task {
@@ -39,6 +42,7 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    //update user preferences and refetch
     func updateUserTheme(isDark: Bool) {
         guard let user else { return }
         Task {
@@ -47,6 +51,7 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    //add a new empty playlist to the user storage and refetch
     func addPlaylist() async throws {
         guard let user else { return }
         
@@ -56,6 +61,7 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    //add a music into the current user playlist and refetch
     func addMusicToPlaylist(musicId: String, playlistId: String) async throws {
         guard let user else { return }
         
@@ -65,6 +71,7 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    //remove a music from the current user playlist and refetch
     func removeMusicFromPlaylist(musicId: String, playlistId: String) async throws {
         guard let user else { return }
         
@@ -74,6 +81,7 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    //save the picked image into the user storage,  and refetch
     func saveProfileImage(item: PhotosPickerItem) {
         guard let user else { return }
         
@@ -91,10 +99,12 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    //sign the current user out
     func signOut() throws {
         try AuthenticationManager.instance.signOut()
     }
-        
+    
+    //delete current user from the database
     func deleteUser() async throws {
         try await AuthenticationManager.instance.deleteUser()
     }

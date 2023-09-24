@@ -49,7 +49,7 @@ struct LoginView: View {
                     Button {
                         Task {
                             do {
-                                try await viewModel.signUp()
+                                try await viewModel.signIn()
                                 showSignInView = false
                             } catch {
                                 errorMSG = error.localizedDescription

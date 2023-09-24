@@ -22,6 +22,7 @@ import Firebase
 final class FacebookSignInHelper: ObservableObject {
     private let loginManager = LoginManager()
     
+    //login usign facebook, getting public profile and email of the user
     func loginFacebook() async throws -> FacebookLoginResult {
         return await withCheckedContinuation { continuation in
             loginManager.logIn(permissions: ["public_profile", "email"], from: nil) { result, error in

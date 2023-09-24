@@ -142,7 +142,6 @@ struct MiniPlayer: View {
                     }
                     
                 }
-                .frame(width: .infinity)
                 
                 
                 //MARK: - PROGRESS BAR
@@ -159,7 +158,6 @@ struct MiniPlayer: View {
                             .font(.custom("Gotham-Light", size: 15))
                             .modifier(BlackColor())
                     }
-                    .frame(width: .infinity)
                     .padding(.horizontal, 5)
                 }
                 

@@ -22,24 +22,30 @@ final class StorageManager {
     static let instance = StorageManager()
     private init() { }
     
+    //reference to firebase cloud storage
     private let storage = Storage.storage().reference()
     
+    //get the user reference in the storage
     private func userReference() -> StorageReference {
         storage.child("users")
     }
     
+    //get the playlist reference in the storage
     private func playlistReference() -> StorageReference {
         storage.child("playlists")
     }
     
+    //get the url for a given image path
     func getUrlForImage(path: String) async throws -> URL {
         return try await Storage.storage().reference(withPath: path).downloadURL()
     }
     
+    //get the data data type from the given path
     func getData(path: String) async throws -> Data{
         return try await storage.child(path).data(maxSize: 3 * 1024 * 1024)
     }
     
+    //return an uiimage given a path
     func getImage(path: String) async throws -> UIImage {
         let data = try await getData(path: path)
         
@@ -50,6 +56,7 @@ final class StorageManager {
         return image
     }
     
+    //delete current user image
     func deleteUserImage() async throws {
         let userId = try AuthenticationManager.instance.getAuthenticatedUser().uid
         let user = try await UserManager.instance.getUser(userId: userId)
@@ -60,6 +67,7 @@ final class StorageManager {
     }
 
     //MARK: USER IMAGES
+    //save user image using their userid
     func saveUserImage(data: Data, userId: String) async throws -> (path: String, name: String){
         let meta = StorageMetadata()
         meta.contentType = "image/jpeg"
@@ -83,6 +91,7 @@ final class StorageManager {
     }
     
     //MARK: PLAYLIST IMAGES
+    //save playlist image using their userid
     func savePlaylistImage(data: Data, playlistId: String) async throws -> (path: String, name: String){
         let meta = StorageMetadata()
         meta.contentType = "image/jpeg"

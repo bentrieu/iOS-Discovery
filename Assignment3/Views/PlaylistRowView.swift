@@ -58,7 +58,6 @@ struct PlaylistRowView: View {
         .onAppear{
             print(playlist.photoUrl!)
         }
-        .frame(width: .infinity)
         .padding(.vertical, 10)
         .padding(.horizontal)
     }

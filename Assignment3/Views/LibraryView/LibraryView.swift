@@ -108,7 +108,7 @@ struct LibraryView: View {
                             ZStack{
                                 LinearGradient(gradient: Gradient(colors: [Color.gray, Color("white")]), startPoint: .top, endPoint: .bottom)
                                     .ignoresSafeArea(.all)
-                                NewPlaylistView(showView: $showAddNewPlaylistView)
+                                NewPlaylistView(showView: .constant(false))
                                     .modifier(PagePadding())
                             }
                             

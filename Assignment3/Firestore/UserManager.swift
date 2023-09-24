@@ -17,6 +17,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+//user model to store user within the database
 struct DBUser: Codable {
     let userId: String
     let dateCreated: Date?
@@ -42,24 +43,29 @@ final class UserManager {
     static let instance = UserManager()
     private init() {}
     
+    //reference to user collection within the database
     private let userCollection = Firestore.firestore().collection("users")
     
+    //get a document from a user
     private func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
     }
     
+    //to encode from normal case to snake case
     private let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         return encoder
     }()
     
+    //to decode from snake case to normal case
     private let decoder: Firestore.Decoder = {
         let decoder = Firestore.Decoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
     
+    //create a user within the database if not exist
     func createNewUser(user: DBUser) async throws {
         let isUserExists = try await userDocument(userId: user.userId).getDocument().exists
         if !isUserExists {
@@ -67,14 +73,17 @@ final class UserManager {
         }
     }
     
+    //get a user using id
     func getUser(userId: String) async throws -> DBUser {
         return try await userDocument(userId: userId).getDocument(as: DBUser.self, decoder: decoder)
     }
     
+    //delete current user
     func deteleCurrentUser() async throws {
         try await userDocument(userId: AuthenticationManager.instance.getAuthenticatedUser().uid).delete()
     }
     
+    //update user display name
     func updateUserProfile(userId:String, displayName: String) async throws {
         let data: [String:Any] = [
             "display_name": displayName
@@ -83,6 +92,7 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    //update user profile image
     func updateProfileImageURL(userId:String, path: String) async throws {
         let data: [String:Any] = [
             "profile_image_path": path
@@ -91,6 +101,7 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    //update user theme reference
     func updateUserTheme(userId:String, isDark: Bool) async throws {
         let data: [String:Any] = [
             "is_dark": isDark
@@ -99,6 +110,7 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    //add a new music to user favorite array
     func favoriteMusic(musicId: String, userId: String) async throws {
         let data: [String: Any] = [
             "favorites": FieldValue.arrayUnion([musicId])
@@ -107,6 +119,7 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    //remove a music from user favorite array
     func unfavoriteMusic(musicId: String, userId: String) async throws {
         let data: [String: Any] = [
             "favorites": FieldValue.arrayRemove([musicId])
