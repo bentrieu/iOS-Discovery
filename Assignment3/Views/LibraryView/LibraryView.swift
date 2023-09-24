@@ -15,28 +15,6 @@ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?
 
 import SwiftUI
 import PhotosUI
-
-@MainActor
-final class PlaylistViewModel: ObservableObject {
-    
-    func savePlaylistImage(item: PhotosPickerItem, playlistId: String) async throws {
-        let playlist = try await PlaylistManager.instance.getPlaylist(playlistId: playlistId)
-        
-        Task {
-            guard let data = try await item.loadTransferable(type: Data.self) else {
-                return
-            }
-            let (path, name) = try await StorageManager.instance.savePlaylistImage(data: data, playlistId: playlist.playlistId)
-            print("success")
-            print(path)
-            print(name)
-            let url = try await StorageManager.instance.getUrlForImage(path: path)
-            try await PlaylistManager.instance.updatePlaylistPhoto(playlistId: playlist.playlistId, photoUrl: url.absoluteString)
-        }
-    }
-}
-
-
 struct LibraryView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
