@@ -16,25 +16,6 @@ import Foundation
 
 import UIKit
 
-enum DeviceType {
-    case iPhone
-    case iPad
-    case unknown
-}
-
-func getDeviceType() -> DeviceType {
-    let userInterfaceIdiom = UIDevice.current.userInterfaceIdiom
-    
-    switch userInterfaceIdiom {
-    case .phone:
-        return .iPhone
-    case .pad:
-        return .iPad
-    default:
-        return .unknown
-    }
-}
-
 extension UIApplication {
     
     @MainActor
