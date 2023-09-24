@@ -16,6 +16,7 @@ import SwiftUI
 import Firebase
 import FacebookCore
 
+//initialize firebase, calling the splashscreen view
 @main
 struct Assignment3App: App {
     
