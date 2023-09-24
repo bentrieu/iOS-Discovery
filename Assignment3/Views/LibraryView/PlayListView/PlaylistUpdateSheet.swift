@@ -17,12 +17,15 @@ import SwiftUI
 
 struct PlaylistUpdateSheet: View {
     @Environment (\.dismiss) var dismiss
-    let parentPresentationMode: Binding<PresentationMode>
+    @StateObject var playlistManager = PlaylistManager.instance
+    @StateObject var musicManager = MusicManager.instance
     
+    let parentPresentationMode: Binding<PresentationMode>
     @Binding var showAddTracksToPlaylistView: Bool
     @Binding var showEditPlaylistView : Bool
-    
-    @StateObject var playlistManager = PlaylistManager.instance
+    @Binding var firstPlaying: Bool
+    @Binding var playMusicActive:Bool
+    let playlistTracks : [Music]
     let playlist: DBPlaylist
     
     var body: some View {
@@ -37,11 +40,18 @@ struct PlaylistUpdateSheet: View {
                 Divider()
                     .overlay(Color("black"))
                 
-                //MARK: - PLAY BUTTON
                 Group{
+                    //MARK: - PLAY BUTTON
                     Button {
+                        if firstPlaying{
+                            musicManager.musicList.removeAll()
+                            musicManager.musicList = playlistTracks
+                            firstPlaying = false
+                        }
+                        musicManager.currPlaying = playlistTracks[0]
+                        musicManager.play()
+                        playMusicActive = true
                         dismiss()
-                        
                     } label: {
                         ButtonRowView(iconName: "play",iconSize: 23, text: "Listen to this playlist")
                     }
