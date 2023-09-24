@@ -46,7 +46,7 @@ struct SettingView: View {
                     SettingItemView(name: "Theme")
                         .modifier(CustomNavigationButton())
                 }
-               
+                
                 Button {
                     Task {
                         do {
@@ -147,7 +147,7 @@ struct SettingView_Previews: PreviewProvider {
     }
 }
 struct AccountProfile: View {
-    @ObservedObject var userViewModel: UserViewModel
+    @StateObject var userViewModel: UserViewModel
     var callback: ()->Void
     var body: some View {
         HStack{

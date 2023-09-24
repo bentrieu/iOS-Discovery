@@ -63,7 +63,6 @@ struct MainView: View {
             Task {
                 do {
                     try? await userViewModel.loadCurrentUser()
-//                    try? await viewModel.loadUserPlaylist()
                 } catch {
                     print(error)
                 }
@@ -71,11 +70,11 @@ struct MainView: View {
             Task {
                 albumListManager.popularAlbums = try await AlbumManager.shared.getAlbumCollectionByName("Popular Albums")
                 loading = false
-                
+
             }
             Task {
                 albumListManager.chart = try await AlbumManager.shared.getAlbumCollectionByName("Charts")
-               
+
             }
         }
         .navigationBarBackButtonHidden(true)
