@@ -16,6 +16,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+//a model to store playlist within the database
 struct DBPlaylist: Codable {
     let playlistId: String
     let dateCreated: Date?
@@ -30,6 +31,7 @@ final class PlaylistManager : ObservableObject{
     static let instance = PlaylistManager()
     private init() {}
     
+    //user colection to get user reference from the database
     private let userCollection = Firestore.firestore().collection("users")
     
     private let encoder: Firestore.Encoder = {
@@ -44,18 +46,17 @@ final class PlaylistManager : ObservableObject{
         return decoder
     }()
     
+    //get the current user id
     func getCurrentUser() async throws -> String {
         return try AuthenticationManager.instance.getAuthenticatedUser().uid
     }
     
+    //get the reference of the current user playlist
     func getPlaylistsRef() async throws -> CollectionReference {
         return try await userCollection.document(getCurrentUser()).collection("playlists")
     }
-
-//    func getPlaylistsRef() async throws -> CollectionReference {
-//        return try await userCollection.document("mW8JeXNn48bI1annfiBM4x6pSdz2").collection("playlists")
-//    }
-//
+    
+    //add a new empty playlist to the user
     func addPlaylist() async throws {
         var playlistData: [String: Any] = [
             "playlist_id": "",
@@ -73,6 +74,7 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).setData(playlistData)
     }
     
+    //add a new playlist, with name
     func addPlaylist(name : String) async throws {
         var playlistData: [String: Any] = [
             "playlist_id": "",
@@ -90,14 +92,17 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).setData(playlistData)
     }
     
+    //remove a playlist from current user
     func removePlaylist(playlistId: String) async throws {
         try await getPlaylistsRef().document(playlistId).delete()
     }
     
+    //get a playlist from current user
     func getPlaylist(playlistId: String) async throws -> DBPlaylist {
         return try await getPlaylistsRef().document(playlistId).getDocument(as: DBPlaylist.self, decoder: decoder)
     }
     
+    //get all playlist from current user
     func getAllPlaylist() async throws -> [DBPlaylist] {
         let snapshot = try await getPlaylistsRef().getDocuments()
         
@@ -111,6 +116,7 @@ final class PlaylistManager : ObservableObject{
         return playlists
     }
     
+    //add a music to a playlist from current user
     func addMusicToPlaylist(musicId: String, playlistId: String) async throws {
         let data: [String: Any] = [
             "musics": FieldValue.arrayUnion([musicId])
@@ -119,6 +125,7 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(data)
     }
     
+    //remove a music from a playlist from current user
     func removeMusicFromPlaylist(musicId: String, playlistId: String) async throws {
         let data: [String: Any] = [
             "musics": FieldValue.arrayRemove([musicId])
@@ -127,6 +134,7 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(data)
     }
     
+    //update the name of the playlist of current user
     func updatePlaylistName(playlistId: String, name: String) async throws {
         let playlistData: [String: Any] = [
             "name": name,
@@ -135,6 +143,7 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(playlistData)
     }
     
+    //update the photourl of the playlist of current user
     func updatePlaylistPhoto(playlistId: String, photoUrl: String) async throws {
         let playlistData: [String: Any] = [
             "photo_url": photoUrl,
@@ -143,6 +152,7 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(playlistData)
     }
     
+    //set an array of music to a playlist of currentt user
     func setMusicsToPlaylist(musicIds: [String], playlistId: String) async throws {
         let data: [String: Any] = [
             "musics": musicIds
@@ -151,14 +161,17 @@ final class PlaylistManager : ObservableObject{
         try await getPlaylistsRef().document(playlistId).updateData(data)
     }
     
+    //get playlist from a local variable in the manager
     func getPlaylistFromLocal(playlistId : String) -> DBPlaylist{
         return playlists.first(where: {$0.playlistId == playlistId})!
     }
     
+    //searcht he playlist
     func searchPlaylistByName(input : String) -> [DBPlaylist]{
         return playlists.filter { $0.name!.lowercased().contains(input.lowercased()) }
     }
     
+    //get all musics from the playlist
     func getAllMusicsInPlaylist(playlistId : String)-> [Music]{
         //get all music ids in playlist
         let playlistTrackIds = playlists.first(where: {$0.playlistId == playlistId})?.musics ?? [String]()
@@ -176,6 +189,7 @@ final class PlaylistManager : ObservableObject{
         return playlistTracks
     }
     
+    //search for music using name or artist
     func searchMusicInAListByNameAndArtist(input : String, musics: [Music]) -> [Music]{
         if input.isEmpty{
             return musics

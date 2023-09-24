@@ -25,6 +25,7 @@ struct GoogleSignInResultModel {
 
 final class SignInGoogleHelper {
     
+    //sign in using google and return tokens for sign in firebase
     @MainActor
     func signIn() async throws -> GoogleSignInResultModel {
         guard let topVC = UIApplication.topViewController() else {

@@ -18,6 +18,7 @@ import Foundation
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
     
+    //call the google sign in prodedure
     func signInGoogle() async throws {
         let helper = SignInGoogleHelper()
         let tokens = try await helper.signIn()
@@ -26,6 +27,7 @@ final class AuthenticationViewModel: ObservableObject {
         try await UserManager.instance.createNewUser(user: user)
     }
     
+    //call the facebook sign in prodedure
     func signInFacebook() async throws -> FacebookLoginResult {
         let loginManager = FacebookSignInHelper()
         return try await loginManager.loginFacebook()
