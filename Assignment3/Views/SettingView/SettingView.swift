@@ -18,7 +18,7 @@ import LocalAuthentication
 struct SettingView: View {
     
     @StateObject var userViewModel: UserViewModel
-    @StateObject var settingViewModel = SettingsViewModel()
+//    @StateObject var settingViewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
     @State private var errorPopUp = false
     @State private var loading = true
@@ -50,7 +50,7 @@ struct SettingView: View {
                 Button {
                     Task {
                         do {
-                            try settingViewModel.signOut()
+                            try userViewModel.signOut()
                             showSignInView = true
                         } catch {
                             print("error: \(error)")

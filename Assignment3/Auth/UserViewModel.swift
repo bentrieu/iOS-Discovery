@@ -90,4 +90,12 @@ final class UserViewModel: ObservableObject {
             self.user = try await UserManager.instance.getUser(userId: user.userId)
         }
     }
+    
+    func signOut() throws {
+        try AuthenticationManager.instance.signOut()
+    }
+        
+    func deleteUser() async throws {
+        try await AuthenticationManager.instance.deleteUser()
+    }
 }
