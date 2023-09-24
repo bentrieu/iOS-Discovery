@@ -18,9 +18,11 @@ import Foundation
 @MainActor
 final class AuthenticateEmailViewModel: ObservableObject {
     
+    //email and password for login
     @Published var email: String = ""
     @Published var password: String = ""
     
+    //sign up the user into the auth and database
     func signUp() async throws {
         guard !email.isEmpty, !password.isEmpty else {
             print("No email or password found")
@@ -32,6 +34,7 @@ final class AuthenticateEmailViewModel: ObservableObject {
         try await UserManager.instance.createNewUser(user: user)
     }
     
+    //sign the user in using password and email
     func signIn() async throws {
         guard !email.isEmpty, !password.isEmpty else {
             print("No email or password found")

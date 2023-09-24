@@ -22,8 +22,10 @@ final class StorageManager {
     static let instance = StorageManager()
     private init() { }
     
+    //reference to firebase cloud storage
     private let storage = Storage.storage().reference()
     
+    //get the usr
     private func userReference() -> StorageReference {
         storage.child("users")
     }
