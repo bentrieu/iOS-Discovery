@@ -15,12 +15,22 @@ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?
 import SwiftUI
 
 struct ThemeEditingView: View {
-    @State private var isLightTheme = true
+    @StateObject var userViewModel : UserViewModel
+    @StateObject var settingManager = SettingManager.shared
     var body: some View {
         VStack{
-            Toggle(isLightTheme ? "Light Theme" : "Dark Theme", isOn: $isLightTheme)
+            Toggle(!SettingManager.shared.isDark ? "Light Theme" : "Dark Theme", isOn: $settingManager.isDark)
                 .padding(.all)
             Spacer()
+        }
+        .onAppear{
+            SettingManager.shared.isDark = userViewModel.user!.isDark!
+        }
+        .onChange(of: SettingManager.shared.isDark) { newValue in
+            userViewModel.updateUserTheme(isDark: SettingManager.shared.isDark)
+            Task{
+                try await userViewModel.loadCurrentUser()
+            }
         }
         
     }
@@ -28,6 +38,6 @@ struct ThemeEditingView: View {
 
 struct ThemeEditingView_Previews: PreviewProvider {
     static var previews: some View {
-        ThemeEditingView()
+        ThemeEditingView(userViewModel: UserViewModel())
     }
 }

@@ -19,7 +19,7 @@ struct LibraryView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @StateObject private var playlistManager = PlaylistManager.instance
-    @StateObject private var userViewModel = UserViewModel()
+    @StateObject  var userViewModel : UserViewModel
     @State var showAddNewPlaylistView = false
     @State var searchActive = false
     @State var searchInput = ""
@@ -211,6 +211,6 @@ struct LibraryView: View {
 
 struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
-        LibraryView()
+        LibraryView(userViewModel: UserViewModel())
     }
 }

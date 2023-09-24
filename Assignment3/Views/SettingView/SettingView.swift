@@ -39,7 +39,7 @@ struct SettingView: View {
                 }
                 
                 NavigationLink {
-                    ThemeEditingView()
+                    ThemeEditingView(userViewModel: userViewModel)
                         .navigationTitle("Theme Setting")
                         .modifier(CustomNavigationButton())
                 } label: {
@@ -103,7 +103,7 @@ struct SettingView: View {
                     .ignoresSafeArea()
             }
             
-            ErrorView(errorMessage: "There is no Face ID") // Error view for pre-filled cell error
+            ErrorView(errorMessage: SettingManager.shared.msg) // Error view for pre-filled cell error
                 .position(x: UIScreen.main.bounds.width/2, y: self.errorPopUp ? 100 : -30) // Position error view
                 .edgesIgnoringSafeArea(.top) // Ignore safe area edges
         }
@@ -133,8 +133,8 @@ struct SettingView: View {
                 }
             }
         } else {
+            SettingManager.shared.msg = "There is no Face ID"
             SettingManager.shared.errorPopUp = true
-          
             print("there is no faceid")
         }
     }

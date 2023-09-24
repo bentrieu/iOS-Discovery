@@ -38,7 +38,7 @@ struct MainView: View {
                             .foregroundColor(Color("black"))
                     }
                 
-                LibraryView()
+                LibraryView(userViewModel: userViewModel)
                     .tabItem {
                         VStack{
                             Label("Library", systemImage:  "books.vertical.fill")
@@ -63,6 +63,8 @@ struct MainView: View {
             Task {
                 do {
                     try? await userViewModel.loadCurrentUser()
+                    SettingManager.shared.isDark = userViewModel.user!.isDark!
+                  
                 } catch {
                     print(error)
                 }
@@ -79,7 +81,12 @@ struct MainView: View {
         }
         .navigationBarBackButtonHidden(true)
         .foregroundColor(Color("black"))
+        .preferredColorScheme(
+//            userViewModel.user ?? userViewModel.user?.isDark ?? .light
+            !SettingManager.shared.isDark ? .light : .dark
+        )
     }
+    
 }
 
 struct RootViewTemp_Previews: PreviewProvider {
@@ -94,7 +101,7 @@ struct LoadingView: View {
                 .frame(width: 50, height: 50)// This displays a spinning activity indicator
         }
         .padding()
-        .background(Color.white.opacity(0.8))
+        .background(Color("white").opacity(0.8))
         .cornerRadius(10)
     }
 }
