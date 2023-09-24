@@ -69,6 +69,7 @@ struct MiniPlayer: View {
                     
                     if viewQueue{
                         QueueVIew()
+                            .frame(height: UIScreen.main.bounds.height/1.7)
                     }else{
                         //MARK: - THUMBNAIL IMAGE
                         AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
