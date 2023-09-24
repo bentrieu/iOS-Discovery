@@ -24,6 +24,7 @@ struct DBUser: Codable {
     let displayName: String?
     let favorites: [String]?
     let profileImagePath: String?
+    let isDark: Bool
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -32,6 +33,7 @@ struct DBUser: Codable {
         self.displayName = auth.displayName
         self.favorites = []
         self.profileImagePath = nil
+        self.isDark = false
     }
 }
 
@@ -84,6 +86,14 @@ final class UserManager {
     func updateProfileImageURL(userId:String, path: String) async throws {
         let data: [String:Any] = [
             "profile_image_path": path
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func updateUserTheme(userId:String, isDark: Bool) async throws {
+        let data: [String:Any] = [
+            "is_dark": isDark
         ]
         
         try await userDocument(userId: userId).updateData(data)
