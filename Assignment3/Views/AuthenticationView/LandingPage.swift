@@ -74,8 +74,10 @@ struct LandingPageView: View {
                     Button {
                         Task {
                             do {
-                                try await viewModel.signInFacebook()
-                                showSignInView = false
+                                let result = try await viewModel.signInFacebook()
+                                if case .success = result {
+                                    showSignInView = false
+                                }
                             } catch {
                                 print(error)
                             }
