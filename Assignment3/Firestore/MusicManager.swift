@@ -116,9 +116,12 @@ final class MusicManager : ObservableObject {
             // Current music not found in the list
             return nil
         }
-
-        let nextIndex = (currentIndex + 1) % self.musicList.count
-        return self.musicList[nextIndex]
+        if currentIndex == self.musicList.count-1{
+            return self.musicList[currentIndex]
+        }else{
+            return self.musicList[currentIndex+1]
+        }
+        
     }
     
     func playPreviousMusic() -> Music? {
@@ -127,8 +130,11 @@ final class MusicManager : ObservableObject {
             return nil
         }
 
-        let previousIndex = (currentIndex - 1 + self.musicList.count) % self.musicList.count
-        return self.musicList[previousIndex]
+        if currentIndex == 0{
+            return self.musicList[currentIndex]
+        }else{
+            return self.musicList[currentIndex-1]
+        }
     }
     
     func searchMusicByGenre(_ genre: Genre){

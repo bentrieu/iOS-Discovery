@@ -69,19 +69,36 @@ struct MiniPlayer: View {
                     if expand{Spacer(minLength: 0)}
                     
                     if viewQueue{
-                        QueueVIew()
-                            .frame(height: UIScreen.main.bounds.height/1.7)
+                        //MARK: - QUEUE VIEW
+                        if UIDevice.current.userInterfaceIdiom == .phone {
+                            QueueVIew()
+                                .frame(height: UIScreen.main.bounds.height/1.7)
+                        }  else{
+                            QueueVIew()
+                                .frame(height: UIScreen.main.bounds.height/1.4)
+                        }
                     }else{
                         //MARK: - THUMBNAIL IMAGE
-                        AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
-                            image
-                                .resizable()
-                                .frame(width: expand ? height : 55, height: expand ? height : 55)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                            
-                        }placeholder: {
-                            
+                        if UIDevice.current.userInterfaceIdiom == .phone {  //change thumbnail dimens based on device typ
+                            AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
+                                image
+                                    .resizable()
+                                    .frame(width: expand ? height : 55, height: expand ? height : 55)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                                
+                            }placeholder: {
+                            }
+                        } else{
+                            AsyncImage(url: URL(string: musicManager.currPlaying.imageUrl!)){ image in
+                                image
+                                    .resizable()
+                                    .frame(width: expand ? height*1.5 : 55, height: expand ? height*1.5 : 55)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                                
+                            }placeholder: {
+                            }
                         }
+
                         
                     }
                     
