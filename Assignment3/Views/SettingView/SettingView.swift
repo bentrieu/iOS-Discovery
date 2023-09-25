@@ -130,18 +130,30 @@ struct SettingView: View {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "This is to confirm delete account") { success, authenticationError in
                 
                 if success {
-                    if !AuthenticationManager.instance.isAuthenticateExpired() {
-                        Task {
-                            do {
-                                try await StorageManager.instance.deleteUserImage()
-                                print("deleted images!!!!!!")
-                                try await UserManager.instance.deteleCurrentUser()
-                                print("deleted document!!!!!!")
-                                try await AuthenticationManager.instance.deleteUser()
-                                print("deleted authentication!!!!!!")
-                                showSignInView = true
-                            } catch {
+                    Task {
+                        AuthenticationManager.instance.isAuthenticateExpired { isExpired, error in
+                            if let error = error {
+                                // Handle the error
                                 print(error.localizedDescription)
+                            } else if let isExpired = isExpired {
+                                if isExpired {
+                                    SettingManager.shared.msg = "Token expired, please sign out and login again"
+                                    SettingManager.shared.errorPopUp = true
+                                } else {
+                                    Task {
+                                        do {
+                                            try await StorageManager.instance.deleteUserImage()
+                                            print("deleted images!!!!!!")
+                                            try await UserManager.instance.deteleCurrentUser()
+                                            print("deleted document!!!!!!")
+                                            try await AuthenticationManager.instance.deleteUser()
+                                            print("deleted authentication!!!!!!")
+                                            showSignInView = true
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

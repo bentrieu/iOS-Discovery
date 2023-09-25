@@ -52,29 +52,28 @@ final class AuthenticationManager {
     }
     
     //get the current login user
-    func isAuthenticateExpired() throws -> Bool {
+    func isAuthenticateExpired(completion: @escaping (Bool?, Error?) -> Void) {
         guard let user = Auth.auth().currentUser else {
-            throw URLError(.badServerResponse)
+            completion(nil, URLError(.badServerResponse))
+            return
         }
-        var result = false
         
         user.getIDTokenResult { (tokenResult, error) in
             if let error = error {
                 print(error.localizedDescription)
+                completion(nil, error)
             } else {
                 if let lastSignInTimestamp = tokenResult?.authDate {
                     let recentLoginThreshold: TimeInterval = 5 * 60
                     
-                    if Date().timeIntervalSince1970 - lastSignInTimestamp.timeIntervalSince1970 <= recentLoginThreshold {
-                        result = false
-                    } else {
-                        result = true
-                    }
+                    let isExpired = Date().timeIntervalSince1970 - lastSignInTimestamp.timeIntervalSince1970 > recentLoginThreshold
+                    
+                    completion(isExpired, nil)
+                } else {
+                    completion(nil, nil) // Auth date is not available
                 }
             }
         }
-        
-        return result
     }
     
     //get the login provider of the user
