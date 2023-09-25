@@ -17,6 +17,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+//manage album lists
 final class AlbumListManager: ObservableObject{
     @Published var popularAlbums :[Album]?
     @Published var chart :[Album]?

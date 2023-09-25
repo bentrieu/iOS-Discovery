@@ -15,6 +15,7 @@ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?
 
 import Foundation
 
+//managing setting views, data and error msg related
 class SettingManager: ObservableObject{
     static var shared = SettingManager()
     @Published var isDark =  false

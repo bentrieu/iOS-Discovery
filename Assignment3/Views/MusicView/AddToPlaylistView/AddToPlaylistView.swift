@@ -1,16 +1,16 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2023B
-  Assessment: Assignment 3
-  Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
-  ID: s3877969, s3878270, s3926888, s3878466, s3836280
-  Created  date: 10/9/2023
-  Last modified: 23/9/2023
-  Acknowledgement:
-https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
-https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
-*/
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2023B
+ Assessment: Assignment 3
+ Author: Le Minh Quan, Dinh Huu Gia Phuoc, Vu Gia An, Trieu Hoang Khang, Nguyen Tran Khang Duy
+ ID: s3877969, s3878270, s3926888, s3878466, s3836280
+ Created  date: 10/9/2023
+ Last modified: 23/9/2023
+ Acknowledgement:
+ https://rmit.instructure.com/courses/121597/pages/w9-whats-happening-this-week?module_item_id=5219569
+ https://rmit.instructure.com/courses/121597/pages/w10-whats-happening-this-week?module_item_id=5219571
+ */
 
 
 import SwiftUI
@@ -20,7 +20,7 @@ struct AddToPlaylistView: View {
     
     @StateObject private var playlistManager = PlaylistManager.instance
     var playlistSearchResult : [DBPlaylist]{
-    
+        
         return searchInput.isEmpty ? playlistManager.playlists : playlistManager.searchPlaylistByName(input: searchInput)
     }
     
@@ -101,47 +101,30 @@ struct AddToPlaylistView: View {
                 .animation(.easeOut, value: addNewPlaylist)
                 
                 
-               
                 
-                HStack{
-                    //MARK: - SEARCH PLAYLIST BUTTON
-                    Button {
-                        searchActive = true
-                    } label: {
-                        HStack{
-                            Image(systemName: "magnifyingglass")
-                                .resizable()
-                                .modifier(Icon())
-                                .frame(width: 20)
-                                .bold()
-                                .foregroundColor(Color("black"))
-                            Text("Find playlist")
-                                .font(.custom("Gotham-Medium", size: 20))
-                                .modifier(BlackColor())
-                        }
-                        .frame(width: UIScreen.main.bounds.width/1.6, height: 50)
-                        .background(
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.gray.opacity(searchActive ? 0 : 0.4))
-                        )
-                    }
-                    
-                    Spacer()
-                    
-                    //MARK: - SORT BUTTON
-                    Button {
-                        
-                    } label: {
-                        Text("Sort")
+                
+                //MARK: - SEARCH PLAYLIST BUTTON
+                Button {
+                    searchActive = true
+                } label: {
+                    HStack{
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .modifier(Icon())
+                            .frame(width: 20)
+                            .bold()
+                            .foregroundColor(Color("black"))
+                        Text("Find playlist")
                             .font(.custom("Gotham-Medium", size: 20))
                             .modifier(BlackColor())
-                            .frame(width: UIScreen.main.bounds.width/4, height: 50)
-                            .background(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .fill(Color.gray.opacity(searchActive ? 0 : 0.4))
-                            )
                     }
+                    .frame(width: UIScreen.main.bounds.width/1.2, height: 53)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.gray.opacity(searchActive ? 0 : 0.4))
+                    )
                 }
+                
                 .offset(y: searchActive ? -UIScreen.main.bounds.height/30 : 0)
                 .opacity(searchActive || addNewPlaylist ? 0 : 1)
                 .frame(height: searchActive || addNewPlaylist ? 0 : nil)
