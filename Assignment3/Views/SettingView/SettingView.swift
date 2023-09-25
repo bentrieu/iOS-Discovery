@@ -96,6 +96,7 @@ struct SettingView: View {
                         .background(Color.red.opacity(0.6))
                         .clipShape(Capsule())
                 }
+                Spacer()
             }
             .padding(.horizontal)
             
