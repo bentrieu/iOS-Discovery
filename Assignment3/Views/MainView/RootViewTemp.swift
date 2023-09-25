@@ -76,7 +76,12 @@ struct MainView: View {
             Task {
                 do {
                     try? await userViewModel.loadCurrentUser()
-                    SettingManager.shared.isDark = userViewModel.user!.isDark!
+                    if let user = userViewModel.user {
+                        SettingManager.shared.isDark = user.isDark!
+                    } else {
+                        try await userViewModel.signOut()
+                        showSignInView = true
+                    }
                 }
             }
             
