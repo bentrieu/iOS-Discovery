@@ -18,7 +18,7 @@ struct SignUpView: View {
     @StateObject private var viewModel = AuthenticateEmailViewModel()
     @State private var errorMSG : String  = ""
     @Binding var showSignInView: Bool
-    
+    @State private var errorPopUp = false
     @State private var isEditing = false
     var body: some View {
         ZStack {
@@ -58,6 +58,17 @@ struct SignUpView: View {
                                 try await viewModel.signUp()
                                 showSignInView = false
                             } catch {
+                                SettingManager.shared.msg =  error.localizedDescription
+                                withAnimation() {
+                                    errorPopUp = true
+                                }
+                                print( SettingManager.shared.errorPopUp)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    withAnimation {
+                                        errorPopUp = false
+                                        SettingManager.shared.errorPopUp = false
+                                    }
+                                }
                                 errorMSG = error.localizedDescription
                             }
                         }
@@ -83,6 +94,10 @@ struct SignUpView: View {
                Spacer()
             }
             .padding(.horizontal)
+            ErrorView(errorMessage: SettingManager.shared.msg) // Error view for pre-filled cell error
+                .position(x: UIScreen.main.bounds.width/2, y: self.errorPopUp ? 120 : -40) // Position error view
+                .edgesIgnoringSafeArea(.top) // Ignore safe area edges
+            
         }
     }
 }
