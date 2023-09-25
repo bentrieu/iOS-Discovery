@@ -54,7 +54,7 @@ struct SettingView: View {
                         do {
                             try userViewModel.signOut()
                             showSignInView = true
-                            MusicManager.instance.isPlaying = false
+                            MusicManager.instance.isPlayingMusicView = false
                         } catch {
                             print("error: \(error)")
                         }
@@ -86,6 +86,8 @@ struct SettingView: View {
                                 SettingManager.shared.errorPopUp = false
                             }
                         }
+                    }else{
+                        MusicManager.instance.isPlayingMusicView = false
                     }
                 } label: {
                     Text("Delete account")
