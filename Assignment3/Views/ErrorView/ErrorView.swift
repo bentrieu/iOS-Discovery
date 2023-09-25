@@ -21,8 +21,9 @@ struct ErrorView: View {
         
         VStack {
             Text(errorMessage) // Display the error message
-                .bold() // Apply bold font style
-                .foregroundColor(Color.white) // Set text color to white
+                .font(Font.custom("Gotham-Bold", size: 12)) // Apply bold font style
+                .foregroundColor(Color.black) // Set text color to white
+                .multilineTextAlignment(.center)
                 .padding(.all) // Add padding
                 .padding(.horizontal) // Add horizontal padding
                 .background(Color("black").opacity(0.8)) // Set background color
