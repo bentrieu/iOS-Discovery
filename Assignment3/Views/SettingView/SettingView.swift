@@ -130,14 +130,19 @@ struct SettingView: View {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "This is to confirm delete account") { success, authenticationError in
                 
                 if success {
-                    Task {
-                        do {
-                            try await StorageManager.instance.deleteUserImage()
-                            try await UserManager.instance.deteleCurrentUser()
-                            try await AuthenticationManager.instance.deleteUser()
-                            showSignInView = true
-                        } catch {
-                            print(error.localizedDescription)
+                    if !AuthenticationManager.instance.isAuthenticateExpired() {
+                        Task {
+                            do {
+                                try await StorageManager.instance.deleteUserImage()
+                                print("deleted images!!!!!!")
+                                try await UserManager.instance.deteleCurrentUser()
+                                print("deleted document!!!!!!")
+                                try await AuthenticationManager.instance.deleteUser()
+                                print("deleted authentication!!!!!!")
+                                showSignInView = true
+                            } catch {
+                                print(error.localizedDescription)
+                            }
                         }
                     }
                 } else {
