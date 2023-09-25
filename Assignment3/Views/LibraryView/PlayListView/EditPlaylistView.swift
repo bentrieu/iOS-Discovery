@@ -253,6 +253,7 @@ struct EditPlaylistView: View {
                 do{
                     //update playlist name and img url on firestore
                     try await playlistviewModel.savePlaylistImage(item: item, playlistId: playlist.playlistId)
+                    try await playlistManager.updatePlaylistName(playlistId: playlist.playlistId, name: nameInput)
                     //fetch change to local array
                     playlistManager.playlists = try await playlistManager.getAllPlaylist()
                     let _ = print(playlist)
@@ -261,19 +262,18 @@ struct EditPlaylistView: View {
                     print(error)
                 }
             }
-        }
-        
-        Task{
-            do{
-                //update playlist name and img url on firestore
-                try await playlistManager.updatePlaylistName(playlistId: playlist.playlistId, name: nameInput)
-                //fetch change to local array
-                playlistManager.playlists = try await playlistManager.getAllPlaylist()
-            }catch{
-                print(error)
+        }else{
+            Task{
+                do{
+                    //update playlist name and img url on firestore
+                    
+                    //fetch change to local array
+                    playlistManager.playlists = try await playlistManager.getAllPlaylist()
+                }catch{
+                    print(error)
+                }
             }
         }
-       
     }
 }
 
