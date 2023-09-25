@@ -54,6 +54,7 @@ struct SettingView: View {
                         do {
                             try userViewModel.signOut()
                             showSignInView = true
+                            MusicManager.instance.isPlaying = false
                         } catch {
                             print("error: \(error)")
                         }
